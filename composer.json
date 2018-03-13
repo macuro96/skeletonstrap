@@ -47,6 +47,19 @@
             "sh post-install.sh"
         ]
     },
+    "extra": {
+        "yii\\composer\\Installer::postCreateProject": {
+            "setPermission": [
+                {
+                    "frontend/runtime": "0777",
+                    "frontend/web/assets": "0777",
+                    "backend/runtime": "0777",
+                    "backend/web/assets": "0777",
+                    "yii": "0755"
+                }
+            ]
+        }
+    },
     "repositories": [
         {
             "type": "composer",

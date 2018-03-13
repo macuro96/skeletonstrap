@@ -29,6 +29,7 @@
         "codeception/verify": "~1.0.0",
         "codeception/specify": "dev-master",
         "codeception/codeception": "^2.2.3",
+        "yiisoft/yii2-apidoc": "dev-master",
 
         "squizlabs/php_codesniffer": "^2.0",
         "yiisoft/yii2-coding-standards": "^2.0",

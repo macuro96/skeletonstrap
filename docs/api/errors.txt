@@ -1,0 +1,2507 @@
+Array
+(
+    [0] => Array
+        (
+            [file] => ./controllers/SiteController.php
+            [message] => broken link to \Behavior in app\controllers\SiteController
+        )
+
+    [1] => Array
+        (
+            [file] => ./models/User.php
+            [message] => broken link to \User::enableAutoLogin in app\models\User
+        )
+
+    [2] => Array
+        (
+            [file] => ./models/User.php
+            [message] => broken link to \User::enableAutoLogin in app\models\User
+        )
+
+    [3] => Array
+        (
+            [file] => ./widgets/Alert.php
+            [message] => broken link to \yii\bootstrap\Alert::closeButton in app\widgets\Alert
+        )
+
+    [4] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [5] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [6] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [7] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [8] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [9] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [10] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [11] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [12] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [13] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [14] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [15] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [16] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [17] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [18] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/ActionFilter.php
+            [message] => broken link to yii\base\Action::$uniqueId in yii\base\ActionFilter
+        )
+
+    [19] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Application.php
+            [message] => broken link to \yii\base\components in yii\base\Application
+        )
+
+    [20] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Application.php
+            [message] => broken link to \yii\base\modules in yii\base\Application
+        )
+
+    [21] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Application.php
+            [message] => broken link to \yii\base\basePath in yii\base\Application
+        )
+
+    [22] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Application.php
+            [message] => broken link to \yii\base\basePath in yii\base\Application
+        )
+
+    [23] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Application.php
+            [message] => broken link to \yii\base\response in yii\base\Application
+        )
+
+    [24] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Application.php
+            [message] => broken link to \yii\base\basePath in yii\base\Application
+        )
+
+    [25] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Application.php
+            [message] => broken link to \yii\base\basePath in yii\base\Application
+        )
+
+    [26] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Application.php
+            [message] => broken link to \yii\base\basePath in yii\base\Application
+        )
+
+    [27] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Controller.php
+            [message] => broken link to \yii\base\viewPath in yii\base\Controller
+        )
+
+    [28] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Controller.php
+            [message] => broken link to yii\base\Application::viewPath in yii\base\Controller
+        )
+
+    [29] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Controller.php
+            [message] => broken link to yii\base\Module::viewPath in yii\base\Controller
+        )
+
+    [30] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Controller.php
+            [message] => broken link to \yii\base\viewPath in yii\base\Controller
+        )
+
+    [31] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Controller.php
+            [message] => broken link to yii\base\Application::layoutPath in yii\base\Controller
+        )
+
+    [32] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Controller.php
+            [message] => broken link to yii\base\Module::layoutPath in yii\base\Controller
+        )
+
+    [33] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/DynamicModel.php
+            [message] => broken link to \yii\base\validators in yii\base\DynamicModel
+        )
+
+    [34] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [35] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [36] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [37] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [38] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [39] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [40] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [41] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [42] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [43] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [44] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [45] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [46] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [47] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [48] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [49] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [50] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [51] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [52] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [53] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [54] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [55] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [56] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [57] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Model.php
+            [message] => broken link to \yii\base\scenario in yii\base\Model
+        )
+
+    [58] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Module.php
+            [message] => broken link to \yii\base\modules in yii\base\Module
+        )
+
+    [59] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Module.php
+            [message] => broken link to \yii\base\components in yii\base\Module
+        )
+
+    [60] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Module.php
+            [message] => broken link to \yii\base\layoutPath in yii\base\Module
+        )
+
+    [61] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Module.php
+            [message] => broken link to \yii\base\modules in yii\base\Module
+        )
+
+    [62] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Module.php
+            [message] => broken link to \yii\base\modules in yii\base\Module
+        )
+
+    [63] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Module.php
+            [message] => broken link to \yii\base\viewPath in yii\base\Module
+        )
+
+    [64] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Module.php
+            [message] => broken link to \yii\base\basePath in yii\base\Module
+        )
+
+    [65] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Theme.php
+            [message] => broken link to \yii\base\basePath in yii\base\Theme
+        )
+
+    [66] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Theme.php
+            [message] => broken link to \yii\base\baseUrl in yii\base\Theme
+        )
+
+    [67] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Theme.php
+            [message] => broken link to yii\base\Application::basePath in yii\base\Theme
+        )
+
+    [68] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Theme.php
+            [message] => broken link to \yii\base\basePath in yii\base\Theme
+        )
+
+    [69] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Theme.php
+            [message] => broken link to \yii\base\basePath in yii\base\Theme
+        )
+
+    [70] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Theme.php
+            [message] => broken link to \yii\base\basePath in yii\base\Theme
+        )
+
+    [71] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Theme.php
+            [message] => broken link to \yii\base\basePath in yii\base\Theme
+        )
+
+    [72] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Theme.php
+            [message] => broken link to \yii\base\baseUrl in yii\base\Theme
+        )
+
+    [73] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Theme.php
+            [message] => broken link to \yii\base\baseUrl in yii\base\Theme
+        )
+
+    [74] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/View.php
+            [message] => broken link to yii\base\Application::viewPath in yii\base\View
+        )
+
+    [75] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/View.php
+            [message] => broken link to yii\base\Module::viewPath in yii\base\View
+        )
+
+    [76] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [77] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [78] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [79] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to yii\base\Application::viewPath in yii\base\Widget
+        )
+
+    [80] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to yii\base\Module::viewPath in yii\base\Widget
+        )
+
+    [81] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\viewPath in yii\base\Widget
+        )
+
+    [82] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [83] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [84] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [85] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [86] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [87] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [88] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [89] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [90] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [91] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [92] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [93] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [94] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [95] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [96] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [97] => Array
+        (
+            [file] => vendor/yiisoft/yii2/base/Widget.php
+            [message] => broken link to \yii\base\id in yii\base\Widget
+        )
+
+    [98] => Array
+        (
+            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
+            [message] => broken link to \yii\caching\serializer in yii\caching\CacheInterface
+        )
+
+    [99] => Array
+        (
+            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
+            [message] => broken link to \yii\caching\keyPrefix in yii\caching\CacheInterface
+        )
+
+    [100] => Array
+        (
+            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
+            [message] => broken link to \yii\caching\keyPrefix in yii\caching\CacheInterface
+        )
+
+    [101] => Array
+        (
+            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
+            [message] => broken link to \yii\caching\defaultDuration in yii\caching\CacheInterface
+        )
+
+    [102] => Array
+        (
+            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
+            [message] => broken link to \yii\caching\serializer in yii\caching\CacheInterface
+        )
+
+    [103] => Array
+        (
+            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
+            [message] => broken link to \yii\caching\serializer in yii\caching\CacheInterface
+        )
+
+    [104] => Array
+        (
+            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
+            [message] => broken link to \yii\caching\serializer in yii\caching\CacheInterface
+        )
+
+    [105] => Array
+        (
+            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
+            [message] => broken link to \yii\caching\defaultDuration in yii\caching\CacheInterface
+        )
+
+    [106] => Array
+        (
+            [file] => vendor/yiisoft/yii2/caching/CacheInterface.php
+            [message] => broken link to \yii\caching\serializer in yii\caching\CacheInterface
+        )
+
+    [107] => Array
+        (
+            [file] => vendor/yiisoft/yii2/caching/MemCache.php
+            [message] => broken link to \yii\caching\servers in yii\caching\MemCache
+        )
+
+    [108] => Array
+        (
+            [file] => vendor/yiisoft/yii2/console/Application.php
+            [message] => broken link to \yii\console\basePath in yii\console\Application
+        )
+
+    [109] => Array
+        (
+            [file] => vendor/yiisoft/yii2/console/Application.php
+            [message] => broken link to \yii\console\basePath in yii\console\Application
+        )
+
+    [110] => Array
+        (
+            [file] => vendor/yiisoft/yii2/console/controllers/HelpController.php
+            [message] => broken link to \yii\console\controllers\ExitCode::UNSPECIFIED_ERROR in yii\console\controllers\HelpController
+        )
+
+    [111] => Array
+        (
+            [file] => vendor/yiisoft/yii2/console/controllers/HelpController.php
+            [message] => broken link to \yii\console\controllers\ExitCode::OK in yii\console\controllers\HelpController
+        )
+
+    [112] => Array
+        (
+            [file] => vendor/yiisoft/yii2/console/controllers/MigrateController.php
+            [message] => broken link to \yii\console\controllers\ExitCode::UNSPECIFIED_ERROR in yii\console\controllers\MigrateController
+        )
+
+    [113] => Array
+        (
+            [file] => vendor/yiisoft/yii2/console/controllers/MigrateController.php
+            [message] => broken link to \yii\console\controllers\ExitCode::OK in yii\console\controllers\MigrateController
+        )
+
+    [114] => Array
+        (
+            [file] => vendor/yiisoft/yii2/console/controllers/ServeController.php
+            [message] => broken link to \yii\console\controllers\ExitCode::UNSPECIFIED_ERROR in yii\console\controllers\ServeController
+        )
+
+    [115] => Array
+        (
+            [file] => vendor/yiisoft/yii2/console/controllers/ServeController.php
+            [message] => broken link to \yii\console\controllers\ExitCode::OK in yii\console\controllers\ServeController
+        )
+
+    [116] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/ActiveDataProvider.php
+            [message] => broken link to \yii\data\totalCount in yii\data\ActiveDataProvider
+        )
+
+    [117] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/ActiveDataProvider.php
+            [message] => broken link to \yii\data\models in yii\data\ActiveDataProvider
+        )
+
+    [118] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/ActiveDataProvider.php
+            [message] => broken link to \yii\data\totalCount in yii\data\ActiveDataProvider
+        )
+
+    [119] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/ArrayDataProvider.php
+            [message] => broken link to \yii\data\sort in yii\data\ArrayDataProvider
+        )
+
+    [120] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/ArrayDataProvider.php
+            [message] => broken link to \yii\data\pagination in yii\data\ArrayDataProvider
+        )
+
+    [121] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/ArrayDataProvider.php
+            [message] => broken link to \yii\data\sort in yii\data\ArrayDataProvider
+        )
+
+    [122] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/ArrayDataProvider.php
+            [message] => broken link to \yii\data\models in yii\data\ArrayDataProvider
+        )
+
+    [123] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/ArrayDataProvider.php
+            [message] => broken link to \yii\data\models in yii\data\ArrayDataProvider
+        )
+
+    [124] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/BaseDataProvider.php
+            [message] => broken link to \yii\data\models in yii\data\BaseDataProvider
+        )
+
+    [125] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/BaseDataProvider.php
+            [message] => broken link to \yii\data\models in yii\data\BaseDataProvider
+        )
+
+    [126] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/BaseDataProvider.php
+            [message] => broken link to yii\data\Pagination::pageCount in yii\data\BaseDataProvider
+        )
+
+    [127] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/BaseDataProvider.php
+            [message] => broken link to \yii\data\pagination in yii\data\BaseDataProvider
+        )
+
+    [128] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/BaseDataProvider.php
+            [message] => broken link to \yii\data\count in yii\data\BaseDataProvider
+        )
+
+    [129] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/BaseDataProvider.php
+            [message] => broken link to \yii\data\models in yii\data\BaseDataProvider
+        )
+
+    [130] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\filter in yii\data\DataFilter
+        )
+
+    [131] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\searchModel in yii\data\DataFilter
+        )
+
+    [132] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\searchModel in yii\data\DataFilter
+        )
+
+    [133] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\searchModel in yii\data\DataFilter
+        )
+
+    [134] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\filter in yii\data\DataFilter
+        )
+
+    [135] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\filter in yii\data\DataFilter
+        )
+
+    [136] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\errorMessages in yii\data\DataFilter
+        )
+
+    [137] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\searchAttributeTypes in yii\data\DataFilter
+        )
+
+    [138] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\searchModel in yii\data\DataFilter
+        )
+
+    [139] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\searchModel in yii\data\DataFilter
+        )
+
+    [140] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\errorMessages in yii\data\DataFilter
+        )
+
+    [141] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\model in yii\data\DataFilter
+        )
+
+    [142] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\filter in yii\data\DataFilter
+        )
+
+    [143] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\errorMessages in yii\data\DataFilter
+        )
+
+    [144] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\searchAttributeTypes in yii\data\DataFilter
+        )
+
+    [145] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\searchModel in yii\data\DataFilter
+        )
+
+    [146] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\searchModel in yii\data\DataFilter
+        )
+
+    [147] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\errorMessages in yii\data\DataFilter
+        )
+
+    [148] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\scenario in yii\data\DataFilter
+        )
+
+    [149] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\Validator in yii\data\DataFilter
+        )
+
+    [150] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\Validator::builtInValidators in yii\data\DataFilter
+        )
+
+    [151] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\model in yii\data\DataFilter
+        )
+
+    [152] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\filter in yii\data\DataFilter
+        )
+
+    [153] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\errorMessages in yii\data\DataFilter
+        )
+
+    [154] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\searchAttributeTypes in yii\data\DataFilter
+        )
+
+    [155] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\searchModel in yii\data\DataFilter
+        )
+
+    [156] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\searchModel in yii\data\DataFilter
+        )
+
+    [157] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\errorMessages in yii\data\DataFilter
+        )
+
+    [158] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/DataFilter.php
+            [message] => broken link to \yii\data\model in yii\data\DataFilter
+        )
+
+    [159] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Pagination.php
+            [message] => broken link to \yii\data\pageSize in yii\data\Pagination
+        )
+
+    [160] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Pagination.php
+            [message] => broken link to \yii\data\page in yii\data\Pagination
+        )
+
+    [161] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Pagination.php
+            [message] => broken link to \yii\data\page in yii\data\Pagination
+        )
+
+    [162] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Pagination.php
+            [message] => broken link to \yii\data\pageSize in yii\data\Pagination
+        )
+
+    [163] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Pagination.php
+            [message] => broken link to \yii\data\page in yii\data\Pagination
+        )
+
+    [164] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Pagination.php
+            [message] => broken link to \yii\data\pageSize in yii\data\Pagination
+        )
+
+    [165] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Pagination.php
+            [message] => broken link to \yii\data\page in yii\data\Pagination
+        )
+
+    [166] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Pagination.php
+            [message] => broken link to \yii\data\page in yii\data\Pagination
+        )
+
+    [167] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Pagination.php
+            [message] => broken link to \yii\data\pageCount in yii\data\Pagination
+        )
+
+    [168] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Pagination.php
+            [message] => broken link to \yii\data\pageCount in yii\data\Pagination
+        )
+
+    [169] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Pagination.php
+            [message] => broken link to \yii\data\page in yii\data\Pagination
+        )
+
+    [170] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Pagination.php
+            [message] => broken link to \yii\data\pageSize in yii\data\Pagination
+        )
+
+    [171] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Sort.php
+            [message] => broken link to \yii\data\attributeOrders in yii\data\Sort
+        )
+
+    [172] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Sort.php
+            [message] => broken link to \yii\data\attributeOrders in yii\data\Sort
+        )
+
+    [173] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/Sort.php
+            [message] => broken link to \yii\data\attributeOrders in yii\data\Sort
+        )
+
+    [174] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/SqlDataProvider.php
+            [message] => broken link to \yii\data\sort in yii\data\SqlDataProvider
+        )
+
+    [175] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/SqlDataProvider.php
+            [message] => broken link to \yii\data\pagination in yii\data\SqlDataProvider
+        )
+
+    [176] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/SqlDataProvider.php
+            [message] => broken link to \yii\data\totalCount in yii\data\SqlDataProvider
+        )
+
+    [177] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/SqlDataProvider.php
+            [message] => broken link to \yii\data\sort in yii\data\SqlDataProvider
+        )
+
+    [178] => Array
+        (
+            [file] => vendor/yiisoft/yii2/data/SqlDataProvider.php
+            [message] => broken link to \yii\data\models in yii\data\SqlDataProvider
+        )
+
+    [179] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ActiveRecord.php
+            [message] => broken link to \yii\db\$scenario in yii\db\ActiveRecord
+        )
+
+    [180] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ActiveRecord.php
+            [message] => broken link to \yii\db\$scenario in yii\db\ActiveRecord
+        )
+
+    [181] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ActiveRecord.php
+            [message] => broken link to \yii\db\$scenario in yii\db\ActiveRecord
+        )
+
+    [182] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ActiveRecord.php
+            [message] => broken link to \yii\db\$scenario in yii\db\ActiveRecord
+        )
+
+    [183] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ActiveRecord.php
+            [message] => broken link to \yii\db\$scenario in yii\db\ActiveRecord
+        )
+
+    [184] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ActiveRecord.php
+            [message] => broken link to \yii\db\$scenario in yii\db\ActiveRecord
+        )
+
+    [185] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ActiveRecord.php
+            [message] => broken link to \yii\db\$scenario in yii\db\ActiveRecord
+        )
+
+    [186] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ActiveRecord.php
+            [message] => broken link to \yii\db\$scenario in yii\db\ActiveRecord
+        )
+
+    [187] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ActiveRecord.php
+            [message] => broken link to \yii\db\$scenario in yii\db\ActiveRecord
+        )
+
+    [188] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ActiveRecord.php
+            [message] => broken link to \yii\db\isNewRecord in yii\db\ActiveRecord
+        )
+
+    [189] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ActiveRecord.php
+            [message] => broken link to \yii\db\dirtyAttributes in yii\db\ActiveRecord
+        )
+
+    [190] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ActiveRecord.php
+            [message] => broken link to \yii\db\$scenario in yii\db\ActiveRecord
+        )
+
+    [191] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ActiveRecord.php
+            [message] => broken link to \yii\db\scenario in yii\db\ActiveRecord
+        )
+
+    [192] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/ActiveRecord.php
+            [message] => broken link to \yii\db\dirtyAttributes in yii\db\ActiveRecord
+        )
+
+    [193] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/BaseActiveRecord.php
+            [message] => broken link to \yii\db\isNewRecord in yii\db\BaseActiveRecord
+        )
+
+    [194] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/BaseActiveRecord.php
+            [message] => broken link to \yii\db\scenario in yii\db\BaseActiveRecord
+        )
+
+    [195] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/BaseActiveRecord.php
+            [message] => broken link to \yii\db\isNewRecord in yii\db\BaseActiveRecord
+        )
+
+    [196] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/BaseActiveRecord.php
+            [message] => broken link to \yii\db\isNewRecord in yii\db\BaseActiveRecord
+        )
+
+    [197] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/BaseActiveRecord.php
+            [message] => broken link to \yii\db\isNewRecord in yii\db\BaseActiveRecord
+        )
+
+    [198] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/BaseActiveRecord.php
+            [message] => broken link to \yii\db\dirtyAttributes in yii\db\BaseActiveRecord
+        )
+
+    [199] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/Command.php
+            [message] => broken link to \yii\db\sql in yii\db\Command
+        )
+
+    [200] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/Command.php
+            [message] => broken link to \yii\db\sql in yii\db\Command
+        )
+
+    [201] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/Command.php
+            [message] => broken link to \yii\db\sql in yii\db\Command
+        )
+
+    [202] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/Command.php
+            [message] => broken link to \yii\db\rawSql in yii\db\Command
+        )
+
+    [203] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/Command.php
+            [message] => broken link to \yii\db\sql in yii\db\Command
+        )
+
+    [204] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/Command.php
+            [message] => broken link to \yii\db\sql in yii\db\Command
+        )
+
+    [205] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/Command.php
+            [message] => broken link to \yii\db\yii\db\Query in yii\db\Command
+        )
+
+    [206] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/Command.php
+            [message] => broken link to \yii\db\yii\db\Query in yii\db\Command
+        )
+
+    [207] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/Command.php
+            [message] => broken link to \yii\db\sql in yii\db\Command
+        )
+
+    [208] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/Connection.php
+            [message] => broken link to \yii\db\$isActive in yii\db\Connection
+        )
+
+    [209] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/DataReader.php
+            [message] => broken link to \yii\db\fetchMode in yii\db\DataReader
+        )
+
+    [210] => Array
+        (
+            [line] => 99
+            [file] => vendor/yiisoft/yii2/db/Migration.php
+            [message] => Method getDb has no parent to inherit from in yii\db\Migration.
+        )
+
+    [211] => Array
+        (
+            [line] => 672
+            [file] => vendor/yiisoft/yii2/db/Query.php
+            [message] => Method param $params does not exist in parent method, @inheritdoc not possible in where in yii\db\Query.
+        )
+
+    [212] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
+            [message] => broken link to \yii\db\yii\db\Query in yii\db\QueryBuilder
+        )
+
+    [213] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/QueryBuilder.php
+            [message] => broken link to \yii\db\yii\db\Query in yii\db\QueryBuilder
+        )
+
+    [214] => Array
+        (
+            [line] => 153
+            [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
+            [message] => Method loadTablePrimaryKey has no parent to inherit from in yii\db\cubrid\Schema.
+        )
+
+    [215] => Array
+        (
+            [line] => 170
+            [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
+            [message] => Method loadTableForeignKeys has no parent to inherit from in yii\db\cubrid\Schema.
+        )
+
+    [216] => Array
+        (
+            [line] => 200
+            [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
+            [message] => Method loadTableIndexes has no parent to inherit from in yii\db\cubrid\Schema.
+        )
+
+    [217] => Array
+        (
+            [line] => 208
+            [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
+            [message] => Method loadTableUniques has no parent to inherit from in yii\db\cubrid\Schema.
+        )
+
+    [218] => Array
+        (
+            [line] => 217
+            [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
+            [message] => Method loadTableChecks has no parent to inherit from in yii\db\cubrid\Schema.
+        )
+
+    [219] => Array
+        (
+            [line] => 226
+            [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
+            [message] => Method loadTableDefaultValues has no parent to inherit from in yii\db\cubrid\Schema.
+        )
+
+    [220] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
+            [message] => broken link to \yii\db\cubrid\ColumnSchema in yii\db\cubrid\Schema
+        )
+
+    [221] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/cubrid/Schema.php
+            [message] => broken link to \yii\db\cubrid\ColumnSchema in yii\db\cubrid\Schema
+        )
+
+    [222] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
+            [message] => broken link to \yii\db\mssql\Query::orderBy in yii\db\mssql\QueryBuilder
+        )
+
+    [223] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
+            [message] => broken link to \yii\db\mssql\Query::limit in yii\db\mssql\QueryBuilder
+        )
+
+    [224] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
+            [message] => broken link to \yii\db\mssql\Query::offset in yii\db\mssql\QueryBuilder
+        )
+
+    [225] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
+            [message] => broken link to \yii\db\mssql\yii\db\Query in yii\db\mssql\QueryBuilder
+        )
+
+    [226] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
+            [message] => broken link to \yii\db\mssql\yii\db\Query in yii\db\mssql\QueryBuilder
+        )
+
+    [227] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/mssql/QueryBuilder.php
+            [message] => broken link to \yii\db\mssql\Query::where() in yii\db\mssql\QueryBuilder
+        )
+
+    [228] => Array
+        (
+            [line] => 174
+            [file] => vendor/yiisoft/yii2/db/mssql/Schema.php
+            [message] => Method loadTablePrimaryKey has no parent to inherit from in yii\db\mssql\Schema.
+        )
+
+    [229] => Array
+        (
+            [line] => 182
+            [file] => vendor/yiisoft/yii2/db/mssql/Schema.php
+            [message] => Method loadTableForeignKeys has no parent to inherit from in yii\db\mssql\Schema.
+        )
+
+    [230] => Array
+        (
+            [line] => 190
+            [file] => vendor/yiisoft/yii2/db/mssql/Schema.php
+            [message] => Method loadTableIndexes has no parent to inherit from in yii\db\mssql\Schema.
+        )
+
+    [231] => Array
+        (
+            [line] => 229
+            [file] => vendor/yiisoft/yii2/db/mssql/Schema.php
+            [message] => Method loadTableUniques has no parent to inherit from in yii\db\mssql\Schema.
+        )
+
+    [232] => Array
+        (
+            [line] => 237
+            [file] => vendor/yiisoft/yii2/db/mssql/Schema.php
+            [message] => Method loadTableChecks has no parent to inherit from in yii\db\mssql\Schema.
+        )
+
+    [233] => Array
+        (
+            [line] => 245
+            [file] => vendor/yiisoft/yii2/db/mssql/Schema.php
+            [message] => Method loadTableDefaultValues has no parent to inherit from in yii\db\mssql\Schema.
+        )
+
+    [234] => Array
+        (
+            [line] => 560
+            [file] => vendor/yiisoft/yii2/db/mssql/Schema.php
+            [message] => Method findViewNames has no parent to inherit from in yii\db\mssql\Schema.
+        )
+
+    [235] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/mysql/QueryBuilder.php
+            [message] => broken link to \yii\db\mysql\yii\db\Query in yii\db\mysql\QueryBuilder
+        )
+
+    [236] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/mysql/QueryBuilder.php
+            [message] => broken link to \yii\db\mysql\yii\db\Query in yii\db\mysql\QueryBuilder
+        )
+
+    [237] => Array
+        (
+            [line] => 122
+            [file] => vendor/yiisoft/yii2/db/mysql/Schema.php
+            [message] => Method loadTablePrimaryKey has no parent to inherit from in yii\db\mysql\Schema.
+        )
+
+    [238] => Array
+        (
+            [line] => 130
+            [file] => vendor/yiisoft/yii2/db/mysql/Schema.php
+            [message] => Method loadTableForeignKeys has no parent to inherit from in yii\db\mysql\Schema.
+        )
+
+    [239] => Array
+        (
+            [line] => 138
+            [file] => vendor/yiisoft/yii2/db/mysql/Schema.php
+            [message] => Method loadTableIndexes has no parent to inherit from in yii\db\mysql\Schema.
+        )
+
+    [240] => Array
+        (
+            [line] => 174
+            [file] => vendor/yiisoft/yii2/db/mysql/Schema.php
+            [message] => Method loadTableUniques has no parent to inherit from in yii\db\mysql\Schema.
+        )
+
+    [241] => Array
+        (
+            [line] => 183
+            [file] => vendor/yiisoft/yii2/db/mysql/Schema.php
+            [message] => Method loadTableChecks has no parent to inherit from in yii\db\mysql\Schema.
+        )
+
+    [242] => Array
+        (
+            [line] => 192
+            [file] => vendor/yiisoft/yii2/db/mysql/Schema.php
+            [message] => Method loadTableDefaultValues has no parent to inherit from in yii\db\mysql\Schema.
+        )
+
+    [243] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/oci/QueryBuilder.php
+            [message] => broken link to \yii\db\oci\Query::orderBy in yii\db\oci\QueryBuilder
+        )
+
+    [244] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/oci/QueryBuilder.php
+            [message] => broken link to \yii\db\oci\Query::limit in yii\db\oci\QueryBuilder
+        )
+
+    [245] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/oci/QueryBuilder.php
+            [message] => broken link to \yii\db\oci\Query::offset in yii\db\oci\QueryBuilder
+        )
+
+    [246] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/oci/QueryBuilder.php
+            [message] => broken link to \yii\db\oci\yii\db\Query in yii\db\oci\QueryBuilder
+        )
+
+    [247] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/oci/QueryBuilder.php
+            [message] => broken link to \yii\db\oci\yii\db\Query in yii\db\oci\QueryBuilder
+        )
+
+    [248] => Array
+        (
+            [line] => 154
+            [file] => vendor/yiisoft/yii2/db/oci/Schema.php
+            [message] => Method loadTablePrimaryKey has no parent to inherit from in yii\db\oci\Schema.
+        )
+
+    [249] => Array
+        (
+            [line] => 162
+            [file] => vendor/yiisoft/yii2/db/oci/Schema.php
+            [message] => Method loadTableForeignKeys has no parent to inherit from in yii\db\oci\Schema.
+        )
+
+    [250] => Array
+        (
+            [line] => 170
+            [file] => vendor/yiisoft/yii2/db/oci/Schema.php
+            [message] => Method loadTableIndexes has no parent to inherit from in yii\db\oci\Schema.
+        )
+
+    [251] => Array
+        (
+            [line] => 211
+            [file] => vendor/yiisoft/yii2/db/oci/Schema.php
+            [message] => Method loadTableUniques has no parent to inherit from in yii\db\oci\Schema.
+        )
+
+    [252] => Array
+        (
+            [line] => 219
+            [file] => vendor/yiisoft/yii2/db/oci/Schema.php
+            [message] => Method loadTableChecks has no parent to inherit from in yii\db\oci\Schema.
+        )
+
+    [253] => Array
+        (
+            [line] => 228
+            [file] => vendor/yiisoft/yii2/db/oci/Schema.php
+            [message] => Method loadTableDefaultValues has no parent to inherit from in yii\db\oci\Schema.
+        )
+
+    [254] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/pgsql/QueryBuilder.php
+            [message] => broken link to \yii\db\pgsql\yii\db\Query in yii\db\pgsql\QueryBuilder
+        )
+
+    [255] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/pgsql/QueryBuilder.php
+            [message] => broken link to \yii\db\pgsql\yii\db\Query in yii\db\pgsql\QueryBuilder
+        )
+
+    [256] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/pgsql/QueryBuilder.php
+            [message] => broken link to \yii\db\pgsql\Query::where() in yii\db\pgsql\QueryBuilder
+        )
+
+    [257] => Array
+        (
+            [line] => 191
+            [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
+            [message] => Method loadTablePrimaryKey has no parent to inherit from in yii\db\pgsql\Schema.
+        )
+
+    [258] => Array
+        (
+            [line] => 199
+            [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
+            [message] => Method loadTableForeignKeys has no parent to inherit from in yii\db\pgsql\Schema.
+        )
+
+    [259] => Array
+        (
+            [line] => 207
+            [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
+            [message] => Method loadTableIndexes has no parent to inherit from in yii\db\pgsql\Schema.
+        )
+
+    [260] => Array
+        (
+            [line] => 251
+            [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
+            [message] => Method loadTableUniques has no parent to inherit from in yii\db\pgsql\Schema.
+        )
+
+    [261] => Array
+        (
+            [line] => 259
+            [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
+            [message] => Method loadTableChecks has no parent to inherit from in yii\db\pgsql\Schema.
+        )
+
+    [262] => Array
+        (
+            [line] => 268
+            [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
+            [message] => Method loadTableDefaultValues has no parent to inherit from in yii\db\pgsql\Schema.
+        )
+
+    [263] => Array
+        (
+            [line] => 316
+            [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
+            [message] => Method findViewNames has no parent to inherit from in yii\db\pgsql\Schema.
+        )
+
+    [264] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
+            [message] => broken link to \yii\db\pgsql\ColumnSchema in yii\db\pgsql\Schema
+        )
+
+    [265] => Array
+        (
+            [file] => vendor/yiisoft/yii2/db/pgsql/Schema.php
+            [message] => broken link to \yii\db\pgsql\ColumnSchema in yii\db\pgsql\Schema
+        )
+
+    [266] => Array
+        (
+            [line] => 100
+            [file] => vendor/yiisoft/yii2/db/sqlite/Schema.php
+            [message] => Method loadTablePrimaryKey has no parent to inherit from in yii\db\sqlite\Schema.
+        )
+
+    [267] => Array
+        (
+            [line] => 108
+            [file] => vendor/yiisoft/yii2/db/sqlite/Schema.php
+            [message] => Method loadTableForeignKeys has no parent to inherit from in yii\db\sqlite\Schema.
+        )
+
+    [268] => Array
+        (
+            [line] => 131
+            [file] => vendor/yiisoft/yii2/db/sqlite/Schema.php
+            [message] => Method loadTableIndexes has no parent to inherit from in yii\db\sqlite\Schema.
+        )
+
+    [269] => Array
+        (
+            [line] => 139
+            [file] => vendor/yiisoft/yii2/db/sqlite/Schema.php
+            [message] => Method loadTableUniques has no parent to inherit from in yii\db\sqlite\Schema.
+        )
+
+    [270] => Array
+        (
+            [line] => 147
+            [file] => vendor/yiisoft/yii2/db/sqlite/Schema.php
+            [message] => Method loadTableChecks has no parent to inherit from in yii\db\sqlite\Schema.
+        )
+
+    [271] => Array
+        (
+            [line] => 187
+            [file] => vendor/yiisoft/yii2/db/sqlite/Schema.php
+            [message] => Method loadTableDefaultValues has no parent to inherit from in yii\db\sqlite\Schema.
+        )
+
+    [272] => Array
+        (
+            [file] => vendor/yiisoft/yii2/di/Instance.php
+            [message] => broken link to \yii\di\var_export() in yii\di\Instance
+        )
+
+    [273] => Array
+        (
+            [line] => 24
+            [file] => vendor/yiisoft/yii2/di/NotInstantiableException.php
+            [message] => Method __construct has no parent to inherit from in yii\di\NotInstantiableException.
+        )
+
+    [274] => Array
+        (
+            [file] => vendor/yiisoft/yii2/filters/AccessRule.php
+            [message] => broken link to yii\base\Controller::uniqueId in yii\filters\AccessRule
+        )
+
+    [275] => Array
+        (
+            [file] => vendor/yiisoft/yii2/filters/AccessRule.php
+            [message] => broken link to yii\web\Request::userIP in yii\filters\AccessRule
+        )
+
+    [276] => Array
+        (
+            [file] => vendor/yiisoft/yii2/filters/AccessRule.php
+            [message] => broken link to yii\web\User::isGuest in yii\filters\AccessRule
+        )
+
+    [277] => Array
+        (
+            [file] => vendor/yiisoft/yii2/filters/AccessRule.php
+            [message] => broken link to yii\web\Request::method in yii\filters\AccessRule
+        )
+
+    [278] => Array
+        (
+            [file] => vendor/yiisoft/yii2/filters/HostControl.php
+            [message] => broken link to yii\web\Request::$hostInfo in yii\filters\HostControl
+        )
+
+    [279] => Array
+        (
+            [file] => vendor/yiisoft/yii2/filters/HostControl.php
+            [message] => broken link to yii\web\Request::$hostInfo in yii\filters\HostControl
+        )
+
+    [280] => Array
+        (
+            [file] => vendor/yiisoft/yii2/filters/HostControl.php
+            [message] => broken link to yii\web\Request::$hostInfo in yii\filters\HostControl
+        )
+
+    [281] => Array
+        (
+            [file] => vendor/yiisoft/yii2/filters/PageCache.php
+            [message] => broken link to yii\web\Application::view in yii\filters\PageCache
+        )
+
+    [282] => Array
+        (
+            [file] => vendor/yiisoft/yii2/helpers/BaseUrl.php
+            [message] => broken link to yii\web\UrlManager::$hostInfo in yii\helpers\BaseUrl
+        )
+
+    [283] => Array
+        (
+            [file] => vendor/yiisoft/yii2/helpers/BaseUrl.php
+            [message] => broken link to yii\web\Controller::route in yii\helpers\BaseUrl
+        )
+
+    [284] => Array
+        (
+            [file] => vendor/yiisoft/yii2/helpers/BaseUrl.php
+            [message] => broken link to yii\web\UrlManager::$hostInfo in yii\helpers\BaseUrl
+        )
+
+    [285] => Array
+        (
+            [file] => vendor/yiisoft/yii2/helpers/BaseUrl.php
+            [message] => broken link to yii\web\UrlManager::$hostInfo in yii\helpers\BaseUrl
+        )
+
+    [286] => Array
+        (
+            [file] => vendor/yiisoft/yii2/helpers/BaseUrl.php
+            [message] => broken link to yii\web\Controller::route in yii\helpers\BaseUrl
+        )
+
+    [287] => Array
+        (
+            [file] => vendor/yiisoft/yii2/helpers/BaseUrl.php
+            [message] => broken link to yii\web\Controller::uniqueId in yii\helpers\BaseUrl
+        )
+
+    [288] => Array
+        (
+            [file] => vendor/yiisoft/yii2/helpers/BaseUrl.php
+            [message] => broken link to yii\web\UrlManager::$hostInfo in yii\helpers\BaseUrl
+        )
+
+    [289] => Array
+        (
+            [file] => vendor/yiisoft/yii2/helpers/BaseUrl.php
+            [message] => broken link to yii\web\UrlManager::$hostInfo in yii\helpers\BaseUrl
+        )
+
+    [290] => Array
+        (
+            [file] => vendor/yiisoft/yii2/helpers/BaseUrl.php
+            [message] => broken link to yii\web\Controller::route in yii\helpers\BaseUrl
+        )
+
+    [291] => Array
+        (
+            [file] => vendor/yiisoft/yii2/helpers/BaseUrl.php
+            [message] => broken link to yii\web\Controller::uniqueId in yii\helpers\BaseUrl
+        )
+
+    [292] => Array
+        (
+            [file] => vendor/yiisoft/yii2/helpers/BaseUrl.php
+            [message] => broken link to yii\base\Module::uniqueId in yii\helpers\BaseUrl
+        )
+
+    [293] => Array
+        (
+            [file] => vendor/yiisoft/yii2/helpers/BaseUrl.php
+            [message] => broken link to yii\web\UrlManager::$hostInfo in yii\helpers\BaseUrl
+        )
+
+    [294] => Array
+        (
+            [file] => vendor/yiisoft/yii2/i18n/Formatter.php
+            [message] => broken link to yii\base\Application::timeZone in yii\i18n\Formatter
+        )
+
+    [295] => Array
+        (
+            [file] => vendor/yiisoft/yii2/log/Target.php
+            [message] => broken link to \yii\log\levels in yii\log\Target
+        )
+
+    [296] => Array
+        (
+            [file] => vendor/yiisoft/yii2/log/Target.php
+            [message] => broken link to \yii\log\levels in yii\log\Target
+        )
+
+    [297] => Array
+        (
+            [file] => vendor/yiisoft/yii2/mail/BaseMailer.php
+            [message] => broken link to \yii\mail\viewPath in yii\mail\BaseMailer
+        )
+
+    [298] => Array
+        (
+            [file] => vendor/yiisoft/yii2/mail/BaseMailer.php
+            [message] => broken link to \yii\mail\viewPath in yii\mail\BaseMailer
+        )
+
+    [299] => Array
+        (
+            [file] => vendor/yiisoft/yii2/mail/BaseMailer.php
+            [message] => broken link to \yii\mail\view in yii\mail\BaseMailer
+        )
+
+    [300] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/Assignment.php
+            [message] => broken link to yii\web\User::id in yii\rbac\Assignment
+        )
+
+    [301] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/Assignment.php
+            [message] => broken link to yii\web\User::id in yii\rbac\Assignment
+        )
+
+    [302] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/BaseManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\BaseManager
+        )
+
+    [303] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/CheckAccessInterface.php
+            [message] => broken link to yii\web\User::id in yii\rbac\CheckAccessInterface
+        )
+
+    [304] => Array
+        (
+            [line] => 123
+            [file] => vendor/yiisoft/yii2/rbac/DbManager.php
+            [message] => Method checkAccess has no parent to inherit from in yii\rbac\DbManager.
+        )
+
+    [305] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/DbManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\DbManager
+        )
+
+    [306] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/DbManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\DbManager
+        )
+
+    [307] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/DbManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\DbManager
+        )
+
+    [308] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/DbManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\DbManager
+        )
+
+    [309] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/DbManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\DbManager
+        )
+
+    [310] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/DbManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\DbManager
+        )
+
+    [311] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/DbManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\DbManager
+        )
+
+    [312] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/DbManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\DbManager
+        )
+
+    [313] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/DbManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\DbManager
+        )
+
+    [314] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/DbManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\DbManager
+        )
+
+    [315] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/DbManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\DbManager
+        )
+
+    [316] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/ManagerInterface.php
+            [message] => broken link to yii\web\User::id in yii\rbac\ManagerInterface
+        )
+
+    [317] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/ManagerInterface.php
+            [message] => broken link to yii\web\User::id in yii\rbac\ManagerInterface
+        )
+
+    [318] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/ManagerInterface.php
+            [message] => broken link to yii\web\User::id in yii\rbac\ManagerInterface
+        )
+
+    [319] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/ManagerInterface.php
+            [message] => broken link to yii\web\User::id in yii\rbac\ManagerInterface
+        )
+
+    [320] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/ManagerInterface.php
+            [message] => broken link to yii\web\User::id in yii\rbac\ManagerInterface
+        )
+
+    [321] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/ManagerInterface.php
+            [message] => broken link to yii\web\User::id in yii\rbac\ManagerInterface
+        )
+
+    [322] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/ManagerInterface.php
+            [message] => broken link to yii\web\User::id in yii\rbac\ManagerInterface
+        )
+
+    [323] => Array
+        (
+            [line] => 99
+            [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
+            [message] => Method checkAccess has no parent to inherit from in yii\rbac\PhpManager.
+        )
+
+    [324] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\PhpManager
+        )
+
+    [325] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\PhpManager
+        )
+
+    [326] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\PhpManager
+        )
+
+    [327] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\PhpManager
+        )
+
+    [328] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\PhpManager
+        )
+
+    [329] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\PhpManager
+        )
+
+    [330] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\PhpManager
+        )
+
+    [331] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\PhpManager
+        )
+
+    [332] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\PhpManager
+        )
+
+    [333] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
+            [message] => broken link to yii\web\User::id in yii\rbac\PhpManager
+        )
+
+    [334] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rbac/Rule.php
+            [message] => broken link to yii\web\User::id in yii\rbac\Rule
+        )
+
+    [335] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rest/ActiveController.php
+            [message] => broken link to \yii\rest\VerbFilter::actions in yii\rest\ActiveController
+        )
+
+    [336] => Array
+        (
+            [file] => vendor/yiisoft/yii2/rest/Controller.php
+            [message] => broken link to \yii\rest\Behavior in yii\rest\Controller
+        )
+
+    [337] => Array
+        (
+            [file] => vendor/yiisoft/yii2/validators/DateValidator.php
+            [message] => broken link to yii\base\Application::formatter in yii\validators\DateValidator
+        )
+
+    [338] => Array
+        (
+            [file] => vendor/yiisoft/yii2/validators/DateValidator.php
+            [message] => broken link to yii\base\Application::timeZone in yii\validators\DateValidator
+        )
+
+    [339] => Array
+        (
+            [line] => 319
+            [file] => vendor/yiisoft/yii2/validators/FileValidator.php
+            [message] => Method param $trim does not exist in parent method, @inheritdoc not possible in isEmpty in yii\validators\FileValidator.
+        )
+
+    [340] => Array
+        (
+            [file] => vendor/yiisoft/yii2/validators/IpValidator.php
+            [message] => broken link to \yii\validators\ranges in yii\validators\IpValidator
+        )
+
+    [341] => Array
+        (
+            [file] => vendor/yiisoft/yii2/validators/IpValidator.php
+            [message] => broken link to \yii\validators\ranges in yii\validators\IpValidator
+        )
+
+    [342] => Array
+        (
+            [file] => vendor/yiisoft/yii2/validators/IpValidator.php
+            [message] => broken link to \yii\validators\ranges in yii\validators\IpValidator
+        )
+
+    [343] => Array
+        (
+            [file] => vendor/yiisoft/yii2/validators/IpValidator.php
+            [message] => broken link to \yii\validators\ranges in yii\validators\IpValidator
+        )
+
+    [344] => Array
+        (
+            [file] => vendor/yiisoft/yii2/validators/IpValidator.php
+            [message] => broken link to \yii\validators\ranges in yii\validators\IpValidator
+        )
+
+    [345] => Array
+        (
+            [file] => vendor/yiisoft/yii2/validators/IpValidator.php
+            [message] => broken link to \yii\validators\ranges in yii\validators\IpValidator
+        )
+
+    [346] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/AssetBundle.php
+            [message] => broken link to yii\web\AssetManager::converter in yii\web\AssetBundle
+        )
+
+    [347] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Controller.php
+            [message] => broken link to yii\web\Application::homeUrl in yii\web\Controller
+        )
+
+    [348] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/ErrorAction.php
+            [message] => broken link to \yii\web\yii\web\ErrorHandler in yii\web\ErrorAction
+        )
+
+    [349] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/ErrorAction.php
+            [message] => broken link to \yii\web\yii\base\UserException in yii\web\ErrorAction
+        )
+
+    [350] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/ErrorAction.php
+            [message] => broken link to \yii\web\yii\web\ErrorHandler in yii\web\ErrorAction
+        )
+
+    [351] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/ErrorAction.php
+            [message] => broken link to \yii\web\yii\base\UserException in yii\web\ErrorAction
+        )
+
+    [352] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\bodyParams in yii\web\Request
+        )
+
+    [353] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\queryString in yii\web\Request
+        )
+
+    [354] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\queryString in yii\web\Request
+        )
+
+    [355] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\csrfToken in yii\web\Request
+        )
+
+    [356] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\bodyParams in yii\web\Request
+        )
+
+    [357] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to yii\validators\IpValidator::::setRanges() in yii\web\Request
+        )
+
+    [358] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\hostInfo in yii\web\Request
+        )
+
+    [359] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\url in yii\web\Request
+        )
+
+    [360] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\scriptUrl in yii\web\Request
+        )
+
+    [361] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\contentType in yii\web\Request
+        )
+
+    [362] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\rawBody in yii\web\Request
+        )
+
+    [363] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\acceptableContentTypes in yii\web\Request
+        )
+
+    [364] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\queryString in yii\web\Request
+        )
+
+    [365] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\hostInfo in yii\web\Request
+        )
+
+    [366] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\queryString in yii\web\Request
+        )
+
+    [367] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\hostInfo in yii\web\Request
+        )
+
+    [368] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\queryString in yii\web\Request
+        )
+
+    [369] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\queryString in yii\web\Request
+        )
+
+    [370] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Request.php
+            [message] => broken link to \yii\web\hostInfo in yii\web\Request
+        )
+
+    [371] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Response.php
+            [message] => broken link to \yii\web\headers in yii\web\Response
+        )
+
+    [372] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Response.php
+            [message] => broken link to \yii\web\cookies in yii\web\Response
+        )
+
+    [373] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Response.php
+            [message] => broken link to \yii\web\statusCode in yii\web\Response
+        )
+
+    [374] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Response.php
+            [message] => broken link to \yii\web\statusCode in yii\web\Response
+        )
+
+    [375] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Session.php
+            [message] => broken link to \yii\web\useCustomStorage in yii\web\Session
+        )
+
+    [376] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Session.php
+            [message] => broken link to \yii\web\useCustomStorage in yii\web\Session
+        )
+
+    [377] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Session.php
+            [message] => broken link to \yii\web\isActive in yii\web\Session
+        )
+
+    [378] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Session.php
+            [message] => broken link to \yii\web\useCustomStorage in yii\web\Session
+        )
+
+    [379] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Session.php
+            [message] => broken link to \yii\web\useCustomStorage in yii\web\Session
+        )
+
+    [380] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Session.php
+            [message] => broken link to \yii\web\useCustomStorage in yii\web\Session
+        )
+
+    [381] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Session.php
+            [message] => broken link to \yii\web\useCustomStorage in yii\web\Session
+        )
+
+    [382] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Session.php
+            [message] => broken link to \yii\web\isActive in yii\web\Session
+        )
+
+    [383] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/Session.php
+            [message] => broken link to \yii\web\useCustomStorage in yii\web\Session
+        )
+
+    [384] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/UrlManager.php
+            [message] => broken link to \yii\web\hostInfo in yii\web\UrlManager
+        )
+
+    [385] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/UrlManager.php
+            [message] => broken link to yii\web\Request::baseUrl in yii\web\UrlManager
+        )
+
+    [386] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/UrlManager.php
+            [message] => broken link to \yii\web\baseUrl in yii\web\UrlManager
+        )
+
+    [387] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/UrlManager.php
+            [message] => broken link to \yii\web\hostInfo in yii\web\UrlManager
+        )
+
+    [388] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/UrlManager.php
+            [message] => broken link to yii\web\Request::scriptUrl in yii\web\UrlManager
+        )
+
+    [389] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/UrlManager.php
+            [message] => broken link to \yii\web\scriptUrl in yii\web\UrlManager
+        )
+
+    [390] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/User.php
+            [message] => broken link to \yii\web\isGuest in yii\web\User
+        )
+
+    [391] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/User.php
+            [message] => broken link to \yii\web\identity in yii\web\User
+        )
+
+    [392] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/User.php
+            [message] => broken link to \yii\web\id in yii\web\User
+        )
+
+    [393] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/User.php
+            [message] => broken link to \yii\web\identity in yii\web\User
+        )
+
+    [394] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/User.php
+            [message] => broken link to \yii\web\returnUrl in yii\web\User
+        )
+
+    [395] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/User.php
+            [message] => broken link to yii\web\Session::timeout in yii\web\User
+        )
+
+    [396] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/User.php
+            [message] => broken link to \yii\web\id in yii\web\User
+        )
+
+    [397] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/User.php
+            [message] => broken link to \yii\web\identity in yii\web\User
+        )
+
+    [398] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/User.php
+            [message] => broken link to \yii\web\returnUrl in yii\web\User
+        )
+
+    [399] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/User.php
+            [message] => broken link to yii\web\Application::homeUrl in yii\web\User
+        )
+
+    [400] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/User.php
+            [message] => broken link to \yii\web\identity in yii\web\User
+        )
+
+    [401] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/User.php
+            [message] => broken link to \yii\web\returnUrl in yii\web\User
+        )
+
+    [402] => Array
+        (
+            [file] => vendor/yiisoft/yii2/web/User.php
+            [message] => broken link to \yii\web\id in yii\web\User
+        )
+
+    [403] => Array
+        (
+            [file] => vendor/yiisoft/yii2/widgets/BaseListView.php
+            [message] => broken link to yii\data\BaseDataProvider::pagination in yii\widgets\BaseListView
+        )
+
+    [404] => Array
+        (
+            [file] => vendor/yiisoft/yii2/widgets/BaseListView.php
+            [message] => broken link to yii\data\BaseDataProvider::sort in yii\widgets\BaseListView
+        )
+
+    [405] => Array
+        (
+            [file] => vendor/yiisoft/yii2/widgets/Breadcrumbs.php
+            [message] => broken link to yii\web\Application::homeUrl in yii\widgets\Breadcrumbs
+        )
+
+    [406] => Array
+        (
+            [file] => vendor/yiisoft/yii2/widgets/FragmentCache.php
+            [message] => broken link to \yii\widgets\id in yii\widgets\FragmentCache
+        )
+
+    [407] => Array
+        (
+            [file] => vendor/yiisoft/yii2/widgets/ListView.php
+            [message] => broken link to \yii\widgets\view in yii\widgets\ListView
+        )
+
+    [408] => Array
+        (
+            [file] => vendor/yiisoft/yii2/widgets/Pjax.php
+            [message] => broken link to \yii\widgets\id in yii\widgets\Pjax
+        )
+
+    [409] => Array
+        (
+            [file] => vendor/yiisoft/yii2/widgets/Pjax.php
+            [message] => broken link to \yii\widgets\id in yii\widgets\Pjax
+        )
+
+)

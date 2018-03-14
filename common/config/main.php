@@ -1,8 +1,8 @@
 <?php
 return [
     'aliases' => [
-        '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@bower'  => '@vendor/bower-asset',
+        '@npm'    => '@vendor/npm-asset',
     ],
     'language' => 'es-ES',
     'name'     => 'Skeleton\'s Trap',

@@ -1,6 +1,21 @@
+@font-face {
+    font-family: supercell-magicregular;
+    src: url(/fonts/supercell-magic.ttf);
+}
+
 html,
 body {
     height: 100%;
+}
+
+body {
+    font-family: 'sans-serif';
+    font-size: 13px;
+    text-rendering: optimizeLegibility;
+
+    background-color: #173e43;
+
+    color: white;
 }
 
 .wrap {
@@ -99,6 +114,18 @@ a.desc:after {
 .nav li > form > button.logout {
     padding: 15px;
     border: none;
+}
+
+.navbar {
+    font-family: 'supercell-magicregular';
+}
+
+.navbar-text {
+    color: white !important;
+}
+
+.navbar-brand {
+    color: white !important;
 }
 
 @media(max-width:767px) {

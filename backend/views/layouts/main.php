@@ -5,6 +5,7 @@
 
 use common\assets\CommonAsset;
 
+use common\components\FooterLayout;
 use common\components\NavBarLayout;
 
 use backend\assets\AppAsset;
@@ -72,13 +73,7 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+<?= FooterLayout::mostrar() ?>
 
 <?php $this->endBody() ?>
 </body>

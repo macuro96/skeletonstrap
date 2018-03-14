@@ -2,8 +2,6 @@
 
 namespace common\components;
 
-use yii\helpers\Html;
-
 class NavBarLayout
 {
     public static function brandLabel()

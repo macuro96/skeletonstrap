@@ -3,14 +3,18 @@
     src: url(/fonts/supercell-magic.ttf);
 }
 
+@font-face {
+    font-family: roboto-slab-regular;
+    src: url(/fonts/RobotoSlab-Regular.ttf);
+}
+
 html,
 body {
     height: 100%;
 }
 
 body {
-    font-family: 'sans-serif';
-    font-size: 13px;
+    font-family: 'roboto-slab-regular',
     text-rendering: optimizeLegibility;
 
     background-color: #173e43;
@@ -30,10 +34,28 @@ body {
 }
 
 .footer {
-    height: 60px;
-    background-color: #f5f5f5;
-    border-top: 1px solid #ddd;
+    height: 120px;
+    background-color: #222;
+    border-top: 1px solid #080808;
     padding-top: 20px;
+
+    color: white !important;
+    text-align: center;
+}
+
+.footer img {
+    max-width: 20%;
+    margin: 0 auto;
+}
+
+.footer .copy {
+    /*font-family: 'supercell-magicregular';*/
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.footer .correo {
+    font-size: 13px;    
 }
 
 .jumbotron {
@@ -118,6 +140,7 @@ a.desc:after {
 
 .navbar {
     font-family: 'supercell-magicregular';
+    font-size: 13px;
 }
 
 .navbar-text {

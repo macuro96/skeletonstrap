@@ -1,6 +1,6 @@
 .div-directo {
     font-family: 'supercell-magicregular';
-    background-color: #256068;
+    /*background-color: #256068;*/
 
     padding-top: 20px;
 }
@@ -8,6 +8,10 @@
 .div-directo .texto-directo {
     text-align: center;
     margin-bottom: 12px;
+}
+
+.div-directo .twitch-video {
+    text-align: center;
 }
 
 .div-directo .texto-directo .fa-circle {
@@ -18,32 +22,54 @@
 .div-directo .equipos {
     text-align: center;
 
+    margin-top: 14px;
+
     padding-left: 20px;
     padding-right: 20px;
+
+    background-color: #256068;
+}
+
+.div-directo .equipos > div {
+    padding: 10px;
+    background-color: #222;
+
+    border-radius: 5px;
+
+    padding-top: 16px;
+
+    border-style: solid;
+    border-color: #222;
+    border-width: 8px;
 }
 
 .div-directo .equipos img {
     margin: 0 auto;
+    max-width: 120px;
 }
 
-.div-directo .equipos > :nth-child(1), .div-directo .equipos > :nth-child(3) {
-    background-color: black;
+.div-directo .equipos > :nth-child(1) > div:nth-child(1), .div-directo .equipos > :nth-child(3) > div:nth-child(1) {
+    height: 160px;
 }
+
+/*
+.div-directo .equipos > :nth-child(1), .div-directo .equipos > :nth-child(3) {
+    height: 200px;
+}
+*/
 
 .div-directo .equipos > :nth-child(1) {
-    padding: 10px;
-
-    border-style: solid;
     border-color: #59cf35;
-    border-width: 14px;
 }
 
 /* VS */
 .div-directo .equipos > :nth-child(2) {
-    font-size: 62px;
-    margin-top: 60px;
+    font-size: 34px;
+    margin-top: 70px;
+
+    border-radius: 0px;
 }
 
 .div-directo .equipos > :nth-child(3) {
-
+    border-color: #cc2525;
 }

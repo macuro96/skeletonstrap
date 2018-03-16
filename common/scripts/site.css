@@ -14,9 +14,7 @@ body {
 }
 
 body {
-    font-family: 'roboto-slab-regular',
-    text-rendering: optimizeLegibility;
-
+    font-family: 'roboto-slab-regular';
     background-color: #173e43;
 
     color: white;
@@ -41,6 +39,9 @@ body {
 
     color: white !important;
     text-align: center;
+
+    font-family: 'supercell-magicregular';
+    font-size: 12px !important;
 }
 
 .footer a {
@@ -53,13 +54,11 @@ body {
 }
 
 .footer .copy {
-    /*font-family: 'supercell-magicregular';*/
-    font-size: 16px;
     font-weight: bold;
 }
 
 .footer .correo, .footer .redes {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .footer .correo span {
@@ -182,6 +181,12 @@ a.desc:after {
 
     .footer .row div {
         margin-bottom: 16px;
+    }
+}
+
+@media(min-width:767px) and (max-width:1200px) {
+    .wrap > .container {
+        padding: 100px 15px 20px !important;
     }
 }
 

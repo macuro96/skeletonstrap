@@ -1,0 +1,49 @@
+.div-directo {
+    font-family: 'supercell-magicregular';
+    background-color: #256068;
+
+    padding-top: 20px;
+}
+
+.div-directo .texto-directo {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.div-directo .texto-directo .fa-circle {
+    color: red;
+    margin-left: 12px;
+}
+
+.div-directo .equipos {
+    text-align: center;
+
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.div-directo .equipos img {
+    margin: 0 auto;
+}
+
+.div-directo .equipos > :nth-child(1), .div-directo .equipos > :nth-child(3) {
+    background-color: black;
+}
+
+.div-directo .equipos > :nth-child(1) {
+    padding: 10px;
+
+    border-style: solid;
+    border-color: #59cf35;
+    border-width: 14px;
+}
+
+/* VS */
+.div-directo .equipos > :nth-child(2) {
+    font-size: 62px;
+    margin-top: 60px;
+}
+
+.div-directo .equipos > :nth-child(3) {
+
+}

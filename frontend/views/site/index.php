@@ -4,3 +4,6 @@
 
 $this->title = 'My Yii Application';
 ?>
+<?=
+    $this->render('_directo');
+?>

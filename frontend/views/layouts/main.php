@@ -33,55 +33,53 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => NavBarLayout::brandLabel(),
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Inicio', 'url' => ['/site/index']],
-        ['label' => 'Torneos', 'url' => ['/torneos/index']],
-        ['label' => 'Equipo', 'url' => ['/site/equipo']],
-        ['label' => 'Calendario', 'url' => ['/site/calendario']],
-        [
-            'label' => 'Únete/Lucha',
-            'items' => [
-                ['label' => 'Únete a nosotros', 'url' => ['/site/unirte']],
-                ['label' => 'Lucha contra nuestro equipo', 'url' => ['/site/luchar']]
-            ]
+<?php
+NavBar::begin([
+    'brandLabel' => NavBarLayout::brandLabel(),
+    'brandUrl' => Yii::$app->homeUrl,
+    'options' => [
+        'class' => 'navbar-inverse navbar-fixed-top',
+    ],
+]);
+$menuItems = [
+    ['label' => 'Inicio', 'url' => ['/site/index']],
+    ['label' => 'Torneos', 'url' => ['/torneos/index']],
+    ['label' => 'Equipo', 'url' => ['/site/equipo']],
+    ['label' => 'Calendario', 'url' => ['/site/calendario']],
+    [
+        'label' => 'Únete/Lucha',
+        'items' => [
+            ['label' => 'Únete a nosotros', 'url' => ['/site/unirte']],
+            ['label' => 'Lucha contra nuestro equipo', 'url' => ['/site/luchar']]
         ]
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = NavBarLayout::loginButton();
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'encodeLabels' => false,
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+    ]
+];
+if (Yii::$app->user->isGuest) {
+    $menuItems[] = NavBarLayout::loginButton();
+} else {
+    $menuItems[] = '<li>'
+        . Html::beginForm(['/site/logout'], 'post')
+        . Html::submitButton(
+            'Logout (' . Yii::$app->user->identity->username . ')',
+            ['class' => 'btn btn-link logout']
+        )
+        . Html::endForm()
+        . '</li>';
+}
+echo Nav::widget([
+    'options' => ['class' => 'navbar-nav navbar-right'],
+    'encodeLabels' => false,
+    'items' => $menuItems,
+]);
+NavBar::end();
+?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </div>
+<div class="container-fluid">
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
+    <?= Alert::widget() ?>
+    <?= $content ?>
 </div>
 
 <?= FooterLayout::mostrar() ?>

@@ -20,6 +20,12 @@ body {
     color: white;
 }
 
+.container-fluid {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+/*
 .wrap {
     min-height: 100%;
     height: auto;
@@ -30,6 +36,7 @@ body {
 .wrap > .container {
     padding: 70px 15px 20px;
 }
+*/
 
 .footer {
     min-height: 120px;
@@ -185,8 +192,13 @@ a.desc:after {
 }
 
 @media(min-width:767px) and (max-width:1200px) {
+    /*
     .wrap > .container {
         padding: 100px 15px 20px !important;
+    }
+    */
+    .container-fluid {
+        margin-top: 100px;
     }
 }
 

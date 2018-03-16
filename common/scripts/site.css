@@ -34,13 +34,17 @@ body {
 }
 
 .footer {
-    height: 120px;
+    min-height: 120px;
     background-color: #222;
     border-top: 1px solid #080808;
     padding-top: 20px;
 
     color: white !important;
     text-align: center;
+}
+
+.footer a {
+    color: white !important;
 }
 
 .footer img {
@@ -54,8 +58,25 @@ body {
     font-weight: bold;
 }
 
-.footer .correo {
-    font-size: 13px;    
+.footer .correo, .footer .redes {
+    font-size: 20px;
+}
+
+.footer .correo span {
+    margin-right: 12px;
+}
+
+.footer .redes i {
+    margin-right: 12px;
+    font-size: 32px;
+}
+
+.footer .redes .twitch {
+    color: #4b367c !important;
+}
+
+.footer .redes .twitter {
+    color: #00aced !important;
 }
 
 .jumbotron {
@@ -157,6 +178,10 @@ a.desc:after {
         text-align: left;
         width: 100%;
         padding: 10px 15px;
+    }
+
+    .footer .row div {
+        margin-bottom: 16px;
     }
 }
 

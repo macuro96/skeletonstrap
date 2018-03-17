@@ -1,0 +1,102 @@
+.div-directo {
+    font-family: 'supercell-magicregular';
+    /*background-color: #256068;*/
+
+    padding-top: 20px;
+}
+
+.div-directo .texto-directo {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.div-directo .twitch-video {
+    text-align: center;
+}
+
+.div-directo .texto-directo .fa-circle {
+    color: red;
+    margin-left: 12px;
+}
+
+.div-directo .equipos {
+    text-align: center;
+
+    margin-top: 14px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+
+    background-color: #256068;
+
+    overflow-wrap: break-word;
+}
+
+.div-directo .equipos > div {
+    padding: 10px;
+    background-color: #222;
+
+    border-radius: 5px;
+
+    padding-top: 16px;
+
+    border-bottom-style: solid;
+    border-bottom-width: 8px;
+
+    border-top-style: solid;
+    border-top-width: 8px;
+    border-top-color: #3C3C3C;
+}
+
+.div-directo .equipos img {
+    margin: 0 auto;
+    max-width: 120px;
+}
+
+.div-directo .equipos .container-img {
+    height: 160px;
+}
+
+.div-directo .equipos > :nth-child(1) {
+    border-color: #59cf35;
+}
+
+/* VS */
+.div-directo .equipos > :nth-child(2) {
+    font-size: 34px;
+    margin-top: 70px;
+
+    border-radius: 0px;
+
+    border-bottom: none;
+}
+
+.div-directo .equipos > :nth-child(3) {
+    border-color: #B72525;
+}
+
+.div-directo .equipos .guion, .div-directo .equipos .marcador-local {
+    margin-top: 40px;
+    font-size: 42px;
+}
+
+marcadorlocal {
+    font-size: 64px;
+    color: #00aced;
+}
+
+@media(max-width:991px) {
+    .div-directo .equipos > :nth-child(2) {
+        margin-top: 0px !important;
+        border: none;
+    }
+
+    .div-directo .equipos > :nth-child(1) {
+        border-top: none;
+    }
+
+
+    .div-directo .equipos > :nth-child(3) {
+        border-bottom: none;
+    }
+}

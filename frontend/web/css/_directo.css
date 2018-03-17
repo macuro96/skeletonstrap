@@ -1,6 +1,5 @@
 .div-directo {
     font-family: 'supercell-magicregular';
-    /*background-color: #256068;*/
 
     padding-top: 20px;
 }
@@ -69,6 +68,11 @@
     border-radius: 0px;
 
     border-bottom: none;
+}
+
+.div-directo .equipos .compartir {
+    font-size: 14px !important;
+    color: #00aced;
 }
 
 .div-directo .equipos > :nth-child(3) {

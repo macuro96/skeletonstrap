@@ -50,7 +50,12 @@ $this->registerCssFile('css/_directo.css');
                 </div>
             </div>
             <div class="col-md-2">
-                VS
+                <div>
+                    VS
+                </div>
+                <div class="compartir">
+                    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> compartir
+                </div>
             </div>
             <div class="col-md-2">
                 <div class="row">

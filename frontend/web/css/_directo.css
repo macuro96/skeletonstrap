@@ -64,11 +64,19 @@
     font-weight: bold;
 }
 
-#etiquetaDirecto {
+#etiquetaDirecto, #etiquetaNoticias {
     text-align: center;
 }
 
-#etiquetaDirecto span {
+#etiquetaNoticias {
+    /*margin-top: 20px;*/
+}
+
+.etiquetas {
+    margin-top: 30px !important;
+}
+
+#etiquetaDirecto span, #etiquetaNoticias span {
     background-color: #256068;
     color: white;
 
@@ -82,7 +90,7 @@
     border-top-right-radius: 5px;
 }
 
-.div-directo .equipos {
+.div-directo .equipos, .div-directo .noticias {
     text-align: center;
 
     margin-top: 14px;
@@ -95,7 +103,7 @@
     overflow-wrap: break-word;
 }
 
-.div-directo .equipos > div {
+.div-directo .equipos > div, .div-directo .noticias > div {
     padding: 10px;
     background-color: #222;
 
@@ -120,7 +128,7 @@
     height: 160px;
 }
 
-.div-directo .equipos > :nth-child(1) {
+.div-directo .equipos > :nth-child(1), .div-directo .noticias > :nth-child(1) {
     border-color: #59cf35;
 }
 

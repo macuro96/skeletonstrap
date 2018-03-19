@@ -6,7 +6,7 @@ use yii\helpers\Html;
 
 use common\components\CheckEnd;
 use common\components\DirectoIndex;
-use common\components\CompartirRedes;
+use common\components\RedesSociales;
 
 $this->registerCssFile('css/_directo.css');
 $this->registerJsFile('js/_directo.js', ['position' => View::POS_END,
@@ -14,8 +14,8 @@ $this->registerJsFile('js/_directo.js', ['position' => View::POS_END,
 ?>
 <div class="row div-directo">
     <div class="col-md-12">
-        <?= DirectoIndex::mostrarProximaPartida() ?>
-        <div id="etiquetaDirecto" class="row">
+        <?= DirectoIndex::mostrarDirecto() ?>
+        <div id="etiquetaDirecto" class="row etiquetas">
             <span>
                 Torneo
             </span>
@@ -51,8 +51,8 @@ $this->registerJsFile('js/_directo.js', ['position' => View::POS_END,
                 <div class="compartir">
                     <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> compartir
                 </div>
-                <?= CompartirRedes::twitter('Partida') ?>
-                <?= CompartirRedes::facebook() ?>
+                <?= RedesSociales::twitter('Partida') ?>
+                <?= RedesSociales::facebook() ?>
             </div>
             <div class="col-md-2">
                 <div class="row">
@@ -78,5 +78,16 @@ $this->registerJsFile('js/_directo.js', ['position' => View::POS_END,
                 </div>
             </div>
         </div>
+        <div id="etiquetaNoticias" class="row etiquetas">
+            <span>
+                Últimas noticias
+            </span>
+        </div>
+        <div class="row noticias">
+            <div class="col-md-offset-3 col-md-6">
+                <?= RedesSociales::timelineTwitter() ?>
+            </div>
+        </div>
+
     </div>
 </div>

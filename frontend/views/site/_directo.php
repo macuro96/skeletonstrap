@@ -1,29 +1,24 @@
 <?php
 
+use yii\web\View;
+
 use yii\helpers\Html;
 
 use common\components\CheckEnd;
+use common\components\DirectoIndex;
+use common\components\CompartirRedes;
 
 $this->registerCssFile('css/_directo.css');
+$this->registerJsFile('js/_directo.js', ['position' => View::POS_END,
+                                         'depends'  => [\yii\web\JqueryAsset::className()]]);
 ?>
 <div class="row div-directo">
     <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-12 texto-directo">
-                <h2>EN DIRECTO<i class="fa fa-circle"></i></h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 twitch-video">
-                <iframe
-                src="http://player.twitch.tv/?channel=skeletonstraptv"
-                height="720"
-                width="80%"
-                frameborder="0"
-                scrolling="no"
-                allowfullscreen="true">
-                </iframe>
-            </div>
+        <?= DirectoIndex::mostrarProximaPartida() ?>
+        <div id="etiquetaDirecto" class="row">
+            <span>
+                Torneo
+            </span>
         </div>
         <div class="row equipos">
             <div class="col-md-offset-3 col-md-2">
@@ -49,13 +44,15 @@ $this->registerCssFile('css/_directo.css');
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 compartir-redes">
                 <div>
                     VS
                 </div>
                 <div class="compartir">
                     <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> compartir
                 </div>
+                <?= CompartirRedes::twitter('Partida') ?>
+                <?= CompartirRedes::facebook() ?>
             </div>
             <div class="col-md-2">
                 <div class="row">

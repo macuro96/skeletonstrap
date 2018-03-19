@@ -12,6 +12,7 @@ use common\assets\CommonAsset;
 
 use common\components\FooterLayout;
 use common\components\NavBarLayout;
+use common\components\CompartirRedes;
 
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
@@ -32,7 +33,6 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-
 <?php
 NavBar::begin([
     'brandLabel' => NavBarLayout::brandLabel(),

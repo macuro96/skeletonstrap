@@ -20,6 +20,23 @@ body {
     color: white;
 }
 
+.a-none {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.a-none:hover {
+    color: inherit;
+}
+
+.a-none:link {
+    color: inherit;
+}
+
+.a-none:visited {
+    color: inherit;
+}
+
 .container-fluid {
     margin-top: 50px;
     margin-bottom: 30px;
@@ -164,6 +181,43 @@ a.desc:after {
 .navbar-brand {
     color: white !important;
 }
+
+/* COMPARTIR REDES */
+
+#compartir-redes {
+    position: fixed;
+
+    right: 0%;
+    bottom: 50%;
+
+    background-color: #EEEEEE;
+    color: black;
+
+    padding: 10px;
+    padding-bottom: 6px;
+
+    border-radius: 5px;
+
+    border-style: solid;
+    border-width: 5px;
+    border-color: #AAAAAA;
+
+    border-right: none;
+
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+#compartir-redes p {
+    text-align: center;
+    color: #999999;
+}
+
+#compartir-redes > a {
+    text-decoration: none;
+}
+
+/* --------------- */
 
 @media(max-width:767px) {
     .nav li > form > button.logout {

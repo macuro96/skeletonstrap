@@ -1,7 +1,5 @@
 .div-directo {
     font-family: 'supercell-magicregular';
-
-    padding-top: 20px;
 }
 
 .div-directo .texto-directo {
@@ -16,6 +14,19 @@
 .div-directo .texto-directo .fa-circle {
     color: red;
     margin-left: 12px;
+}
+
+.etiquetas {
+    text-align: center;
+
+    font-size: 32px;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    margin-top: 20px;
+
+    background-color: #222;
 }
 
 .proxima-partida {
@@ -64,36 +75,8 @@
     font-weight: bold;
 }
 
-#etiquetaDirecto, #etiquetaNoticias {
-    text-align: center;
-}
-
-#etiquetaNoticias {
-    /*margin-top: 20px;*/
-}
-
-.etiquetas {
-    margin-top: 30px !important;
-}
-
-#etiquetaDirecto span, #etiquetaNoticias span {
-    background-color: #256068;
-    color: white;
-
-    font-size: 34px;
-
-    padding: 12px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
 .div-directo .equipos, .div-directo .noticias {
     text-align: center;
-
-    margin-top: 14px;
 
     padding-left: 20px;
     padding-right: 20px;

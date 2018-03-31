@@ -251,3 +251,37 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.seccion {
+    padding-left: 20px;
+    padding-right: 20px;
+
+    padding-top: 20px;
+
+    overflow-wrap: break-word;
+
+    font-family: 'roboto-slab-regular';
+    font-size: 20px;
+}
+
+.seccion p {
+    border-left-style: solid;
+    border-left-color: #222;
+    border-left-width: 6px;
+
+    border-right-style: solid;
+    border-right-color: white;
+    border-right-width: 6px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.seccion .titulo-seccion {
+}
+
+.img-seccion .img-responsive {
+    margin: 0 auto !important;
+
+    margin-bottom: 10px !important;
+}

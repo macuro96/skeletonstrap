@@ -2,9 +2,9 @@
 
 namespace common\components;
 
-class DirectoIndex
+class MostrarIndex
 {
-    public static function mostrarDirecto()
+    public static function directo($etiqueta)
     {
         ?>
         <div class="row">
@@ -24,10 +24,16 @@ class DirectoIndex
                 </iframe>
             </div>
         </div>
+        <div class="row etiquetas">
+            <div class="col-md-offset-5 col-md-2">
+                <?= $etiqueta ?>
+            </div>
+        </div>
+        <?= Partidas::mostrarPartida() ?>
         <?php
     }
 
-    public static function mostrarProximaPartida()
+    public static function proximaPartida()
     {
         ?>
         <div class="row">
@@ -42,6 +48,29 @@ class DirectoIndex
                     <p>FALTAN</p>
                     <p><tiempo>02:31:40</tiempo> Hrs</p>
                 </div>
+            </div>
+        </div>
+        <?php
+    }
+
+    public static function mejoresPartidas($coleccion)
+    {
+        ?>
+        <div class="row etiquetas">
+            <div class="col-md-offset-4 col-md-4">
+                Mejores partidas
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 twitch-video">
+                <iframe
+                    src="http://player.twitch.tv/?collection=<?= $coleccion ?>"
+                    height="720"
+                    width="1280"
+                    frameborder="0"
+                    scrolling="no"
+                    allowfullscreen="true">
+                </iframe>
             </div>
         </div>
         <?php

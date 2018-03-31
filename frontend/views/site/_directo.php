@@ -5,7 +5,7 @@ use yii\web\View;
 use yii\helpers\Html;
 
 use common\components\CheckEnd;
-use common\components\DirectoIndex;
+use common\components\MostrarIndex;
 use common\components\RedesSociales;
 
 $this->registerCssFile('css/_directo.css');
@@ -14,74 +14,40 @@ $this->registerJsFile('js/_directo.js', ['position' => View::POS_END,
 ?>
 <div class="row div-directo">
     <div class="col-md-12">
-        <?= DirectoIndex::mostrarDirecto() ?>
-        <div id="etiquetaDirecto" class="row etiquetas">
-            <span>
-                Torneo
-            </span>
-        </div>
-        <div class="row equipos">
-            <div class="col-md-offset-3 col-md-2">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-4 col-md-12">
-                        <div class="container-img">
-                            <?= Html::img(CheckEnd::rutaRelativa() . 'images/logo.png', ['class' => 'img-responsive']) ?>
-                        </div>
-                        <div>
-                            <p>Skeleton's Trap</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 visible-sm guion">
-                        -
-                    </div>
-                    <div class="col-sm-4 visible-sm marcador-local">
-                        <marcadorlocal>0</marcadorlocal>
-                    </div>
+        <div class="row seccion">
+            <div class="col-md-offset-3 col-md-6">
+                <div class="img-seccion">
+                    <?= Html::img(CheckEnd::rutaRelativa() . 'images/logo.png', ['class' => 'img-responsive']) ?>
                 </div>
-                <div class="row hidden-sm">
-                    <div class="col-md-12">
-                        <marcadorlocal>0</marcadorlocal>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 compartir-redes">
-                <div>
-                    VS
-                </div>
-                <div class="compartir">
-                    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> compartir
-                </div>
-                <?= RedesSociales::twitter('Partida') ?>
-                <?= RedesSociales::facebook() ?>
-            </div>
-            <div class="col-md-2">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-4 col-md-12">
-                        <div class="container-img">
-                            <?= Html::img(CheckEnd::rutaRelativa() . 'images/Logo4K1.png', ['class' => 'img-responsive']) ?>
-                        </div>
-                        <div>
-                            <p>RoyaleconQueso</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 visible-sm guion">
-                        -
-                    </div>
-                    <div class="col-sm-4 visible-sm marcador-local">
-                        <marcadorlocal>0</marcadorlocal>
-                    </div>
-                </div>
-                <div class="row hidden-sm">
-                    <div class="col-md-12">
-                        <marcadorlocal>0</marcadorlocal>
-                    </div>
-                </div>
+
+                <p class="titulo-seccion">
+                    <h2>Trappero, bienvenido a la web del equipo <b>"Skeleton's Trap"</b></h2>
+                </p>
+
+                <p>
+                    Somos un equipo pequeño y humilde pero con muchas ganas de conseguir grandes cosas.
+                </p>
             </div>
         </div>
-        <div id="etiquetaNoticias" class="row etiquetas">
-            <span>
+
+        <!--
+        <div class="row seccion">
+            <div class="col-md-offset-3 col-md-6">
+                <p>
+                    Buscamos nuevos miembros que quieran formar parte de Skeleton's Trap, si quieres ser uno de ellos
+                    puedes leer las normas, y contactar con nosotros a través de un formulario.
+                </p>
+                <p>
+                    Para acceder al formulario puedes hacerlo a través de este enlace o en el apartado 'Únete/Lucha' del menú principal.
+                </p>
+            </div>
+        </div>
+        -->
+        <?= MostrarIndex::mejoresPartidas('8NTmRZP42xSlkg') ?>
+        <div class="row etiquetas">
+            <div class="col-md-offset-4 col-md-4">
                 Últimas noticias
-            </span>
+            </div>
         </div>
         <div class="row noticias">
             <div class="col-md-offset-3 col-md-6">

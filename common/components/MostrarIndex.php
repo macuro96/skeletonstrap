@@ -56,23 +56,14 @@ class MostrarIndex
     public static function mejoresPartidas($coleccion)
     {
         ?>
-        <div class="row etiquetas">
-            <div class="col-md-offset-4 col-md-4">
-                Mejores partidas
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 twitch-video">
-                <iframe
-                    src="http://player.twitch.tv/?collection=<?= $coleccion ?>"
-                    height="720"
-                    width="1280"
-                    frameborder="0"
-                    scrolling="no"
-                    allowfullscreen="true">
-                </iframe>
-            </div>
-        </div>
+        <iframe
+            src="http://player.twitch.tv/?collection=<?= $coleccion ?>"
+            height="720"
+            width="80%"
+            frameborder="0"
+            scrolling="no"
+            allowfullscreen="true">
+        </iframe>
         <?php
     }
 }

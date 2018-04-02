@@ -1,161 +1,19 @@
-.div-directo {
-    font-family: 'supercell-magicregular';
-}
-
-.div-directo .texto-directo {
-    text-align: center;
-    margin-bottom: 12px;
-}
-
-.div-directo .twitch-video {
-    text-align: center;
-}
-
-.div-directo .texto-directo .fa-circle {
-    color: red;
-    margin-left: 12px;
-}
-
-.etiquetas {
+.cabecera-inicio {
     text-align: center;
 
-    font-size: 32px;
-
-    padding-top: 20px;
-    padding-bottom: 20px;
-
-    margin-top: 20px;
-
-    background-color: #222;
+    margin-bottom: 40px;
 }
 
-.proxima-partida {
-    text-align: center;
-
-    margin-top: 14px;
-    margin-bottom: 14px;
-}
-
-.proxima-partida div {
-    padding: 10px;
+.titulo-inicio {
     font-size: 30px;
+    color: #222;
 }
 
-.proxima-partida span {
-    position: absolute;
-
-    margin-top: -30px;
-    margin-left: -62px;
-
-    background-color: #222;
-
-    padding: 10px;
+.logo-inicio {
+    margin-top: 20px;
+    margin-bottom: 10px !important;
 }
 
-.proxima-partida div div {
-    padding-top: 40px;
-
-    border-top-style: solid;
-    border-top-width: 6px;
-    border-top-color: #222;
-
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-
-    background-color: #256068;
-
-    font-size: 14px;
-}
-
-.proxima-partida div div p:nth-child(2) {
-    padding-top: 5px;
-    padding-bottom: 5px;
-
-    background-color: #222;
-    font-weight: bold;
-}
-
-.div-directo .equipos, .div-directo .noticias {
-    text-align: center;
-
-    padding-left: 20px;
-    padding-right: 20px;
-
-    background-color: #256068;
-
-    overflow-wrap: break-word;
-}
-
-.div-directo .equipos > div, .div-directo .noticias > div {
-    padding: 10px;
-    background-color: #222;
-
-    border-radius: 5px;
-
-    padding-top: 16px;
-
-    border-bottom-style: solid;
-    border-bottom-width: 8px;
-
-    border-top-style: solid;
-    border-top-width: 8px;
-    border-top-color: #3C3C3C;
-}
-
-.div-directo .equipos img {
-    margin: 0 auto;
-    max-width: 120px;
-}
-
-.div-directo .equipos .container-img {
-    height: 160px;
-}
-
-.div-directo .equipos > :nth-child(1), .div-directo .noticias > :nth-child(1) {
-    border-color: #59cf35;
-}
-
-/* VS */
-.div-directo .equipos > :nth-child(2) {
-    font-size: 34px;
-    margin-top: 70px;
-
-    border-radius: 0px;
-
-    border-bottom: none;
-}
-
-.div-directo .equipos .compartir {
-    font-size: 14px !important;
-    color: #00aced;
-}
-
-.div-directo .equipos > :nth-child(3) {
-    border-color: #B72525;
-}
-
-.div-directo .equipos .guion, .div-directo .equipos .marcador-local {
-    margin-top: 40px;
-    font-size: 42px;
-}
-
-marcadorlocal {
-    font-size: 64px;
-    color: #00aced;
-}
-
-@media(max-width:991px) {
-    .div-directo .equipos > :nth-child(2) {
-        margin-top: 0px !important;
-        border: none;
-    }
-
-    .div-directo .equipos > :nth-child(1) {
-        border-top: none;
-    }
-
-
-    .div-directo .equipos > :nth-child(3) {
-        border-bottom: none;
-    }
+.redes-sociales {
+    margin-top: 30px;
 }

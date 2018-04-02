@@ -7,10 +7,13 @@ use yii\helpers\Html;
 use common\components\CheckEnd;
 use common\components\MostrarIndex;
 use common\components\RedesSociales;
+use mobiledetect\Detection\MobileDetect;
 
 $this->registerCssFile('css/_directo.css');
 $this->registerJsFile('js/_directo.js', ['position' => View::POS_END,
                                          'depends'  => [\yii\web\JqueryAsset::className()]]);
+
+$detect = new Mobile_Detect();
 ?>
 <div class="row cabecera-inicio">
     <div class="col-lg-offset-3 col-lg-6 col-md-12">
@@ -113,7 +116,11 @@ $this->registerJsFile('js/_directo.js', ['position' => View::POS_END,
                     <h2><?= Html::a('¿Te atréves a jugar <b>contra nosotros</b>?', ['/site/lucha'], ['class' => 'a-none']) ?></h2>
                     <div class="redes-sociales">
                         <?= RedesSociales::twitter('https://skeletons-trap.herokuapp.com/ ¿Te atréves a jugar contra nosotros? Somos Skeleton\'s Trap') ?>
-                        <?= RedesSociales::whatsapp('https://skeletons-trap.herokuapp.com/ ¿Te atréves a jugar contra nosotros? Somos Skeleton\'s Trap') ?>
+                        <?php
+                        if ($detect->isMobile() || $detect->isTablet()) {
+                            echo RedesSociales::whatsapp('https://skeletons-trap.herokuapp.com/ ¿Te atréves a jugar contra nosotros? Somos Skeleton\'s Trap');
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

@@ -81,11 +81,11 @@ body {
     font-size: 32px;
 }
 
-.footer .redes .twitch {
+.redes .twitch {
     color: #4b367c !important;
 }
 
-.footer .redes .twitter {
+.redes .twitter {
     color: #00aced !important;
 }
 
@@ -234,6 +234,18 @@ a.desc:after {
     }
 }
 
+@media (min-width:991px) {
+    .div-titulo {
+        border-right-style: solid;
+        border-right-width: 5px;
+        border-right-color: #936a45;
+
+        border-left-style: solid;
+        border-left-width: 5px;
+        border-left-color: #936a45;
+    }
+}
+
 .nav > li > form > button.logout:focus,
 .nav > li > form > button.logout:hover {
     text-decoration: none;
@@ -243,41 +255,15 @@ a.desc:after {
     outline: none;
 }
 
-/*
-.seccion {
-    padding-left: 20px;
-    padding-right: 20px;
-
-    padding-top: 20px;
-
-    overflow-wrap: break-word;
-
-    font-size: 20px;
-}
-
-.seccion p {
-    border-left-style: solid;
-    border-left-color: #222;
-    border-left-width: 6px;
-
-    border-right-style: solid;
-    border-right-color: white;
-    border-right-width: 6px;
-
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.seccion .titulo-seccion {
-}
-*/
-
 .img-centered .img-responsive {
     margin: 0 auto !important;
 }
 
-.contenido-seccion {
+.text-centered {
+    text-align: center !important;
+}
 
+.contenido-seccion {
     padding-top: 20px;
     padding-bottom: 46px;
 
@@ -332,6 +318,33 @@ a.desc:after {
 
 .encuentro td img {
     max-width: 80px;
+}
+
+.div-titulo {
+    margin-bottom: 30px;
+
+    border-top-style: solid;
+    border-top-width: 5px;
+    border-top-color: #936a45;
+
+    background-color: #e1e1e1;
+}
+
+.div-subtitulo {
+    margin-bottom: 30px;
+
+    margin-left: 60px;
+    margin-right: 60px;
+
+    border-left-style: solid;
+    border-left-width: 5px;
+    border-left-color: #936a45;
+
+    border-right-style: solid;
+    border-right-width: 5px;
+    border-right-color: #936a45;
+
+    background-color: #e1e1e1;
 }
 
 /* REDES SOCIALES */

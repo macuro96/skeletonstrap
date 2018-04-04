@@ -16,7 +16,7 @@ $this->registerJsFile('js/_directo.js', ['position' => View::POS_END,
 $detect = new Mobile_Detect();
 ?>
 <div class="row cabecera-inicio">
-    <div class="col-lg-offset-3 col-lg-6 col-md-12">
+    <div class="col-lg-offset-3 col-lg-6">
         <div class="img-centered logo-inicio">
             <?= Html::img(CheckEnd::rutaRelativa() . 'images/logo.png', ['class' => 'img-responsive']) ?>
         </div>
@@ -26,10 +26,13 @@ $detect = new Mobile_Detect();
         </p>
 
         <p>
-            Ésta es una web en la que encontrarás información sobre nosotros: integrantes del equipo, estadísticas, torneos y poder unirte o luchar contra nosotros...
+            Ésta es una web en la que encontrarás información sobre: integrantes del equipo, estadísticas, torneos y para establecer un contacto para poder unirte o luchar contra nosotros...
         </p>
     </div>
 </div>
+
+<evento-partida><?= MostrarIndex::proximaPartida() ?></evento-partida>
+
 <div class="row seccion">
     <div class="col-lg-12">
         <div class="titulo-seccion"><h2>Sobre nosotros</h2></div>

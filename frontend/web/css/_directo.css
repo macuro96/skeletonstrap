@@ -17,3 +17,101 @@
 .redes-sociales {
     margin-top: 30px;
 }
+
+.titulo-proxima-partida {
+    font-size: 50px !important;
+}
+
+.div-titulo {
+    margin-bottom: 0px !important;
+}
+
+.div-subtitulo {
+    border-bottom-style: solid;
+    border-bottom-width: 8px;
+    border-bottom-color: #936a45;
+}
+
+.subtitulo-proxima-partida {
+    font-size: 18px !important;
+}
+
+.subtitulo-proxima-partida hora {
+    font-size: 32px !important;
+}
+
+/* Titulo de proxima partida */
+.proxima-partida {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+
+    border-bottom-style: solid;
+    border-bottom-width: 12px;
+    border-bottom-color: #e1e1e1;
+}
+
+.proxima-partida .nombres-equipos {
+    font-family: 'supercell-magicregular';
+    text-align: center;
+
+    margin-bottom: 10px;
+}
+
+.proxima-partida .nombres-equipos .equipo {
+    color: #d45c2f;
+}
+
+.proxima-partida .nombres-equipos .equipo-enemigo {
+}
+
+.proxima-partida .glyphicon-refresh {
+    font-size: 24px;
+}
+
+.proxima-partida .glyphicon-refresh:hover {
+    font-size: 32px;
+}
+
+/* proxima partida VERSUS */
+#versus-image {
+    max-width: 220px !important;
+}
+
+.logo {
+
+}
+
+.logo img {
+    max-height: 250px;
+    max-width: 350px;
+}
+
+@media(min-width:992px) and (max-width:1400px) {
+    #versus-image {
+        max-width: 80px !important;
+    }
+
+    .logo img {
+        height: 160px !important;
+    }
+}
+
+@media (max-width:767px) {
+    .logo img {
+        height: 160px !important;
+    }
+
+    .twitch-video {
+        height: 320px;
+    }
+}
+
+@media (max-width:520px) {
+    .logo img {
+        height: 100px !important;
+    }
+
+    .proxima-partida .nombres-equipos h3 {
+        font-size: 18px !important;
+    }
+}

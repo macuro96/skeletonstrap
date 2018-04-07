@@ -5,5 +5,7 @@
 $this->title = 'My Yii Application';
 ?>
 <?=
-    $this->render('_directo');
+    $this->render('_directo', [
+        'detect' => $detect
+    ]);
 ?>

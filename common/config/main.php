@@ -3,7 +3,7 @@ return [
     'aliases' => [
         '@bower'        => '@vendor/bower-asset',
         '@npm'          => '@vendor/npm-asset',
-        '@commonViews'  => '@common/components/views'
+        '@commonViews'  => '@common/views'
     ],
     'language' => 'es-ES',
     'name'     => 'Skeleton\'s Trap',

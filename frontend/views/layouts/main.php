@@ -79,7 +79,7 @@ NavBar::end();
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
     <?= Alert::widget() ?>
-    <?= $content ?>
+    <?= $content ?>        
 </div>
 
 <?= FooterLayout::mostrar() ?>

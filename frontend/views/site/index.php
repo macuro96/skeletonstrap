@@ -12,11 +12,10 @@ use common\components\RedesSociales;
 
 $this->title = 'Inicio';
 
-$this->registerCssFile('css/_index.css');
-$this->registerJsFile('js/_index.js', ['position' => View::POS_END,
-                                       'depends'  => [\yii\web\JqueryAsset::className()]]);
+$this->registerCssFile('css/index.css');
+$this->registerJsFile('js/index.js', ['position' => View::POS_END,
+                                      'depends'  => [\yii\web\JqueryAsset::className()]]);
 ?>
-
 <div class="row cabecera-inicio">
     <div class="col-lg-offset-3 col-lg-6">
         <div class="img-centered logo-inicio">
@@ -34,9 +33,6 @@ $this->registerJsFile('js/_index.js', ['position' => View::POS_END,
 </div>
 
 <evento-partida>
-    <?= $this->render('_proximaPartida', [
-        'detect' => $detect,
-    ]) ?>
 </evento-partida>
 
 <div class="row seccion">

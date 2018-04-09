@@ -20,6 +20,11 @@ body {
     color: #222;
 }
 
+.container-fluid {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
 .a-none {
     text-decoration: inherit;
     color: inherit;
@@ -35,11 +40,6 @@ body {
 
 .a-none:visited {
     color: inherit;
-}
-
-.container-fluid {
-    margin-top: 50px;
-    margin-bottom: 30px;
 }
 
 .footer {

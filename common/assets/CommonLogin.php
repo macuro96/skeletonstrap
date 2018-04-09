@@ -4,15 +4,14 @@ namespace common\assets;
 
 use yii\web\AssetBundle;
 
-class CommonAsset extends AssetBundle
+class CommonLogin extends AssetBundle
 {
-    public $sourcePath = '@common/scripts';
+    public $sourcePath = '@common/scripts/login';
     public $css = [
-        'site.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
+        'login.css'
     ];
     public $js = [
-        
+
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -12,8 +12,8 @@ use common\components\RedesSociales;
 
 $this->title = 'Inicio';
 
-$this->registerCssFile('css/index.css');
-$this->registerJsFile('js/index.js', ['position' => View::POS_END,
+$this->registerCssFile('/css/index.css');
+$this->registerJsFile('/js/index.js', ['position' => View::POS_END,
                                       'depends'  => [\yii\web\JqueryAsset::className()]]);
 ?>
 <div class="row cabecera-inicio">

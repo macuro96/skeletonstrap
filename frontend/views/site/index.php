@@ -27,7 +27,7 @@ $this->registerJsFile('/js/index.js', ['position' => View::POS_END,
         </p>
 
         <p>
-            Ésta es una web en la que encontrarás información sobre: integrantes del equipo, estadísticas, torneos y para establecer un contacto para poder unirte o luchar contra nosotros...
+            Ésta es una web en la que encontrarás información sobre: integrantes del equipo, estadísticas, torneos. También podrás contactarnos para poder unirte o luchar contra nosotros...
         </p>
     </div>
 </div>
@@ -48,7 +48,9 @@ $this->registerJsFile('/js/index.js', ['position' => View::POS_END,
                 </div>
                 <div class="col-lg-8">
                     <p>
-                        Sed vel est quis risus imperdiet eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et mi rutrum, laoreet lorem id, lobortis nunc. Sed vehicula libero quam, vel porta sapien tincidunt vitae. Sed congue ligula ac neque suscipit tempor non placerat diam.
+                        Somos un equipo competitivo de Clash Royale, empezamos nuestros pasos en el año 2017 llenos de ilusión
+                        y con ganas de crecer. Durante todo este tiempo hemos ido creciendo poco a poco y manteniendo un buen nivel competitivo
+                        en las batallas a las que nos hemos enfrentado.
                     </p>
                 </div>
             </div>
@@ -109,22 +111,8 @@ $this->registerJsFile('/js/index.js', ['position' => View::POS_END,
 <div class="row seccion">
     <div class="col-lg-12">
         <div class="titulo-seccion"><h2>Mejores partidas</h2></div>
-
-        <div class="contenido-seccion">
-            <div class="row">
-                <div class="col-lg-12 centrar">
-                    <?= Twitch::coleccion('8NTmRZP42xSlkg') ?>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 centrar">
-                    <h2><?= Html::a('¿Te atréves a jugar <b>contra nosotros</b>?', ['/site/lucha'], ['class' => 'a-none']) ?></h2>
-                    <div class="redes-sociales">
-                        <?= RedesSociales::twitter('https://skeletons-trap.herokuapp.com/ ¿Te atréves a jugar contra nosotros? Somos Skeleton\'s Trap') ?>
-                        <?= RedesSociales::whatsapp($detect, 'https://skeletons-trap.herokuapp.com/ ¿Te atréves a jugar contra nosotros? Somos Skeleton\'s Trap') ?>
-                    </div>
-                </div>
-            </div>
+        <div style="width: 100%; height: 420px;" class="centrar">
+            <h2>EN DESARROLLO</h2>
         </div>
     </div>
 </div>

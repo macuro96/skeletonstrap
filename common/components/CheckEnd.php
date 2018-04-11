@@ -18,6 +18,6 @@ class CheckEnd
 
     public static function rutaRelativa()
     {
-        return self::isBackEnd() ? '../' : '/';
+        return self::isBackEnd() ? '../../' : '/';
     }
 }

@@ -133,19 +133,51 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
+    * @return \yii\db\ActiveQuery
+    */
     public function getJugadores()
     {
-        return $this->hasOne(Jugadores::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
+      return $this->hasOne(Jugadores::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
     }
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
+    * @return \yii\db\ActiveQuery
+    */
     public function getNacionalidad()
     {
-        return $this->hasOne(Nacionalidades::className(), ['id' => 'nacionalidad_id'])->inverseOf('usuarios');
+      return $this->hasOne(Nacionalidades::className(), ['id' => 'nacionalidad_id'])->inverseOf('usuarios');
+    }
+
+    /**
+    * @return \yii\db\ActiveQuery
+    */
+    public function getUsuariosRoles()
+    {
+        return $this->hasMany(UsuariosRoles::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
+    }
+
+    /**
+    * @return \yii\db\ActiveQuery
+    */
+    public function getUsuariosRoles0()
+    {
+        return $this->hasMany(UsuariosRoles::className(), ['rol_id' => 'id'])->inverseOf('rol');
+    }
+
+    /**
+    * @return \yii\db\ActiveQuery
+    */
+    public function getRols()
+    {
+        return $this->hasMany(Usuarios::className(), ['id' => 'rol_id'])->viaTable('usuarios_roles', ['usuario_id' => 'id']);
+    }
+
+    /**
+    * @return \yii\db\ActiveQuery
+    */
+    public function getUsuarios()
+    {
+        return $this->hasMany(Usuarios::className(), ['id' => 'usuario_id'])->viaTable('usuarios_roles', ['rol_id' => 'id']);
     }
 
     public function beforeSave($insert)

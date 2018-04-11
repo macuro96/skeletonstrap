@@ -55,8 +55,9 @@ DROP TABLE IF EXISTS permisos CASCADE;
 
 CREATE TABLE permisos
 (
-    id     BIGSERIAL    PRIMARY KEY
-  , nombre VARCHAR(32)  NOT NULL UNIQUE
+    id          BIGSERIAL     PRIMARY KEY
+  , nombre      VARCHAR(32)   NOT NULL UNIQUE
+  , descripcion VARCHAR(255)
 );
 
 DROP TABLE IF EXISTS nacionalidades CASCADE;
@@ -182,12 +183,24 @@ DROP TABLE IF EXISTS roles CASCADE;
 
 CREATE TABLE roles
 (
-    id         BIGSERIAL    PRIMARY KEY
-  , nombre     VARCHAR(32)  NOT NULL UNIQUE
-  , permiso_id BIGINT       NOT NULL
-                            REFERENCES permisos (id)
-                            ON DELETE NO ACTION
-                            ON UPDATE CASCADE
+    id          BIGSERIAL    PRIMARY KEY
+  , nombre      VARCHAR(32)  NOT NULL UNIQUE
+);
+
+DROP TABLE IF EXISTS roles_permisos CASCADE;
+
+CREATE TABLE roles_permisos
+(
+    id          BIGSERIAL    PRIMARY KEY
+  , rol_id      BIGINT       NOT NULL
+                             REFERENCES roles (id)
+                             ON DELETE NO ACTION
+                             ON UPDATE CASCADE
+  , permiso_id  BIGINT       NOT NULL
+                             REFERENCES permisos (id)
+                             ON DELETE NO ACTION
+                             ON UPDATE CASCADE
+  , CONSTRAINT uq_roles_permisos UNIQUE (rol_id, permiso_id)
 );
 
 DROP TABLE IF EXISTS visibilidad_clanes CASCADE;
@@ -281,6 +294,22 @@ CREATE TABLE usuarios
   , activo          BOOLEAN      DEFAULT FALSE
   , verificado      BOOLEAN      NOT NULL
                                  DEFAULT FALSE
+);
+
+DROP TABLE IF EXISTS usuarios_roles CASCADE;
+
+CREATE TABLE usuarios_roles
+(
+      id         BIGSERIAL   PRIMARY KEY
+    , usuario_id BIGINT      NOT NULL
+                             REFERENCES usuarios (id)
+                             ON DELETE NO ACTION
+                             ON UPDATE CASCADE
+    , rol_id     BIGINT      NOT NULL
+                             REFERENCES usuarios (id)
+                             ON DELETE NO ACTION
+                             ON UPDATE CASCADE
+    , CONSTRAINT uq_usuarios_roles UNIQUE (usuario_id, rol_id)
 );
 
 DROP TABLE IF EXISTS jugadores CASCADE;
@@ -545,4 +574,20 @@ VALUES ('España', 'ESP', 1);
 /*
 INSERT INTO usuarios (nombre, password, correo, nacionalidad_id, auth_key)
 VALUES ('manuel', crypt('manuel', gen_salt('bf', 13)), 'nombre@dominio.com', 1, 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA');
+
+INSERT INTO permisos (nombre, descripcion)
+VALUES ('verPrueba', 'Puede ver'),
+       ('escribirPrueba', 'Puede escribir');
+
+INSERT INTO roles (nombre)
+VALUES ('administrador'),
+       ('iniciado');
+
+INSERT INTO roles_permisos (rol_id, permiso_id)
+VALUES (1, 1),
+       (1, 2),
+       (2, 1);
+
+INSERT INTO usuarios_roles (usuario_id, rol_id)
+VALUES (1, 1);
 */

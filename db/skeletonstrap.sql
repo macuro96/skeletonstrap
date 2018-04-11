@@ -270,12 +270,15 @@ CREATE TABLE usuarios
                                  REFERENCES nacionalidades (id)
                                  ON DELETE NO ACTION
                                  ON UPDATE CASCADE
-/*                                
+  , access_token    VARCHAR(255)
+  , auth_key        VARCHAR(255)
+/*
   , rol_id          BIGINT       NOT NULL
                                  REFERENCES roles (id)
                                  ON DELETE NO ACTION
                                  ON UPDATE CASCADE
 */
+  , activo          BOOLEAN      DEFAULT FALSE
   , verificado      BOOLEAN      NOT NULL
                                  DEFAULT FALSE
 );
@@ -535,8 +538,11 @@ CREATE TABLE config_equipo
 
 
 -- DATOS INICIALES
-
+INSERT INTO nacionalidades (nombre, abreviatura, tramo_horario)
+VALUES ('España', 'ESP', 1);
 
 -- DATOS PRUEBAS
 /*
+INSERT INTO usuarios (nombre, password, correo, nacionalidad_id, auth_key)
+VALUES ('manuel', crypt('manuel', gen_salt('bf', 13)), 'nombre@dominio.com', 1, 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA');
 */

@@ -3,7 +3,6 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -12,7 +11,6 @@ use common\assets\CommonAsset;
 
 use common\components\FooterLayout;
 use common\components\NavBarLayout;
-use common\components\CompartirRedes;
 
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
@@ -60,7 +58,7 @@ if (Yii::$app->user->isGuest) {
     $menuItems[] = '<li>'
         . Html::beginForm(['/site/logout'], 'post')
         . Html::submitButton(
-            'Logout (' . Yii::$app->user->identity->username . ')',
+            'Logout (' . Yii::$app->user->identity->nombre . ')',
             ['class' => 'btn btn-link logout']
         )
         . Html::endForm()
@@ -79,7 +77,7 @@ NavBar::end();
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
     <?= Alert::widget() ?>
-    <?= $content ?>        
+    <?= $content ?>
 </div>
 
 <?= FooterLayout::mostrar() ?>

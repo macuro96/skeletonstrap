@@ -50,7 +50,7 @@ if (Yii::$app->user->isGuest) {
     $menuItems[] = '<li>'
         . Html::beginForm(['/site/logout'], 'post')
         . Html::submitButton(
-            'Logout (' . Yii::$app->user->identity->username . ')',
+            'Logout (' . Yii::$app->user->identity->nombre . ')',
             ['class' => 'btn btn-link logout']
         )
         . Html::endForm()

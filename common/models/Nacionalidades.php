@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 
@@ -32,7 +32,7 @@ class Nacionalidades extends \yii\db\ActiveRecord
     {
         return [
             [['nombre', 'abreviatura', 'tramo_horario'], 'required'],
-            [['tramo_horario'], 'number'],
+            [['tramo_horario'], 'number', 'min' => -12, 'max' => 12],
             [['nombre'], 'string', 'max' => 32],
             [['abreviatura'], 'string', 'max' => 3],
             [['abreviatura'], 'unique'],

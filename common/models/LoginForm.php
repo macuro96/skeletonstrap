@@ -9,7 +9,7 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
-    public $username;
+    public $usuario;
     public $password;
     public $rememberMe = true;
 
@@ -22,12 +22,25 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            // username and password are both required
-            [['username', 'password'], 'required'],
+            // usuario and password are both required
+            [['usuario', 'password'], 'required'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+            ['usuario', 'checkActivo', 'skipOnError' => true]
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'usuario' => 'Usuario',
+            'password' => 'Contraseña',
+            'rememberMe' => 'Recuérdame'
         ];
     }
 
@@ -43,13 +56,13 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, 'Usuario y/o password incorrecto.');
             }
         }
     }
 
     /**
-     * Logs in a user using the provided username and password.
+     * Logs in a user using the provided usuario and password.
      *
      * @return bool whether the user is logged in successfully
      */
@@ -58,21 +71,28 @@ class LoginForm extends Model
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
-        
+
         return false;
     }
 
     /**
-     * Finds user by [[username]]
+     * Finds user by [[usuario]]
      *
      * @return User|null
      */
     protected function getUser()
     {
         if ($this->_user === null) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = Usuarios::findByNombre($this->usuario);
         }
 
         return $this->_user;
+    }
+
+    public function checkActivo($attribute, $params, $validator)
+    {
+        if (Usuarios::findActivo($this->usuario) === null) {
+            $this->addError($attribute, 'El usuario esta desactivado temporalmente');
+        }
     }
 }

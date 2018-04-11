@@ -1,53 +1,131 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $detect Detection\MobileDetect */
 
-$this->title = 'My Yii Application';
+use yii\helpers\Html;
+use yii\web\View;
+
+use common\components\Twitch;
+use common\components\CheckEnd;
+use common\components\RedesSociales;
+
+$this->title = 'Inicio';
+
+$this->registerCssFile('/css/index.css');
+$this->registerJsFile('/js/index.js', ['position' => View::POS_END,
+                                      'depends'  => [\yii\web\JqueryAsset::className()]]);
 ?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+<div class="row cabecera-inicio">
+    <div class="col-lg-offset-3 col-lg-6">
+        <div class="img-centered logo-inicio">
+            <?= Html::img(CheckEnd::rutaRelativa() . 'images/logo.png', ['class' => 'img-responsive']) ?>
         </div>
 
+        <p class="titulo-inicio">
+            Trappero, bienvenido a la web del equipo <b>"Skeleton's Trap"</b>
+        </p>
+
+        <p>
+            Ésta es una web en la que encontrarás información sobre: integrantes del equipo, estadísticas, torneos. También podrás contactarnos para poder unirte o luchar contra nosotros...
+        </p>
+    </div>
+</div>
+
+<evento-partida>
+</evento-partida>
+
+<div class="row seccion">
+    <div class="col-lg-12">
+        <div class="titulo-seccion"><h2>Sobre nosotros</h2></div>
+
+        <div class="contenido-seccion">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="img-centered">
+                        <?= Html::img(CheckEnd::rutaRelativa() . 'images/clash-royale-logo.png', ['class' => 'img-responsive']) ?>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <p>
+                        Somos un equipo competitivo de Clash Royale, empezamos nuestros pasos en el año 2017 llenos de ilusión
+                        y con ganas de crecer. Durante todo este tiempo hemos ido creciendo poco a poco y manteniendo un buen nivel competitivo
+                        en las batallas a las que nos hemos enfrentado.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row seccion">
+    <div class="col-lg-12">
+        <div class="titulo-seccion" id="ultimos-encuentros">
+            <h2>Últimos encuentros <span class="glyphicon glyphicon-refresh btn" aria-hidden="true"></span></h2>
+            <h6>Última actualización hace: <tiempo>1 min</tiempo>...</h6>
+        </div>
+
+        <div class="contenido-seccion">
+            <div class="row encuentro">
+                <div class="col-lg-12">
+                    <table class="table table-stripped">
+                        <thead>
+                            <tr>
+                                <th class="hidden-logo">
+                                    Logo
+                                </th>
+                                <th>
+                                    Equipo
+                                </th>
+                                <th>
+                                    Estadio
+                                </th>
+                                <th>
+                                    Marcador
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="hidden-logo">
+                                    <?= Html::img(CheckEnd::rutaRelativa() . 'images/logo.png', ['class' => 'img-responsive']) ?>
+                                </td>
+                                <td>Skeleton's Trap</td>
+                                <td>Stadium Trap</td>
+                                <td class="marcador">0 - 0</td>
+                            </tr>
+                            <tr>
+                                <td class="hidden-logo">
+                                    <?= Html::img(CheckEnd::rutaRelativa() . 'images/Logo4K1.png', ['class' => 'img-responsive']) ?>
+                                </td>
+                                <td>TeamQueso</td>
+                                <td>Stadium Trap</td>
+                                <td class="marcador">3 - 0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row seccion">
+    <div class="col-lg-12">
+        <div class="titulo-seccion"><h2>Mejores partidas</h2></div>
+        <div style="width: 100%; height: 420px;" class="centrar">
+            <h2>EN DESARROLLO</h2>
+        </div>
+    </div>
+</div>
+<div class="row seccion">
+    <div class="col-lg-12">
+        <div class="titulo-seccion"><h2>Novedades</h2></div>
+
+        <div class="contenido-seccion">
+            <div class="row">
+                <div class="col-lg-12 centrar">
+                    <?= RedesSociales::timelineTwitter() ?>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

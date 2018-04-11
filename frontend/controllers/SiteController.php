@@ -2,6 +2,8 @@
 namespace frontend\controllers;
 
 use Yii;
+use Detection\MobileDetect;
+
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -72,7 +74,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $detect = new MobileDetect();
+
+        return $this->render('index', [
+            'detect' => $detect
+        ]);
     }
 
     /**

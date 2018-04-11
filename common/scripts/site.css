@@ -1,0 +1,563 @@
+@font-face {
+    font-family: supercell-magicregular;
+    src: url(/fonts/supercell-magic.ttf);
+}
+
+@font-face {
+    font-family: roboto-slab-regular;
+    src: url(/fonts/RobotoSlab-Regular.ttf);
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: 'roboto-slab-regular';
+    background-color: #eaeaea;
+
+    color: #222;
+}
+
+.container-fluid {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.a-none {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.a-none:hover {
+    color: inherit;
+}
+
+.a-none:link {
+    color: inherit;
+}
+
+.a-none:visited {
+    color: inherit;
+}
+
+.footer {
+    min-height: 120px;
+    background-color: #222;
+    border-top: 1px solid #080808;
+    padding-top: 20px;
+
+    color: white !important;
+    text-align: center;
+
+    font-family: 'supercell-magicregular';
+    font-size: 12px !important;
+}
+
+.footer a {
+    color: white !important;
+}
+
+.footer img {
+    max-width: 20%;
+    margin: 0 auto;
+}
+
+.footer .copy {
+    font-weight: bold;
+}
+
+.footer .correo, .footer .redes {
+    font-size: 18px;
+}
+
+.footer .correo span {
+    margin-right: 12px;
+}
+
+.footer .redes i {
+    margin-right: 12px;
+    font-size: 32px;
+}
+
+.redes .twitch {
+    color: #4b367c !important;
+}
+
+.redes .twitter {
+    color: #00aced !important;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: "\e151";
+}
+
+a.desc:after {
+    content: "\e152";
+}
+
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view td {
+    white-space: nowrap;
+}
+
+.grid-view .filters input,
+.grid-view .filters select {
+    min-width: 50px;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+/* align the logout "link" (button in form) of the navbar */
+.nav li > form > button.logout {
+    padding: 15px;
+    border: none;
+}
+
+.navbar {
+    font-family: 'supercell-magicregular';
+    font-size: 13px;
+}
+
+.navbar-text {
+    color: white !important;
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+/* COMPARTIR REDES */
+.redes-sociales a {
+    text-decoration: none !important;
+    color: white !important;
+}
+
+.redes-sociales a:hover {
+    color: inherit;
+}
+
+.redes-sociales a:link {
+    color: inherit;
+}
+
+.redes-sociales a:visited {
+    color: inherit;
+}
+/* --------------- */
+
+@media(max-width:767px) {
+    .nav li > form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 15px;
+    }
+
+    .footer .row div {
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hidden-logo {
+        display: none;
+    }
+}
+
+@media(min-width:767px) and (max-width:1200px) {
+    /*
+    .wrap > .container {
+        padding: 100px 15px 20px !important;
+    }
+    */
+}
+
+@media(min-width:767px) and (max-width:991px) {
+    .container-fluid {
+        margin-top: 100px;
+    }
+}
+
+@media (min-width:991px) {
+    .div-titulo {
+        border-right-style: solid;
+        border-right-width: 5px;
+        border-right-color: #936a45;
+
+        border-left-style: solid;
+        border-left-width: 5px;
+        border-left-color: #936a45;
+    }
+}
+
+.nav > li > form > button.logout:focus,
+.nav > li > form > button.logout:hover {
+    text-decoration: none;
+}
+
+.nav > li > form > button.logout:focus {
+    outline: none;
+}
+
+.img-centered .img-responsive {
+    margin: 0 auto !important;
+}
+
+.text-centered {
+    text-align: center !important;
+}
+
+.contenido-seccion {
+    padding-top: 20px;
+    padding-bottom: 46px;
+
+    border-bottom-style: solid;
+    border-bottom-width: 12px;
+    border-bottom-color: #e1e1e1;
+
+    font-size: 18px !important;
+}
+
+.seccion .titulo-seccion {
+    background-color: #964545;
+
+    color: white;
+
+    border-bottom-style: solid;
+    border-bottom-width: 5px;
+    border-bottom-color: #633030;
+
+    text-align: center;
+
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.seccion .titulo-seccion h2 {
+    font-size: 42px !important;
+}
+
+.seccion p {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.centrar {
+    text-align: center;
+}
+
+.seccion .glyphicon-refresh {
+    font-size: 24px;
+}
+
+.encuentro {
+    padding-left: 20px;
+    padding-right: 20px;
+
+    /*background-color: #d1d1d1;*/
+}
+
+.encuentro tbody {
+}
+
+.encuentro td img {
+    max-width: 80px;
+}
+
+.div-titulo {
+    margin-bottom: 30px;
+
+    border-top-style: solid;
+    border-top-width: 5px;
+    border-top-color: #936a45;
+
+    background-color: #e1e1e1;
+}
+
+.div-subtitulo {
+    margin-bottom: 30px;
+
+    margin-left: 60px;
+    margin-right: 60px;
+
+    border-left-style: solid;
+    border-left-width: 5px;
+    border-left-color: #936a45;
+
+    border-right-style: solid;
+    border-right-width: 5px;
+    border-right-color: #936a45;
+
+    background-color: #e1e1e1;
+}
+
+/* REDES SOCIALES */
+.resp-sharing-button__link,
+.resp-sharing-button__icon {
+  display: inline-block
+}
+
+.resp-sharing-button__link {
+  text-decoration: none;
+  color: #fff;
+  margin: 0.5em
+}
+
+.resp-sharing-button {
+  border-radius: 5px;
+  transition: 25ms ease-out;
+  padding: 0.5em 0.75em;
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif
+}
+
+.resp-sharing-button__icon svg {
+  width: 1em;
+  height: 1em;
+  margin-right: 0.4em;
+  vertical-align: top
+}
+
+.resp-sharing-button--small svg {
+  margin: 0;
+  vertical-align: middle
+}
+
+/* Non solid icons get a stroke */
+.resp-sharing-button__icon {
+  stroke: #fff;
+  fill: none
+}
+
+/* Solid icons get a fill */
+.resp-sharing-button__icon--solid,
+.resp-sharing-button__icon--solidcircle {
+  fill: #fff;
+  stroke: none
+}
+
+.resp-sharing-button--twitter {
+  background-color: #55acee
+}
+
+.resp-sharing-button--twitter:hover {
+  background-color: #2795e9
+}
+
+.resp-sharing-button--pinterest {
+  background-color: #bd081c
+}
+
+.resp-sharing-button--pinterest:hover {
+  background-color: #8c0615
+}
+
+.resp-sharing-button--facebook {
+  background-color: #3b5998
+}
+
+.resp-sharing-button--facebook:hover {
+  background-color: #2d4373
+}
+
+.resp-sharing-button--tumblr {
+  background-color: #35465C
+}
+
+.resp-sharing-button--tumblr:hover {
+  background-color: #222d3c
+}
+
+.resp-sharing-button--reddit {
+  background-color: #5f99cf
+}
+
+.resp-sharing-button--reddit:hover {
+  background-color: #3a80c1
+}
+
+.resp-sharing-button--google {
+  background-color: #dd4b39
+}
+
+.resp-sharing-button--google:hover {
+  background-color: #c23321
+}
+
+.resp-sharing-button--linkedin {
+  background-color: #0077b5
+}
+
+.resp-sharing-button--linkedin:hover {
+  background-color: #046293
+}
+
+.resp-sharing-button--email {
+  background-color: #777
+}
+
+.resp-sharing-button--email:hover {
+  background-color: #5e5e5e
+}
+
+.resp-sharing-button--xing {
+  background-color: #1a7576
+}
+
+.resp-sharing-button--xing:hover {
+  background-color: #114c4c
+}
+
+.resp-sharing-button--whatsapp {
+  background-color: #25D366
+}
+
+.resp-sharing-button--whatsapp:hover {
+  background-color: #1da851
+}
+
+.resp-sharing-button--hackernews {
+background-color: #FF6600
+}
+.resp-sharing-button--hackernews:hover, .resp-sharing-button--hackernews:focus {   background-color: #FB6200 }
+
+.resp-sharing-button--vk {
+  background-color: #507299
+}
+
+.resp-sharing-button--vk:hover {
+  background-color: #43648c
+}
+
+.resp-sharing-button--facebook {
+  background-color: #3b5998;
+  border-color: #3b5998;
+}
+
+.resp-sharing-button--facebook:hover,
+.resp-sharing-button--facebook:active {
+  background-color: #2d4373;
+  border-color: #2d4373;
+}
+
+.resp-sharing-button--twitter {
+  background-color: #55acee;
+  border-color: #55acee;
+}
+
+.resp-sharing-button--twitter:hover,
+.resp-sharing-button--twitter:active {
+  background-color: #2795e9;
+  border-color: #2795e9;
+}
+
+.resp-sharing-button--google {
+  background-color: #dd4b39;
+  border-color: #dd4b39;
+}
+
+.resp-sharing-button--google:hover,
+.resp-sharing-button--google:active {
+  background-color: #c23321;
+  border-color: #c23321;
+}
+
+.resp-sharing-button--tumblr {
+  background-color: #35465C;
+  border-color: #35465C;
+}
+
+.resp-sharing-button--tumblr:hover,
+.resp-sharing-button--tumblr:active {
+  background-color: #222d3c;
+  border-color: #222d3c;
+}
+
+.resp-sharing-button--email {
+  background-color: #777777;
+  border-color: #777777;
+}
+
+.resp-sharing-button--email:hover,
+.resp-sharing-button--email:active {
+  background-color: #5e5e5e;
+  border-color: #5e5e5e;
+}
+
+.resp-sharing-button--pinterest {
+  background-color: #bd081c;
+  border-color: #bd081c;
+}
+
+.resp-sharing-button--pinterest:hover,
+.resp-sharing-button--pinterest:active {
+  background-color: #8c0615;
+  border-color: #8c0615;
+}
+
+.resp-sharing-button--whatsapp {
+  background-color: #25D366;
+  border-color: #25D366;
+}
+
+.resp-sharing-button--whatsapp:hover,
+.resp-sharing-button--whatsapp:active {
+  background-color: #1DA851;
+  border-color: #1DA851;
+}
+/* -------------- */

@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS config CASCADE;
 CREATE TABLE config
 (
     id               BIGSERIAL     PRIMARY KEY
-    usuario_twitch   VARCHAR(255)  NOT NULL
+  , usuario_twitch   VARCHAR(255)  NOT NULL
   , password_twitch  VARCHAR(255)  NOT NULL
   , usuario_twitter  VARCHAR(255)  NOT NULL
   , password_twitter VARCHAR(255)  NOT NULL

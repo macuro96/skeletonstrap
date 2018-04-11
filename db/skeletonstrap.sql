@@ -270,10 +270,12 @@ CREATE TABLE usuarios
                                  REFERENCES nacionalidades (id)
                                  ON DELETE NO ACTION
                                  ON UPDATE CASCADE
+/*                                
   , rol_id          BIGINT       NOT NULL
                                  REFERENCES roles (id)
                                  ON DELETE NO ACTION
                                  ON UPDATE CASCADE
+*/
   , verificado      BOOLEAN      NOT NULL
                                  DEFAULT FALSE
 );

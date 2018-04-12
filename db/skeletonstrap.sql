@@ -306,7 +306,7 @@ CREATE TABLE usuarios_roles
                              ON DELETE NO ACTION
                              ON UPDATE CASCADE
     , rol_id     BIGINT      NOT NULL
-                             REFERENCES usuarios (id)
+                             REFERENCES roles (id)
                              ON DELETE NO ACTION
                              ON UPDATE CASCADE
     , CONSTRAINT uq_usuarios_roles UNIQUE (usuario_id, rol_id)
@@ -589,5 +589,6 @@ VALUES (1, 1),
        (2, 1);
 
 INSERT INTO usuarios_roles (usuario_id, rol_id)
-VALUES (1, 1);
+VALUES (1, 1),
+       (1, 2);
 */

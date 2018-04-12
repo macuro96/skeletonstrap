@@ -292,8 +292,7 @@ CREATE TABLE usuarios
                                  ON UPDATE CASCADE
 */
   , activo          BOOLEAN      DEFAULT FALSE
-  , verificado      BOOLEAN      NOT NULL
-                                 DEFAULT FALSE
+  , verificado      VARCHAR(255)
 );
 
 DROP TABLE IF EXISTS usuarios_roles CASCADE;
@@ -572,8 +571,9 @@ VALUES ('España', 'ESP', 1);
 
 -- DATOS PRUEBAS
 /*
-INSERT INTO usuarios (nombre, password, correo, nacionalidad_id, auth_key)
-VALUES ('manuel', crypt('manuel', gen_salt('bf', 13)), 'nombre@dominio.com', 1, 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA');
+INSERT INTO usuarios (nombre, password, correo, nacionalidad_id, auth_key, verificado, activo)
+VALUES ('manuel', crypt('manuel', gen_salt('bf', 13)), 'nombre@dominio.com', 1, 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA', null, true),
+       ('pepe', crypt('pepe', gen_salt('bf', 13)), 'nombred@dominio.com', 1, 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA', 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA', false);
 
 INSERT INTO permisos (nombre, descripcion)
 VALUES ('verPrueba', 'Puede ver'),
@@ -590,5 +590,5 @@ VALUES (1, 1),
 
 INSERT INTO usuarios_roles (usuario_id, rol_id)
 VALUES (1, 1),
-       (1, 2);
+       (2, 2);
 */

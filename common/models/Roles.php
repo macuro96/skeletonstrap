@@ -69,6 +69,22 @@ class Roles extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getUsuariosRoles()
+    {
+        return $this->hasMany(UsuariosRoles::className(), ['rol_id' => 'id'])->inverseOf('rol');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuarios()
+    {
+        return $this->hasMany(Usuarios::className(), ['id' => 'usuario_id'])->viaTable('usuarios_roles', ['rol_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getVisibilidadClanes()
     {
         return $this->hasMany(VisibilidadClanes::className(), ['rol_id' => 'id'])->inverseOf('rol');

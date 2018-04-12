@@ -37,8 +37,8 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['nombre', 'password', 'correo', 'nacionalidad_id'], 'required'],
             [['nacionalidad_id'], 'default', 'value' => null],
             [['nacionalidad_id'], 'integer'],
-            [['verificado', 'activo'], 'boolean'],
-            [['nombre', 'password', 'correo', 'access_token', 'auth_key'], 'string', 'max' => 255],
+            [['activo'], 'boolean'],
+            [['nombre', 'password', 'correo', 'access_token', 'auth_key', 'verificado'], 'string', 'max' => 255],
             [['correo'], 'unique'],
             [['nacionalidad_id'], 'exist', 'skipOnError' => true, 'targetClass' => Nacionalidades::className(), 'targetAttribute' => ['nacionalidad_id' => 'id']],
         ];
@@ -59,22 +59,26 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
 
-    public static function getActivosQuery()
+    public function getEstaActivo()
     {
-        return static::find(['activo' => true]);
+        return $this->activo === true;
     }
 
-    public static function findActivo($nombre)
+    public function getEstaVerificado()
     {
-        return static::find(['activo' => true])
-                     ->one();
+        return $this->verificado === null;
+    }
+
+    public static function findLoginQuery()
+    {
+        return static::find()
+                     ->where(['activo' => true])
+                     ->andWhere('verificado is null');
     }
 
     public static function findByNombre($nombre)
     {
-        return static::getActivosQuery()
-                     ->where(['nombre' => $nombre])
-                     ->one();
+        return static::findOne(['nombre' => $nombre]);
     }
 
     /**
@@ -85,9 +89,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
       */
     public static function findIdentity($id)
     {
-        return static::getActivosQuery()
-                     ->where(['id' => $id])
-                     ->one();
+        return static::findOne(['id' => $id]);
     }
 
      /**
@@ -132,12 +134,17 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         return \Yii::$app->security->validatePassword($password, $this->password);
     }
 
+    public function getEsAdministrador()
+    {
+        return $this->getRoles()->where(['nombre' => 'administrador'])->one() !== null;
+    }
+
     /**
     * @return \yii\db\ActiveQuery
     */
     public function getJugadores()
     {
-      return $this->hasOne(Jugadores::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
+        return $this->hasOne(Jugadores::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
     }
 
     /**
@@ -145,39 +152,23 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     */
     public function getNacionalidad()
     {
-      return $this->hasOne(Nacionalidades::className(), ['id' => 'nacionalidad_id'])->inverseOf('usuarios');
+        return $this->hasOne(Nacionalidades::className(), ['id' => 'nacionalidad_id'])->inverseOf('usuarios');
     }
 
     /**
-    * @return \yii\db\ActiveQuery
-    */
+     * @return \yii\db\ActiveQuery
+     */
     public function getUsuariosRoles()
     {
         return $this->hasMany(UsuariosRoles::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
     }
 
     /**
-    * @return \yii\db\ActiveQuery
-    */
-    public function getUsuariosRoles0()
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRoles()
     {
-        return $this->hasMany(UsuariosRoles::className(), ['rol_id' => 'id'])->inverseOf('rol');
-    }
-
-    /**
-    * @return \yii\db\ActiveQuery
-    */
-    public function getRols()
-    {
-        return $this->hasMany(Usuarios::className(), ['id' => 'rol_id'])->viaTable('usuarios_roles', ['usuario_id' => 'id']);
-    }
-
-    /**
-    * @return \yii\db\ActiveQuery
-    */
-    public function getUsuarios()
-    {
-        return $this->hasMany(Usuarios::className(), ['id' => 'usuario_id'])->viaTable('usuarios_roles', ['rol_id' => 'id']);
+        return $this->hasMany(Roles::className(), ['id' => 'rol_id'])->viaTable('usuarios_roles', ['usuario_id' => 'id']);
     }
 
     public function beforeSave($insert)

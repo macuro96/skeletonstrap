@@ -1,49 +1,14 @@
 <?php
-namespace common\models;
+namespace backend\models;
 
 use Yii;
-use yii\base\Model;
 
 /**
  * Login form
  */
-class LoginForm extends Model
+class LoginForm extends \common\models\LoginForm
 {
-    public $usuario;
-    public $password;
-    public $rememberMe = true;
-
-    private $_user;
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            // usuario and password are both required
-            [['usuario', 'password'], 'required'],
-            // rememberMe must be a boolean value
-            ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
-            ['password', 'validatePassword'],
-            ['usuario', 'validateVerificado', 'skipOnError' => true],
-            ['usuario', 'validateActivo', 'skipOnError' => true]
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'usuario' => 'Usuario',
-            'password' => 'Contraseña',
-            'rememberMe' => 'Recuérdame'
-        ];
-    }
+    private $_userAdmin;
 
     /**
      * Validates the password.
@@ -56,8 +21,9 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
+
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Usuario y/o password incorrecto.');
+                $this->addError($attribute, 'El usuario no es un administrador o usuario y/o password incorrecto.');
             }
         }
     }
@@ -83,17 +49,17 @@ class LoginForm extends Model
      */
     protected function getUser()
     {
-        if ($this->_user === null) {
-            $this->_user = Usuarios::findByNombre($this->usuario);
+        if ($this->_userAdmin === null) {
+            $this->_userAdmin = Usuarios::findByNombre($this->usuario);
         }
 
-        return $this->_user;
+        return $this->_userAdmin;
     }
 
     public function validateActivo($attribute, $params, $validator)
     {
         if (!$this->hasErrors()) {
-            if (!$this->_user->estaActivo) {
+            if (!$this->getUser()->estaActivo) {
                 $this->addError($attribute, 'El usuario esta desactivado temporalmente');
             }
         }
@@ -102,7 +68,7 @@ class LoginForm extends Model
     public function validateVerificado($attribute, $params, $validator)
     {
         if (!$this->hasErrors()) {
-            if (!$this->_user->estaVerificado) {
+            if (!$this->getUser()->estaVerificado) {
                 $this->addError($attribute, 'El usuario no está verificado, por favor, compruebe el mensaje que le hemos enviado en su correo electronico para confirmar su cuenta');
             }
         }

@@ -293,6 +293,9 @@ CREATE TABLE usuarios
 */
   , activo          BOOLEAN      DEFAULT FALSE
   , verificado      VARCHAR(255)
+  , created_at      TIMESTAMP(0) NOT NULL
+                                 DEFAULT current_timestamp
+  , updated_at      TIMESTAMP(0) NOT NULL
 );
 
 DROP TABLE IF EXISTS usuarios_roles CASCADE;

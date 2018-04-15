@@ -35,10 +35,12 @@ class UsuariosController extends Controller
      */
     public function actionIndex()
     {
-        $usuarios = Usuarios::find();
+        $usuarios = Usuarios::find()->all();
+        $usuariosNoActivos = Usuarios::noActivos();
 
         return $this->render('index', [
             'usuarios' => $usuarios,
+            'usuariosNoActivos' => $usuariosNoActivos
         ]);
     }
 

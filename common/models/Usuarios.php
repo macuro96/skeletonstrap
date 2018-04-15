@@ -76,6 +76,13 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                      ->andWhere('verificado is null');
     }
 
+    public static function noActivos()
+    {
+        return static::find()
+                     ->where(['activo' => false])
+                     ->all();
+    }
+
     public static function findByNombre($nombre)
     {
         return static::findOne(['nombre' => $nombre]);

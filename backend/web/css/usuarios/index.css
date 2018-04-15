@@ -26,6 +26,17 @@
     padding-top: 4px !important;
 }
 
+.btn-pendiente {
+    color: #fff;
+    background-color: #7e7e7e;
+    border-color: #393939;
+}
+
+.btn-pendiente:hover {
+    color: white !important;
+    background-color: #5d5d5d !important;
+}
+
 @media (max-width: 992px) {
     .usuario {
         text-align: center;

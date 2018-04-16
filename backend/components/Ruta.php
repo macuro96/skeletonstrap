@@ -10,4 +10,9 @@ class Ruta
     {
         return ('/admin/' . $url);
     }
+
+    public static function urlToFrontEnd($url)
+    {
+        return str_replace('/admin', '', $url);
+    }
 }

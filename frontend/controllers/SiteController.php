@@ -9,6 +9,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use common\models\Usuarios;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
@@ -102,6 +103,25 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionVerificar($auth)
+    {
+        $usuario = Usuarios::findByVerificado($auth);
+
+        if ($usuario != null && !$usuario->estaVerificado) {
+            $usuario->verificado = null;
+
+            if ($usuario->load(Yii::$app->request->post()) && $usuario->save()) {
+                return $this->redirect(['index']);
+            }
+
+            return $this->render('verificar', [
+                'model' => $model
+            ]);
+        }
+
+        return $this->redirect(['index']);
     }
 
     /**

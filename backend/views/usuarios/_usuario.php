@@ -1,8 +1,8 @@
 <?php
-    /* @var $model common\models\Usuarios */
+/* @var $model common\models\Usuarios */
 
-    use yii\helpers\Html;
-    use backend\components\Ruta;
+use yii\helpers\Html;
+use backend\components\Ruta;
 ?>
 <div class="usuario" data-usuario="<?= Html::encode($model->id) ?>">
     <div class="row">
@@ -20,12 +20,18 @@
             </p>
         </div>
         <div class="col-lg-2 col-md-2 botones">
-            <?php if (!$model->estaVerificado) : ?>
-                <?= Html::a('Aceptar', ['aceptar'], ['class' => 'btn btn-success btn-lg']) ?>
-                <?= Html::a('Cancelar', ['cancelar'], ['class' => 'btn btn-danger btn-lg']) ?>
+            <?php if (!$model->estaActivo) : ?>
+                <?= Html::a('Aceptar', ['aceptar-solicitud'], ['class' => 'btn btn-success btn-lg']) ?>
             <?php else : ?>
-                <?= Html::a('Pendiente de verificar', ['correo-verificar'], ['class' => 'btn btn-pendiente btn-lg']) ?>
+                <?= Html::a('Pendiente de verificar', ['correo-verificar'], [
+                    'class' => 'btn btn-pendiente btn-lg',
+                    'data' => [
+                        'method' => 'post',
+                        'params' => ['usuario' => $model->id]
+                    ]
+                ]) ?>
             <?php endif; ?>
+            <?= Html::a('Cancelar', ['cancelar-solicitud'], ['class' => 'btn btn-danger btn-lg']) ?>
         </div>
     </div>
 </div>

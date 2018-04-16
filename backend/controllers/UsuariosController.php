@@ -3,11 +3,18 @@
 namespace backend\controllers;
 
 use Yii;
+use HttpInvalidParamException;
+use yii\filters\AccessControl;
+
+use yii\helpers\Url;
+use yii\helpers\Html;
+
 use common\models\Usuarios;
-use backend\models\UsuariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+use backend\components\Ruta;
 
 /**
  * UsuariosController implements the CRUD actions for Usuarios model.
@@ -23,7 +30,18 @@ class UsuariosController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'correo-verificar' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'invitar'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'invitar'],
+                        'allow' => true,
+                        'roles' => ['administrador']
+                    ],
                 ],
             ],
         ];
@@ -36,11 +54,63 @@ class UsuariosController extends Controller
     public function actionIndex()
     {
         $usuarios = Usuarios::find()->all();
-        $usuariosNoActivos = Usuarios::noActivos();
+        $usuariosPendientes = Usuarios::pendientes();
 
         return $this->render('index', [
             'usuarios' => $usuarios,
-            'usuariosNoActivos' => $usuariosNoActivos
+            'usuariosPendientes' => $usuariosPendientes
+        ]);
+    }
+
+    private function enviarCorreoConfirmacion($usuario)
+    {
+        $enlace = Ruta::urlToFrontEnd(Url::to(['/usuarios/validar', 'auth' => $usuario->verificado], true));
+
+        return Yii::$app->mailer->compose()
+                        ->setFrom(Yii::$app->params['adminEmail'])
+                        ->setTo($usuario->correo)
+                        ->setSubject('Correo de confirmacion de Skeleton\'s Trap')
+                        ->setHtmlBody('Hola, para poder utilizar la cuenta debes verificar la cuenta a través del siguiente enlace <a href="' . $enlace . '">' . $enlace . '</a>')
+                        ->setTextBody('Hola, para poder utilizar la cuenta debes verificar la cuenta a través del siguiente enlace: ' . $enlace)
+                        ->send();
+    }
+
+    public function actionCorreoVerificar()
+    {
+        $usuario = Yii::$app->request->post('usuario');
+        $model   = Usuarios::findOne($usuario);
+
+        if ($model == null) {
+            throw new NotFoundHttpException('No se encuentra el usuario');
+        }
+
+        if ($this->enviarCorreoConfirmacion($model)) {
+            \Yii::$app->session->setFlash('success', 'Se ha vuelto a enviar el correo de confirmación a la dirección <b>' . Html::encode($model->correo) . '</b> correctamente');
+        } else {
+            \Yii::$app->session->setFlash('danger', 'No se ha podido enviar el correo de confirmación a la dirección <b>' . Html::encode($model->correo) . '</b>, ha ocurrido un error inesperado.');
+        }
+
+        return $this->redirect(['index']);
+    }
+
+    public function actionInvitar()
+    {
+        $model = new Usuarios([
+            'scenario' => Usuarios::ESCENARIO_INVITAR
+        ]);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($this->enviarCorreoConfirmacion($model)) {
+                \Yii::$app->session->setFlash('success', 'Se ha enviado el correo de confirmación a la dirección <b>' . Html::encode($model->correo) . '</b> correctamente');
+            } else {
+                \Yii::$app->session->setFlash('danger', 'No se ha podido enviar el correo de confirmación a la dirección <b>' . Html::encode($model->correo) . '</b>, ha ocurrido un error inesperado.');
+            }
+
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('invitar', [
+            'model' => $model,
         ]);
     }
 
@@ -50,18 +120,21 @@ class UsuariosController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    /*
     public function actionView($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
+    */
 
     /**
      * Creates a new Usuarios model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    /*
     public function actionCreate()
     {
         $model = new Usuarios();
@@ -74,6 +147,7 @@ class UsuariosController extends Controller
             'model' => $model,
         ]);
     }
+    */
 
     /**
      * Updates an existing Usuarios model.
@@ -82,6 +156,7 @@ class UsuariosController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    /*
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -94,6 +169,7 @@ class UsuariosController extends Controller
             'model' => $model,
         ]);
     }
+    */
 
     /**
      * Deletes an existing Usuarios model.
@@ -102,12 +178,14 @@ class UsuariosController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    /*
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
+    */
 
     /**
      * Finds the Usuarios model based on its primary key value.
@@ -122,6 +200,6 @@ class UsuariosController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('La petición a la pagina solicitada no existe.');
     }
 }

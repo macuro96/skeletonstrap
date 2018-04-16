@@ -20,6 +20,8 @@ use \yii\web\IdentityInterface;
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
+    const ESCENARIO_INVITAR = 'invitar';
+
     /**
      * @inheritdoc
      */
@@ -34,12 +36,14 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['nombre', 'password', 'correo', 'nacionalidad_id'], 'required'],
+            [['nombre', 'correo', 'nacionalidad_id'], 'required'],
+            [['password'], 'required', 'on' => 'default'],
+            [['password'], 'default', 'value' => '', 'on' => [self::ESCENARIO_INVITAR]],
             [['nacionalidad_id'], 'default', 'value' => null],
             [['nacionalidad_id'], 'integer'],
             [['activo'], 'boolean'],
             [['nombre', 'password', 'correo', 'access_token', 'auth_key', 'verificado'], 'string', 'max' => 255],
-            [['correo'], 'unique'],
+            [['correo', 'nombre'], 'unique'],
             [['nacionalidad_id'], 'exist', 'skipOnError' => true, 'targetClass' => Nacionalidades::className(), 'targetAttribute' => ['nacionalidad_id' => 'id']],
         ];
     }
@@ -76,16 +80,22 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                      ->andWhere('verificado is null');
     }
 
-    public static function noActivos()
+    public static function pendientes()
     {
         return static::find()
                      ->where(['activo' => false])
+                     ->orWhere('verificado is not null')
                      ->all();
     }
 
     public static function findByNombre($nombre)
     {
         return static::findOne(['nombre' => $nombre]);
+    }
+
+    public static function findByVerificado($verificado)
+    {
+        return static::findOne(['verificado' => $verificado]);
     }
 
     /**
@@ -183,6 +193,11 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
                 $this->auth_key = \Yii::$app->security->generateRandomString();
+
+                if ($this->scenario == self::ESCENARIO_INVITAR) {
+                    $this->activo     = true;
+                    $this->verificado = \Yii::$app->security->generateRandomString();
+                }
             }
             return true;
         }

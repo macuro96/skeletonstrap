@@ -40,7 +40,7 @@ class UsuariosController extends Controller
                     [
                         'actions' => ['index', 'invitar'],
                         'allow' => true,
-                        'roles' => ['administrador']
+                        'roles' => ['@']
                     ],
                 ],
             ],

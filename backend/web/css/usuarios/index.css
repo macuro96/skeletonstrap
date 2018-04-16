@@ -20,6 +20,9 @@
 
 .usuario .botones a {
     width: 100% !important;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .usuario .datos {

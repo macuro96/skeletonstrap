@@ -11,7 +11,7 @@ use common\components\CheckEnd;
 
 <div class="site-login">
     <div class="row">
-        <div class="col-lg-offset-4 col-lg-4">
+        <div class="col-lg-offset-4 col-lg-4 contenedor">
             <h1><?= Html::encode($this->title) ?></h1>
 
             <p>Para solicitar una cuenta primero debe aceptar las normas del equipo y rellenar un formulario, que se puede acceder a través de este <?= Html::a('enlace', '/site/unete') ?>.</p>

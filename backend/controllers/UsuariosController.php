@@ -64,7 +64,7 @@ class UsuariosController extends Controller
 
     private function enviarCorreoConfirmacion($usuario)
     {
-        $enlace = Ruta::urlToFrontEnd(Url::to(['/site/validar', 'auth' => $usuario->verificado], true));
+        $enlace = Ruta::urlToFrontEnd(Url::to(['/site/verificar', 'auth' => $usuario->verificado], true));
 
         return Yii::$app->mailer->compose()
                         ->setFrom(Yii::$app->params['adminEmail'])

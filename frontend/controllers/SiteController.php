@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\Usuarios;
 use common\models\LoginForm;
+use frontend\models\VerificarForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -29,10 +30,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'verificar'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['verificar'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -109,16 +110,30 @@ class SiteController extends Controller
     {
         $usuario = Usuarios::findByVerificado($auth);
 
-        if ($usuario != null && !$usuario->estaVerificado) {
-            $usuario->verificado = null;
-
-            if ($usuario->load(Yii::$app->request->post()) && $usuario->save()) {
-                return $this->redirect(['index']);
+        if ($usuario != null) {
+            if (!$usuario->estaActivo) {
+                throw new BadRequestHttpException('El usuario no está aceptado');
             }
 
-            return $this->render('verificar', [
-                'model' => $model
-            ]);
+            if (!$usuario->estaVerificado) {
+                $usuario->scenario = Usuarios::ESCENARIO_VERIFICAR;
+
+                $model = new VerificarForm();
+
+                if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                    $usuario->password = $model->password;
+                    $usuario->save();
+
+                    \Yii::$app->session->setFlash('success', 'La cuenta ha sido verificada correctamente');
+
+                    return $this->redirect(['login']);
+                }
+
+                return $this->render('verificar', [
+                    'usuario' => $usuario,
+                    'model' => $model
+                ]);
+            }
         }
 
         return $this->redirect(['index']);

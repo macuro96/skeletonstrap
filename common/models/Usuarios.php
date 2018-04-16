@@ -20,7 +20,8 @@ use \yii\web\IdentityInterface;
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
-    const ESCENARIO_INVITAR = 'invitar';
+    const ESCENARIO_INVITAR   = 'invitar';
+    const ESCENARIO_VERIFICAR = 'verificar';
 
     /**
      * @inheritdoc
@@ -37,8 +38,8 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['nombre', 'correo', 'nacionalidad_id'], 'required'],
-            [['password'], 'required', 'on' => 'default'],
-            [['password'], 'default', 'value' => '', 'on' => [self::ESCENARIO_INVITAR]],
+            [['password'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::ESCENARIO_VERIFICAR]],
+            [['password'], 'default', 'value' => \Yii::$app->security->generatePasswordHash(''), 'on' => [self::ESCENARIO_INVITAR]],
             [['nacionalidad_id'], 'default', 'value' => null],
             [['nacionalidad_id'], 'integer'],
             [['activo'], 'boolean'],
@@ -197,6 +198,11 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                 if ($this->scenario == self::ESCENARIO_INVITAR) {
                     $this->activo     = true;
                     $this->verificado = \Yii::$app->security->generateRandomString();
+                }
+            } else {
+                if ($this->scenario == self::ESCENARIO_VERIFICAR) {
+                    $this->verificado = null;
+                    $this->password   = \Yii::$app->security->generatePasswordHash($this->password);
                 }
             }
             return true;

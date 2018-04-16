@@ -1,3 +1,11 @@
+body {
+    height: 80% !important;
+}
+
+.container-fluid {
+    min-height: 100% !important;
+}
+
 .img-perfil {
     max-height: 156px !important;
 }

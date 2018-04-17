@@ -47,7 +47,7 @@ $menuItems = [
     [
         'label' => 'Únete/Lucha',
         'items' => [
-            ['label' => 'Únete a nosotros', 'url' => ['/site/unirte']],
+            ['label' => 'Únete a nosotros', 'url' => ['/site/unete']],
             ['label' => 'Lucha contra nuestro equipo', 'url' => ['/site/luchar']]
         ]
     ]

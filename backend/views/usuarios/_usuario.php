@@ -21,7 +21,13 @@ use backend\components\Ruta;
         </div>
         <div class="col-lg-2 col-md-2 botones">
             <?php if (!$model->estaActivo) : ?>
-                <?= Html::a('Aceptar', ['aceptar-solicitud'], ['class' => 'btn btn-success btn-lg']) ?>
+                <?= Html::a('Aceptar', ['aceptar-solicitud'], [
+                    'class' => 'btn btn-success btn-lg',
+                    'data' => [
+                        'method' => 'post',
+                        'params' => ['usuario' => $model->id]
+                    ]
+                ]) ?>
             <?php else : ?>
                 <?= Html::a('Pendiente de verificar', ['correo-verificar'], [
                     'class' => 'btn btn-pendiente btn-lg',
@@ -31,7 +37,14 @@ use backend\components\Ruta;
                     ]
                 ]) ?>
             <?php endif; ?>
-            <?= Html::a('Cancelar', ['cancelar-solicitud'], ['class' => 'btn btn-danger btn-lg']) ?>
+            <?= Html::a('Cancelar', ['cancelar-solicitud'], [
+                'class' => 'btn btn-danger btn-lg',
+                'data' => [
+                    'confirm' => "¿Estás seguro que quieres cancelar la solicitud del jugador $model->nombre?",
+                    'method' => 'post',
+                    'params' => ['usuario' => $model->id]
+                ]
+            ]) ?>
         </div>
     </div>
 </div>

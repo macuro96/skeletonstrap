@@ -9,6 +9,8 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\Html;
+
 use common\models\Usuarios;
 use common\models\LoginForm;
 use frontend\models\VerificarForm;
@@ -80,6 +82,23 @@ class SiteController extends Controller
 
         return $this->render('index', [
             'detect' => $detect
+        ]);
+    }
+
+    public function actionUnete()
+    {
+        $model = new Usuarios([
+            'scenario' => Usuarios::ESCENARIO_UNETE
+        ]);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            \Yii::$app->session->setFlash('success', 'Se ha enviado la petición al administrador correctamente. Correo suministrado: <b>' . Html::encode($model->correo) . '</b>');
+
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('unete', [
+            'model' => $model,
         ]);
     }
 

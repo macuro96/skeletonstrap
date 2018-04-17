@@ -1,0 +1,20 @@
+body {
+    height: 80% !important;
+}
+
+.container-fluid {
+    min-height: 100% !important;
+}
+
+.pasos {
+    margin-bottom: 40px;
+}
+
+#usuarios-form {
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+}
+
+.contenido-seccion {
+    border: hidden !important;
+}

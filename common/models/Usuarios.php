@@ -20,8 +20,11 @@ use \yii\web\IdentityInterface;
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
+    public $normas;
+
     const ESCENARIO_INVITAR   = 'invitar';
     const ESCENARIO_VERIFICAR = 'verificar';
+    const ESCENARIO_UNETE     = 'unete';
 
     /**
      * @inheritdoc
@@ -38,15 +41,24 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['nombre', 'correo', 'nacionalidad_id'], 'required'],
+            [['nombre'], 'string', 'min' => 4],
             [['password'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::ESCENARIO_VERIFICAR]],
-            [['password'], 'default', 'value' => \Yii::$app->security->generatePasswordHash(''), 'on' => [self::ESCENARIO_INVITAR]],
+            [['password'], 'default', 'value' => \Yii::$app->security->generatePasswordHash(''), 'on' => [self::ESCENARIO_INVITAR, self::ESCENARIO_UNETE]],
             [['nacionalidad_id'], 'default', 'value' => null],
             [['nacionalidad_id'], 'integer'],
             [['activo'], 'boolean'],
             [['nombre', 'password', 'correo', 'access_token', 'auth_key', 'verificado'], 'string', 'max' => 255],
             [['correo', 'nombre'], 'unique'],
             [['nacionalidad_id'], 'exist', 'skipOnError' => true, 'targetClass' => Nacionalidades::className(), 'targetAttribute' => ['nacionalidad_id' => 'id']],
+            [['normas'], 'required', 'on' => self::ESCENARIO_UNETE],
+            [['normas'], 'boolean', 'on' => self::ESCENARIO_UNETE],
+            [['normas'], 'compare', 'compareValue' => true, 'message' => 'Las normas deben ser aceptadas obligatoriamente']
         ];
+    }
+
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), ['normas']);
     }
 
     /**
@@ -61,6 +73,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             'correo' => 'Correo',
             'nacionalidad_id' => 'Nacionalidad',
             'verificado' => 'Verificado',
+            'normas' => 'Acepto las normas',
         ];
     }
 
@@ -197,6 +210,10 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 
                 if ($this->scenario == self::ESCENARIO_INVITAR) {
                     $this->activo     = true;
+                    $this->verificado = \Yii::$app->security->generateRandomString();
+                }
+
+                if ($this->scenario == self::ESCENARIO_UNETE) {
                     $this->verificado = \Yii::$app->security->generateRandomString();
                 }
             } else {

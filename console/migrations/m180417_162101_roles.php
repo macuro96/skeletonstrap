@@ -10,7 +10,7 @@ use common\models\UsuariosRoles;
 /**
  * Class m180411_172514_init_rbac
  */
-class m180411_172514_init_rbac extends Migration
+class m180417_162101_roles extends Migration
 {
     /**
      * {@inheritdoc}

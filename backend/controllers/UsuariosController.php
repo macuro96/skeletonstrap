@@ -31,16 +31,23 @@ class UsuariosController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'correo-verificar' => ['POST'],
+                    'aceptar-solicitud' => ['POST'],
+                    'cancelar-solicitud' => ['POST'],
                 ],
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'invitar'],
+                'only' => ['index', 'invitar', 'aceptar-solicitud', 'cancelar-solicitud'],
                 'rules' => [
                     [
-                        'actions' => ['index', 'invitar'],
+                        'actions' => ['invitar', 'aceptar-solicitud', 'cancelar-solicitud'],
                         'allow' => true,
                         'roles' => ['administrador']
+                    ],
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@']
                     ],
                 ],
             ],
@@ -60,6 +67,34 @@ class UsuariosController extends Controller
             'usuarios' => $usuarios,
             'usuariosPendientes' => $usuariosPendientes
         ]);
+    }
+
+    public function actionAceptarSolicitud()
+    {
+        $usuario = Yii::$app->request->post('usuario');
+        $model   = Usuarios::findOne($usuario);
+
+        if ($model == null) {
+            throw new NotFoundHttpException('No se encuentra el usuario');
+        }
+
+        $model->activo = true;
+
+        if ($model->save() && $this->enviarCorreoConfirmacion($model)) {
+            \Yii::$app->session->setFlash('success', 'Se ha enviado el correo de confirmación a la dirección <b>' . Html::encode($model->correo) . '</b> correctamente');
+        } else {
+            \Yii::$app->session->setFlash('danger', 'No se ha podido enviar el correo de confirmación a la dirección <b>' . Html::encode($model->correo) . '</b>, ha ocurrido un error inesperado.');
+        }
+
+        return $this->redirect(['index']);
+    }
+
+    public function actionCancelarSolicitud()
+    {
+        $id = Yii::$app->request->post('usuario');
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
     }
 
     private function enviarCorreoConfirmacion($usuario)

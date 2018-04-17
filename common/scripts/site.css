@@ -18,11 +18,15 @@ body {
     background-color: #eaeaea;
 
     color: #222;
+
+    height: 80% !important;
 }
 
 .container-fluid {
     margin-top: 50px;
     margin-bottom: 30px;
+
+    min-height: 100% !important;
 }
 
 .a-none {

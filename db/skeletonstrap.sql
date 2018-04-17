@@ -569,6 +569,8 @@ CREATE TABLE config_equipo
 
 
 -- DATOS INICIALES
+CREATE EXTENSION pgcrypto;
+
 INSERT INTO nacionalidades (nombre, abreviatura, tramo_horario)
 VALUES ('España', 'ESP', 1);
 

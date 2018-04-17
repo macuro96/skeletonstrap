@@ -1,4 +1,9 @@
 <?php
+$params = array_merge(
+    require __DIR__ . '/params.php',
+    require __DIR__ . '/params-local.php'
+);
+
 return [
     'aliases' => [
         '@bower'        => '@vendor/bower-asset',
@@ -20,6 +25,22 @@ return [
             'showScriptName' => false,
             'rules' => [
             ],
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@common/mail',
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => $params['adminEmail'],
+                'password' => getenv('PASSWORD_SKT_GMAIL'),
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
+            // send all mails to a file by default. You have to set
+            // 'useFileTransport' to false and configure a transport
+            // for the mailer to send real emails.
+            'useFileTransport' => false,
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',

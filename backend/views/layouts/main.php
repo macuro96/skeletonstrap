@@ -41,9 +41,13 @@ NavBar::begin([
         'class' => 'navbar-inverse navbar-fixed-top',
     ],
 ]);
-$menuItems = [
-    ['label' => 'Inicio', 'url' => ['/site/index']],
-];
+$menuItems = [];
+
+if (!Yii::$app->user->isGuest) {
+    $menuItems[] = ['label' => 'Inicio', 'url' => ['/site/index']];
+    $menuItems[] = ['label' => 'Usuarios', 'url' => ['/usuarios/index']];
+}
+
 if (Yii::$app->user->isGuest) {
     $menuItems[] = NavBarLayout::loginButton();
 } else {

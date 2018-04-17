@@ -1,0 +1,59 @@
+body {
+    height: 80% !important;
+}
+
+.container-fluid {
+    min-height: 100% !important;
+}
+
+.img-perfil {
+    max-height: 156px !important;
+}
+
+.seccion div.acciones {
+    margin-bottom: 12px;
+}
+
+.usuario > .row div {
+    border-style: solid;
+    border-width: 4px;
+    border-color: #BBBBBB;
+
+    padding: 12px;
+
+    word-break: break-all;
+
+    height: 180px;
+}
+
+.usuario .botones a {
+    width: 100% !important;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.usuario .datos {
+    padding-top: 4px !important;
+}
+
+.btn-pendiente {
+    color: #fff;
+    background-color: #7e7e7e;
+    border-color: #393939;
+}
+
+.btn-pendiente:hover {
+    color: white !important;
+    background-color: #5d5d5d !important;
+}
+
+@media (max-width: 992px) {
+    .usuario {
+        text-align: center;
+    }
+
+    .usuario >.row div {
+        height: auto !important;
+    }
+}

@@ -20,6 +20,9 @@ use \yii\web\IdentityInterface;
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
+    const ESCENARIO_INVITAR   = 'invitar';
+    const ESCENARIO_VERIFICAR = 'verificar';
+
     /**
      * @inheritdoc
      */
@@ -34,12 +37,14 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['nombre', 'password', 'correo', 'nacionalidad_id'], 'required'],
+            [['nombre', 'correo', 'nacionalidad_id'], 'required'],
+            [['password'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::ESCENARIO_VERIFICAR]],
+            [['password'], 'default', 'value' => \Yii::$app->security->generatePasswordHash(''), 'on' => [self::ESCENARIO_INVITAR]],
             [['nacionalidad_id'], 'default', 'value' => null],
             [['nacionalidad_id'], 'integer'],
             [['activo'], 'boolean'],
             [['nombre', 'password', 'correo', 'access_token', 'auth_key', 'verificado'], 'string', 'max' => 255],
-            [['correo'], 'unique'],
+            [['correo', 'nombre'], 'unique'],
             [['nacionalidad_id'], 'exist', 'skipOnError' => true, 'targetClass' => Nacionalidades::className(), 'targetAttribute' => ['nacionalidad_id' => 'id']],
         ];
     }
@@ -76,9 +81,22 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                      ->andWhere('verificado is null');
     }
 
+    public static function pendientes()
+    {
+        return static::find()
+                     ->where(['activo' => false])
+                     ->orWhere('verificado is not null')
+                     ->all();
+    }
+
     public static function findByNombre($nombre)
     {
         return static::findOne(['nombre' => $nombre]);
+    }
+
+    public static function findByVerificado($verificado)
+    {
+        return static::findOne(['verificado' => $verificado]);
     }
 
     /**
@@ -176,6 +194,16 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
                 $this->auth_key = \Yii::$app->security->generateRandomString();
+
+                if ($this->scenario == self::ESCENARIO_INVITAR) {
+                    $this->activo     = true;
+                    $this->verificado = \Yii::$app->security->generateRandomString();
+                }
+            } else {
+                if ($this->scenario == self::ESCENARIO_VERIFICAR) {
+                    $this->verificado = null;
+                    $this->password   = \Yii::$app->security->generatePasswordHash($this->password);
+                }
             }
             return true;
         }

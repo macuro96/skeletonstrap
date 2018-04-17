@@ -276,7 +276,7 @@ DROP TABLE IF EXISTS usuarios CASCADE;
 CREATE TABLE usuarios
 (
     id              BIGSERIAL    PRIMARY KEY
-  , nombre          VARCHAR(255) NOT NULL
+  , nombre          VARCHAR(255) NOT NULL UNIQUE
   , password        VARCHAR(255) NOT NULL
   , correo          VARCHAR(255) NOT NULL UNIQUE
   , nacionalidad_id BIGINT       NOT NULL
@@ -293,6 +293,9 @@ CREATE TABLE usuarios
 */
   , activo          BOOLEAN      DEFAULT FALSE
   , verificado      VARCHAR(255)
+  , created_at      TIMESTAMP(0) NOT NULL
+                                 DEFAULT current_timestamp
+  , updated_at      TIMESTAMP(0)
 );
 
 DROP TABLE IF EXISTS usuarios_roles CASCADE;
@@ -566,14 +569,14 @@ CREATE TABLE config_equipo
 
 
 -- DATOS INICIALES
+CREATE EXTENSION pgcrypto;
+
 INSERT INTO nacionalidades (nombre, abreviatura, tramo_horario)
 VALUES ('España', 'ESP', 1);
 
 -- DATOS PRUEBAS
-/*
 INSERT INTO usuarios (nombre, password, correo, nacionalidad_id, auth_key, verificado, activo)
-VALUES ('manuel', crypt('manuel', gen_salt('bf', 13)), 'nombre@dominio.com', 1, 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA', null, true),
-       ('pepe', crypt('pepe', gen_salt('bf', 13)), 'nombred@dominio.com', 1, 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA', 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA', false);
+VALUES ('manuel', crypt('manuel', gen_salt('bf', 13)), 'nombre@dominio.com', 1, 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA', null, true);
 
 INSERT INTO permisos (nombre, descripcion)
 VALUES ('verPrueba', 'Puede ver'),
@@ -589,6 +592,4 @@ VALUES (1, 1),
        (2, 1);
 
 INSERT INTO usuarios_roles (usuario_id, rol_id)
-VALUES (1, 1),
-       (2, 2);
-*/
+VALUES (1, 1);

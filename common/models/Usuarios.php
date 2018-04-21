@@ -40,6 +40,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            [['nombre', 'correo', 'nacionalidad_id', 'password', 'activo', 'normas'], 'trim'],
             [['nombre', 'correo', 'nacionalidad_id'], 'required'],
             [['nombre'], 'string', 'min' => 4],
             [['password'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::ESCENARIO_VERIFICAR]],
@@ -47,12 +48,13 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['nacionalidad_id'], 'default', 'value' => null],
             [['nacionalidad_id'], 'integer'],
             [['activo'], 'boolean'],
-            [['nombre', 'password', 'correo', 'access_token', 'auth_key', 'verificado'], 'string', 'max' => 255],
+            [['nombre', 'password', 'access_token', 'auth_key', 'verificado'], 'string', 'max' => 255],
+            [['correo'], 'email'],
             [['correo', 'nombre'], 'unique'],
             [['nacionalidad_id'], 'exist', 'skipOnError' => true, 'targetClass' => Nacionalidades::className(), 'targetAttribute' => ['nacionalidad_id' => 'id']],
             [['normas'], 'required', 'on' => self::ESCENARIO_UNETE],
             [['normas'], 'boolean', 'on' => self::ESCENARIO_UNETE],
-            [['normas'], 'compare', 'compareValue' => true, 'message' => 'Las normas deben ser aceptadas obligatoriamente']
+            [['normas'], 'compare', 'compareValue' => true, 'message' => 'Las normas deben ser aceptadas obligatoriamente', 'on' => self::ESCENARIO_UNETE]
         ];
     }
 

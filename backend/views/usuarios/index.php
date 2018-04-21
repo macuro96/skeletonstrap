@@ -1,9 +1,8 @@
 <?php
 
-use yii\helpers\Url;
 use yii\helpers\Html;
 
-use backend\components\Ruta;
+use common\components\RegisterThisCss;
 
 /* @var $this     yii\web\View */
 /* @var $usuarios common\models\Usuarios */
@@ -12,7 +11,7 @@ use backend\components\Ruta;
 $this->title = 'Usuarios';
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerCssFile(Ruta::to('css/usuarios/index.css'));
+RegisterThisCss::register($this);
 ?>
 
 <div class="row seccion solicitudes-entrar">

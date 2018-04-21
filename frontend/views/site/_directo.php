@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use common\components\CheckEnd;
+use common\components\Recursos;
 use common\components\RedesSociales;
 use common\components\Twitch;
 
@@ -35,7 +36,7 @@ $nombreEvento = $nombreEvento ?? '';
             <div class="logo logo-equipo col-md-5 col-sm-5 col-xs-6 img-centered">
                 <div class="row">
                     <div class="col-md-12">
-                        <?= Html::img(CheckEnd::rutaRelativa() . 'images/logo.png', ['class' => 'img-responsive']) ?>
+                        <?= Recursos::imageCommon('logo.png') ?>
                     </div>
                 </div>
                 <div class="row nombres-equipos">
@@ -48,14 +49,14 @@ $nombreEvento = $nombreEvento ?? '';
             <div id="versus-image" class="col-md-2 col-sm-2 img-centered hidden-xs">
                 <div class="row">
                     <div class="col-md-12">
-                        <?= Html::img(CheckEnd::rutaRelativa() . 'images/versus.png', ['class' => 'img-responsive']) ?>
+                        <?= Recursos::imageCommon('versus.png') ?>
                     </div>
                 </div>
             </div>
             <div class="logo logo-enemigo col-md-5 col-sm-5 col-xs-6 img-centered">
                 <div class="row">
                     <div class="col-md-12">
-                        <?= Html::img(CheckEnd::rutaRelativa() . 'images/Logo4K1.png', ['class' => 'img-responsive']) ?>
+                        <?= Recursos::imageCommon('Logo4K1.png') ?>
                     </div>
                 </div>
                 <div class="row nombres-equipos">

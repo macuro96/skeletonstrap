@@ -6,13 +6,13 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-use backend\components\Ruta;
+use common\assets\CommonFormNuevoUsuario;
 
 $this->title = 'Nueva invitación';
 $this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['usuarios/index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerCssFile(Ruta::to('css/usuarios/invitar.css'));
+CommonFormNuevoUsuario::register($this);
 ?>
 <div class="row seccion usuarios-form">
     <div class="col-lg-12">

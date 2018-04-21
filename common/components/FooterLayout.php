@@ -19,7 +19,7 @@ class FooterLayout
                         <a href="mailto:<?= Html::encode(Yii::$app->params['supportEmail']) ?>" class="correo"><p><span class="glyphicon glyphicon-envelope"></span><?= Html::encode(Yii::$app->params['supportEmail']) ?></p></a>
                     </div>
                     <div class="col-md-4 logo">
-                        <a href="<?= Yii::$app->homeUrl ?>"><?= Html::img(CheckEnd::rutaRelativa() . 'images/logo.png', ['class' => 'img-responsive']) ?></a>
+                        <a href="<?= Yii::$app->homeUrl ?>"><?= Recursos::imageCommon('logo.png') ?></a>
                     </div>
                     <div class="col-md-4 redes">
                         <p>Síguenos</p>

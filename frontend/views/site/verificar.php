@@ -7,10 +7,12 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use common\components\RegisterThisCss;
+
 $this->title = 'Verificar usuario nuevo';
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerCssFile('/css/verificar.css');
+RegisterThisCss::register($this);
 ?>
 <div class="site-login">
     <div class="row">

@@ -3,7 +3,6 @@
 namespace backend\controllers;
 
 use Yii;
-use HttpInvalidParamException;
 use yii\filters\AccessControl;
 
 use yii\helpers\Url;
@@ -14,7 +13,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-use backend\components\Ruta;
+use common\components\UrlConvert;
 
 /**
  * UsuariosController implements the CRUD actions for Usuarios model.
@@ -71,12 +70,8 @@ class UsuariosController extends Controller
 
     public function actionAceptarSolicitud()
     {
-        $usuario = Yii::$app->request->post('usuario');
-        $model   = Usuarios::findOne($usuario);
-
-        if ($model == null) {
-            throw new NotFoundHttpException('No se encuentra el usuario');
-        }
+        $id = Yii::$app->request->post('usuario');
+        $model = $this->findModel($id);
 
         $model->activo = true;
 
@@ -99,7 +94,7 @@ class UsuariosController extends Controller
 
     private function enviarCorreoConfirmacion($usuario)
     {
-        $enlace = Ruta::urlToFrontEnd(Url::to(['/site/verificar', 'auth' => $usuario->verificado], true));
+        $enlace = UrlConvert::toFrontEnd(Url::to(['/site/verificar', 'auth' => $usuario->verificado], true));
 
         return Yii::$app->mailer->compose()
                         ->setFrom(Yii::$app->params['adminEmail'])
@@ -112,12 +107,8 @@ class UsuariosController extends Controller
 
     public function actionCorreoVerificar()
     {
-        $usuario = Yii::$app->request->post('usuario');
-        $model   = Usuarios::findOne($usuario);
-
-        if ($model == null) {
-            throw new NotFoundHttpException('No se encuentra el usuario');
-        }
+        $id = Yii::$app->request->post('usuario');
+        $model = $this->findModel($id);
 
         if ($this->enviarCorreoConfirmacion($model)) {
             \Yii::$app->session->setFlash('success', 'Se ha vuelto a enviar el correo de confirmación a la dirección <b>' . Html::encode($model->correo) . '</b> correctamente');

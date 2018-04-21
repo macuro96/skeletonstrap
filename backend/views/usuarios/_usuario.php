@@ -2,12 +2,12 @@
 /* @var $model common\models\Usuarios */
 
 use yii\helpers\Html;
-use backend\components\Ruta;
+use common\components\Recursos;
 ?>
 <div class="usuario" data-usuario="<?= Html::encode($model->id) ?>">
     <div class="row">
         <div class="col-lg-offset-3 col-md-offset-1 col-lg-1 col-md-1 img-centered">
-            <?= Html::img(Ruta::to('images/perfil.png'), ['class' => 'img-responsive img-perfil']) ?>
+            <?= Recursos::image('perfil.png', ['class' => 'img-responsive img-perfil']) ?>
         </div>
         <div class="col-lg-3 col-md-7 datos">
             <h5>Usuario:</h5>

@@ -1,18 +1,17 @@
 <?php
 /* @var $this yii\web\View */
-/* @var $model app\models\Usuarios */
+/* @var $model common\models\Usuarios */
 /* @var $form yii\widgets\ActiveForm */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-use backend\components\Ruta;
+use common\assets\CommonFormNuevoUsuario;
 
 $this->title = 'Únete';
-$this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['usuarios/index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerCssFile(Ruta::to('css/unete.css'));
+CommonFormNuevoUsuario::register($this);
 ?>
 <div class="row seccion usuarios-form">
     <div class="col-lg-12">

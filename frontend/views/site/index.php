@@ -3,23 +3,23 @@
 /* @var $this yii\web\View */
 /* @var $detect Detection\MobileDetect */
 
-use yii\helpers\Html;
 use yii\web\View;
 
-use common\components\Twitch;
-use common\components\CheckEnd;
+use common\components\Recursos;
 use common\components\RedesSociales;
+use common\components\RegisterThisJs;
+use common\components\RegisterThisCss;
 
 $this->title = 'Inicio';
 
-$this->registerCssFile('/css/index.css');
-$this->registerJsFile('/js/index.js', ['position' => View::POS_END,
-                                      'depends'  => [\yii\web\JqueryAsset::className()]]);
+RegisterThisCss::register($this);
+RegisterThisJs::register($this, ['position' => View::POS_END,
+                                 'depends'  => [\yii\web\JqueryAsset::className()]]);
 ?>
 <div class="row cabecera-inicio">
     <div class="col-lg-offset-3 col-lg-6">
         <div class="img-centered logo-inicio">
-            <?= Html::img(CheckEnd::rutaRelativa() . 'images/logo.png', ['class' => 'img-responsive']) ?>
+            <?= Recursos::imageCommon('logo.png') ?>
         </div>
 
         <p class="titulo-inicio">
@@ -43,7 +43,7 @@ $this->registerJsFile('/js/index.js', ['position' => View::POS_END,
             <div class="row">
                 <div class="col-lg-4">
                     <div class="img-centered">
-                        <?= Html::img(CheckEnd::rutaRelativa() . 'images/clash-royale-logo.png', ['class' => 'img-responsive']) ?>
+                        <?= Recursos::imageCommon('clash-royale-logo.png') ?>
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -87,7 +87,7 @@ $this->registerJsFile('/js/index.js', ['position' => View::POS_END,
                         <tbody>
                             <tr>
                                 <td class="hidden-logo">
-                                    <?= Html::img(CheckEnd::rutaRelativa() . 'images/logo.png', ['class' => 'img-responsive']) ?>
+                                    <?= Recursos::imageCommon('logo.png') ?>
                                 </td>
                                 <td>Skeleton's Trap</td>
                                 <td>Stadium Trap</td>
@@ -95,7 +95,7 @@ $this->registerJsFile('/js/index.js', ['position' => View::POS_END,
                             </tr>
                             <tr>
                                 <td class="hidden-logo">
-                                    <?= Html::img(CheckEnd::rutaRelativa() . 'images/Logo4K1.png', ['class' => 'img-responsive']) ?>
+                                    <?= Recursos::imageCommon('Logo4K1.png') ?>
                                 </td>
                                 <td>TeamQueso</td>
                                 <td>Stadium Trap</td>

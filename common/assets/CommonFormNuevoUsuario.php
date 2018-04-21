@@ -4,12 +4,11 @@ namespace common\assets;
 
 use yii\web\AssetBundle;
 
-class CommonAsset extends AssetBundle
+class CommonFormNuevoUsuario extends AssetBundle
 {
-    public $sourcePath = '@common/scripts';
+    public $sourcePath = '@common/scripts/form-nuevo-usuario';
     public $css = [
-        'site.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
+        'form-nuevo-usuario.css'
     ];
     public $js = [
 

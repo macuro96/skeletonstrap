@@ -20,13 +20,15 @@ RegisterThisCss::register($this);
 
         <div class="contenido-seccion">
             <div class="acciones centrar">
-                <?= Html::a('Nueva invitación', ['invitar'], ['class' => 'btn btn-success btn-lg']) ?>
+                <?= Html::a('Invitar a un jugador', ['invitar'], ['class' => 'btn btn-success btn-lg']) ?>
             </div>
-            <?php foreach ($usuariosPendientes as $us) : ?>
-                <?= $this->render('_usuario', [
-                    'model' => $us
-                ]); ?>
-            <?php endforeach; ?>
+            <div id="usuarios-solicitudes">
+                <?php foreach ($usuariosPendientes as $us) : ?>
+                    <?= $this->render('_usuario', [
+                        'model' => $us
+                    ]); ?>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
 </div>

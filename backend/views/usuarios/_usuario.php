@@ -6,7 +6,7 @@ use common\components\Recursos;
 ?>
 <div class="usuario" data-usuario="<?= Html::encode($model->id) ?>">
     <div class="row">
-        <div class="col-lg-offset-3 col-md-offset-1 col-lg-1 col-md-1 img-centered">
+        <div class="col-lg-offset-3 col-md-offset-1 col-lg-1 col-md-1 img-centered hidden-sm hidden-xs">
             <?= Recursos::image('perfil.png', ['class' => 'img-responsive img-perfil']) ?>
         </div>
         <div class="col-lg-3 col-md-7 datos">

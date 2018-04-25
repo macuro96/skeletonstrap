@@ -16,7 +16,6 @@ use common\components\NavBarLayout;
 use backend\assets\AppAsset;
 use common\widgets\Alert;
 
-CommonAsset::register($this);
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -33,50 +32,10 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<?php
-NavBar::begin([
-    'brandLabel' => NavBarLayout::brandLabel(),
-    'brandUrl' => Yii::$app->homeUrl,
-    'options' => [
-        'class' => 'navbar-inverse navbar-fixed-top',
-    ],
-]);
-$menuItems = [];
-
-if (!Yii::$app->user->isGuest) {
-    $menuItems[] = ['label' => 'Inicio', 'url' => ['/site/index']];
-    $menuItems[] = ['label' => 'Usuarios', 'url' => ['/usuarios/index']];
-}
-
-if (Yii::$app->user->isGuest) {
-    $menuItems[] = NavBarLayout::loginButton();
-} else {
-    $menuItems[] = '<li>'
-        . Html::beginForm(['/site/logout'], 'post')
-        . Html::submitButton(
-            'Logout (' . Yii::$app->user->identity->nombre . ')',
-            ['class' => 'btn btn-link logout']
-        )
-        . Html::endForm()
-        . '</li>';
-}
-echo Nav::widget([
-    'options' => ['class' => 'navbar-nav navbar-right'],
-    'encodeLabels' => false,
-    'items' => $menuItems,
-]);
-NavBar::end();
-?>
-
 <div class="container-fluid">
-    <?= Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>
     <?= Alert::widget() ?>
     <?= $content ?>
 </div>
-
-<?= FooterLayout::mostrar() ?>
 
 <?php $this->endBody() ?>
 </body>

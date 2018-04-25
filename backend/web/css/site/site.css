@@ -1,0 +1,27 @@
+@font-face {
+    font-family: supercell-magicregular;
+    src: url(/fonts/supercell-magic.ttf);
+}
+
+@font-face {
+    font-family: roboto-slab-regular;
+    src: url(/fonts/RobotoSlab-Regular.ttf);
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: 'roboto-slab-regular';
+    background-color: #eaeaea;
+
+    color: #222;
+
+    height: 80% !important;
+}
+
+.container-fluid {
+    min-height: 100% !important;
+}

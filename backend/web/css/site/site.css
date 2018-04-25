@@ -18,10 +18,87 @@ body {
     background-color: #eaeaea;
 
     color: #222;
-
-    height: 80% !important;
 }
 
 .container-fluid {
-    min-height: 100% !important;
+    height: 100% !important;
+}
+
+.contenedor-menu, .contenedor-menu > div, .contenedor-menu > div > div {
+    height: 100% !important;
+}
+
+div.menu {
+    background-color: #222;
+}
+
+.menu .titulo {
+    font-size: 30px;
+
+    background-color: #222 !important;
+
+
+    text-align: center;
+
+    padding: 14px !important;
+}
+
+.menu .opcion-row, .menu .titulo {
+    background-color: #337ab7;
+    color: white;
+
+    padding: 5px;
+
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.menu .opcion-row {
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+    border-bottom-color: #2e6593;
+
+    cursor: pointer;
+}
+
+.menu .opcion-row:hover {
+    background-color: #2e6593;
+}
+
+.menu .opcion-row span {
+    margin-right: 8px;
+}
+
+.menu .opcion-row.active {
+    background-color: #255176;
+}
+
+.menu .opcion-row.salir {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+.menu .opcion-row.salir:hover {
+    background-color: #d43f3a;
+}
+
+.contenedor-menu .contenido {
+    padding-left: 15px;
+    padding-top: 15px;
+}
+
+@media (max-width: 1200px) {
+    .menu .titulo {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 991px) {
+    .contenedor-menu, .contenedor-menu > div, .contenedor-menu > div > div {
+        height: auto !important;
+    }
+
+    .menu {
+        padding-bottom: 5px !important;
+    }
 }

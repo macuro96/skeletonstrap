@@ -34,7 +34,45 @@ AppAsset::register($this);
 
 <div class="container-fluid">
     <?= Alert::widget() ?>
-    <?= $content ?>
+    <div class="contenedor-menu">
+        <div class="row">
+            <div class="col-md-2 menu">
+                <div class="row titulo">
+                    <div class="col-md-12">
+                        Skeleton's Trap
+                    </div>
+                </div>
+                <div class="row opcion-row active">
+                    <div class="col-md-12">
+                        <span class="glyphicon glyphicon-chevron-right"></span>Inicio
+                    </div>
+                </div>
+                <div class="row opcion-row">
+                    <div class="col-md-12">
+                        <span class="glyphicon glyphicon-chevron-right"></span>Solicitudes para entrar
+                    </div>
+                </div>
+                <div class="row opcion-row">
+                    <div class="col-md-12">
+                        <span class="glyphicon glyphicon-chevron-right"></span>Calendario
+                    </div>
+                </div>
+                <div class="row opcion-row">
+                    <div class="col-md-12">
+                        <span class="glyphicon glyphicon-chevron-right"></span>Torneos
+                    </div>
+                </div>
+                <div class="row opcion-row salir">
+                    <div class="col-md-12">
+                        <span class="glyphicon glyphicon-chevron-right"></span>Salir
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 contenido">
+                <?= $content ?>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php $this->endBody() ?>

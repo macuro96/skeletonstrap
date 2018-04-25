@@ -8,13 +8,11 @@ use yii\helpers\Html;
 
 use yii\widgets\ActiveForm;
 
-use common\components\CheckEnd;
 use common\components\RegisterThisCss;
 
 $this->title = 'Inicio de sesión';
 RegisterThisCss::register($this);
 ?>
-
 <div class="contenedor-login">
     <div class="row">
         <div class="col-md-offset-4 col-md-4">

@@ -22,3 +22,7 @@
     border-color: #2e6593;
     border-width: 5px;
 }
+
+div.menu {
+    visibility: hidden;
+}

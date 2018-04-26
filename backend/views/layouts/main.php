@@ -31,48 +31,77 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
+<?php
+$tmpControlador = $this->context->module->controller;
 
+$nombreControlador = $tmpControlador->id;
+$nombreAccion      = $tmpControlador->action->id;
+
+$bSiteLogin = ($nombreControlador == 'site' && $nombreAccion == 'login');
+?>
 <div class="container-fluid">
     <?= Alert::widget() ?>
-    <div class="contenedor-menu">
-        <div class="row">
-            <div class="col-md-2 menu">
-                <div class="row titulo">
-                    <div class="col-md-12">
-                        Skeleton's Trap
+    <?php if ($bSiteLogin) : ?>
+        <?= $content ?>
+    <?php else : ?>
+        <div class="contenedor-menu">
+            <div class="row">
+                <div class="col-md-2 menu">
+                    <div class="row titulo">
+                        <div class="col-md-12">
+                            Skeleton's Trap
+                        </div>
                     </div>
-                </div>
-                <div class="row opcion-row active">
-                    <div class="col-md-12">
-                        <span class="glyphicon glyphicon-chevron-right"></span>Inicio
+                    <?= Html::a('
+                    <div class="row opcion-row active">
+                        <div class="col-md-12">
+                            <span class="glyphicon glyphicon-chevron-right"></span>Inicio
+                        </div>
                     </div>
-                </div>
-                <div class="row opcion-row">
-                    <div class="col-md-12">
-                        <span class="glyphicon glyphicon-chevron-right"></span>Solicitudes para entrar
+                    ', ['site/index']);
+                    ?>
+                    <?= Html::a('
+                    <div class="row opcion-row">
+                        <div class="col-md-12">
+                            <span class="glyphicon glyphicon-chevron-right"></span>Solicitudes para entrar
+                        </div>
                     </div>
-                </div>
-                <div class="row opcion-row">
-                    <div class="col-md-12">
-                        <span class="glyphicon glyphicon-chevron-right"></span>Calendario
+                    ', ['usuarios/solicitudes-entrar']);
+                    ?>
+                    <?= Html::a('
+                    <div class="row opcion-row">
+                        <div class="col-md-12">
+                            <span class="glyphicon glyphicon-chevron-right"></span>Calendario
+                        </div>
                     </div>
-                </div>
-                <div class="row opcion-row">
-                    <div class="col-md-12">
-                        <span class="glyphicon glyphicon-chevron-right"></span>Torneos
+                    ', ['site/calendario']); ?>
+                    <?= Html::a('
+                    <div class="row opcion-row">
+                        <div class="col-md-12">
+                            <span class="glyphicon glyphicon-chevron-right"></span>Torneos
+                        </div>
                     </div>
-                </div>
-                <div class="row opcion-row salir">
-                    <div class="col-md-12">
-                        <span class="glyphicon glyphicon-chevron-right"></span>Salir
+                    ', ['torneos/index']);
+                    ?>
+                    <?= Html::a('
+                    <div class="row opcion-row salir">
+                        <div class="col-md-12">
+                            <span class="glyphicon glyphicon-chevron-right"></span>Salir
+                        </div>
                     </div>
+                    ', ['site/logout'], [
+                        'data' => [
+                            'method' => 'post'
+                        ]
+                    ]);
+                    ?>
                 </div>
-            </div>
-            <div class="col-md-9 contenido">
-                <?= $content ?>
+                <div class="col-md-9 contenido">
+                    <?= $content ?>
+                </div>
             </div>
         </div>
-    </div>
+    <?php endif; ?>
 </div>
 
 <?php $this->endBody() ?>

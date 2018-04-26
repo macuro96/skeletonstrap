@@ -57,8 +57,6 @@ div.menu {
     border-bottom-style: solid;
     border-bottom-width: 3px;
     border-bottom-color: #2e6593;
-
-    cursor: pointer;
 }
 
 .menu .opcion-row:hover {

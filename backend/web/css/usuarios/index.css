@@ -1,5 +1,6 @@
 .usuario {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .usuario .botones a {
@@ -7,6 +8,8 @@
     word-break: break-all;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    color: white;
 }
 
 .btn-pendiente {
@@ -23,4 +26,9 @@
 .img-perfil {
     max-height: 92px !important;
     margin: 0 auto;
+}
+
+.solicitudes-entrar .contenido {
+    height: 500px;
+    overflow-y: scroll;
 }

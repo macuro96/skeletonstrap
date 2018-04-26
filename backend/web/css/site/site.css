@@ -1,14 +1,3 @@
-@font-face {
-    font-family: supercell-magicregular;
-    src: url(/fonts/supercell-magic.ttf);
-}
-
-@font-face {
-    font-family: roboto-slab-regular;
-    src: url(/fonts/RobotoSlab-Regular.ttf);
-}
-
-html,
 body {
     height: 100%;
 }
@@ -18,10 +7,6 @@ body {
     background-color: #eaeaea;
 
     color: #222;
-}
-
-.centrar {
-    text-align: center;
 }
 
 .container-fluid {
@@ -36,6 +21,12 @@ body {
 
 .contenedor-menu, .contenedor-menu > div, .contenedor-menu > div > div {
     height: 100% !important;
+}
+
+.contenedor-menu .menu .expandir {
+    color: white;
+
+    font-size: 26px;
 }
 
 div.menu {

@@ -5,9 +5,12 @@
 
 use yii\helpers\Html;
 
+use common\assets\CommonAsset;
+
 use backend\assets\AppAsset;
 use common\widgets\Alert;
 
+CommonAsset::register($this);
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -32,7 +35,6 @@ $nombreAccion      = $tmpControlador->action->id;
 $bSiteLogin = ($nombreControlador == 'site' && $nombreAccion == 'login');
 ?>
 <div class="container-fluid">
-    <?= Alert::widget() ?>
     <?php if ($bSiteLogin) : ?>
         <?= $content ?>
     <?php else : ?>
@@ -44,54 +46,62 @@ $bSiteLogin = ($nombreControlador == 'site' && $nombreAccion == 'login');
                             Skeleton's Trap
                         </div>
                     </div>
-                    <?= Html::a('
-                    <div class="row opcion-row active">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-chevron-right"></span>Inicio
+                    <div class="opciones">
+                        <?= Html::a('
+                        <div class="row opcion-row ' . (($nombreControlador == 'site' && $nombreAccion == 'index') ? 'active' : '') . '">
+                            <div class="col-md-12">
+                                <span class="glyphicon glyphicon-chevron-right"></span>Inicio
+                            </div>
+                        </div>
+                        ', ['site/index']);
+                        ?>
+                        <?= Html::a('
+                        <div class="row opcion-row ' . (($nombreControlador == 'usuarios') ? 'active' : '') . '">
+                            <div class="col-md-12">
+                                <span class="glyphicon glyphicon-chevron-right"></span>Usuarios
+                            </div>
+                        </div>
+                        ', ['usuarios/index']);
+                        ?>
+                        <?= Html::a('
+                        <div class="row opcion-row ' . (($nombreControlador == 'site' && $nombreAccion == 'calendario') ? 'active' : '') . '">
+                            <div class="col-md-12">
+                                <span class="glyphicon glyphicon-chevron-right"></span>Calendario
+                            </div>
+                        </div>
+                        ', ['site/calendario']); ?>
+                        <?= Html::a('
+                        <div class="row opcion-row ' . (($nombreControlador == 'torneos') ? 'active' : '') . '">
+                            <div class="col-md-12">
+                                <span class="glyphicon glyphicon-chevron-right"></span>Torneos
+                            </div>
+                        </div>
+                        ', ['torneos/index']);
+                        ?>
+                        <?= Html::a('
+                        <div class="row opcion-row salir">
+                            <div class="col-md-12">
+                                <span class="glyphicon glyphicon-chevron-right"></span>Salir
+                            </div>
+                        </div>
+                        ', ['site/logout'], [
+                            'data' => [
+                                'method' => 'post'
+                            ]
+                        ]);
+                        ?>
+                    </div>
+                    <div class="row visible-sm visible-xs expandir">
+                        <div class="col-md-12 centrar">
+                            <span aria-label="true" class="glyphicon glyphicon-chevron-down"></span>
                         </div>
                     </div>
-                    ', ['site/index']);
-                    ?>
-                    <?= Html::a('
-                    <div class="row opcion-row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-chevron-right"></span>Usuarios
-                        </div>
-                    </div>
-                    ', ['usuarios/index']);
-                    ?>
-                    <?= Html::a('
-                    <div class="row opcion-row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-chevron-right"></span>Calendario
-                        </div>
-                    </div>
-                    ', ['site/calendario']); ?>
-                    <?= Html::a('
-                    <div class="row opcion-row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-chevron-right"></span>Torneos
-                        </div>
-                    </div>
-                    ', ['torneos/index']);
-                    ?>
-                    <?= Html::a('
-                    <div class="row opcion-row salir">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-chevron-right"></span>Salir
-                        </div>
-                    </div>
-                    ', ['site/logout'], [
-                        'data' => [
-                            'method' => 'post'
-                        ]
-                    ]);
-                    ?>
                 </div>
             </div>
         </div>
         <div class="row contenedor-menu-contenido">
             <div class="col-md-offset-2 col-md-10">
+                <?= Alert::widget() ?>
                 <?= $content ?>
             </div>
         </div>

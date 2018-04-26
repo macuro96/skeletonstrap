@@ -6,23 +6,18 @@ use common\components\Recursos;
 ?>
 <div class="usuario" data-usuario="<?= Html::encode($model->id) ?>">
     <div class="row">
-        <div class="col-lg-offset-3 col-md-offset-1 col-lg-1 col-md-1 img-centered">
-            <?= Recursos::image('perfil.png', ['class' => 'img-responsive img-perfil']) ?>
-        </div>
-        <div class="col-lg-3 col-md-7 datos">
-            <h5>Usuario:</h5>
-            <p>
-                <?= Html::encode($model->nombre) ?>
-            </p>
-            <h5>Correo:</h5>
-            <p>
+        <div class="col-md-12 centrar">
+            <div>
+                <b><?= Html::encode($model->nombre) ?></b>
+            </div>
+            <div>
                 <?= Html::encode($model->correo) ?>
-            </p>
+            </div>
         </div>
-        <div class="col-lg-2 col-md-2 botones">
+        <div class="col-md-12 botones">
             <?php if (!$model->estaActivo) : ?>
                 <?= Html::a('Aceptar', ['aceptar-solicitud'], [
-                    'class' => 'btn btn-success btn-lg',
+                    'class' => 'btn btn-success',
                     'data' => [
                         'method' => 'post',
                         'params' => ['usuario' => $model->id]
@@ -30,7 +25,7 @@ use common\components\Recursos;
                 ]) ?>
             <?php else : ?>
                 <?= Html::a('Pendiente de verificar', ['correo-verificar'], [
-                    'class' => 'btn btn-pendiente btn-lg',
+                    'class' => 'btn btn-pendiente',
                     'data' => [
                         'method' => 'post',
                         'params' => ['usuario' => $model->id]
@@ -38,7 +33,7 @@ use common\components\Recursos;
                 ]) ?>
             <?php endif; ?>
             <?= Html::a('Cancelar', ['cancelar-solicitud'], [
-                'class' => 'btn btn-danger btn-lg',
+                'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => "¿Estás seguro que quieres cancelar la solicitud del jugador $model->nombre?",
                     'method' => 'post',

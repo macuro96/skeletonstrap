@@ -1,0 +1,28 @@
+.contenedor-login {
+    margin-top: 7%;
+
+    color: white;
+}
+
+.contenedor-login > div > div > div:nth-child(2) {
+    background-color: white;
+    color: black;
+}
+
+.contenedor-login > div > div > div:first-child {
+    background-color: #337ab7;
+}
+
+.contenedor-login > div > div > div {
+    padding: 20px;
+    padding-left: 35px;
+    padding-right: 35px;
+
+    border-style: solid;
+    border-color: #2e6593;
+    border-width: 5px;
+}
+
+div.menu {
+    visibility: hidden;
+}

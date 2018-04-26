@@ -3,15 +3,9 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-use common\assets\CommonAsset;
 
-use common\components\FooterLayout;
-use common\components\NavBarLayout;
+use common\assets\CommonAsset;
 
 use backend\assets\AppAsset;
 use common\widgets\Alert;
@@ -32,51 +26,87 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-
 <?php
-NavBar::begin([
-    'brandLabel' => NavBarLayout::brandLabel(),
-    'brandUrl' => Yii::$app->homeUrl,
-    'options' => [
-        'class' => 'navbar-inverse navbar-fixed-top',
-    ],
-]);
-$menuItems = [];
+$tmpControlador = $this->context->module->controller;
 
-if (!Yii::$app->user->isGuest) {
-    $menuItems[] = ['label' => 'Inicio', 'url' => ['/site/index']];
-    $menuItems[] = ['label' => 'Usuarios', 'url' => ['/usuarios/index']];
-}
+$nombreControlador = $tmpControlador->id;
+$nombreAccion      = $tmpControlador->action->id;
 
-if (Yii::$app->user->isGuest) {
-    $menuItems[] = NavBarLayout::loginButton();
-} else {
-    $menuItems[] = '<li>'
-        . Html::beginForm(['/site/logout'], 'post')
-        . Html::submitButton(
-            'Logout (' . Yii::$app->user->identity->nombre . ')',
-            ['class' => 'btn btn-link logout']
-        )
-        . Html::endForm()
-        . '</li>';
-}
-echo Nav::widget([
-    'options' => ['class' => 'navbar-nav navbar-right'],
-    'encodeLabels' => false,
-    'items' => $menuItems,
-]);
-NavBar::end();
+$bSiteLogin = ($nombreControlador == 'site' && $nombreAccion == 'login');
 ?>
-
 <div class="container-fluid">
-    <?= Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>
-    <?= Alert::widget() ?>
-    <?= $content ?>
+    <?php if ($bSiteLogin) : ?>
+        <?= $content ?>
+    <?php else : ?>
+        <div class="contenedor-menu navbar-fija">
+            <div class="row">
+                <div class="col-md-2 menu">
+                    <div class="row titulo">
+                        <div class="col-md-12">
+                            Skeleton's Trap
+                        </div>
+                    </div>
+                    <div class="opciones">
+                        <?= Html::a('
+                        <div class="row opcion-row ' . (($nombreControlador == 'site' && $nombreAccion == 'index') ? 'active' : '') . '">
+                            <div class="col-md-12">
+                                <span class="glyphicon glyphicon-chevron-right"></span>Inicio
+                            </div>
+                        </div>
+                        ', ['site/index']);
+                        ?>
+                        <?= Html::a('
+                        <div class="row opcion-row ' . (($nombreControlador == 'usuarios') ? 'active' : '') . '">
+                            <div class="col-md-12">
+                                <span class="glyphicon glyphicon-chevron-right"></span>Usuarios
+                            </div>
+                        </div>
+                        ', ['usuarios/index']);
+                        ?>
+                        <?= Html::a('
+                        <div class="row opcion-row ' . (($nombreControlador == 'site' && $nombreAccion == 'calendario') ? 'active' : '') . '">
+                            <div class="col-md-12">
+                                <span class="glyphicon glyphicon-chevron-right"></span>Calendario
+                            </div>
+                        </div>
+                        ', ['site/calendario']); ?>
+                        <?= Html::a('
+                        <div class="row opcion-row ' . (($nombreControlador == 'torneos') ? 'active' : '') . '">
+                            <div class="col-md-12">
+                                <span class="glyphicon glyphicon-chevron-right"></span>Torneos
+                            </div>
+                        </div>
+                        ', ['torneos/index']);
+                        ?>
+                        <?= Html::a('
+                        <div class="row opcion-row salir">
+                            <div class="col-md-12">
+                                <span class="glyphicon glyphicon-chevron-right"></span>Salir
+                            </div>
+                        </div>
+                        ', ['site/logout'], [
+                            'data' => [
+                                'method' => 'post'
+                            ]
+                        ]);
+                        ?>
+                    </div>
+                    <div class="row visible-sm visible-xs expandir">
+                        <div class="col-md-12 centrar">
+                            <span aria-label="true" class="glyphicon glyphicon-chevron-down"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row contenedor-menu-contenido">
+            <div class="col-md-offset-2 col-md-10">
+                <?= Alert::widget() ?>
+                <?= $content ?>
+            </div>
+        </div>
+    <?php endif; ?>
 </div>
-
-<?= FooterLayout::mostrar() ?>
 
 <?php $this->endBody() ?>
 </body>

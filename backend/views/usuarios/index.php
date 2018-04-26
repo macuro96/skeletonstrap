@@ -13,20 +13,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
 RegisterThisCss::register($this);
 ?>
-
-<div class="row seccion solicitudes-entrar">
-    <div class="col-lg-12">
-        <div class="titulo-seccion"><h2>Solicitudes para entrar en el equipo (<numero-solicitudes><?= Html::encode(count($usuariosPendientes)) ?></numero-solicitudes>)</h2></div>
-
-        <div class="contenido-seccion">
-            <div class="acciones centrar">
-                <?= Html::a('Nueva invitación', ['invitar'], ['class' => 'btn btn-success btn-lg']) ?>
+<div class="row">
+    <div class="col-md-3 modulo solicitudes-entrar">
+        <div class="row titulo-cabecera centrar">
+            <div class="col-md-12">
+                <h3>Solicitudes para entrar en el equipo (<numero-solicitudes><?= Html::encode(count($usuariosPendientes)) ?></numero-solicitudes>)</h3>
             </div>
-            <?php foreach ($usuariosPendientes as $us) : ?>
-                <?= $this->render('_usuario', [
-                    'model' => $us
-                ]); ?>
-            <?php endforeach; ?>
+        </div>
+        <div class="row contenido">
+            <div class="col-md-12">
+                <div class="acciones centrar">
+                    <?= Html::a('Invitar a un jugador', ['invitar'], ['class' => 'btn btn-success btn-lg']) ?>
+                </div>
+                <div id="usuarios-solicitudes">
+                    <?php foreach ($usuariosPendientes as $us) : ?>
+                        <?= $this->render('_usuario', [
+                            'model' => $us
+                        ]); ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>

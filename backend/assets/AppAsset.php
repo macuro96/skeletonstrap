@@ -13,8 +13,10 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site/site.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
     ];
     public $js = [
+        'js/menu.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

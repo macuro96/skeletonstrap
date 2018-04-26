@@ -12,14 +12,13 @@ $this->title = 'Nueva invitación';
 $this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['usuarios/index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-CommonFormNuevoUsuario::register($this);
 ?>
 <div class="row seccion usuarios-form">
     <div class="col-lg-12">
-        <div class="titulo-seccion"><h2>Nueva invitación</h2></div>
+        <h2>Nueva invitación</h2>
 
-        <div class="contenido-seccion">
-            <ul class="pasos">
+        <div>
+            <ul>
                 <li>
                     Este formulario generará un correo que se enviará de forma automática al correo propocionado, de manera que
                     el usuario tenga que verificar su cuenta desde el enlace enviado introduciendo el código del mensaje.

@@ -3,15 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-use common\assets\CommonAsset;
-
-use common\components\FooterLayout;
-use common\components\NavBarLayout;
 
 use backend\assets\AppAsset;
 use common\widgets\Alert;
@@ -44,7 +36,7 @@ $bSiteLogin = ($nombreControlador == 'site' && $nombreAccion == 'login');
     <?php if ($bSiteLogin) : ?>
         <?= $content ?>
     <?php else : ?>
-        <div class="contenedor-menu">
+        <div class="contenedor-menu navbar-fija">
             <div class="row">
                 <div class="col-md-2 menu">
                     <div class="row titulo">
@@ -63,10 +55,10 @@ $bSiteLogin = ($nombreControlador == 'site' && $nombreAccion == 'login');
                     <?= Html::a('
                     <div class="row opcion-row">
                         <div class="col-md-12">
-                            <span class="glyphicon glyphicon-chevron-right"></span>Solicitudes para entrar
+                            <span class="glyphicon glyphicon-chevron-right"></span>Usuarios
                         </div>
                     </div>
-                    ', ['usuarios/solicitudes-entrar']);
+                    ', ['usuarios/index']);
                     ?>
                     <?= Html::a('
                     <div class="row opcion-row">
@@ -96,9 +88,11 @@ $bSiteLogin = ($nombreControlador == 'site' && $nombreAccion == 'login');
                     ]);
                     ?>
                 </div>
-                <div class="col-md-9 contenido">
-                    <?= $content ?>
-                </div>
+            </div>
+        </div>
+        <div class="row contenedor-menu-contenido">
+            <div class="col-md-offset-2 col-md-10">
+                <?= $content ?>
             </div>
         </div>
     <?php endif; ?>

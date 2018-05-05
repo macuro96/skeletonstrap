@@ -361,11 +361,13 @@ CREATE TABLE jugadores
   , carta_favorita          BIGINT       REFERENCES cartas (id)
                                          ON DELETE NO ACTION
                                          ON UPDATE CASCADE
+/*
   , equipo_partidas_jugadas INTEGER      CONSTRAINT ck_equipo_partidas_jugadas_positivas
                                          CHECK (equipo_partidas_jugadas >= 0)
   , equipo_cartas_ganadas   NUMERIC(4)   DEFAULT 0
                                          CONSTRAINT ck_equipo_cartas_ganadas_positivas
                                          CHECK (equipo_cartas_ganadas >= 0)
+*/
   , desafio_max_victorias   INTEGER      CONSTRAINT ck_desafio_max_victorias_positivas
                                          CHECK (desafio_max_victorias >= 0)
   , desafio_cartas_ganadas  NUMERIC(4)   CONSTRAINT ck_desafio_cartas_ganadas_positivas

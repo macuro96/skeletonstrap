@@ -94,7 +94,28 @@ class ClashRoyaleAPI extends Component
     {
         $endpoint = 'clan';
 
-        $url = $this->_url . "$endpoint/$tag?exclude=members";
+        $url = $this->_url . "$endpoint/$tag"; //?exclude=members
+
+        $this->validarConexion($endpoint, [$tag]);
+
+        return $this->conexion($url);
+    }
+
+    public function jugador($tag)
+    {
+        $endpoint = 'player';
+
+        $keys = implode(',', [
+            'tag',
+            'name',
+            'trophies',
+            'arena',
+            'clan',
+            'stats',
+            'games'
+        ]);
+
+        $url = $this->_url . "$endpoint/$tag?keys=$keys";
 
         $this->validarConexion($endpoint, [$tag]);
 

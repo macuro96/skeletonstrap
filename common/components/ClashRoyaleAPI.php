@@ -9,10 +9,31 @@ use yii\web\BadRequestHttpException;
 
 class ClashRoyaleAPI extends Component
 {
+    /**
+     * Key developer de la api https://api.royaleapi.com/
+     * Se accede a través de una variable de entorno del sistema
+     * @var string
+     */
     private $_key;
+
+    /**
+     * Dirección url donde se encuentra la aplicación REST de CR
+     * @var string
+     */
     private $_url;
+
+    /**
+     * Endpoints para la utilización de la aplicación REST validos.
+     * Solo se pueden utilizar los que se almacenen en este array.
+     * @var array
+     */
     private $_endpointsValidos;
 
+    /**
+     * Define si esta en modo debug o no. Proporciona información adicional
+     * en algunas partes del código.
+     * @var bool
+     */
     private $_debug;
 
     public function __construct()
@@ -27,12 +48,24 @@ class ClashRoyaleAPI extends Component
         ];
     }
 
+    /**
+     * Indica el modo debug
+     * @param bool $bModo TRUE  -> Activado
+     *                    FALSE -> Por defecto, Desactivado
+     */
     public function setDebug(bool $bModo)
     {
         $this->_debug = $bModo;
     }
 
-    private function validarConexion($endpoint, $tags, $endpointAdicional = null)
+    /**
+     * Comprueba si la conexión que se va a realizar con la api es correcta.
+     * @param  string $endpoint          Endpoint valido (definidos en el constructor)
+     * @param  array  $tags              Tag
+     * @param  string|null $endpointAdicional Endpoint válido adicional
+     * @return BadRequestHttpException Solo devuelve la excepción si la petición no es válida.
+     */
+    private function validarConexion(string $endpoint, array $tags, ?string $endpointAdicional = null)
     {
         $nTags = count($tags);
         $bEPsValidos = in_array($endpoint, $this->_endpointsValidos) && (in_array($endpointAdicional, $this->_endpointsValidos) || $endpointAdicional === null);
@@ -67,7 +100,12 @@ class ClashRoyaleAPI extends Component
         }
     }
 
-    private function conexion($url)
+    /**
+     * Realiza la conexión con la aplicación REST de CR
+     * @param  string $url Url final que se forma con los distintos métodos de la clase.
+     * @return mixed Devuelve los datos en forma de array json, o nulo si ha ocurrido un error.
+     */
+    private function conexion(string $url)
     {
         $ch = curl_init();
 
@@ -81,12 +119,23 @@ class ClashRoyaleAPI extends Component
         $data = curl_exec($ch);
         curl_close($ch);
 
+        $jsonData = json_decode($data);
+
+        if ($jsonData === null) {
+            return $jsonData;
+        }
+
         \Yii::$app->response->format = Response::FORMAT_JSON;
 
-        return json_decode($data);
+        return $jsonData;
     }
 
-    public function clan($tag)
+    /**
+     * Realiza la búsqueda de un equipo (clan) de CR válido
+     * @param  string $tag El TAG del equipo real de CR
+     * @return mixed      Devuelve los datos de un clan de CR
+     */
+    public function clan(string $tag)
     {
         $endpoint = 'clan';
 
@@ -97,6 +146,11 @@ class ClashRoyaleAPI extends Component
         return $this->conexion($url);
     }
 
+    /**
+     * Realiza la búsqueda de un jugador de CR válido
+     * @param  string $tag El TAG del jugador real de CR
+     * @return mixed      Devuelve los datos de un jugador de CR
+     */
     public function jugador($tag)
     {
         $endpoint = 'player';
@@ -114,6 +168,35 @@ class ClashRoyaleAPI extends Component
         $url = $this->_url . "$endpoint/$tag?keys=$keys";
 
         $this->validarConexion($endpoint, [$tag]);
+
+        return $this->conexion($url);
+    }
+
+    /**
+     * Realiza la búsqueda varios jugadores de CR válidos
+     * @param  array $tags Un array con los TAGS de los jugadores reales de CR
+     *                     que se quieran buscar.
+     * @return mixed      Devuelve los datos varios jugadores de CR
+     */
+    public function jugadores(array $tags)
+    {
+        $endpoint = 'player';
+
+        $keys = implode(',', [
+            'tag',
+            'name',
+            'trophies',
+            'arena',
+            'clan',
+            'stats',
+            'games'
+        ]);
+
+        $sTags = implode(',', $tags);
+
+        $url = $this->_url . "$endpoint/$sTags?keys=$keys";
+
+        $this->validarConexion($endpoint, $tags);
 
         return $this->conexion($url);
     }

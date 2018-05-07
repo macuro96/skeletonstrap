@@ -81,13 +81,9 @@ class ClashRoyaleAPI extends Component
         $data = curl_exec($ch);
         curl_close($ch);
 
-        if ($this->_debug) {
-            return json_decode($data);
-        }
-
         \Yii::$app->response->format = Response::FORMAT_JSON;
 
-        return $data;
+        return json_decode($data);
     }
 
     public function clan($tag)

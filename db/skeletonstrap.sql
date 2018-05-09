@@ -244,7 +244,7 @@ CREATE TABLE rarezas
     id     BIGSERIAL    PRIMARY KEY
   , nombre VARCHAR(255) NOT NULL UNIQUE
 );
-
+/*
 DROP TABLE IF EXISTS carta_tipos CASCADE;
 
 CREATE TABLE carta_tipos
@@ -252,7 +252,8 @@ CREATE TABLE carta_tipos
     id     BIGSERIAL    PRIMARY KEY
   , nombre VARCHAR(255) NOT NULL UNIQUE
 );
-
+*/
+/*
 DROP TABLE IF EXISTS cartas CASCADE;
 
 CREATE TABLE cartas
@@ -267,9 +268,9 @@ CREATE TABLE cartas
                                ON DELETE NO ACTION
                                ON UPDATE CASCADE
 );
-
-CREATE INDEX idx_cartas_rareza_id     ON cartas (rareza_id);
-CREATE INDEX idx_cartas_carta_tipo_id ON cartas (carta_tipo_id);
+*/
+--CREATE INDEX idx_cartas_rareza_id     ON cartas (rareza_id);
+--CREATE INDEX idx_cartas_carta_tipo_id ON cartas (carta_tipo_id);
 
 DROP TABLE IF EXISTS usuarios CASCADE;
 
@@ -281,6 +282,9 @@ CREATE TABLE usuarios
   , correo          VARCHAR(255) NOT NULL UNIQUE
   , nacionalidad_id BIGINT       NOT NULL
                                  REFERENCES nacionalidades (id)
+                                 ON DELETE NO ACTION
+                                 ON UPDATE CASCADE
+  , jugador_id      BIGINT       REFERENCES jugadores (id)
                                  ON DELETE NO ACTION
                                  ON UPDATE CASCADE
   , access_token    VARCHAR(255)
@@ -319,13 +323,10 @@ DROP TABLE IF EXISTS jugadores CASCADE;
 CREATE TABLE jugadores
 (
     id                      BIGSERIAL    PRIMARY KEY
-  , usuario_id              BIGINT       NOT NULL UNIQUE
-                                         REFERENCES usuarios (id)
-                                         ON DELETE CASCADE
-                                         ON UPDATE CASCADE
   , expulsado               TIMESTAMP(0) -- HASTA FECHA
   , deleted_at              TIMESTAMP(0) -- SOFT DELETE
   , tag                     VARCHAR(9)   NOT NULL UNIQUE
+  , nombre                  VARCHAR(255) NOT NULL
   , nivel                   NUMERIC(5)   NOT NULL
                                          CONSTRAINT ck_nivel_positivo
                                          CHECK (nivel >= 0)
@@ -355,12 +356,19 @@ CREATE TABLE jugadores
                                          CHECK (donaciones_totales >= 0)
   , donaciones_equipo       INTEGER      CONSTRAINT ck_donaciones_equipo_positivas
                                          CHECK (donaciones_equipo >= 0)
-  , cartas_descubiertas     NUMERIC(4)   NOT NULL
+  , cartas_descubiertas     NUMERIC(5)   NOT NULL
                                          CONSTRAINT ck_cartas_descubiertas_positivas
                                          CHECK (cartas_descubiertas >= 0)
+/*
+  , carta_favorita          INTEGER      NOT NULL
+                                         CONSTRAINT ck_carta_favorita_positiva
+                                         CHECK (carta_favorita >= 0)
+*/
+/*
   , carta_favorita          BIGINT       REFERENCES cartas (id)
                                          ON DELETE NO ACTION
                                          ON UPDATE CASCADE
+*/
 /*
   , equipo_partidas_jugadas INTEGER      CONSTRAINT ck_equipo_partidas_jugadas_positivas
                                          CHECK (equipo_partidas_jugadas >= 0)
@@ -390,9 +398,9 @@ CREATE INDEX idx_jugadores_victorias_tres_coronas  ON jugadores (victorias_tres_
 CREATE INDEX idx_jugadores_donaciones_totales      ON jugadores (donaciones_totales);
 CREATE INDEX idx_jugadores_donaciones_equipo       ON jugadores (donaciones_equipo);
 CREATE INDEX idx_jugadores_cartas_descubiertas     ON jugadores (cartas_descubiertas);
-CREATE INDEX idx_jugadores_carta_favorita          ON jugadores (carta_favorita);
-CREATE INDEX idx_jugadores_equipo_partidas_jugadas ON jugadores (equipo_partidas_jugadas);
-CREATE INDEX idx_jugadores_equipo_cartas_ganadas   ON jugadores (equipo_cartas_ganadas);
+--CREATE INDEX idx_jugadores_carta_favorita          ON jugadores (carta_favorita);
+--CREATE INDEX idx_jugadores_equipo_partidas_jugadas ON jugadores (equipo_partidas_jugadas);
+--CREATE INDEX idx_jugadores_equipo_cartas_ganadas   ON jugadores (equipo_cartas_ganadas);
 CREATE INDEX idx_jugadores_desafio_max_victorias   ON jugadores (desafio_max_victorias);
 CREATE INDEX idx_jugadores_desafio_cartas_ganadas  ON jugadores (desafio_cartas_ganadas);
 CREATE INDEX idx_jugadores_liga_id                 ON jugadores (liga_id);
@@ -575,6 +583,29 @@ CREATE EXTENSION pgcrypto;
 
 INSERT INTO nacionalidades (nombre, abreviatura, tramo_horario)
 VALUES ('España', 'ESP', 1);
+
+INSERT INTO ligas (nombre, icono)
+VALUES ('Arena 1', 1),
+       ('Arena 2', 2),
+       ('Arena 3', 3),
+       ('Arena 4', 4),
+       ('Arena 5', 5),
+       ('Arena 6', 6),
+       ('Arena 7', 7),
+       ('Arena 8', 8),
+       ('Arena 9', 9),
+       ('Arena 10', 10),
+       ('Arena 11', 11),
+       ('Arena 12', 12),
+       ('Combatientes I', 13),
+       ('Combatientes II', 14),
+       ('Combatientes III', 15),
+       ('Maestros I', 16),
+       ('Maestros II', 17),
+       ('Maestros III', 18),
+       ('Campeones', 19),
+       ('Grandes Campeones', 20),
+       ('Campeones Definitivos', 21);
 
 -- DATOS PRUEBAS
 INSERT INTO usuarios (nombre, password, correo, nacionalidad_id, auth_key, verificado, activo)

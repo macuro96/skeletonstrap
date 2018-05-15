@@ -155,32 +155,6 @@ class ClashRoyaleAPI extends Component
     }
 
     /**
-     * Realiza la búsqueda de un jugador de CR válido
-     * @param  string $tag El TAG del jugador real de CR
-     * @return mixed      Devuelve los datos de un jugador de CR
-     */
-    public function jugador($tag)
-    {
-        $endpoint = 'player';
-
-        $keys = implode(',', [
-            'tag',
-            'name',
-            'trophies',
-            'arena',
-            'clan',
-            'stats',
-            'games'
-        ]);
-
-        $url = $this->_url . "$endpoint/$tag?keys=$keys";
-
-        $this->validarConexion($endpoint, [$tag]);
-
-        return $this->conexion($url);
-    }
-
-    /**
      * Realiza la búsqueda varios jugadores de CR válidos
      * @param  array $tags Un array con los TAGS de los jugadores reales de CR
      *                     que se quieran buscar.

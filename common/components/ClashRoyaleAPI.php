@@ -115,9 +115,17 @@ class ClashRoyaleAPI extends Component
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'auth: ' . $this->_key
         ]);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 
         $data = curl_exec($ch);
         curl_close($ch);
+
+        if ($this->_debug) {
+            var_dump('debug:');
+            var_dump($data);
+            die();
+        }
 
         $jsonData = json_decode($data);
 

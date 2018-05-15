@@ -325,15 +325,15 @@ CREATE TABLE jugadores
     id                      BIGSERIAL    PRIMARY KEY
   , expulsado               TIMESTAMP(0) -- HASTA FECHA
   , deleted_at              TIMESTAMP(0) -- SOFT DELETE
-  , tag                     VARCHAR(9)   NOT NULL UNIQUE
+  , tag                     VARCHAR(16)  NOT NULL UNIQUE
   , nombre                  VARCHAR(255) NOT NULL
   , nivel                   NUMERIC(5)   NOT NULL
                                          CONSTRAINT ck_nivel_positivo
                                          CHECK (nivel >= 0)
-  , copas                   NUMERIC(8)   NOT NULL
+  , copas                   NUMERIC(16)  NOT NULL
                                          CONSTRAINT ck_copas_positivas
                                          CHECK (copas >= 0)
-  , max_copas               NUMERIC(8)   NOT NULL
+  , max_copas               NUMERIC(16)  NOT NULL
                                          CONSTRAINT ck_max_copas_positivas
                                          CHECK (max_copas >= 0)
   , partidas_totales        INTEGER      NOT NULL
@@ -356,7 +356,7 @@ CREATE TABLE jugadores
                                          CHECK (donaciones_totales >= 0)
   , donaciones_equipo       INTEGER      CONSTRAINT ck_donaciones_equipo_positivas
                                          CHECK (donaciones_equipo >= 0)
-  , cartas_descubiertas     NUMERIC(5)   NOT NULL
+  , cartas_descubiertas     NUMERIC(10)  NOT NULL
                                          CONSTRAINT ck_cartas_descubiertas_positivas
                                          CHECK (cartas_descubiertas >= 0)
 /*
@@ -378,7 +378,7 @@ CREATE TABLE jugadores
 */
   , desafio_max_victorias   INTEGER      CONSTRAINT ck_desafio_max_victorias_positivas
                                          CHECK (desafio_max_victorias >= 0)
-  , desafio_cartas_ganadas  NUMERIC(4)   CONSTRAINT ck_desafio_cartas_ganadas_positivas
+  , desafio_cartas_ganadas  NUMERIC(10)   CONSTRAINT ck_desafio_cartas_ganadas_positivas
                                          CHECK (desafio_cartas_ganadas >= 0)
   , liga_id                 BIGINT       REFERENCES ligas (id)
                                          ON DELETE NO ACTION

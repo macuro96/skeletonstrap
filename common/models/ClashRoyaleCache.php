@@ -72,7 +72,7 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
                      ->where([$clave => $aValores[0]]);
 
         for ($i = 1; $i < $nBusquedas; $i++) {
-            $query = $query->andWhere([$clave => $aValores[$i]]);
+            $query = $query->orWhere([$clave => $aValores[$i]]);
         }
 
         if ($bQuery) {
@@ -82,13 +82,22 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
         $models = $query->all();
         $nModels = count($models);
 
-        if ($nModels < $nBusquedas || empty($models) || $bForzarBusqueda) {
+        $aClavesModelos = [];
+
+        for ($i = 0; $i < $nModels; $i++) {
+            $aClavesModelos[$i] = $models[$i]->{$clave};
+        }
+
+        $aValoresSinCache = array_values(array_diff($aValores, $aClavesModelos));
+        $nValoresSinCache = count($aValoresSinCache);
+
+        if (!empty($aValoresSinCache) || $bForzarBusqueda) {
             $api = \Yii::$app->crapi;
-            $atributosJSON = $api->{$metodo}($aValores);
+            $atributosJSON = $api->{$metodo}($aValoresSinCache);
 
             if ($atributosJSON == null) {
                 $api = new \common\components\ClashRoyaleData();
-                $atributosJSON = $api->{$metodo}($aValores);
+                $atributosJSON = $api->{$metodo}($aValoresSinCache);
             }
 
             if ($atributosJSON === null) {
@@ -102,7 +111,7 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
             $atributosLabelsStatic = static::attributeLabelsStatic();
             $clavesCache = static::clavesCache();
 
-            for ($m = 0; $m < $nBusquedas; $m++) {
+            for ($m = 0; $m < $nValoresSinCache; $m++) {
                 foreach ($clavesCache as $key => $value) {
                     $claveTemp = $key;
                     $separacionClave = explode('.', $claveTemp);
@@ -125,26 +134,28 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
                     }
                 }
 
+                $indiceModel = $nModels + $m;
+
                 // Crear uno nuevo
                 $nombreClase = self::className();
-                $models[$m] = new $nombreClase($atributos[$m]);
+                $models[$indiceModel] = new $nombreClase($atributos[$m]);
 
-                if (!$models[$m]->validate()) {
+                if (!$models[$indiceModel]->validate()) {
                     // Actualizar uno ya existente
-                    $models[$m] = $nombreClase::find()
-                                              ->where([$clave => $aValores[$m]])
-                                              ->one();
+                    $models[$indiceModel] = $nombreClase::find()
+                                                        ->where([$clave => $aValoresSinCache[$m]])
+                                                        ->one();
 
                     foreach ($atributos[$m] as $key => $value) {
-                        $models[$m][$key] = $value;
+                        $models[$indiceModel][$key] = $value;
                     }
                 }
 
-                if (!$models[$m]->save()) {
+                if (!$models[$indiceModel]->save()) {
                     return static::ERROR_GUARDAR;
                 }
 
-                $models[$m]->refresh();
+                $models[$indiceModel]->refresh();
             }
         }
 

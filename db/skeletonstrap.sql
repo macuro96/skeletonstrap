@@ -90,6 +90,7 @@ CREATE TABLE cofres
   , icono  NUMERIC(2)   NOT NULL UNIQUE
 );
 
+/*
 DROP TABLE IF EXISTS clan_etiquetas CASCADE;
 
 CREATE TABLE clan_etiquetas
@@ -98,6 +99,7 @@ CREATE TABLE clan_etiquetas
   , nombre VARCHAR(32)  NOT NULL UNIQUE
   , color  VARCHAR(6)   UNIQUE
 );
+*/
 
 DROP TABLE IF EXISTS clanes CASCADE;
 
@@ -326,6 +328,7 @@ CREATE TABLE jugadores
   , expulsado               TIMESTAMP(0) -- HASTA FECHA
   , deleted_at              TIMESTAMP(0) -- SOFT DELETE
   , tag                     VARCHAR(16)  NOT NULL UNIQUE
+  , clan_tag                VARCHAR(16)  NOT NULL
   , nombre                  VARCHAR(255) NOT NULL
   , nivel                   NUMERIC(5)   NOT NULL
                                          CONSTRAINT ck_nivel_positivo
@@ -571,8 +574,18 @@ CREATE TABLE config_equipo
   , copas             NUMERIC(8)   NOT NULL
   , copas_requeridas  NUMERIC(8)   NOT NULL
   , donaciones_semana INTEGER
+  /*
   , estado_cofre      BOOLEAN      NOT NULL
                                    DEFAULT FALSE
+  */
+);
+
+DROP TABLE IF EXISTS config_tiempo_actualizado;
+CREATE TABLE config_tiempo_actualizado
+(
+      id          BIGSERIAL    PRIMARY KEY
+    , subrutaweb  VARCHAR(255) NOT NULL UNIQUE
+    , created_at  TIMESTAMP(0) NOT NULL DEFAULT current_timestamp
 );
 
 -- TRIGGERS

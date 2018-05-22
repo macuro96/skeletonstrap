@@ -57,11 +57,9 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
      * @param  array   $busquedaAPI      Array con la clave como primer elemento y de valor otro array con los valores.
      * @param  bool    $bQuery           TRUE -> Devuelve la query con la que se hace la consulta a la base de datos.
      *                                   FALSE -> Por defecto, no tiene efecto.
-     * @param  bool    $bForzarBusqueda  TRUE  -> Fuerza la búsqueda aunque ya existan los datos.
-     *                                   FALSE -> Por defecto, solo hace la búsqueda si no existen datos.
      * @return Model|string              Devuelve uno o más modelos distintos dependiendo de los datos que se busquen. O un error si algo falla.
      */
-    public static function findAPI(string $metodo, array $busquedaAPI, bool $bQuery = false, bool $bForzarBusqueda = false)
+    public static function findAPI(string $metodo, array $busquedaAPI, bool $bQuery = false)
     {
         $clave    = array_keys($busquedaAPI)[0];
         $aValores = $busquedaAPI[$clave];
@@ -88,17 +86,56 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
             $aClavesModelos[$i] = $models[$i]->{$clave};
         }
 
-        $aValoresSinCache = array_values(array_diff($aValores, $aClavesModelos));
-        $nValoresSinCache = count($aValoresSinCache);
+        for ($i = 0; $i < $nModels; $i++) {
+            $aClavesModelos[$i] = $models[$i]->{$clave};
+        }
 
-        if (!empty($aValoresSinCache) || $bForzarBusqueda) {
-            $api = \Yii::$app->crapi;
-            $atributosJSON = $api->{$metodo}($aValoresSinCache);
+        $aValoresConsultaAPI = [];
 
-            if ($atributosJSON == null) {
+        $aValoresSinBD = array_values(array_diff($aValores, $aClavesModelos));
+        $nValoresSinBD = count($aValoresSinBD);
+
+        $aValoresEnBD = array_values(array_diff($aValores, $aValoresSinBD));
+        $nValoresEnBD = count($aValoresEnBD);
+
+        // Comprobar que API escoger con la version de la CR API
+        $api = null;
+        $version = null;
+
+        $loadAPI = function () use (&$api, &$version) {
+            $api     = \Yii::$app->crapi;
+            $version = $api->version();
+
+            //if ($api->version() == null) {
                 $api = new \common\components\ClashRoyaleData();
-                $atributosJSON = $api->{$metodo}($aValoresSinCache);
+                $version = $api->version();
+            //}
+        };
+
+        $loadAPI();
+
+        ConfigTiempoActualizado::clearRegistros();
+
+        for ($i = 0; $i < $nValoresSinBD; $i++) {
+            $subRutaWeb = $api->getRutasDatos()[$metodo] . '/' . $aValoresSinBD[$i];
+
+            if ($api->actualizarDatos($subRutaWeb)) {
+                $aValoresConsultaAPI[] = $aValoresSinBD[$i];
             }
+        }
+
+        for ($i = 0; $i < $nValoresEnBD; $i++) {
+            $subRutaWeb = $api->getRutasDatos()[$metodo] . '/' . $aValoresEnBD[$i];
+
+            if ($api->actualizarDatos($subRutaWeb)) {
+                $aValoresConsultaAPI[] = $aValoresEnBD[$i];
+            }
+        }
+
+        $nValoresConsultaAPI = count($aValoresConsultaAPI);
+
+        if (!empty($aValoresConsultaAPI)) {
+            $atributosJSON = $api->{$metodo}($aValoresConsultaAPI);
 
             if ($atributosJSON === null) {
                 return static::ERROR_API;
@@ -111,7 +148,7 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
             $atributosLabelsStatic = static::attributeLabelsStatic();
             $clavesCache = static::clavesCache();
 
-            for ($m = 0; $m < $nValoresSinCache; $m++) {
+            for ($m = 0; $m < $nValoresConsultaAPI; $m++) {
                 foreach ($clavesCache as $key => $value) {
                     $claveTemp = $key;
                     $separacionClave = explode('.', $claveTemp);
@@ -134,28 +171,39 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
                     }
                 }
 
-                $indiceModel = $nModels + $m;
-
                 // Crear uno nuevo
-                $nombreClase = self::className();
-                $models[$indiceModel] = new $nombreClase($atributos[$m]);
+                $esNuevo = false;
 
-                if (!$models[$indiceModel]->validate()) {
+                $nombreClase = self::className();
+                $modelTemp   = new $nombreClase($atributos[$m]);
+
+                if (!$modelTemp->validate()) {
                     // Actualizar uno ya existente
-                    $models[$indiceModel] = $nombreClase::find()
-                                                        ->where([$clave => $aValoresSinCache[$m]])
-                                                        ->one();
+                    $modelTemp = $nombreClase::find()
+                                             ->where([$clave => $aValoresConsultaAPI[$m]])
+                                             ->one();
 
                     foreach ($atributos[$m] as $key => $value) {
-                        $models[$indiceModel][$key] = $value;
+                        $modelTemp[$key] = $value;
                     }
+                } else {
+                    $models[] = $modelTemp;
+                    $esNuevo = true;
                 }
 
-                if (!$models[$indiceModel]->save()) {
+                if (!$modelTemp->save()) {
                     return static::ERROR_GUARDAR;
                 }
 
-                $models[$indiceModel]->refresh();
+                // Refresh datos del modelo actualizado
+                if (!$esNuevo) {
+                    for ($indiceModel = 0; $indiceModel < $nModels; $indiceModel++) {
+                        if ($models[$indiceModel]->tag == $modelTemp->tag) {
+                            $models[$indiceModel]->refresh();
+                            $indiceModel = $nModels;
+                        }
+                    }
+                }
             }
         }
 

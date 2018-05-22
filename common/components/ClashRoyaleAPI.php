@@ -7,6 +7,8 @@ use yii\web\Response;
 use yii\base\Component;
 use yii\web\BadRequestHttpException;
 
+use common\models\ConfigTiempoActualizado;
+
 class ClashRoyaleAPI extends Component
 {
     /**
@@ -36,6 +38,13 @@ class ClashRoyaleAPI extends Component
      */
     private $_debug;
 
+    /**
+     * Rutas de consulta para indicar que tiempo de cache de actualizado
+     * añadir o actualizar.
+     * @var array
+     */
+    private $_rutas_datos;
+
     public function __construct()
     {
         $this->setDebug(false);
@@ -45,6 +54,12 @@ class ClashRoyaleAPI extends Component
             'clan',
             'player',
             'battles'
+        ];
+
+        $this->_rutas_datos = [
+            'jugadores' => 'profile',
+            'clanes' => 'clan',
+            'cartasJugadores' => 'cards',
         ];
     }
 
@@ -56,6 +71,11 @@ class ClashRoyaleAPI extends Component
     public function setDebug(bool $bModo)
     {
         $this->_debug = $bModo;
+    }
+
+    public function getRutasDatos()
+    {
+        return $this->_rutas_datos;
     }
 
     /**
@@ -105,7 +125,7 @@ class ClashRoyaleAPI extends Component
      * @param  string $url Url final que se forma con los distintos métodos de la clase.
      * @return mixed Devuelve los datos en forma de array json, o nulo si ha ocurrido un error.
      */
-    private function conexion(string $url)
+    private function conexion(string $url, bool $bDataJSON = true)
     {
         $ch = curl_init();
 
@@ -127,15 +147,28 @@ class ClashRoyaleAPI extends Component
             die();
         }
 
+        if (!$bDataJSON) {
+            return $data;
+        }
+
         $jsonData = json_decode($data);
 
-        if ($jsonData === null) {
-            return $jsonData;
+        if ($jsonData == null) {
+            return null;
         }
 
         \Yii::$app->response->format = Response::FORMAT_JSON;
 
         return $jsonData;
+    }
+
+    public function version()
+    {
+        $endpoint = 'version';
+
+        $url = $this->_url . "$endpoint";
+
+        return $this->conexion($url, false);
     }
 
     /**
@@ -163,6 +196,7 @@ class ClashRoyaleAPI extends Component
     public function jugadores(array $tags)
     {
         $endpoint = 'player';
+        $datos    = null;
 
         $keys = implode(',', [
             'tag',
@@ -174,12 +208,19 @@ class ClashRoyaleAPI extends Component
             'games'
         ]);
 
-        $sTags = implode(',', $tags);
+        if (!empty($tags)) {
+            $sTags = implode(',', $tags);
+            $url = $this->_url . "$endpoint/$sTags?keys=$keys";
 
-        $url = $this->_url . "$endpoint/$sTags?keys=$keys";
+            $this->validarConexion($endpoint, $tags);
+            $datos = $this->conexion($url);
+        }
 
-        $this->validarConexion($endpoint, $tags);
+        return $datos;
+    }
 
-        return $this->conexion($url);
+    public function actualizarDatos($subRutaWeb)
+    {
+        return ConfigTiempoActualizado::actualizarTiempoCache($subRutaWeb);
     }
 }

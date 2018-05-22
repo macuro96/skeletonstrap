@@ -4,6 +4,8 @@ namespace common\components;
 
 use yii\web\Response;
 
+use common\models\ConfigTiempoActualizado;
+
 class ClashRoyaleData
 {
     /**
@@ -54,6 +56,13 @@ class ClashRoyaleData
     private $_patrones;
 
     /**
+     * Rutas de consulta para indicar que tiempo de cache de actualizado
+     * añadir o actualizar.
+     * @var array
+     */
+    private $_rutas_datos;
+
+    /**
      * Etiquetas html que se utilizarán en el filtrado del contenido web de las
      * respuestas.
      * @var string
@@ -61,23 +70,10 @@ class ClashRoyaleData
     const ETIQUETAS_FILTRADO = '<span><div><a>';
 
     /**
-     * Ruta de la url para construir la petición de la consulta de un jugador.
+     * Version de la API
      * @var string
      */
-    const RUTA_JUGADOR = 'profile';
-
-    /**
-     * Ruta de la url para construir la petición de la consulta de un clan.
-     * @var string
-     */
-    const RUTA_CLAN = 'clan';
-
-    /**
-     * Ruta de la url para construir la petición de la consulta a las cartas
-     * de un jugador en concreto.
-     * @var string
-     */
-    const RUTA_CARTAS_JUGADOR = 'cards';
+    const VERSION = 'macuro96-cr-api';
 
     /**
      * Inicia los datos iniciales: el dominio de la url, url y patrones.
@@ -86,6 +82,12 @@ class ClashRoyaleData
     {
         $this->_dominioUrl = getenv('URL_DATA_CR');
         $this->_url = 'https://' . $this->_dominioUrl . '/es/';
+
+        $this->_rutas_datos = [
+            'jugadores' => 'profile',
+            'clanes' => 'clan',
+            'cartasJugadores' => 'cards',
+        ];
 
         $this->_patrones = [
             'jugador' => [
@@ -138,6 +140,11 @@ class ClashRoyaleData
     ///////////////////////
 
     ////// GETTERS /////////
+
+    public function getRutasDatos()
+    {
+        return $this->_rutas_datos;
+    }
 
     /**
      * Devuelve el contenido web guardado de un jugador.
@@ -203,11 +210,13 @@ class ClashRoyaleData
      */
     private function setContenidoWebJugador(string $tag, bool $bForzar = false)
     {
-        if (!$this->_contenidoWebJugador || $bForzar) {
-            $subRutaWeb = static::RUTA_JUGADOR . '/' . $tag;
+        $subRutaWeb = $this->_rutas_datos['jugadores'] . '/' . $tag;
 
+        if (!$this->_contenidoWebJugador || $bForzar) {
             $this->_contenidoWebJugador = $this->filtrarContenidoWeb($subRutaWeb);
         }
+
+        return $subRutaWeb;
     }
 
     /**
@@ -221,11 +230,13 @@ class ClashRoyaleData
      */
     private function setContenidoWebClan(string $tag, bool $bForzar = false)
     {
-        if (!$this->_contenidoWebClan || $bForzar) {
-            $subRutaWeb = static::RUTA_CLAN . '/' . $tag;
+        $subRutaWeb = $this->_rutas_datos['clanes'] . '/' . $tag;
 
+        if (!$this->_contenidoWebClan || $bForzar) {
             $this->_contenidoWebClan = $this->filtrarContenidoWeb($subRutaWeb);
         }
+
+        return $subRutaWeb;
     }
 
     /**
@@ -239,16 +250,27 @@ class ClashRoyaleData
      */
     private function setContenidoWebCartasJugador(string $tagJugador, bool $bForzar = false)
     {
-        if (!$this->_contenidoWebCartasJugador || $bForzar) {
-            $subRutaWeb = static::RUTA_JUGADOR . '/' . $tagJugador . '/' .  static::RUTA_CARTAS_JUGADOR;
+        $subRutaWeb = $this->_rutas_datos['jugadores'] . '/' . $tagJugador . '/' .  $this->_rutas_datos['cartasJugadores'];
 
+        if (!$this->_contenidoWebCartasJugador || $bForzar) {
             $this->_contenidoWebCartasJugador = $this->filtrarContenidoWeb($subRutaWeb);
         }
+
+        return $subRutaWeb;
     }
 
     ////////////////////////
 
     ///// METODOS /////////
+
+    /**
+     * Getter de la versión de la API
+     * @return string Devuelve la version
+     */
+    public function version()
+    {
+        return self::VERSION;
+    }
 
     /**
      * Busca los jugadores en forma de array de objetos para su posterior
@@ -258,111 +280,154 @@ class ClashRoyaleData
      */
     public function jugadores(array $tagsJugadores)
     {
+        $aResultado = [];
+
+        $comprobarNull = function ($valor) {
+            return $valor === null;
+        };
+
         $nJugadores     = count($tagsJugadores);
         $aCoincidencias = null;
+        $subRutasWeb    = [];
 
         $clan = null;
 
         for ($j = 0; $j < $nJugadores; $j++) {
-            $this->setContenidoWebJugador($tagsJugadores[$j], true);
-            $this->setContenidoWebCartasJugador($tagsJugadores[$j], true);
+            $nIntentos = 0;
+            $bClaveCoincidenciaNotFound = true;
 
-            $clavePatron = 'jugador';
+            while ($nIntentos++ < 2 && $bClaveCoincidenciaNotFound) {
+                $aCoincidencias      = null;
+                $clavesCheckNotFound = [];
 
-            $patron = $this->getPatron($this->_patrones[$clavePatron]['clan']['tag']);
-            $aCoincidencias[$j]['clan']['tag'] = $this->coincidenciasPatron([
-                'patron' => $patron,
-                'clave'  => $clavePatron
-            ]);
+                $subRutasWeb[$j][] = $this->setContenidoWebJugador($tagsJugadores[$j], true);
+                $subRutasWeb[$j][] = $this->setContenidoWebCartasJugador($tagsJugadores[$j], true);
 
-            $clanTemp = $aCoincidencias[$j]['clan']['tag'];
+                $clavePatron = 'jugador';
 
-            if ($clan == null) {
-                $clan = $clanTemp;
-            }
+                $patron = $this->getPatron($this->_patrones[$clavePatron]['clan']['tag']);
 
-            $bForzar = ($clanTemp != $clan);
-
-            $this->setContenidoWebClan($clanTemp, $bForzar);
-
-            $patron = $this->getPatron($this->_patrones[$clavePatron]['clan']['donations'], $tagsJugadores[$j]);
-            $aCoincidencias[$j]['clan']['donations'] = $this->coincidenciasPatron([
-                'patron' => $patron,
-                'clave'  => 'clan'
-            ]);
-
-            $patron = $this->getPatron($this->_patrones[$clavePatron]['name']);
-            $aCoincidencias[$j]['name'] = $this->coincidenciasPatron([
-                'patron' => $patron,
-                'clave'  => $clavePatron
-            ]);
-
-            $aStats = [
-                'level',
-                'maxTrophies',
-                'threeCrownWins',
-                'totalDonations',
-                'challengeMaxWins',
-                'challengeCardsWon',
-            ];
-
-            for ($i = 0; $i < count($aStats); $i++) {
-                $patron = $this->getPatron($this->_patrones[$clavePatron]['stats'][$aStats[$i]]);
-                $aCoincidencias[$j]['stats'][$aStats[$i]] = $this->coincidenciasPatron([
+                $aCoincidencias[$j]['clan']['tag'] = $this->coincidenciasPatron([
                     'patron' => $patron,
-                    'clave' => $clavePatron
+                    'clave'  => $clavePatron
                 ]);
-            }
 
-            $patron = $this->getPatron($this->_patrones[$clavePatron]['stats']['cardsFound'], $tagsJugadores[$j]);
-            $aCoincidencias[$j]['stats']['cardsFound'] = count($this->coincidenciasPatron([
-                'patron' => $patron,
-                'clave'  => 'cartasJugador',
-                'allResults' => true
-            ]));
+                $clanTemp = $aCoincidencias[$j]['clan']['tag'];
+                $clavesCheckNotFound[] = $comprobarNull($clanTemp);
 
-            $patron = $this->getPatron($this->_patrones[$clavePatron]['trophies']);
-            $aCoincidencias[$j]['trophies'] = $this->coincidenciasPatron([
-                'patron' => $patron,
-                'clave'  => $clavePatron
-            ]);
+                if ($clan == null) {
+                    $clan = $clanTemp;
+                }
 
-            $aGames = [
-                'total',
-                'wins',
-                'losses',
-            ];
+                $bForzar = ($clanTemp != $clan);
 
-            for ($i = 0; $i < count($aGames); $i++) {
-                $patron = $this->getPatron($this->_patrones[$clavePatron]['games'][$aGames[$i]]);
-                $aCoincidencias[$j]['games'][$aGames[$i]] = $this->coincidenciasPatron([
+                $subRutasWeb[$j][] = $this->setContenidoWebClan($clanTemp, $bForzar);
+
+                $patron = $this->getPatron($this->_patrones[$clavePatron]['clan']['donations'], $tagsJugadores[$j]);
+                $aCoincidencias[$j]['clan']['donations'] = $this->coincidenciasPatron([
                     'patron' => $patron,
-                    'clave' => $clavePatron
+                    'clave'  => 'clan'
                 ]);
+                $clavesCheckNotFound[] = $comprobarNull($aCoincidencias[$j]['clan']['donations']);
+
+                $patron = $this->getPatron($this->_patrones[$clavePatron]['name']);
+                $aCoincidencias[$j]['name'] = $this->coincidenciasPatron([
+                    'patron' => $patron,
+                    'clave'  => $clavePatron
+                ]);
+                $clavesCheckNotFound[] = $comprobarNull($aCoincidencias[$j]['name']);
+
+                $aStats = [
+                    'level',
+                    'maxTrophies',
+                    'threeCrownWins',
+                    'totalDonations',
+                    'challengeMaxWins',
+                    'challengeCardsWon',
+                ];
+
+                for ($i = 0; $i < count($aStats); $i++) {
+                    $patron = $this->getPatron($this->_patrones[$clavePatron]['stats'][$aStats[$i]]);
+
+                    if ($aStats[$i] == 'challengeCardsWon') {
+                        $aCoincidencias[$j]['stats'][$aStats[$i]] = $this->coincidenciasPatron([
+                            'patron' => $patron,
+                            'clave' => $clavePatron,
+                            'allResults' => true
+                        ])[1];
+                    } else {
+                        $aCoincidencias[$j]['stats'][$aStats[$i]] = $this->coincidenciasPatron([
+                            'patron' => $patron,
+                            'clave' => $clavePatron,
+                        ]);
+                    }
+
+                    $clavesCheckNotFound[] = $comprobarNull($aCoincidencias[$j]['stats'][$aStats[$i]]);
+                }
+
+                $patron = $this->getPatron($this->_patrones[$clavePatron]['stats']['cardsFound'], $tagsJugadores[$j]);
+                $aCoincidencias[$j]['stats']['cardsFound'] = count($this->coincidenciasPatron([
+                    'patron' => $patron,
+                    'clave'  => 'cartasJugador',
+                    'allResults' => true
+                ]));
+                $clavesCheckNotFound[] = $comprobarNull($aCoincidencias[$j]['stats']['cardsFound']);
+
+                $patron = $this->getPatron($this->_patrones[$clavePatron]['trophies']);
+                $aCoincidencias[$j]['trophies'] = $this->coincidenciasPatron([
+                    'patron' => $patron,
+                    'clave'  => $clavePatron
+                ]);
+                $clavesCheckNotFound[] = $comprobarNull($aCoincidencias[$j]['trophies']);
+
+                $aGames = [
+                    'total',
+                    'wins',
+                    'losses',
+                ];
+
+                for ($i = 0; $i < count($aGames); $i++) {
+                    $patron = $this->getPatron($this->_patrones[$clavePatron]['games'][$aGames[$i]]);
+                    $aCoincidencias[$j]['games'][$aGames[$i]] = $this->coincidenciasPatron([
+                        'patron' => $patron,
+                        'clave' => $clavePatron
+                    ]);
+                    $clavesCheckNotFound[] = $comprobarNull($aCoincidencias[$j]['games'][$aGames[$i]]);
+                }
+
+                $empates = $aCoincidencias[$j]['games']['total'] - ($aCoincidencias[$j]['games']['wins'] + $aCoincidencias[$j]['games']['losses']);
+                $aCoincidencias[$j]['games']['draws'] = $empates;
+                $clavesCheckNotFound[] = $comprobarNull($aCoincidencias[$j]['games']['draws']);
+
+                $patron = $this->getPatron($this->_patrones[$clavePatron]['arena']['arenaID']);
+                $nombreArena = $this->coincidenciasPatron([
+                    'patron' => $patron,
+                    'clave'  => $clavePatron
+                ]);
+                $clavesCheckNotFound[] = $comprobarNull($nombreArena);
+
+                $aCoincidencias[$j]['arena']['arenaID'] = $this->findDatoRelacion('\common\models\Ligas', 'id', ['nombre' => $nombreArena]);
+                $aCoincidencias[$j]['tag'] = $tagsJugadores[$j];
+
+                $clavesCheckNotFound[] = $comprobarNull($aCoincidencias[$j]['arena']['arenaID']);
+
+                $bClaveCoincidenciaNotFound = in_array(true, $clavesCheckNotFound);
+
+                if (!$bClaveCoincidenciaNotFound) {
+                    $aCoincidencias[$j]        = (object) $aCoincidencias[$j];
+                    $aCoincidencias[$j]->clan  = (object) $aCoincidencias[$j]->clan;
+                    $aCoincidencias[$j]->stats = (object) $aCoincidencias[$j]->stats;
+                    $aCoincidencias[$j]->games = (object) $aCoincidencias[$j]->games;
+                    $aCoincidencias[$j]->arena = (object) $aCoincidencias[$j]->arena;
+                }
             }
 
-            $empates = $aCoincidencias[$j]['games']['total'] - ($aCoincidencias[$j]['games']['wins'] + $aCoincidencias[$j]['games']['losses']);
-            $aCoincidencias[$j]['games']['draws'] = $empates;
-
-            $patron = $this->getPatron($this->_patrones[$clavePatron]['arena']['arenaID']);
-            $nombreArena = $this->coincidenciasPatron([
-                'patron' => $patron,
-                'clave'  => $clavePatron
-            ]);
-
-            $aCoincidencias[$j]['arena']['arenaID'] = $this->findDatoRelacion('\common\models\Ligas', 'id', ['nombre' => $nombreArena]);
-            $aCoincidencias[$j]['tag'] = $tagsJugadores[$j];
-
-            $aCoincidencias[$j]        = (object) $aCoincidencias[$j];
-            $aCoincidencias[$j]->clan  = (object) $aCoincidencias[$j]->clan;
-            $aCoincidencias[$j]->stats = (object) $aCoincidencias[$j]->stats;
-            $aCoincidencias[$j]->games = (object) $aCoincidencias[$j]->games;
-            $aCoincidencias[$j]->arena = (object) $aCoincidencias[$j]->arena;
+            $aResultado[] = is_array($aCoincidencias) ? $aCoincidencias[$j] : [];
         }
 
         \Yii::$app->response->format = Response::FORMAT_JSON;
 
-        return $aCoincidencias;
+        return $aResultado;
     }
 
     /**
@@ -438,6 +503,18 @@ class ClashRoyaleData
         }
 
         return $coincidenciasFinal;
+    }
+
+    public function actualizarDatos($subRutaWeb)
+    {
+        $url = $this->_url . $subRutaWeb . '/refresh';
+
+        $bActualizado = ConfigTiempoActualizado::actualizarTiempoCache($subRutaWeb, function () use ($url) {
+            $contenido = json_decode(file_get_contents($url));
+            return $contenido->success;
+        });
+
+        return $bActualizado;
     }
 
     ///////////////////////

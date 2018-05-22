@@ -42,7 +42,7 @@ NavBar::begin([
 $menuItems = [
     ['label' => 'Inicio', 'url' => ['/site/index']],
     ['label' => 'Torneos', 'url' => ['/torneos/index']],
-    ['label' => 'Equipo', 'url' => ['/site/equipo']],
+    ['label' => 'Equipo', 'url' => ['/equipo/index']],
     ['label' => 'Calendario', 'url' => ['/site/calendario']],
     [
         'label' => 'Únete/Lucha',

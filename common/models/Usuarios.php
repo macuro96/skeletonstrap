@@ -21,6 +21,7 @@ use \yii\web\IdentityInterface;
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
     public $normas;
+    public $tag;
 
     const ESCENARIO_INVITAR   = 'invitar';
     const ESCENARIO_VERIFICAR = 'verificar';
@@ -45,7 +46,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['nombre'], 'string', 'min' => 4],
             [['password'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::ESCENARIO_VERIFICAR]],
             [['password'], 'default', 'value' => \Yii::$app->security->generatePasswordHash(''), 'on' => [self::ESCENARIO_INVITAR, self::ESCENARIO_UNETE]],
-            [['nacionalidad_id'], 'default', 'value' => null],
+            [['nacionalidad_id', 'jugador_id'], 'default', 'value' => null],
             [['nacionalidad_id'], 'integer'],
             [['activo'], 'boolean'],
             [['nombre', 'password', 'access_token', 'auth_key', 'verificado'], 'string', 'max' => 255],
@@ -53,14 +54,48 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['correo', 'nombre'], 'unique'],
             [['nacionalidad_id'], 'exist', 'skipOnError' => true, 'targetClass' => Nacionalidades::className(), 'targetAttribute' => ['nacionalidad_id' => 'id']],
             [['normas'], 'required', 'on' => self::ESCENARIO_UNETE],
+            [['tag'], 'required', 'on' => self::ESCENARIO_UNETE],
             [['normas'], 'boolean', 'on' => self::ESCENARIO_UNETE],
-            [['normas'], 'compare', 'compareValue' => true, 'message' => 'Las normas deben ser aceptadas obligatoriamente', 'on' => self::ESCENARIO_UNETE]
+            [['normas'], 'compare', 'compareValue' => true, 'message' => 'Las normas deben ser aceptadas obligatoriamente', 'on' => self::ESCENARIO_UNETE],
+            [['tag'], function ($attribute, $params, $validator) {
+                if (!$this->hasErrors()) {
+                    $usuarioConTag  = null;
+                    $jugadorBuscado = Jugadores::find()->where(['tag' => $this->$attribute])->one();
+
+                    if ($jugadorBuscado != null) {
+                        $usuarioConTag = self::find()
+                                             ->where(['jugador_id' => $jugadorBuscado->id])
+                                             ->one();
+                    }
+
+                    if ($usuarioConTag == null) {
+                        if ($jugadorBuscado == null) {
+                            $jugadorBuscado = Jugadores::findAPI('jugadores', [
+                                'tag' => [
+                                    $this->tag
+                                ]
+                            ]);
+
+                            $jugadorBuscado = (!empty($jugadorBuscado) ? $jugadorBuscado[0] : $jugadorBuscado);
+                        }
+
+                        if ($jugadorBuscado == null) {
+                            $this->addError($attribute, 'No existe un jugador con ese TAG');
+                        } else {
+                            $this->jugador_id = $jugadorBuscado->id;
+                        }
+                    } else {
+                        $this->addError($attribute, 'Ya existe un usuario con ese TAG asociado');
+                    }
+                }
+            }, 'skipOnEmpty' => true],
+            [['jugador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Jugadores::className(), 'targetAttribute' => ['jugador_id' => 'id']],
         ];
     }
 
     public function attributes()
     {
-        return array_merge(parent::attributes(), ['normas']);
+        return array_merge(parent::attributes(), ['normas', 'tag']);
     }
 
     /**

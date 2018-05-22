@@ -106,10 +106,10 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
             $api     = \Yii::$app->crapi;
             $version = $api->version();
 
-            //if ($api->version() == null) {
+            if ($api->version() == null) {
                 $api = new \common\components\ClashRoyaleData();
                 $version = $api->version();
-            //}
+            }
         };
 
         $loadAPI();

@@ -137,8 +137,11 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
         if (!empty($aValoresConsultaAPI)) {
             $atributosJSON = $api->{$metodo}($aValoresConsultaAPI);
 
-            if ($atributosJSON === null) {
-                return static::ERROR_API;
+            $posibleErrorAPI = isset($atributosJSON->error) ? $atributosJSON->error : false;
+
+            if ($atributosJSON == null || empty($atributosJSON) || $posibleErrorAPI) {
+                //return static::ERROR_API;
+                return $models;
             }
 
             if (!is_array($atributosJSON)) {

@@ -40,6 +40,10 @@ CommonFormNuevoUsuario::register($this);
                     [1 => 'ESP']
                 ])
                 ?>
+                <?= $form->field($model, 'tag')->textInput(['maxlength' => true])
+                                               ->label('TAG*')
+                                               ->hint('Debe ser un TAG real de un jugador del juego')
+                ?>
                 <?= $form->field($model, 'normas')->checkbox()
                                                   ->hint('Se deben aceptar las normas para poder optar por una cuenta en la aplicación')
                 ?>

@@ -157,8 +157,6 @@ class ClashRoyaleAPI extends Component
             return null;
         }
 
-        \Yii::$app->response->format = Response::FORMAT_JSON;
-
         return $jsonData;
     }
 

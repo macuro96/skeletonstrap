@@ -425,8 +425,6 @@ class ClashRoyaleData
             $aResultado[] = is_array($aCoincidencias) ? $aCoincidencias[$j] : [];
         }
 
-        \Yii::$app->response->format = Response::FORMAT_JSON;
-
         return $aResultado;
     }
 

@@ -73,6 +73,10 @@ class ClashRoyaleAPI extends Component
         $this->_debug = $bModo;
     }
 
+    /**
+     * Devuelve subrutas web válidas para la consulta
+     * @return array Array de subrutas
+     */
     public function getRutasDatos()
     {
         return $this->_rutas_datos;
@@ -122,7 +126,8 @@ class ClashRoyaleAPI extends Component
 
     /**
      * Realiza la conexión con la aplicación REST de CR
-     * @param  string $url Url final que se forma con los distintos métodos de la clase.
+     * @param  string $url       Url final que se forma con los distintos métodos de la clase.
+     * @param  bool   $bDataJSON Devolver los datos en JSON o no. Por defecto es TRUE.
      * @return mixed Devuelve los datos en forma de array json, o nulo si ha ocurrido un error.
      */
     private function conexion(string $url, bool $bDataJSON = true)
@@ -160,6 +165,11 @@ class ClashRoyaleAPI extends Component
         return $jsonData;
     }
 
+    /**
+     * Devuelve la versión de la API.
+     * @return string|null Si ha podido hacer la conexión devuelve la versión,
+     *                     y en el caso de que no devuelve un null.
+     */
     public function version()
     {
         $endpoint = 'version';
@@ -217,7 +227,14 @@ class ClashRoyaleAPI extends Component
         return $datos;
     }
 
-    public function actualizarDatos($subRutaWeb)
+    /**
+     * Actualiza los datos de la página web de la que se recibe los datos y el registro de cacheado si es posible.
+     * @param  string $subRutaWeb Subrutaweb válida
+     * @return bool|null          TRUE -> se ha actualizado correctamente.
+     *                            FALSE -> no se ha podido actualizar (puede ser que ya esté actualizado recientemente)
+     *                            NULL -> error.
+     */
+    public function actualizarDatos(string $subRutaWeb)
     {
         return ConfigTiempoActualizado::actualizarTiempoCache($subRutaWeb);
     }

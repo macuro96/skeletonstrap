@@ -47,23 +47,42 @@ class ConfigTiempoActualizado extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function actualizarTiempoCache($subRutaWeb, $callBackRefresh = null)
+    /**
+     * Actualiza el tiempo de cacheado según una subruta de consulta válida y una
+     * función dada por el usuario.
+     * @param  string $subRutaWeb Subruta valida de la lista de los componentes de
+     *                            la API.
+     * @param  mixed $function    Función para que devuelva TRUE o FALSE que indique
+     *                            si se puede realizar la actualización o no. Puede ser
+     *                            null en caso de que no necesite ninguna condición.
+     * @return bool|null          Devuelve un booleano dependiendo si se ha podido actualizar
+     *                            el registro o no. En el caso de que ocurra un error (como por
+     *                            ejemplo que falle la condición de la función) devuelve un null.
+     */
+    public static function actualizarTiempoCache(string $subRutaWeb, $function = null)
     {
-        $bActualizado = false;
+        $actualizado = false;
 
         if (self::find()->where(['subrutaweb' => $subRutaWeb])->one() === null) {
-            $bRefresh = ($callBackRefresh !== null ? $callBackRefresh() : true);
+            $bFunction = ($function !== null ? $function() : true);
 
-            $registro = new self([
-                'subrutaweb' => $subRutaWeb
-            ]);
+            if ($bFunction) {
+                $registro = new self([
+                    'subrutaweb' => $subRutaWeb
+                ]);
 
-            $bActualizado = $registro->save();
+                $actualizado = $registro->save();
+            } else {
+                $actualizado = null;
+            }
         }
 
-        return $bActualizado;
+        return $actualizado;
     }
 
+    /**
+     * Borra los registros que tengan más de 14 minutos desde su creación
+     */
     public static function clearRegistros()
     {
         self::deleteAll(new Expression("((current_timestamp - created_at) > interval '14 min')"));

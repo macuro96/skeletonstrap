@@ -77,26 +77,31 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
             return $query;
         }
 
-        $models = $query->all();
-        $nModels = count($models);
-
-        $aClavesModelos = [];
-
-        for ($i = 0; $i < $nModels; $i++) {
-            $aClavesModelos[$i] = $models[$i]->{$clave};
-        }
-
-        for ($i = 0; $i < $nModels; $i++) {
-            $aClavesModelos[$i] = $models[$i]->{$clave};
-        }
+        ConfigTiempoActualizado::clearRegistros();
 
         $aValoresConsultaAPI = [];
 
-        $aValoresSinBD = array_values(array_diff($aValores, $aClavesModelos));
+        $models = $query->all();
+        $nModels = count($models);
+
+        $aValoresBusqueda = [];
+
+        for ($i = 0; $i < $nModels; $i++) {
+            $aValoresBusqueda[$i] = $models[$i]->{$clave};
+
+            $subRutaWeb = $api->getRutasDatos()[$metodo] . '/' . $aValoresBusqueda[$i];
+
+            // Si no esta actualizado almacenarlo para su procesamiento
+            if (ConfigTiempoActualizado::find()->where(['subrutaweb' => $subRutaWeb])->one() == null) {
+                $aValoresConsultaAPI[] = $aValoresBusqueda[$i];
+            }
+        }
+
+        $aValoresSinBD = array_values(array_diff($aValores, $aValoresBusqueda));
         $nValoresSinBD = count($aValoresSinBD);
 
-        $aValoresEnBD = array_values(array_diff($aValores, $aValoresSinBD));
-        $nValoresEnBD = count($aValoresEnBD);
+        $aValoresConsultaAPI = array_merge($aValoresConsultaAPI, $aValoresSinBD);
+        $nValoresConsultaAPI = count($aValoresConsultaAPI);
 
         // Comprobar que API escoger con la version de la CR API
         $api = null;
@@ -114,33 +119,16 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
 
         $loadAPI();
 
-        ConfigTiempoActualizado::clearRegistros();
-
-        for ($i = 0; $i < $nValoresSinBD; $i++) {
-            $subRutaWeb = $api->getRutasDatos()[$metodo] . '/' . $aValoresSinBD[$i];
-
-            if ($api->actualizarDatos($subRutaWeb)) {
-                $aValoresConsultaAPI[] = $aValoresSinBD[$i];
-            }
-        }
-
-        for ($i = 0; $i < $nValoresEnBD; $i++) {
-            $subRutaWeb = $api->getRutasDatos()[$metodo] . '/' . $aValoresEnBD[$i];
-
-            if ($api->actualizarDatos($subRutaWeb)) {
-                $aValoresConsultaAPI[] = $aValoresEnBD[$i];
-            }
-        }
-
-        $nValoresConsultaAPI = count($aValoresConsultaAPI);
-
         if (!empty($aValoresConsultaAPI)) {
             $atributosJSON = $api->{$metodo}($aValoresConsultaAPI);
 
             $posibleErrorAPI = isset($atributosJSON->error) ? $atributosJSON->error : false;
 
-            if ($atributosJSON == null || empty($atributosJSON) || $posibleErrorAPI) {
-                //return static::ERROR_API;
+            if ($posibleErrorAPI) {
+                return static::ERROR_API;
+            }
+
+            if ($atributosJSON == null || empty($atributosJSON)) {
                 return $models;
             }
 

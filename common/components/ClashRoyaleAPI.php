@@ -2,8 +2,6 @@
 
 namespace common\components;
 
-use yii\web\Response;
-
 use yii\base\Component;
 use yii\web\BadRequestHttpException;
 
@@ -99,7 +97,7 @@ class ClashRoyaleAPI extends Component
             if ($nTags > 7 || $nTags == 0 || !$bEPsValidos || !$bKey) {
                 throw new BadRequestHttpException('Petición no realizada correctamente');
             }
-        } else if (YII_ENV == 'dev') {
+        } elseif (YII_ENV == 'dev') {
             $errorsTemp = [];
 
             if ($nTags > 7) {

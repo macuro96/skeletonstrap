@@ -2,6 +2,8 @@
 
 namespace backend\models;
 
+use yii\db\ActiveQuery;
+
 use \yii\web\IdentityInterface;
 
 /**
@@ -19,6 +21,10 @@ use \yii\web\IdentityInterface;
  */
 class Usuarios extends \common\models\Usuarios
 {
+    /**
+     * Query de usuarios administradores válidos para el logueo.
+     * @return ActiveQuery ActiveQuery
+     */
     public static function findAdminQuery()
     {
         return static::find()
@@ -27,6 +33,9 @@ class Usuarios extends \common\models\Usuarios
                      ->where(['roles.nombre' => 'administrador']);
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function findLoginQuery()
     {
         return static::findAdminQuery()
@@ -34,7 +43,7 @@ class Usuarios extends \common\models\Usuarios
                      ->andWhere('verificado is null');
     }
 
-    public static function findByNombre($nombre)
+    public static function findByNombre(string $nombre)
     {
         return static::findAdminQuery()
                      ->andWhere(['usuarios.nombre' => $nombre])
@@ -75,10 +84,5 @@ class Usuarios extends \common\models\Usuarios
     public function validateAuthKey($authKey)
     {
         return parent::validateAuthKey($authKey);
-    }
-
-    public function validatePassword($password)
-    {
-        return \Yii::$app->security->validatePassword($password, $this->password);
     }
 }

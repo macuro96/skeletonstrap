@@ -7,6 +7,10 @@ use yii\web\BadRequestHttpException;
 
 use common\models\ConfigTiempoActualizado;
 
+/**
+ * Componente común:
+ * API de ClashRoyale (en desarrollo)
+ */
 class ClashRoyaleAPI extends Component
 {
     /**

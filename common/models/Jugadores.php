@@ -2,10 +2,6 @@
 
 namespace common\models;
 
-use Yii;
-
-use yii\web\BadRequestHttpException;
-
 /**
  * This is the model class for table "jugadores".
  *
@@ -13,6 +9,7 @@ use yii\web\BadRequestHttpException;
  * @property string $expulsado
  * @property string $deleted_at
  * @property string $tag
+ * @property string $clan_tag
  * @property string $nombre
  * @property string $nivel
  * @property string $copas

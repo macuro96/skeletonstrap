@@ -5,16 +5,33 @@ use Yii;
 use yii\base\Model;
 
 /**
- * Login form
+ * Formulario de logueo
  */
 class LoginForm extends Model
 {
+    /**
+     * Usuario
+     * @var string
+     */
     public $usuario;
+
+    /**
+     * Password
+     * @var string
+     */
     public $password;
+
+    /**
+     * Recordar sesión
+     * @var bool
+     */
     public $rememberMe = true;
 
+    /**
+     * Modelo de usuario temporal
+     * @var Usuarios
+     */
     private $_user;
-
 
     /**
      * {@inheritdoc}
@@ -90,6 +107,12 @@ class LoginForm extends Model
         return $this->_user;
     }
 
+    /**
+     * Validar si el usuario está activado o no
+     * @param  mixed $attribute Atributo
+     * @param  mixed $params    Parametros
+     * @param  mixed $validator Validador
+     */
     public function validateActivo($attribute, $params, $validator)
     {
         if (!$this->hasErrors()) {
@@ -99,6 +122,12 @@ class LoginForm extends Model
         }
     }
 
+    /**
+     * Validar si el usuario está verificado a través del correo o no.
+     * @param  mixed $attribute Atributo
+     * @param  mixed $params    Parametros
+     * @param  mixed $validator Validador
+     */
     public function validateVerificado($attribute, $params, $validator)
     {
         if (!$this->hasErrors()) {

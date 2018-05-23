@@ -5,6 +5,7 @@ namespace common\components;
 use common\models\ConfigTiempoActualizado;
 
 /**
+ * Componente común:
  * API propia para recuperar distintos datos de ClashRoyale y devolverlos en el mismo
  * formato que la original para poder complementarse. Se utiliza automaticamente en el caso
  * de que el primer componente (API original) falle.

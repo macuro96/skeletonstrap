@@ -2,10 +2,14 @@
 
 namespace common\components;
 
-use yii\helpers\Html;
-
+/**
+ * Componente común para funciones de twitch.
+ */
 class Twitch
 {
+    /**
+     * Crea el iframe del vídeo en directo del canal de skeletonstraptv
+     */
     public static function directo()
     {
         ?>
@@ -20,7 +24,11 @@ class Twitch
         <?php
     }
 
-    public static function coleccion($coleccion)
+    /**
+     * Crea el iframe de una colección de vídeos del canal skeletonstraptv
+     * @param  string $coleccion ID de la colección.
+     */
+    public static function coleccion(string $coleccion)
     {
         ?>
         <iframe class="twitch-video"

@@ -61,6 +61,19 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
      */
     public static function findAPI(string $metodo, array $busquedaAPI, bool $bQuery = false)
     {
+        $api = null;
+        $version = null;
+
+        $loadAPI = function () use (&$api, &$version) {
+            $api     = \Yii::$app->crapi;
+            $version = $api->version();
+
+            //if ($api->version() == null) {
+                $api = new \common\components\ClashRoyaleData();
+                $version = $api->version();
+            //}
+        };
+
         $clave    = array_keys($busquedaAPI)[0];
         $aValores = $busquedaAPI[$clave];
 
@@ -86,6 +99,9 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
 
         $aValoresBusqueda = [];
 
+        // Comprobar que API escoger con la version de la CR API
+        $loadAPI();
+
         for ($i = 0; $i < $nModels; $i++) {
             $aValoresBusqueda[$i] = $models[$i]->{$clave};
 
@@ -103,29 +119,13 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
         $aValoresConsultaAPI = array_merge($aValoresConsultaAPI, $aValoresSinBD);
         $nValoresConsultaAPI = count($aValoresConsultaAPI);
 
-        // Comprobar que API escoger con la version de la CR API
-        $api = null;
-        $version = null;
-
-        $loadAPI = function () use (&$api, &$version) {
-            $api     = \Yii::$app->crapi;
-            $version = $api->version();
-
-            if ($api->version() == null) {
-                $api = new \common\components\ClashRoyaleData();
-                $version = $api->version();
-            }
-        };
-
-        $loadAPI();
-
         if (!empty($aValoresConsultaAPI)) {
             $atributosJSON = $api->{$metodo}($aValoresConsultaAPI);
 
             $posibleErrorAPI = isset($atributosJSON->error) ? $atributosJSON->error : false;
 
             if ($posibleErrorAPI) {
-                return static::ERROR_API;
+                return null;
             }
 
             if ($atributosJSON == null || empty($atributosJSON)) {
@@ -180,6 +180,10 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
                 } else {
                     $models[] = $modelTemp;
                     $esNuevo = true;
+                }
+
+                if (is_array($modelTemp)) {
+                    return null;
                 }
 
                 if (!$modelTemp->save()) {

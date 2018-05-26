@@ -59,9 +59,9 @@ class ClashRoyaleAPI extends Component
         ];
 
         $this->_rutas_datos = [
-            'jugadores' => 'profile',
-            'clanes' => 'clan',
-            'cartasJugadores' => 'cards',
+            'jugador' => 'profile',
+            'clan' => 'clan',
+            'cartasJugador' => 'cards',
         ];
     }
 
@@ -203,7 +203,7 @@ class ClashRoyaleAPI extends Component
      *                     que se quieran buscar.
      * @return mixed      Devuelve los datos varios jugadores de CR
      */
-    public function jugadores(array $tags)
+    public function jugador(array $tags)
     {
         $endpoint = 'player';
         $datos    = null;
@@ -224,6 +224,29 @@ class ClashRoyaleAPI extends Component
 
             $this->validarConexion($endpoint, $tags);
             $datos = $this->conexion($url);
+        }
+
+        if ($datos && (isset($datos->error) ? !$datos->error : true)) {
+            $contador = 0;
+
+            foreach ($tags as $tag) {
+                $subRutaWebJugador = $this->_rutas_datos['jugador'] . '/' . $tag;
+                $this->actualizarDatos($subRutaWebJugador);
+
+                if (is_array($datos)) {
+                    if (isset($datos[$contador]->clan->tag)) {
+                        $subRutaWebClan = $this->_rutas_datos['clan'] . '/' . $datos[$contador]->clan->tag;
+                        $this->actualizarDatos($subRutaWebClan);
+                    }
+                } else {
+                    if (isset($datos->clan->tag)) {
+                        $subRutaWebClan = $this->_rutas_datos['clan'] . '/' . $datos->clan->tag;
+                        $this->actualizarDatos($subRutaWebClan);
+                    }
+                }
+
+                $contador++;
+            }
         }
 
         return $datos;

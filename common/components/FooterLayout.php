@@ -6,8 +6,14 @@ use Yii;
 
 use yii\helpers\Html;
 
+/**
+ * Componente común de pie de layout main
+ */
 class FooterLayout
 {
+    /**
+     * Mostrar pie
+     */
     public static function mostrar()
     {
         ?>

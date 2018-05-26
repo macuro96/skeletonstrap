@@ -30,22 +30,22 @@ CommonFormNuevoUsuario::register($this);
             <?php $form = ActiveForm::begin(['id' => 'usuarios-form']); ?>
 
                 <?= $form->field($model, 'nombre')->textInput(['maxlength' => true])
-                                                  ->hint('Debe coincidir exactamente (mayúsculas y minúsculas, numeros, etc) con el nombre del jugador de Clash Royale.')
-                                                  ->label('Nombre*')
+                                                  ->hint('Con el que se identificará la cuenta.')
+                                                  ->label('Nombre de usuario*')
                 ?>
                 <?= $form->field($model, 'correo')->textInput(['maxlength' => true])
                                                   ->label('Correo*')
                 ?>
                 <?= $form->field($model, 'nacionalidad_id')->dropDownList([
                     [1 => 'ESP']
-                ])
+                ])->label('Nacionalidad*')
                 ?>
                 <?= $form->field($model, 'tag')->textInput(['maxlength' => true])
                                                ->label('TAG*')
-                                               ->hint('Debe ser un TAG real de un jugador del juego')
+                                               ->hint('Debe ser un TAG real de un jugador del juego.')
                 ?>
                 <?= $form->field($model, 'normas')->checkbox()
-                                                  ->hint('Se deben aceptar las normas para poder optar por una cuenta en la aplicación')
+                                                  ->hint('Se deben aceptar las normas para poder optar por una cuenta en la aplicación.')
                 ?>
 
                 <div class="form-group">

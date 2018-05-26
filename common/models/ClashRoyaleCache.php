@@ -61,6 +61,19 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
      */
     public static function findAPI(string $metodo, array $busquedaAPI, bool $bQuery = false)
     {
+        $api = null;
+        $version = null;
+
+        $loadAPI = function () use (&$api, &$version) {
+            $api     = \Yii::$app->crapi;
+            $version = $api->version();
+
+            //if ($api->version() == null) {
+                $api = new \common\components\ClashRoyaleData();
+                $version = $api->version();
+            //}
+        };
+
         $clave    = array_keys($busquedaAPI)[0];
         $aValores = $busquedaAPI[$clave];
 
@@ -77,61 +90,33 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
             return $query;
         }
 
-        $models = $query->all();
-        $nModels = count($models);
-
-        $aClavesModelos = [];
-
-        for ($i = 0; $i < $nModels; $i++) {
-            $aClavesModelos[$i] = $models[$i]->{$clave};
-        }
-
-        for ($i = 0; $i < $nModels; $i++) {
-            $aClavesModelos[$i] = $models[$i]->{$clave};
-        }
+        ConfigTiempoActualizado::clearRegistros();
 
         $aValoresConsultaAPI = [];
 
-        $aValoresSinBD = array_values(array_diff($aValores, $aClavesModelos));
-        $nValoresSinBD = count($aValoresSinBD);
+        $models = $query->all();
+        $nModels = count($models);
 
-        $aValoresEnBD = array_values(array_diff($aValores, $aValoresSinBD));
-        $nValoresEnBD = count($aValoresEnBD);
+        $aValoresBusqueda = [];
 
         // Comprobar que API escoger con la version de la CR API
-        $api = null;
-        $version = null;
-
-        $loadAPI = function () use (&$api, &$version) {
-            $api     = \Yii::$app->crapi;
-            $version = $api->version();
-
-            if ($api->version() == null) {
-                $api = new \common\components\ClashRoyaleData();
-                $version = $api->version();
-            }
-        };
-
         $loadAPI();
 
-        ConfigTiempoActualizado::clearRegistros();
+        for ($i = 0; $i < $nModels; $i++) {
+            $aValoresBusqueda[$i] = $models[$i]->{$clave};
 
-        for ($i = 0; $i < $nValoresSinBD; $i++) {
-            $subRutaWeb = $api->getRutasDatos()[$metodo] . '/' . $aValoresSinBD[$i];
+            $subRutaWeb = $api->getRutasDatos()[$metodo] . '/' . $aValoresBusqueda[$i];
 
-            if ($api->actualizarDatos($subRutaWeb)) {
-                $aValoresConsultaAPI[] = $aValoresSinBD[$i];
+            // Si no esta actualizado almacenarlo para su procesamiento
+            if (ConfigTiempoActualizado::find()->where(['subrutaweb' => $subRutaWeb])->one() == null) {
+                $aValoresConsultaAPI[] = $aValoresBusqueda[$i];
             }
         }
 
-        for ($i = 0; $i < $nValoresEnBD; $i++) {
-            $subRutaWeb = $api->getRutasDatos()[$metodo] . '/' . $aValoresEnBD[$i];
+        $aValoresSinBD = array_values(array_diff($aValores, $aValoresBusqueda));
+        $nValoresSinBD = count($aValoresSinBD);
 
-            if ($api->actualizarDatos($subRutaWeb)) {
-                $aValoresConsultaAPI[] = $aValoresEnBD[$i];
-            }
-        }
-
+        $aValoresConsultaAPI = array_merge($aValoresConsultaAPI, $aValoresSinBD);
         $nValoresConsultaAPI = count($aValoresConsultaAPI);
 
         if (!empty($aValoresConsultaAPI)) {
@@ -139,8 +124,11 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
 
             $posibleErrorAPI = isset($atributosJSON->error) ? $atributosJSON->error : false;
 
-            if ($atributosJSON == null || empty($atributosJSON) || $posibleErrorAPI) {
-                //return static::ERROR_API;
+            if ($posibleErrorAPI) {
+                return null;
+            }
+
+            if ($atributosJSON == null || empty($atributosJSON)) {
                 return $models;
             }
 
@@ -192,6 +180,10 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
                 } else {
                     $models[] = $modelTemp;
                     $esNuevo = true;
+                }
+
+                if (is_array($modelTemp)) {
+                    return null;
                 }
 
                 if (!$modelTemp->save()) {

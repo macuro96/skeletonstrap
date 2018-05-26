@@ -8,7 +8,16 @@ use yii\base\Model;
  */
 class VerificarForm extends Model
 {
+    /**
+     * Primer password
+     * @var string
+     */
     public $password;
+
+    /**
+     * Segundo campo de password para la verificación
+     * @var string
+     */
     public $password_repeat;
 
     /**

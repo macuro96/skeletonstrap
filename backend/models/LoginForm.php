@@ -8,6 +8,10 @@ use Yii;
  */
 class LoginForm extends \common\models\LoginForm
 {
+    /**
+     * Usuario administrador temporal.
+     * @var string
+     */
     private $_userAdmin;
 
     /**
@@ -56,6 +60,9 @@ class LoginForm extends \common\models\LoginForm
         return $this->_userAdmin;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function validateActivo($attribute, $params, $validator)
     {
         if (!$this->hasErrors()) {
@@ -65,6 +72,9 @@ class LoginForm extends \common\models\LoginForm
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function validateVerificado($attribute, $params, $validator)
     {
         if (!$this->hasErrors()) {

@@ -2,13 +2,15 @@
 
 namespace common\components;
 
-use yii\web\Response;
-
 use yii\base\Component;
 use yii\web\BadRequestHttpException;
 
 use common\models\ConfigTiempoActualizado;
 
+/**
+ * Componente común:
+ * API de ClashRoyale (en desarrollo)
+ */
 class ClashRoyaleAPI extends Component
 {
     /**
@@ -57,9 +59,9 @@ class ClashRoyaleAPI extends Component
         ];
 
         $this->_rutas_datos = [
-            'jugadores' => 'profile',
-            'clanes' => 'clan',
-            'cartasJugadores' => 'cards',
+            'jugador' => 'profile',
+            'clan' => 'clan',
+            'cartasJugador' => 'cards',
         ];
     }
 
@@ -73,6 +75,10 @@ class ClashRoyaleAPI extends Component
         $this->_debug = $bModo;
     }
 
+    /**
+     * Devuelve subrutas web válidas para la consulta
+     * @return array Array de subrutas
+     */
     public function getRutasDatos()
     {
         return $this->_rutas_datos;
@@ -95,7 +101,7 @@ class ClashRoyaleAPI extends Component
             if ($nTags > 7 || $nTags == 0 || !$bEPsValidos || !$bKey) {
                 throw new BadRequestHttpException('Petición no realizada correctamente');
             }
-        } else if (YII_ENV == 'dev') {
+        } elseif (YII_ENV == 'dev') {
             $errorsTemp = [];
 
             if ($nTags > 7) {
@@ -122,7 +128,8 @@ class ClashRoyaleAPI extends Component
 
     /**
      * Realiza la conexión con la aplicación REST de CR
-     * @param  string $url Url final que se forma con los distintos métodos de la clase.
+     * @param  string $url       Url final que se forma con los distintos métodos de la clase.
+     * @param  bool   $bDataJSON Devolver los datos en JSON o no. Por defecto es TRUE.
      * @return mixed Devuelve los datos en forma de array json, o nulo si ha ocurrido un error.
      */
     private function conexion(string $url, bool $bDataJSON = true)
@@ -160,6 +167,11 @@ class ClashRoyaleAPI extends Component
         return $jsonData;
     }
 
+    /**
+     * Devuelve la versión de la API.
+     * @return string|null Si ha podido hacer la conexión devuelve la versión,
+     *                     y en el caso de que no devuelve un null.
+     */
     public function version()
     {
         $endpoint = 'version';
@@ -191,7 +203,7 @@ class ClashRoyaleAPI extends Component
      *                     que se quieran buscar.
      * @return mixed      Devuelve los datos varios jugadores de CR
      */
-    public function jugadores(array $tags)
+    public function jugador(array $tags)
     {
         $endpoint = 'player';
         $datos    = null;
@@ -214,10 +226,40 @@ class ClashRoyaleAPI extends Component
             $datos = $this->conexion($url);
         }
 
+        if ($datos && (isset($datos->error) ? !$datos->error : true)) {
+            $contador = 0;
+
+            foreach ($tags as $tag) {
+                $subRutaWebJugador = $this->_rutas_datos['jugador'] . '/' . $tag;
+                $this->actualizarDatos($subRutaWebJugador);
+
+                if (is_array($datos)) {
+                    if (isset($datos[$contador]->clan->tag)) {
+                        $subRutaWebClan = $this->_rutas_datos['clan'] . '/' . $datos[$contador]->clan->tag;
+                        $this->actualizarDatos($subRutaWebClan);
+                    }
+                } else {
+                    if (isset($datos->clan->tag)) {
+                        $subRutaWebClan = $this->_rutas_datos['clan'] . '/' . $datos->clan->tag;
+                        $this->actualizarDatos($subRutaWebClan);
+                    }
+                }
+
+                $contador++;
+            }
+        }
+
         return $datos;
     }
 
-    public function actualizarDatos($subRutaWeb)
+    /**
+     * Actualiza los datos de la página web de la que se recibe los datos y el registro de cacheado si es posible.
+     * @param  string $subRutaWeb Subrutaweb válida
+     * @return bool|null          TRUE -> se ha actualizado correctamente.
+     *                            FALSE -> no se ha podido actualizar (puede ser que ya esté actualizado recientemente)
+     *                            NULL -> error.
+     */
+    public function actualizarDatos(string $subRutaWeb)
     {
         return ConfigTiempoActualizado::actualizarTiempoCache($subRutaWeb);
     }

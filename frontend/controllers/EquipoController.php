@@ -1,14 +1,9 @@
 <?php
 namespace frontend\controllers;
 
-use Yii;
-
-use yii\base\InvalidParamException;
-use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\helpers\Html;
 
 /**
  * Site controller
@@ -69,11 +64,6 @@ class EquipoController extends Controller
      */
     public function actionIndex()
     {
-        $api = \Yii::$app->crapi;
-
-        $api->setDebug(true);
-
-        return var_dump($api->jugador('208QRUJU9'));
-        //return $this->render('index');
+        return $this->render('index');
     }
 }

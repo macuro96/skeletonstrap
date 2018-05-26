@@ -68,6 +68,10 @@ class UsuariosController extends Controller
         ]);
     }
 
+    /**
+     * Acepta la solicitud de un usuario que ha pedido invitación al equipo.
+     * @return mixed
+     */
     public function actionAceptarSolicitud()
     {
         $id = Yii::$app->request->post('usuario');
@@ -84,6 +88,10 @@ class UsuariosController extends Controller
         return $this->redirect(['index']);
     }
 
+    /**
+     * Cancela la solicitud de un usuario que ha pedido una invitación al equipo.
+     * @return mixed
+     */
     public function actionCancelarSolicitud()
     {
         $id = Yii::$app->request->post('usuario');
@@ -92,6 +100,10 @@ class UsuariosController extends Controller
         return $this->redirect(['index']);
     }
 
+    /**
+     * Envia un correo de confirmación a un usuario en concreto
+     * @param  Usuarios $usuario Usuario al que se le va a enviar el correo
+     */
     private function enviarCorreoConfirmacion($usuario)
     {
         $enlace = UrlConvert::toFrontEnd(Url::to(['/site/verificar', 'auth' => $usuario->verificado], true));
@@ -105,6 +117,10 @@ class UsuariosController extends Controller
                         ->send();
     }
 
+    /**
+     * Verifica un correo de un usuario
+     * @return mixed
+     */
     public function actionCorreoVerificar()
     {
         $id = Yii::$app->request->post('usuario');
@@ -119,6 +135,10 @@ class UsuariosController extends Controller
         return $this->redirect(['index']);
     }
 
+    /**
+     * Invita a un nuevo usuario al equipo.
+     * @return mixed
+     */
     public function actionInvitar()
     {
         $model = new Usuarios([
@@ -141,82 +161,9 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Displays a single Usuarios model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    /*
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-    */
-
-    /**
-     * Creates a new Usuarios model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    /*
-    public function actionCreate()
-    {
-        $model = new Usuarios();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-    */
-
-    /**
-     * Updates an existing Usuarios model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    /*
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-    */
-
-    /**
-     * Deletes an existing Usuarios model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    /*
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-    */
-
-    /**
      * Finds the Usuarios model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id
      * @return Usuarios the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

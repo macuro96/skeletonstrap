@@ -2,7 +2,8 @@
 
 namespace common\models;
 
-use Yii;
+use yii\db\ActiveQuery;
+
 use \yii\web\IdentityInterface;
 
 /**
@@ -13,6 +14,7 @@ use \yii\web\IdentityInterface;
  * @property string $password
  * @property string $correo
  * @property int $nacionalidad_id
+ * @property string $tag
  * @property bool $verificado
  *
  * @property Jugadores $jugadores
@@ -20,12 +22,35 @@ use \yii\web\IdentityInterface;
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
+    /**
+     * Normas aceptadas o no.
+     * @var bool
+     */
     public $normas;
+
+    /**
+     * TAG real del jugador en ClashRoyale
+     * @var string
+     */
     public $tag;
 
-    const ESCENARIO_INVITAR   = 'invitar';
+    /**
+     * Escenario de invitar a un nuevo usuario.
+     * @var string
+     */
+    const ESCENARIO_INVITAR = 'invitar';
+
+    /**
+     * Escenario de verificar a un usuario concreto.
+     * @var string
+     */
     const ESCENARIO_VERIFICAR = 'verificar';
-    const ESCENARIO_UNETE     = 'unete';
+
+    /**
+     * Escenario de que un usuario envía una nueva invitación a los administradores.
+     * @var string
+     */
+    const ESCENARIO_UNETE = 'unete';
 
     /**
      * @inheritdoc
@@ -70,7 +95,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 
                     if ($usuarioConTag == null) {
                         if ($jugadorBuscado == null) {
-                            $jugadorBuscado = Jugadores::findAPI('jugadores', [
+                            $jugadorBuscado = Jugadores::findAPI('jugador', [
                                 'tag' => [
                                     $this->tag
                                 ]
@@ -93,6 +118,9 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function attributes()
     {
         return array_merge(parent::attributes(), ['normas', 'tag']);
@@ -105,7 +133,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'nombre' => 'Nombre',
+            'nombre' => 'Nombre de usuario',
             'password' => 'Contraseña',
             'correo' => 'Correo',
             'nacionalidad_id' => 'Nacionalidad',
@@ -114,16 +142,28 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
 
+    /**
+     * Comprueba si un usuario está activo o no.
+     * @return bool Activo o no.
+     */
     public function getEstaActivo()
     {
         return $this->activo === true;
     }
 
+    /**
+     * Comprueba si un usuario está verificado mediante el correo o no.
+     * @return bool Verificado o no.
+     */
     public function getEstaVerificado()
     {
         return $this->verificado === null;
     }
 
+    /**
+     * Query de usuarios válidos para el logueo.
+     * @return ActiveQuery ActiveQuery
+     */
     public static function findLoginQuery()
     {
         return static::find()
@@ -131,6 +171,10 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                      ->andWhere('verificado is null');
     }
 
+    /**
+     * Usuarios pendientes de verificar.
+     * @return Usuarios Usuarios no verificados.
+     */
     public static function pendientes()
     {
         return static::find()
@@ -139,14 +183,24 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                      ->all();
     }
 
-    public static function findByNombre($nombre)
+    /**
+     * Buscar un usuario por su nombre.
+     * @param  string $nombre Nombre del usuario.
+     * @return Usuarios       Usuario buscado.
+     */
+    public static function findByNombre(string $nombre)
     {
         return static::findOne(['nombre' => $nombre]);
     }
 
-    public static function findByVerificado($verificado)
+    /**
+     * Busca si existe el usuario con el codigo de verificación x y lo devuelve si existe.
+     * @param  string $auth Código de autentificación proporcionado por el correo de verificación.
+     * @return Usuarios     Usuario verificado buscado.
+     */
+    public static function findByVerificado($auth)
     {
-        return static::findOne(['verificado' => $verificado]);
+        return static::findOne(['verificado' => $auth]);
     }
 
     /**
@@ -197,11 +251,20 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->getAuthKey() === $authKey;
     }
 
-    public function validatePassword($password)
+    /**
+     * Valida una contraseña con seguridad.
+     * @param  string $password Contraseña a verificar.
+     * @return bool             Es correcta o no.
+     */
+    public function validatePassword(string $password)
     {
         return \Yii::$app->security->validatePassword($password, $this->password);
     }
 
+    /**
+     * Comprueba si el usuario es administrador
+     * @return bool
+     */
     public function getEsAdministrador()
     {
         return $this->getRoles()->where(['nombre' => 'administrador'])->one() !== null;

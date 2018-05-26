@@ -95,7 +95,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 
                     if ($usuarioConTag == null) {
                         if ($jugadorBuscado == null) {
-                            $jugadorBuscado = Jugadores::findAPI('jugadores', [
+                            $jugadorBuscado = Jugadores::findAPI('jugador', [
                                 'tag' => [
                                     $this->tag
                                 ]
@@ -133,7 +133,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'nombre' => 'Nombre',
+            'nombre' => 'Nombre de usuario',
             'password' => 'Contraseña',
             'correo' => 'Correo',
             'nacionalidad_id' => 'Nacionalidad',

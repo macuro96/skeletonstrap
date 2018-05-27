@@ -328,7 +328,7 @@ CREATE TABLE jugadores
   , expulsado               TIMESTAMP(0) -- HASTA FECHA
   , deleted_at              TIMESTAMP(0) -- SOFT DELETE
   , tag                     VARCHAR(16)  NOT NULL UNIQUE
-  , clan_tag                VARCHAR(16)  NOT NULL
+  , clan_tag                VARCHAR(16)
   , nombre                  VARCHAR(255) NOT NULL
   , nivel                   NUMERIC(5)   NOT NULL
                                          CONSTRAINT ck_nivel_positivo
@@ -381,9 +381,9 @@ CREATE TABLE jugadores
 */
   , desafio_max_victorias   INTEGER      CONSTRAINT ck_desafio_max_victorias_positivas
                                          CHECK (desafio_max_victorias >= 0)
-  , desafio_cartas_ganadas  NUMERIC(10)   CONSTRAINT ck_desafio_cartas_ganadas_positivas
+  , desafio_cartas_ganadas  NUMERIC(10)  CONSTRAINT ck_desafio_cartas_ganadas_positivas
                                          CHECK (desafio_cartas_ganadas >= 0)
-  , liga_id                 BIGINT       REFERENCES ligas (id)
+  , liga_id                 BIGINT       NOT NULL REFERENCES ligas (id)
                                          ON DELETE NO ACTION
                                          ON UPDATE CASCADE
 );

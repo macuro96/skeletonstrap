@@ -175,6 +175,17 @@ class ClashRoyaleData
 
     ///// SETTERS /////////
 
+    /**
+     * Guarda el contenido web al hacerle una petición al servidor X.
+     * Se puede forzar a que se vuelva a guardar si se le indica con el último
+     * parámetro.
+     * @param string       $claveSubRutaWeb Clave de la subruta con la que hacer la petición
+     * @param string|null  $tag     TAG
+     * @param bool         $bForzar TRUE -> Fuerza la petición al servidor.
+     *                              FALSE -> Por defecto, no la fuerza, y en el caso de
+     *                              que ya existan datos no hace nada.
+     * @param array $config         Configuracion (claveSubRutaWeb2)
+     */
     private function setContenidoWeb(string $claveSubRutaWeb, ?string $tag, bool $bForzar, array $config = [])
     {
         if ($tag == null) {
@@ -363,7 +374,17 @@ class ClashRoyaleData
         return $aResultado;
     }
 
-    private function coincidencia(&$patron, $clavePatron, $clave, $valor, &$config, $configAnadido)
+    /**
+     * Busca coincidencias de forma general con un patrón sobre una cadena previamente recogida
+     * con la funcion de setContenidoWeb.
+     * @param  string      &$patron        Donde se va a guardar el patron.
+     * @param  string|null $clavePatron    Clave del patron.
+     * @param  string|null $clave          Clave para el array, puede ser nulo si es de primer nivel.
+     * @param  string|null $valor          Valor para el array.
+     * @param  array       &$config        Donde se va a guardar la configuracion (patron, clave).
+     * @param  array       $configAnadido  Configuracion añadida o sobrescribir la existente en $config (patron, clave, allResults, parametroPatron y function).
+     */
+    private function coincidencia(string &$patron, ?string $clavePatron, ?string $clave, ?string $valor, array &$config, array $configAnadido)
     {
         $parametroPatron = (isset($configAnadido['parametroPatron']) ? $configAnadido['parametroPatron'] : null);
 
@@ -383,7 +404,15 @@ class ClashRoyaleData
         ], $configAnadido);
     }
 
-    private function coincidenciaPrimerNivel(&$aCoincidencias, $clavePatron, $valor, $configAnadido = [])
+    /**
+     * Coincidencias de patron de primer nivel (solo valor)
+     * @param  array       &$aCoincidencias Donde se almaacenan las coincidencias
+     * @param  string|null $clavePatron     Clave del patron
+     * @param  string|null $valor           Valor a buscar en el patron
+     * @param  array       $configAnadido   Configuracion añadida
+     * @return mixed                        Devuelve la coincidencia
+     */
+    private function coincidenciaPrimerNivel(array &$aCoincidencias, ?string $clavePatron, ?string $valor, array $configAnadido = [])
     {
         $allResults = isset($configAnadido['allResults']) ? true : false;
         $function   = isset($configAnadido['function']) ? $configAnadido['function'] : null;
@@ -400,7 +429,16 @@ class ClashRoyaleData
         return $coincidencia;
     }
 
-    private function coincidenciaSegundoNivel(&$aCoincidencias, $clavePatron, $clave, $valor, $configAnadido = [])
+    /**
+     * Coincidencias de patron de primer nivel (solo valor)
+     * @param  array       &$aCoincidencias Donde se almaacenan las coincidencias
+     * @param  string|null $clavePatron     Clave del patron
+     * @param  string|null $clave           Clave del valor a buscar
+     * @param  string|null $valor           Valor a buscar en el patron
+     * @param  array       $configAnadido   Configuracion añadida
+     * @return mixed                        Devuelve la coincidencia
+     */
+    private function coincidenciaSegundoNivel(array &$aCoincidencias, ?string $clavePatron, ?string $clave, ?string $valor, array $configAnadido = [])
     {
         $allResults = isset($configAnadido['allResults']) ? true : false;
         $function   = isset($configAnadido['function']) ? $configAnadido['function'] : null;

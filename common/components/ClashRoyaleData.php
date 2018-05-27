@@ -377,14 +377,14 @@ class ClashRoyaleData
     /**
      * Busca coincidencias de forma general con un patrón sobre una cadena previamente recogida
      * con la funcion de setContenidoWeb.
-     * @param  string      &$patron        Donde se va a guardar el patron.
+     * @param  string|null &$patron        Donde se va a guardar el patron.
      * @param  string|null $clavePatron    Clave del patron.
      * @param  string|null $clave          Clave para el array, puede ser nulo si es de primer nivel.
      * @param  string|null $valor          Valor para el array.
-     * @param  array       &$config        Donde se va a guardar la configuracion (patron, clave).
-     * @param  array       $configAnadido  Configuracion añadida o sobrescribir la existente en $config (patron, clave, allResults, parametroPatron y function).
+     * @param  array|null  &$config        Donde se va a guardar la configuracion (patron, clave).
+     * @param  array|null  $configAnadido  Configuracion añadida o sobrescribir la existente en $config (patron, clave, allResults, parametroPatron y function).
      */
-    private function coincidencia(string &$patron, ?string $clavePatron, ?string $clave, ?string $valor, array &$config, array $configAnadido)
+    private function coincidencia(?string &$patron, ?string $clavePatron, ?string $clave, ?string $valor, ?array &$config, ?array $configAnadido)
     {
         $parametroPatron = (isset($configAnadido['parametroPatron']) ? $configAnadido['parametroPatron'] : null);
 
@@ -406,13 +406,13 @@ class ClashRoyaleData
 
     /**
      * Coincidencias de patron de primer nivel (solo valor)
-     * @param  array       &$aCoincidencias Donde se almaacenan las coincidencias
+     * @param  array|null  &$aCoincidencias Donde se almaacenan las coincidencias
      * @param  string|null $clavePatron     Clave del patron
      * @param  string|null $valor           Valor a buscar en el patron
-     * @param  array       $configAnadido   Configuracion añadida
+     * @param  array|null  $configAnadido   Configuracion añadida
      * @return mixed                        Devuelve la coincidencia
      */
-    private function coincidenciaPrimerNivel(array &$aCoincidencias, ?string $clavePatron, ?string $valor, array $configAnadido = [])
+    private function coincidenciaPrimerNivel(?array &$aCoincidencias, ?string $clavePatron, ?string $valor, ?array $configAnadido = [])
     {
         $allResults = isset($configAnadido['allResults']) ? true : false;
         $function   = isset($configAnadido['function']) ? $configAnadido['function'] : null;
@@ -431,14 +431,14 @@ class ClashRoyaleData
 
     /**
      * Coincidencias de patron de primer nivel (solo valor)
-     * @param  array       &$aCoincidencias Donde se almaacenan las coincidencias
+     * @param  array|null  &$aCoincidencias Donde se almaacenan las coincidencias
      * @param  string|null $clavePatron     Clave del patron
      * @param  string|null $clave           Clave del valor a buscar
      * @param  string|null $valor           Valor a buscar en el patron
-     * @param  array       $configAnadido   Configuracion añadida
+     * @param  array|null  $configAnadido   Configuracion añadida
      * @return mixed                        Devuelve la coincidencia
      */
-    private function coincidenciaSegundoNivel(array &$aCoincidencias, ?string $clavePatron, ?string $clave, ?string $valor, array $configAnadido = [])
+    private function coincidenciaSegundoNivel(?array &$aCoincidencias, ?string $clavePatron, ?string $clave, ?string $valor, ?array $configAnadido = [])
     {
         $allResults = isset($configAnadido['allResults']) ? true : false;
         $function   = isset($configAnadido['function']) ? $configAnadido['function'] : null;

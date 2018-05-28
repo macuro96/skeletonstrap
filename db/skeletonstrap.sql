@@ -78,7 +78,7 @@ CREATE TABLE ligas
 (
     id     BIGSERIAL    PRIMARY KEY
   , nombre VARCHAR(255) NOT NULL UNIQUE
-  , icono  NUMERIC(2)   NOT NULL UNIQUE
+  , icono  NUMERIC(2)   NOT NULL
 );
 
 DROP TABLE IF EXISTS cofres CASCADE;
@@ -598,27 +598,27 @@ INSERT INTO nacionalidades (nombre, abreviatura, tramo_horario)
 VALUES ('España', 'ESP', 1);
 
 INSERT INTO ligas (nombre, icono)
-VALUES ('Arena 1', 1),
-       ('Arena 2', 2),
-       ('Arena 3', 3),
-       ('Arena 4', 4),
-       ('Arena 5', 5),
-       ('Arena 6', 6),
-       ('Arena 7', 7),
-       ('Arena 8', 8),
-       ('Arena 9', 9),
-       ('Arena 10', 10),
-       ('Arena 11', 11),
-       ('Arena 12', 12),
-       ('Combatientes I', 13),
-       ('Combatientes II', 14),
-       ('Combatientes III', 15),
-       ('Maestros I', 16),
-       ('Maestros II', 17),
-       ('Maestros III', 18),
-       ('Campeones', 19),
-       ('Grandes Campeones', 20),
-       ('Campeones Definitivos', 21);
+VALUES ('Arena 1', 0),
+       ('Arena 2', 0),
+       ('Arena 3', 0),
+       ('Arena 4', 0),
+       ('Arena 5', 0),
+       ('Arena 6', 0),
+       ('Arena 7', 0),
+       ('Arena 8', 0),
+       ('Arena 9', 0),
+       ('Arena 10', 0),
+       ('Arena 11', 0),
+       ('Arena 12', 0),
+       ('Combatientes I', 1),
+       ('Combatientes II', 2),
+       ('Combatientes III', 3),
+       ('Maestros I', 4),
+       ('Maestros II', 5),
+       ('Maestros III', 6),
+       ('Campeones', 7),
+       ('Grandes Campeones', 8),
+       ('Campeones Definitivos', 9);
 
 -- DATOS PRUEBAS
 INSERT INTO usuarios (nombre, password, correo, nacionalidad_id, auth_key, verificado, activo)

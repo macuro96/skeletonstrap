@@ -184,6 +184,19 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     /**
+     * Usuarios válidos (ya en el equipo)
+     * @return Usuarios
+     */
+    public static function validos()
+    {
+        return static::find()
+                     ->where(['activo' => true])
+                     ->andWhere('verificado is null')
+                     ->andWhere('jugador_id is not null')
+                     ->all();
+    }
+
+    /**
      * Buscar un usuario por su nombre.
      * @param  string $nombre Nombre del usuario.
      * @return Usuarios       Usuario buscado.
@@ -275,7 +288,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     */
     public function getJugadores()
     {
-        return $this->hasOne(Jugadores::className(), ['usuario_id' => 'id'])->inverseOf('usuario');
+        return $this->hasOne(Jugadores::className(), ['id' => 'jugador_id'])->inverseOf('usuario');
     }
 
     /**

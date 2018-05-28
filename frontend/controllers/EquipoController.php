@@ -5,6 +5,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
+use common\models\Usuarios;
+
 /**
  * Site controller
  */
@@ -64,6 +66,11 @@ class EquipoController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $usuarios = Usuarios::find()->all();
+        $usuariosValidos = Usuarios::validos();
+
+        return $this->render('index', [
+            'jugadores' => $usuariosValidos
+        ]);
     }
 }

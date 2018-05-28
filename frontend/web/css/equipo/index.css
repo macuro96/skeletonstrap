@@ -1,0 +1,71 @@
+.jugador {
+    border-style: solid;
+    border-color: #964545;
+    border-width: 5px;
+
+    background-color: white;
+    color: black;
+
+    margin-bottom: 14px;    
+}
+
+.img-logo-miembros {
+    max-width: 64px;
+}
+
+.img-perfil {
+    margin-top: 14px;
+    margin-bottom: 14px;
+    margin-left: 20px;
+
+    max-width: 52px;
+}
+
+.img-icon {
+    max-width: 24px;
+}
+
+.nombre {
+    margin-left: 14px;
+    font-family: 'supercell-magicregular';
+}
+
+.datos {
+    margin-top: 5px;
+
+    background-color: #964545;
+    padding: 5px;
+    padding-left: 20px;
+    color: white;
+
+    border-bottom-color: #633030;
+    border-bottom-style: solid;
+    border-bottom-width: 5px;
+}
+
+.datos .nombre-dato {
+    font-style: italic;
+}
+
+.datos .nombre-dato, .datos .valor-dato {
+    padding-left: 12px;
+    padding-right: 30px;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.datos .valor-dato {
+    text-align: right;
+    font-weight: bold;
+}
+
+@media (max-width: 994px) {
+    .datos {
+        text-align: center;
+    }
+
+    .datos .valor-dato {
+        text-align: center;
+    }
+}

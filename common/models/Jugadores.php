@@ -212,4 +212,9 @@ class Jugadores extends \common\models\ClashRoyaleCache
     {
         return $this->hasOne(Ligas::className(), ['id' => 'liga_id'])->inverseOf('jugadores');
     }
+
+    public function getUsuario()
+    {
+        return $this->hasOne(Usuarios::className(), ['id' => 'jugador_id'])->inverseOf('jugadores');
+    }
 }

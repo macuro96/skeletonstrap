@@ -9,6 +9,22 @@ body {
     min-height: 100% !important;
 }
 
+.cabecera-inicio {
+    text-align: center;
+
+    margin-bottom: 40px;
+}
+
+.titulo-inicio {
+    font-size: 30px;
+    color: #222;
+}
+
+.logo-inicio {
+    margin-top: 20px;
+    margin-bottom: 10px !important;
+}
+
 .footer {
     min-height: 120px;
     background-color: #222;

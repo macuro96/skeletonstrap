@@ -10,6 +10,7 @@ namespace common\models;
  * @property string $deleted_at
  * @property string $tag
  * @property string $clan_tag
+ * @property string $clan_rol
  * @property string $nombre
  * @property string $nivel
  * @property string $copas
@@ -55,7 +56,7 @@ class Jugadores extends \common\models\ClashRoyaleCache
             [['nivel', 'copas', 'max_copas', 'cartas_descubiertas', 'desafio_cartas_ganadas'], 'number'],
             [['partidas_totales', 'victorias', 'derrotas', 'empates', 'victorias_tres_coronas', 'donaciones_totales', 'donaciones_equipo', 'desafio_max_victorias', 'liga_id'], 'default', 'value' => null],
             [['partidas_totales', 'victorias', 'derrotas', 'empates', 'victorias_tres_coronas', 'donaciones_totales', 'donaciones_equipo', 'desafio_max_victorias', 'liga_id'], 'integer'],
-            [['tag', 'clan_tag'], 'string', 'max' => 9],
+            [['tag', 'clan_tag', 'clan_rol'], 'string', 'max' => 16],
             [['nombre'], 'string', 'max' => 255],
             [['tag'], 'unique'],
             [['liga_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ligas::className(), 'targetAttribute' => ['liga_id' => 'id']],
@@ -95,7 +96,8 @@ class Jugadores extends \common\models\ClashRoyaleCache
             'Cartas descubiertas',
             'Máximas victorias en desafio',
             'Cartas ganadas en desafio',
-            'Arena'
+            'Arena',
+            'Rol'
         ]);
     }
 
@@ -124,7 +126,8 @@ class Jugadores extends \common\models\ClashRoyaleCache
             'cartas_descubiertas',
             'desafio_max_victorias',
             'desafio_cartas_ganadas',
-            'liga_id'
+            'liga_id',
+            'clan_rol'
         ];
     }
 
@@ -153,7 +156,8 @@ class Jugadores extends \common\models\ClashRoyaleCache
             'stats.cardsFound',
             'stats.challengeMaxWins',
             'stats.challengeCardsWon',
-            'arena.arenaID'
+            'arena.arenaID',
+            'clan.role'
         ], self::clavesLabelsStatic());
     }
 
@@ -216,5 +220,23 @@ class Jugadores extends \common\models\ClashRoyaleCache
     public function getUsuario()
     {
         return $this->hasOne(Usuarios::className(), ['id' => 'jugador_id'])->inverseOf('jugadores');
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $roles = [
+                'member' => 'Miembro',
+                'coLeader' => 'Colíder',
+                'leader' => 'Líder'
+            ];
+
+            if (isset($roles[$this->clan_rol])) {
+                $this->clan_rol = $roles[$this->clan_rol];
+            }
+
+            return true;
+        }
+        return false;
     }
 }

@@ -26,7 +26,15 @@ RegisterThisCss::register($this);
 </div>
 <div class="row seccion">
     <div class="col-lg-12">
-        <div class="titulo-seccion"><h2>Miembros</h2></div>
+        <div class="titulo-seccion"><h2>Información</h2></div>
+
+        <div class="contenido-seccion">
+        </div>
+    </div>
+</div>
+<div class="row seccion">
+    <div class="col-lg-12">
+        <div class="titulo-seccion"><h2>Miembros (<?= count($jugadores) ?>)</h2></div>
 
         <div class="contenido-seccion">
             <?php foreach ($jugadores as $jugador) : ?>

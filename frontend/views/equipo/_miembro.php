@@ -8,8 +8,18 @@ use common\components\Recursos;
 <div class="col-md-4 col-sm-6">
     <div class="jugador">
         <?= Recursos::imageCommon('perfil.png', ['class' => 'img-perfil img-resposive']) ?>
-        <span class="nombre"><?= Html::encode($model->jugadores->nombre) ?></span>
+        <span class="nombre"><?= Html::encode($model->jugadores->nombre) ?></span> <span class="rol">(<?= Html::encode($model->jugadores->clan_rol) ?>)</span>
         <div class="datos">
+            <div class="row ultima-act">
+                <div class="col-md-6">
+                    Última actualización hace 1 min...
+                </div>
+                <div class="col-md-6 btn-actualizar">
+                    <?= Html::a('Actualizar', ['equipo/actualizar-miembro'], [
+                        'class' => ['btn-xs', 'btn', 'btn-success']
+                    ]) ?>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-6 nombre-dato">
                     Nacionalidad

@@ -12,6 +12,8 @@ use yii\helpers\Html;
 
 use common\models\Usuarios;
 use common\models\LoginForm;
+use common\models\ZonasHorarias;
+use common\models\Nacionalidades;
 use frontend\models\VerificarForm;
 
 /**
@@ -90,6 +92,35 @@ class SiteController extends Controller
             'scenario' => Usuarios::ESCENARIO_UNETE
         ]);
 
+        $nacionalidadesDatos = Nacionalidades::find()
+                                             ->orderBy('pais ASC')
+                                             ->asArray()
+                                             ->all();
+
+        $zonasHorariasDatos = ZonasHorarias::find()
+                                           ->orderBy('zona ASC')
+                                           ->asArray()
+                                           ->all();
+
+        $nacionalidades = [];
+        $zonasHorarias  = [];
+
+        foreach ($nacionalidadesDatos as $key => $value) {
+            $idNacionalidad   = $value['id'];
+            $paisNacionalidad = $value['pais'];
+
+            $nacionalidades[$idNacionalidad] = $paisNacionalidad;
+        }
+
+        foreach ($zonasHorariasDatos as $key => $value) {
+            $idZonaHoraria    = $value['id'];
+
+            $zonaZonaHoraria  = $value['zona'];
+            $lugarZonaHoraria = $value['lugar'];
+
+            $zonasHorarias[$idZonaHoraria] = 'GMT ' . ($zonaZonaHoraria >= 0 ? '+' : '') . $zonaZonaHoraria . ' - ' . $lugarZonaHoraria;
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             \Yii::$app->session->setFlash('success', 'Se ha enviado la petición al administrador correctamente. Correo suministrado: <b>' . Html::encode($model->correo) . '</b>');
 
@@ -98,6 +129,8 @@ class SiteController extends Controller
 
         return $this->render('unete', [
             'model' => $model,
+            'nacionalidades' => $nacionalidades,
+            'zonasHorarias' => $zonasHorarias
         ]);
     }
 

@@ -66,18 +66,19 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['nombre', 'correo', 'nacionalidad_id', 'password', 'activo', 'normas'], 'trim'],
-            [['nombre', 'correo', 'nacionalidad_id'], 'required'],
+            [['nombre', 'correo', 'nacionalidad_id', 'password', 'activo', 'normas', 'zona_horaria_id'], 'trim'],
+            [['nombre', 'correo', 'nacionalidad_id', 'zona_horaria_id'], 'required'],
             [['nombre'], 'string', 'min' => 4],
             [['password'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::ESCENARIO_VERIFICAR]],
             [['password'], 'default', 'value' => \Yii::$app->security->generatePasswordHash(''), 'on' => [self::ESCENARIO_INVITAR, self::ESCENARIO_UNETE]],
-            [['nacionalidad_id', 'jugador_id'], 'default', 'value' => null],
-            [['nacionalidad_id'], 'integer'],
+            [['nacionalidad_id', 'jugador_id', 'zona_horaria_id'], 'default', 'value' => null],
+            [['nacionalidad_id', 'zona_horaria_id'], 'integer'],
             [['activo'], 'boolean'],
             [['nombre', 'password', 'access_token', 'auth_key', 'verificado'], 'string', 'max' => 255],
             [['correo'], 'email'],
             [['correo', 'nombre'], 'unique'],
             [['nacionalidad_id'], 'exist', 'skipOnError' => true, 'targetClass' => Nacionalidades::className(), 'targetAttribute' => ['nacionalidad_id' => 'id']],
+            [['zona_horaria_id'], 'exist', 'skipOnError' => true, 'targetClass' => ZonasHorarias::className(), 'targetAttribute' => ['zona_horaria_id' => 'id']],
             [['normas'], 'required', 'on' => self::ESCENARIO_UNETE],
             [['tag'], 'required', 'on' => self::ESCENARIO_UNETE],
             [['normas'], 'boolean', 'on' => self::ESCENARIO_UNETE],
@@ -297,6 +298,14 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function getNacionalidad()
     {
         return $this->hasOne(Nacionalidades::className(), ['id' => 'nacionalidad_id'])->inverseOf('usuarios');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getZonaHoraria()
+    {
+        return $this->hasOne(ZonasHorarias::className(), ['id' => 'zona_horaria_id'])->inverseOf('usuarios');
     }
 
     /**

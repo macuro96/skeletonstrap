@@ -9,8 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $nombre
- * @property string $abreviatura
- * @property string $tramo_horario
+ * @property string $pais
  *
  * @property ConfigEquipo[] $configEquipos
  * @property Usuarios[] $usuarios
@@ -31,13 +30,10 @@ class Nacionalidades extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'abreviatura', 'tramo_horario'], 'required'],
-            [['tramo_horario'], 'number', 'min' => -12, 'max' => 12],
-            [['nombre'], 'string', 'max' => 32],
-            [['abreviatura'], 'string', 'max' => 3],
-            [['abreviatura'], 'unique'],
+            [['nombre', 'pais'], 'required'],
+            [['nombre', 'pais'], 'string', 'max' => 32],
             [['nombre'], 'unique'],
-            [['tramo_horario'], 'unique'],
+            [['pais'], 'unique'],
         ];
     }
 
@@ -49,8 +45,7 @@ class Nacionalidades extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
-            'abreviatura' => 'Abreviatura',
-            'tramo_horario' => 'Tramo Horario',
+            'pais' => 'Pais',
         ];
     }
 

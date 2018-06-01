@@ -64,12 +64,9 @@ DROP TABLE IF EXISTS nacionalidades CASCADE;
 
 CREATE TABLE nacionalidades
 (
-    id            BIGSERIAL    PRIMARY KEY
-  , nombre        VARCHAR(32)  NOT NULL UNIQUE
-  , abreviatura   VARCHAR(3)   NOT NULL UNIQUE
-  , tramo_horario NUMERIC(2)   NOT NULL UNIQUE
-                               CONSTRAINT ck_tramo_horario_valido
-                               CHECK (tramo_horario >= -12 AND tramo_horario <= 12)
+    id      BIGSERIAL   PRIMARY KEY
+  , nombre  VARCHAR(32) NOT NULL
+  , pais    VARCHAR(32) NOT NULL
 );
 
 DROP TABLE IF EXISTS ligas CASCADE;
@@ -90,25 +87,23 @@ CREATE TABLE cofres
   , icono  NUMERIC(2)   NOT NULL UNIQUE
 );
 
-/*
-DROP TABLE IF EXISTS clan_etiquetas CASCADE;
+DROP TABLE IF EXISTS torneo_etiquetas CASCADE;
 
-CREATE TABLE clan_etiquetas
+CREATE TABLE torneo_etiquetas
 (
     id     BIGSERIAL    PRIMARY KEY
   , nombre VARCHAR(32)  NOT NULL UNIQUE
   , color  VARCHAR(6)   UNIQUE
 );
-*/
 
-DROP TABLE IF EXISTS clanes CASCADE;
+DROP TABLE IF EXISTS torneos CASCADE;
 
-CREATE TABLE clanes
+CREATE TABLE torneos
 (
     id                 BIGSERIAL    PRIMARY KEY
   , tag                VARCHAR(8)   NOT NULL UNIQUE
-  , clan_etiqueta_id   BIGINT       NOT NULL
-                                    REFERENCES clan_etiquetas (id)
+  , torneo_etiqueta_id BIGINT       NOT NULL
+                                    REFERENCES torneo_etiquetas (id)
                                     ON DELETE NO ACTION
                                     ON UPDATE CASCADE
   , nombre             VARCHAR(255) NOT NULL
@@ -127,13 +122,13 @@ CREATE TABLE clanes
   , estado             BOOLEAN      DEFAULT TRUE -- ABIERTO O CERRADO
 );
 
-CREATE INDEX idx_clanes_nombre                ON clanes (nombre);
-CREATE INDEX idx_clanes_capacidad             ON clanes (capacidad);
-CREATE INDEX idx_clanes_max_capacidad         ON clanes (max_capacidad);
-CREATE INDEX idx_clanes_fecha_comienzo        ON clanes (fecha_comienzo DESC);
-CREATE INDEX idx_clanes_duracion              ON clanes (duracion);
-CREATE INDEX idx_clanes_estado                ON clanes (estado);
-CREATE INDEX idx_clanes_fecha_comienzo_estado ON clanes (fecha_comienzo DESC, estado);
+CREATE INDEX idx_torneos_nombre                ON torneos (nombre);
+CREATE INDEX idx_torneos_capacidad             ON torneos (capacidad);
+CREATE INDEX idx_torneos_max_capacidad         ON torneos (max_capacidad);
+CREATE INDEX idx_torneos_fecha_comienzo        ON torneos (fecha_comienzo DESC);
+CREATE INDEX idx_torneos_duracion              ON torneos (duracion);
+CREATE INDEX idx_torneos_estado                ON torneos (estado);
+CREATE INDEX idx_torneos_fecha_comienzo_estado ON torneos (fecha_comienzo DESC, estado);
 
 DROP TABLE IF EXISTS batalla_etiquetas CASCADE;
 
@@ -205,21 +200,21 @@ CREATE TABLE roles_permisos
   , CONSTRAINT uq_roles_permisos UNIQUE (rol_id, permiso_id)
 );
 
-DROP TABLE IF EXISTS visibilidad_clanes CASCADE;
+DROP TABLE IF EXISTS visibilidad_torneos CASCADE;
 
-CREATE TABLE visibilidad_clanes
+CREATE TABLE visibilidad_torneos
 (
     id        BIGSERIAL  PRIMARY KEY
-  , clan_id   BIGINT     NOT NULL
-                         REFERENCES clanes (id)
+  , torneo_id BIGINT     NOT NULL
+                         REFERENCES torneos (id)
                          ON DELETE NO ACTION
                          ON UPDATE CASCADE
   , rol_id    BIGINT     NOT NULL
                          REFERENCES roles (id)
                          ON DELETE NO ACTION
                          ON UPDATE CASCADE
-  , CONSTRAINT uq_visibilidad_clanes_clan_id_rol_id
-    UNIQUE (clan_id, rol_id)
+  , CONSTRAINT uq_visibilidad_torneos_torneo_id_rol_id
+    UNIQUE (torneo_id, rol_id)
 );
 
 DROP TABLE IF EXISTS visibilidad_eventos CASCADE;
@@ -274,34 +269,41 @@ CREATE TABLE cartas
 --CREATE INDEX idx_cartas_rareza_id     ON cartas (rareza_id);
 --CREATE INDEX idx_cartas_carta_tipo_id ON cartas (carta_tipo_id);
 
+DROP TABLE IF EXISTS zonas_horarias CASCADE;
+
+CREATE TABLE zonas_horarias
+(
+      id    BIGSERIAL   PRIMARY KEY
+    , zona  NUMERIC(2)  NOT NULL UNIQUE
+                                 CONSTRAINT ck_zona_valido
+                                 CHECK (zona >= -11 AND zona <= 12)
+    , lugar TEXT
+);
+
 DROP TABLE IF EXISTS usuarios CASCADE;
 
 CREATE TABLE usuarios
 (
-    id              BIGSERIAL    PRIMARY KEY
-  , nombre          VARCHAR(255) NOT NULL UNIQUE
-  , password        VARCHAR(255) NOT NULL
-  , correo          VARCHAR(255) NOT NULL UNIQUE
-  , nacionalidad_id BIGINT       NOT NULL
-                                 REFERENCES nacionalidades (id)
-                                 ON DELETE NO ACTION
-                                 ON UPDATE CASCADE
-  , jugador_id      BIGINT       REFERENCES jugadores (id)
-                                 ON DELETE NO ACTION
-                                 ON UPDATE CASCADE
-  , access_token    VARCHAR(255)
-  , auth_key        VARCHAR(255)
-/*
-  , rol_id          BIGINT       NOT NULL
-                                 REFERENCES roles (id)
-                                 ON DELETE NO ACTION
-                                 ON UPDATE CASCADE
-*/
-  , activo          BOOLEAN      DEFAULT FALSE
-  , verificado      VARCHAR(255)
-  , created_at      TIMESTAMP(0) NOT NULL
-                                 DEFAULT current_timestamp
-  , updated_at      TIMESTAMP(0)
+    id               BIGSERIAL    PRIMARY KEY
+  , nombre           VARCHAR(255) NOT NULL UNIQUE
+  , password         VARCHAR(255) NOT NULL
+  , correo           VARCHAR(255) NOT NULL UNIQUE
+  , nacionalidad_id  BIGINT       NOT NULL
+                                  REFERENCES nacionalidades (id)
+                                  ON DELETE NO ACTION
+                                  ON UPDATE CASCADE
+  , jugador_id       BIGINT       REFERENCES jugadores (id)
+                                  ON DELETE NO ACTION
+                                  ON UPDATE CASCADE
+  , zona_horaria_id BIGINT        NOT NULL
+                                  REFERENCES zonas_horarias (id)
+  , access_token     VARCHAR(255)
+  , auth_key         VARCHAR(255)
+  , activo           BOOLEAN      DEFAULT FALSE
+  , verificado       VARCHAR(255)
+  , created_at       TIMESTAMP(0) NOT NULL
+                                  DEFAULT current_timestamp
+  , updated_at       TIMESTAMP(0)
 );
 
 DROP TABLE IF EXISTS usuarios_roles CASCADE;
@@ -329,6 +331,7 @@ CREATE TABLE jugadores
   , deleted_at              TIMESTAMP(0) -- SOFT DELETE
   , tag                     VARCHAR(16)  NOT NULL UNIQUE
   , clan_tag                VARCHAR(16)
+  , clan_rol                VARCHAR(16)
   , nombre                  VARCHAR(255) NOT NULL
   , nivel                   NUMERIC(5)   NOT NULL
                                          CONSTRAINT ck_nivel_positivo
@@ -425,16 +428,16 @@ CREATE TABLE evento_integrantes
     UNIQUE (evento_id, jugador_id)
 );
 
-DROP TABLE IF EXISTS clan_jugadores CASCADE;
+DROP TABLE IF EXISTS torneo_jugadores CASCADE;
 
-CREATE TABLE clan_jugadores
+CREATE TABLE torneo_jugadores
 (
     id         BIGSERIAL   PRIMARY KEY
-  , clan_id    BIGINT      NOT NULL
-                           REFERENCES clanes (id)
+  , torneo_id  BIGINT      NOT NULL
+                           REFERENCES torneos (id)
                            ON DELETE CASCADE
                            ON UPDATE CASCADE
-  , jugador_id BIGINT      NOT NULL
+  , jugador_id  BIGINT     NOT NULL
                            REFERENCES jugadores (id)
                            ON DELETE NO ACTION
                            ON UPDATE CASCADE
@@ -442,11 +445,11 @@ CREATE TABLE clan_jugadores
                            DEFAULT 0
                            CONSTRAINT ck_puntos_positivos
                            CHECK (puntos >= 0)
-  , CONSTRAINT uq_clan_jugadores_clan_id_jugador_id
-    UNIQUE (clan_id, jugador_id)
+  , CONSTRAINT uq_torneo_jugadores_torneo_id_jugador_id
+    UNIQUE (torneo_id, jugador_id)
 );
 
-CREATE INDEX idx_clan_jugadores_puntos ON clan_jugadores (puntos);
+CREATE INDEX idx_torneo_jugadores_puntos ON torneo_jugadores (puntos);
 
 DROP TABLE IF EXISTS oponentes CASCADE;
 
@@ -457,12 +460,12 @@ CREATE TABLE oponentes
     id          BIGSERIAL    PRIMARY KEY
   , tag         VARCHAR(9)   NOT NULL UNIQUE
   , nombre      VARCHAR(255)
-  , tag_clan    VARCHAR(9)
-  , nombre_clan VARCHAR(255)
+  , tag_torneo    VARCHAR(9)
+  , nombre_torneo VARCHAR(255)
 );
 
-CREATE INDEX idx_oponentes_tag_clan    ON oponentes (tag_clan);
-CREATE INDEX idx_oponentes_nombre_clan ON oponentes (nombre_clan);
+CREATE INDEX idx_oponentes_tag_torneo    ON oponentes (tag_torneo);
+CREATE INDEX idx_oponentes_nombre_torneo ON oponentes (nombre_torneo);
 
 DROP TABLE IF EXISTS batallas CASCADE;
 
@@ -521,21 +524,21 @@ CREATE INDEX idx_batallas_jugador_id_oponente_id       ON batallas (jugador_id, 
 CREATE INDEX idx_batallas_jugador_id_coronas_jugador   ON batallas (jugador_id, coronas_jugador);
 CREATE INDEX idx_batallas_oponente_id_coronas_oponente ON batallas (oponente_id, coronas_oponente);
 
-DROP TABLE IF EXISTS clan_batallas CASCADE;
+DROP TABLE IF EXISTS torneo_batallas CASCADE;
 
-CREATE TABLE clan_batallas
+CREATE TABLE torneo_batallas
 (
     id         BIGSERIAL    PRIMARY KEY
-  , clan_id    BIGINT       NOT NULL
-                            REFERENCES clanes (id)
+  , torneo_id    BIGINT       NOT NULL
+                            REFERENCES torneos (id)
                             ON DELETE NO ACTION
                             ON UPDATE CASCADE
   , batalla_id BIGINT       NOT NULL
                             REFERENCES batallas (id)
                             ON DELETE NO ACTION
                             ON UPDATE CASCADE
-  , CONSTRAINT uq_clan_batallas_clan_id_batalla_id
-    UNIQUE (clan_id, batalla_id)
+  , CONSTRAINT uq_torneo_batallas_torneo_id_batalla_id
+    UNIQUE (torneo_id, batalla_id)
 );
 
 DROP TABLE IF EXISTS cofres_ciclos CASCADE;
@@ -594,8 +597,196 @@ CREATE TABLE config_tiempo_actualizado
 -- DATOS INICIALES
 CREATE EXTENSION pgcrypto;
 
-INSERT INTO nacionalidades (nombre, abreviatura, tramo_horario)
-VALUES ('España', 'ESP', 1);
+INSERT INTO nacionalidades (nombre, pais)
+VALUES ('Venezolana','Venezuela'),
+('Afgana','Afganistán'),
+('Albanesa','Albania'),
+('Alemana','Alemania'),
+('Alto volteña','Alto volta'),
+('Andorrana','Andorra'),
+('Angoleña','Angola'),
+('Argelina','Argelia'),
+('Argentina','Argentina'),
+('Australiana','Australia'),
+('Austriaca','Austria'),
+('Bahamesa','Bahamas'),
+('Bahreina','Bahrein'),
+('Bangladesha','Bangladesh'),
+('Barbadesa','Barbados'),
+('Belga','Belgica'),
+('Beliceña','Belice'),
+('Bermudesa','Bermudas'),
+('Birmana','Birmania'),
+('Boliviana','Bolivia'),
+('Botswanesa','Botswana'),
+('Brasileña','Brasil'),
+('Bulgara','Bulgaria'),
+('Burundesa','Burundi'),
+('Butana','Butan'),
+('Camboyana','Khemer Rep de Camboya '),
+('Camerunesa','Camerun'),
+('Canadiense','Canada'),
+('Centroafricana','Rep Centroafricana'),
+('Chadeña','Chad'),
+('Checoslovaca','Rep. Checa'),
+('Chilena','Chile'),
+('China','China'),
+('China','Taiwan'),
+('Chipriota','Chipre'),
+('Colombiana','Colombia'),
+('Congoleña','Congo'),
+('Costarricense','Costa Rica'),
+('Cubana','Cuba'),
+('Dahoneya','Dahoney'),
+('Danes','Dinamarca'),
+('Dominicana','Rep. Dominicana'),
+('Ecuatoriana','Ecuador'),
+('Egipcia','Egipto'),
+('Emirata','Emiratos Arabes Udo.'),
+('Escosesa','Escocia'),
+('Eslovaca','Rep. Eslovaca'),
+('Española','España'),
+('Estona','Estonia'),
+('Etiope','Etiopia'),
+('Fijena','Fiji'),
+('Filipina','Filipinas'),
+('Finlandesa','Finlandia'),
+('Francesa','Francia'),
+('Gabiana','Gambia'),
+('Gabona','Gabon'),
+('Galesa','Gales'),
+('Ghanesa','Ghana'),
+('Granadeña','Granada'),
+('Griega','Grecia'),
+('Guatemalteca','Guatemala'),
+('Guinesa Ecuatoriana','Guinea Ecuatorial'),
+('Guinesa','Guinea'),
+('Guyanesa','Guyana'),
+('Haitiana','Haiti'),
+('Holandesa','Holanda'),
+('Hondureña','Honduras'),
+('Hungara','Hungria'),
+('India','India'),
+('Indonesa','Indonesia'),
+('Inglesa','Inglaterra'),
+('Iraki','Irak'),
+('Irani','Iran'),
+('Irlandesa','Irlanda'),
+('Islandesa','Islandia'),
+('Israeli','Israel'),
+('Italiana','Italia'),
+('Jamaiquina','Jamaica'),
+('Japonesa','Japon'),
+('Jordana','Jordania'),
+('Katensa','Katar'),
+('Keniana','Kenia'),
+('Kuwaiti','Kwait'),
+('Laosiana','Laos'),
+('Leonesa','Sierra leona'),
+('Lesothensa','Lesotho'),
+('Letonesa','Letonia'),
+('Libanesa','Libano'),
+('Liberiana','Liberia'),
+('Libeña','Libia'),
+('Liechtenstein','Liechtenstein'),
+('Lituana','Lituania'),
+('Luxemburgo','Luxemburgo'),
+('Madagascar','Madagascar'),
+('Malaca','Fede. de Malasia'),
+('Malawi','Malawi'),
+('Maldivas','Maldivas'),
+('Mali','Mali'),
+('Maltesa','Malta'),
+('Marfilesa','Costa de Marfil'),
+('Marroqui','Marruecos'),
+('Mauricio','Mauricio'),
+('Mauritana','Mauritania'),
+('Mexicana','México'),
+('Monaco','Monaco'),
+('Mongolesa','Mongolia'),
+('Nauru','Nauru'),
+('Neozelandesa','Nueva Zelandia'),
+('Nepalesa','Nepal'),
+('Nicaraguense','Nicaragua'),
+('Nigerana','Niger'),
+('Nigeriana','Nigeria'),
+('Norcoreana','Corea del Norte'),
+('Norirlandesa','Irlanda del norte'),
+('Norteamericana','Estados unidos'),
+('Noruega','Noruega'),
+('Omana','Oman'),
+('Pakistani','Pakistan'),
+('Panameña','Panama'),
+('Paraguaya','Paraguay'),
+('Peruana','Peru'),
+('Polaca','Polonia'),
+('Portoriqueña','Puerto Rico'),
+('Portuguesa','Portugal'),
+('Rhodesiana','Rhodesia'),
+('Ruanda','Ruanda'),
+('Rumana','Rumania'),
+('Rusa','Russia'),
+('Salvadoreña','El Salvador'),
+('Samoa Occidental','Samoa Occidental'),
+('San marino','San Marino'),
+('Saudi','Arabia Saudita'),
+('Senegalesa','Senegal'),
+('Sikkim','Sikkim'),
+('Singapur','Singapur'),
+('Siria','Siria'),
+('Somalia','Somalia'),
+('Sovietica','Union Sovietica'),
+('Sri Lanka','Sri Lanka (Ceylan) '),
+('Suazilandesa','Suazilandia'),
+('Sudafricana','Sudafrica'),
+('Sudanesa','Sudan'),
+('Sueca','Suecia'),
+('Suiza','Suiza'),
+('Surcoreana','Corea del Sur'),
+('Tailandesa','Tailandia'),
+('Tanzana','Tanzania'),
+('Tonga','Tonga'),
+('Tongo','Tongo'),
+('Trinidad y Tobago','Trinidad y Tobago'),
+('Tunecina','Tunez'),
+('Turca','Turquia'),
+('Ugandesa','Uganda'),
+('Uruguaya','Uruguay'),
+('Vaticano','Vaticano'),
+('Vietnamita','Vietnam'),
+('Yemen Rep Arabe','Yemen Rep. Arabe'),
+('Yemen Rep Dem','Yemen Rep. Dem'),
+('Yugoslava','Yugoslavia'),
+('Zaire','Zaire');
+
+INSERT INTO zonas_horarias (zona, lugar)
+VALUES (-11, 'Samoa'),
+       (-10, 'Hawaii'),
+       (-9, 'Anchorage, Juneau'),
+       (-8, 'Seattle, San Francisco, Los Angeles'),
+       (-7, 'Edmonton, Denver, Phoenix'),
+       (-6, 'Chicago, Houston, Mexico'),
+       (-5, 'New York, Miami, La Habana, Puerto Principe'),
+       (-4, 'Santo Domingo, Caracas, Asuncion, Santiago de Chile'),
+       (-3, 'Brasilia, Rio De Janeiro, Montevideo, Buenos Aires'),
+       (-2, 'Recife'),
+       (-1, 'Azores'),
+       (0, 'Londres, Dublín, Lisboa, Casablanca, Dakar, Accra'),
+       (1, 'Paris, Madrid, Roma, Berlín, Praga, Belgrado, Varsovia, Estocolmo'),
+       (2, 'Helsinki, Minks, Bucarest, Estambul, Atenas, Beirut, Cairo'),
+       (3, 'San Petersburgo, Moscow, Bagdad, Riad, Addis Abeba'),
+       (4, 'Samara, Baku, Tbilisi, Dubai'),
+       (5, 'Sheliabinsk, Karachi, Islamabad'),
+       (6, 'Omsk, Tashkent, Dacca'),
+       (7, 'Novosibirsk, Bangkok, Hanoi, Yakarta'),
+       (8, 'Irkutsk, Lhasa, Beijing, Hong Kong, Kuala Lumpur'),
+       (9, 'Tokyo, Seul'),
+       (10, 'Vladivostok, Sydney, Melbourne'),
+       (11, 'Noumea, Magaban'),
+       (12, 'Wellington (Nueva Zelanda)');
+
+INSERT INTO config_equipo (nombre, icono, nacionalidad_id, copas, copas_requeridas)
+VALUES ('Skeletons Trap', 'sktrap', 48, 0, 0);
 
 INSERT INTO ligas (nombre, icono)
 VALUES ('Arena 1', 0),
@@ -620,22 +811,25 @@ VALUES ('Arena 1', 0),
        ('Grandes Campeones', 8),
        ('Campeones Definitivos', 9);
 
--- DATOS PRUEBAS
-INSERT INTO usuarios (nombre, password, correo, nacionalidad_id, auth_key, verificado, activo)
-VALUES ('manuel', crypt('manuel', gen_salt('bf', 13)), 'nombre@dominio.com', 1, 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA', null, true);
+INSERT INTO usuarios (nombre, password, correo, nacionalidad_id, zona_horaria_id, auth_key, verificado, activo)
+VALUES ('admin', crypt('admin', gen_salt('bf', 13)), 'nombre@dominio.com', 48, 13, 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA', null, true);
 
 INSERT INTO permisos (nombre, descripcion)
-VALUES ('verPrueba', 'Puede ver'),
-       ('escribirPrueba', 'Puede escribir');
+VALUES ('verTodo', 'Puede ver'),
+       ('escribirTodo', 'Puede escribir');
 
 INSERT INTO roles (nombre)
 VALUES ('administrador'),
-       ('iniciado');
+       ('Líder'),
+       ('Colíder'),
+       ('Miembro'),
+       ('En prueba');
 
 INSERT INTO roles_permisos (rol_id, permiso_id)
 VALUES (1, 1),
-       (1, 2),
-       (2, 1);
+       (1, 2);
 
 INSERT INTO usuarios_roles (usuario_id, rol_id)
 VALUES (1, 1);
+
+-- DATOS PRUEBAS

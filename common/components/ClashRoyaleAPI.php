@@ -182,19 +182,41 @@ class ClashRoyaleAPI extends Component
     }
 
     /**
-     * Realiza la búsqueda de un equipo (clan) de CR válido
-     * @param  string $tag El TAG del equipo real de CR
-     * @return mixed      Devuelve los datos de un clan de CR
+     * Realiza la búsqueda de uno o más equipos (clan) de CR válido
+     * @param  array $tags El TAG del equipo real de CR
+     * @return mixed       Devuelve los datos de un clan de CR
      */
-    public function clan(string $tag)
+    public function clan(array $tags)
     {
         $endpoint = 'clan';
+        $datos    = null;
 
-        $url = $this->_url . "$endpoint/$tag"; //?exclude=members
+        $keys = implode(',', [
+            'tag',
+            'name',
+            'description',
+            'score',
+            'memberCount',
+            'requiredScore',
+            'donations'
+        ]);
 
-        $this->validarConexion($endpoint, [$tag]);
+        if (!empty($tags)) {
+            $sTags = implode(',', $tags);
+            $url = $this->_url . "$endpoint/$sTags?keys=$keys";
 
-        return $this->conexion($url);
+            $this->validarConexion($endpoint, $tags);
+            $datos = $this->conexion($url);
+        }
+
+        if ($datos && (isset($datos->error) ? !$datos->error : true)) {
+            foreach ($tags as $tag) {
+                $subRutaWebClan = $this->_rutas_datos['clan'] . '/' . $tag;
+                $this->actualizarDatos($subRutaWebClan);
+            }
+        }
+
+        return $datos;
     }
 
     /**

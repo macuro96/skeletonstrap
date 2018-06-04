@@ -568,15 +568,12 @@ CREATE TABLE config_equipo
 (
     id                BIGSERIAL    PRIMARY KEY
   , nombre            VARCHAR(255) NOT NULL
-  , icono             VARCHAR(255) NOT NULL
-  , nacionalidad_id   BIGINT       NOT NULL
-                                   REFERENCES nacionalidades (id)
-                                   ON DELETE NO ACTION
-                                   ON UPDATE CASCADE
+  , tag               VARCHAR(16)  NOT NULL
   , descripcion       TEXT
   , copas             NUMERIC(8)   NOT NULL
   , copas_requeridas  NUMERIC(8)   NOT NULL
   , donaciones_semana INTEGER
+  , numero_miembros   INTEGER      NOT NULL
   /*
   , estado_cofre      BOOLEAN      NOT NULL
                                    DEFAULT FALSE
@@ -784,9 +781,6 @@ VALUES (-11, 'Samoa'),
        (10, 'Vladivostok, Sydney, Melbourne'),
        (11, 'Noumea, Magaban'),
        (12, 'Wellington (Nueva Zelanda)');
-
-INSERT INTO config_equipo (nombre, icono, nacionalidad_id, copas, copas_requeridas)
-VALUES ('Skeletons Trap', 'sktrap', 48, 0, 0);
 
 INSERT INTO ligas (nombre, icono)
 VALUES ('Arena 1', 0),

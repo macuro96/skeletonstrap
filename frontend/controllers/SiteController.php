@@ -228,7 +228,7 @@ class SiteController extends Controller
             $usuario = \Yii::$app->user->identity;
 
             if ($usuario) {
-                if ($this->enviarCorreoAdmin('Usuario de baja', 'El usuario <b>' . $usuario->nombre . '</b>, con TAG ' . $usuario->tag . 'se ha dado de baja.', 'El usuario ' . $usuario->nombre . ', con TAG ' . $usuario->tag . 'se ha dado de baja.')) {
+                if ($this->enviarCorreoAdmin('Usuario de baja', 'El usuario <b>' . $usuario->nombre . '</b>, con TAG ' . $usuario->jugadores->tag . 'se ha dado de baja.', 'El usuario ' . $usuario->nombre . ', con TAG ' . $usuario->tag . 'se ha dado de baja.')) {
                     $usuario->delete();
 
                     \Yii::$app->session->setFlash('success', 'La cuenta ha sido dada de baja correctamente.');

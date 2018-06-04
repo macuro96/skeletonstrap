@@ -1,0 +1,102 @@
+.jugador {
+    border-style: solid;
+    border-color: #964545;
+    border-width: 5px;
+
+    background-color: white;
+    color: black;
+
+    margin-bottom: 14px;
+}
+
+.img-logo-miembros {
+    max-width: 64px;
+}
+
+.img-perfil {
+    margin-top: 14px;
+    margin-bottom: 14px;
+    margin-left: 20px;
+
+    max-width: 52px;
+}
+
+.img-icon {
+    max-width: 24px;
+}
+
+.nombre {
+    margin-left: 14px;
+    font-family: 'supercell-magicregular';
+}
+
+.rol {
+    font-family: 'supercell-magicregular';
+    font-size: 10px;
+}
+
+.datos {
+    margin-top: 5px;
+
+    background-color: #964545;
+    padding: 5px;
+    padding-left: 20px;
+    color: white;
+
+    border-bottom-color: #633030;
+    border-bottom-style: solid;
+    border-bottom-width: 5px;
+}
+
+.datos .nombre-dato, .datos .ultima-act {
+    font-style: italic;
+}
+
+.datos .nombre-dato, .datos .valor-dato {
+    padding-left: 12px;
+    padding-right: 30px;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.datos .ultima-act {
+    font-size: 12px;
+}
+
+.datos .ultima-act {
+    text-align: left;
+}
+
+.datos .btn-actualizar {
+    text-align: right;
+    padding-right: 30px;
+}
+
+.datos .valor-dato {
+    text-align: right;
+    font-weight: bold;
+}
+
+@media (max-width: 994px) {
+    .datos {
+        text-align: center;
+
+        padding-bottom: 16px;
+    }
+
+    .datos .valor-dato {
+        text-align: center;
+    }
+
+    .datos .ultima-act {
+        text-align: center;
+    }
+
+    .datos .btn-actualizar {
+        margin-top: 10px;
+        margin-bottom: 18px;
+
+        text-align: center;
+    }
+}

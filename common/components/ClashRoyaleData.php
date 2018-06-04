@@ -90,6 +90,7 @@ class ClashRoyaleData
                     'tag' => '/<a href=\'https:\/\/' . $this->_dominioUrl . '\/es\/clan\/(.*?)\' class="ui__link ui__mediumText ui__whiteText profileHeader__userClan">/su',
                     // Clave clan
                     'donations' => '/<a class="ui__blueLink" href=\'https:\/\/' . $this->_dominioUrl . '\/es\/profile\/_TAG_\'>.*?<div class="clan__donation">(.*?)<\/div>/su',
+                    'role' => '/<a class="ui__blueLink" href=\'https:\/\/' . $this->_dominioUrl . '\/es\/profile\/_TAG_\'>.*?<div class="clan__memberRoleInner">(.*?)<\/div>/su'
                 ],
                 'name' => '/<span class="profileHeader__nameCaption">(.*?)<\/span>/su',
                 'stats' => [
@@ -326,6 +327,11 @@ class ClashRoyaleData
             $subRutasWeb[$j][] = $this->setContenidoWebClan($clan, $bForzar);
 
             $this->coincidenciaSegundoNivel($aCoincidencias, $clavePatron, 'clan', 'donations', [
+                'clave' => 'clan',
+                'parametroPatron' => $tagsJugadores[$j]
+            ]);
+
+            $this->coincidenciaSegundoNivel($aCoincidencias, $clavePatron, 'clan', 'role', [
                 'clave' => 'clan',
                 'parametroPatron' => $tagsJugadores[$j]
             ]);

@@ -30,15 +30,15 @@ CommonFormNuevoUsuario::register($this);
             <?php $form = ActiveForm::begin(['id' => 'usuarios-form']); ?>
 
                 <?= $form->field($model, 'nombre')->textInput(['maxlength' => true])
-                                                  ->hint('Con el que se identificará la cuenta.')
+                                                  ->hint('Con el que se identificará la cuenta para el inicio de sesión.')
                                                   ->label('Nombre de usuario*')
                 ?>
                 <?= $form->field($model, 'correo')->textInput(['maxlength' => true])
                                                   ->label('Correo*')
                 ?>
-                <?= $form->field($model, 'nacionalidad_id')->dropDownList([
-                    [1 => 'ESP']
-                ])->label('Nacionalidad*')
+                <?= $form->field($model, 'nacionalidad_id')->dropDownList($nacionalidades, ['value' => 48])->label('Nacionalidad*')
+                ?>
+                <?= $form->field($model, 'zona_horaria_id')->dropDownList($zonasHorarias, ['value' => 13])->label('Zona Horaria*')
                 ?>
                 <?= $form->field($model, 'tag')->textInput(['maxlength' => true])
                                                ->label('TAG*')

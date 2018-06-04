@@ -6,8 +6,6 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-use common\assets\CommonFormNuevoUsuario;
-
 $this->title = 'Nueva invitación';
 $this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['usuarios/index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -31,15 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = ActiveForm::begin(['id' => 'usuarios-form']); ?>
 
                 <?= $form->field($model, 'nombre')->textInput(['maxlength' => true])
-                                                  ->hint('Debe coincidir exactamente (mayúsculas y minúsculas, numeros, etc) con el nombre del jugador de Clash Royale.')
-                                                  ->label('Nombre*')
+                                                  ->hint('Con el que se identificará la cuenta para el inicio de sesión.')
+                                                  ->label('Nombre de usuario*')
                 ?>
                 <?= $form->field($model, 'correo')->textInput(['maxlength' => true])
                                                   ->label('Correo*')
                 ?>
-                <?= $form->field($model, 'nacionalidad_id')->dropDownList([
-                    [1 => 'ESP']
-                ])
+                <?= $form->field($model, 'nacionalidad_id')->dropDownList($nacionalidades, ['value' => 48])->label('Nacionalidad*') ?>
+                <?= $form->field($model, 'zona_horaria_id')->dropDownList($zonasHorarias, ['value' => 13])->label('Zona Horaria*') ?>
+                <?= $form->field($model, 'tag')->textInput(['maxlength' => true])
+                                               ->label('TAG*')
+                                               ->hint('Debe ser un TAG real de un jugador del juego.')
                 ?>
 
                 <div class="form-group">

@@ -85,4 +85,14 @@ class ConfigTiempoActualizado extends \yii\db\ActiveRecord
     {
         self::deleteAll(new Expression("((current_timestamp - created_at) > interval '14 min')"));
     }
+
+    public static function ultimaActualizacionJugador($tag)
+    {
+        $subRutaWeb = 'profile/' . $tag;
+
+        return self::find()
+                   ->where(new Expression("((current_timestamp - created_at) > interval '14 min')"))
+                   ->andWhere(['subrutaweb' => $subRutaWeb])
+                   ->one();
+    }
 }

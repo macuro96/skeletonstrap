@@ -13,6 +13,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use common\models\ZonasHorarias;
+use common\models\Nacionalidades;
+
 use common\components\UrlConvert;
 
 /**
@@ -145,6 +148,35 @@ class UsuariosController extends Controller
             'scenario' => Usuarios::ESCENARIO_INVITAR
         ]);
 
+        $nacionalidadesDatos = Nacionalidades::find()
+                                             ->orderBy('pais ASC')
+                                             ->asArray()
+                                             ->all();
+
+        $zonasHorariasDatos = ZonasHorarias::find()
+                                           ->orderBy('zona ASC')
+                                           ->asArray()
+                                           ->all();
+
+        $nacionalidades = [];
+        $zonasHorarias  = [];
+
+        foreach ($nacionalidadesDatos as $key => $value) {
+            $idNacionalidad   = $value['id'];
+            $paisNacionalidad = $value['pais'];
+
+            $nacionalidades[$idNacionalidad] = $paisNacionalidad;
+        }
+
+        foreach ($zonasHorariasDatos as $key => $value) {
+            $idZonaHoraria    = $value['id'];
+
+            $zonaZonaHoraria  = $value['zona'];
+            $lugarZonaHoraria = $value['lugar'];
+
+            $zonasHorarias[$idZonaHoraria] = 'GMT ' . ($zonaZonaHoraria >= 0 ? '+' : '') . $zonaZonaHoraria . ' - ' . $lugarZonaHoraria;
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if ($this->enviarCorreoConfirmacion($model)) {
                 \Yii::$app->session->setFlash('success', 'Se ha enviado el correo de confirmación a la dirección <b>' . Html::encode($model->correo) . '</b> correctamente');
@@ -157,6 +189,8 @@ class UsuariosController extends Controller
 
         return $this->render('invitar', [
             'model' => $model,
+            'nacionalidades' => $nacionalidades,
+            'zonasHorarias' => $zonasHorarias
         ]);
     }
 

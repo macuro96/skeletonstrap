@@ -1,5 +1,7 @@
 <?php
 
+use yii\helpers\Html;
+
 use common\components\Recursos;
 use common\components\RegisterThisCss;
 
@@ -51,7 +53,7 @@ RegisterThisCss::register($this);
         </p>
 
         <p>
-            Aquí encontrarás información sobre los miembros del equipo: estadísticas del juego, información personal, etc.
+            Aquí encontrarás información sobre el equipo y sus miembros: estadísticas del juego, requisitos del equipo, etc.
         </p>
     </div>
 </div>
@@ -60,6 +62,39 @@ RegisterThisCss::register($this);
         <div class="titulo-seccion"><h2>Información</h2></div>
 
         <div class="contenido-seccion">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <p>
+                        <div class="div-logo img-centered">
+                            <?= Recursos::imageCommon('logo.png', ['class' => 'img-responsive']) ?>
+                        </div>
+                    </p>
+                    <div class="info-equipo">
+                        <p>
+                            <?= Html::encode($clan->descripcion) ?>
+                        </p>
+                        <p>
+                            TAG: <b><?= Html::encode($clan->tag) ?></b>
+                        </p>
+                        <p>
+                            Número de miembros: <b><?= Html::encode($clan->numero_miembros) ?></b>
+                        </p>
+
+                        <h2><?= Recursos::imageCommon('trophy.png', ['class' => 'img-icon img-resposive']) ?> Copas</h2>
+                        <p>
+                            <u>Mínimo de copas para entrar en el equipo: <b><?= Html::encode($clan->copas_requeridas) ?></b></u>
+                        </p>
+                        <p>
+                            Copas totales: <b><?= Html::encode($clan->copas) ?></b>
+                        </p>
+
+                        <h2><?= Recursos::imageCommon('battle.png', ['class' => 'img-icon img-resposive']) ?> Donaciones</h2>
+                        <p>
+                            Donaciones por semana: <b><?= Html::encode($clan->donaciones_semana) ?></b>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

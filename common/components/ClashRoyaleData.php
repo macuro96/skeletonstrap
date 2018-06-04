@@ -115,8 +115,11 @@ class ClashRoyaleData
                 ]
             ],
             'clan' => [
-                'trofeos' => '',
-                'donacionesSemana' => ''
+                'description' => '/<div class="ui__headerMedium clan__clanName">.*?<div class="ui__mediumText">(.*?)<\/div>/su',
+                'score' => '/<div class="clan__metric clan__trophyMetric">[\n\r]\s+<div class="clan__metricContent">[\n\r]\s+<div class="ui__headerMedium">(.*?)<\/div>/su',
+                'requiredScore' => '/<div class="clan__metric clan__trophyMetric">[\n\r]\s+<div class="clan__metricContent">[\n\r]\s+<div class="ui__headerMedium">(.*?)<\/div>/su',
+                'donations' => '/<div class="clan__metric clan__donationsMetric">[\n\r]\s+<div class="clan__metricContent">[\n\r]\s+<div class="ui__headerMedium">(.*?)<\/div>/su',
+                'memberCount' => '/<div class="clan__rowContainer(.*?)"/su',
             ],
         ];
     }
@@ -381,6 +384,64 @@ class ClashRoyaleData
     }
 
     /**
+     * Busca los clanes en forma de array de objetos para su posterior
+     * procesamiento donde sea necesario.
+     * @param  array  $tagsClanes TAGS de los clanes buscados
+     * @return array  Devuelve los clanes en forma de array de objetos.
+     */
+    public function clan(array $tagsClanes)
+    {
+        $aResultado = [];
+        $nClanes    = count($tagsClanes);
+
+        $fContarResultados = function (&$coincidencia) {
+            $coincidencia = count($coincidencia);
+        };
+
+        $fNumResultado = function (&$coincidencia, $numero) {
+            $coincidencia = (isset($coincidencia[$numero]) ? $coincidencia[$numero] : null);
+        };
+
+        $fSegundoResultado = function (&$coincidencia) use ($fNumResultado) {
+            $fNumResultado($coincidencia, 1);
+        };
+
+        $fTercerResultado = function (&$coincidencia) use ($fNumResultado) {
+            $fNumResultado($coincidencia, 2);
+        };
+
+        for ($j = 0; $j < $nClanes; $j++) {
+            $aCoincidencias = [];
+            $subRutasWeb    = [];
+
+            $subRutasWeb[$j][] = $this->setContenidoWebClan($tagsClanes[$j], true);
+
+            $clavePatron = 'clan';
+
+            $this->coincidenciaPrimerNivel($aCoincidencias, $clavePatron, 'description');
+            $this->coincidenciaPrimerNivel($aCoincidencias, $clavePatron, 'score');
+            $this->coincidenciaPrimerNivel($aCoincidencias, $clavePatron, 'requiredScore', [
+                'allResults' => true,
+                'function' => $fSegundoResultado
+            ]);
+            $this->coincidenciaPrimerNivel($aCoincidencias, $clavePatron, 'donations');
+            $this->coincidenciaPrimerNivel($aCoincidencias, $clavePatron, 'memberCount', [
+                'allResults' => true,
+                'noTrim' => true,
+                'function' => $fContarResultados
+            ]);
+
+            $aCoincidencias['tag']  = $tagsClanes[$j];
+            $aCoincidencias['name'] = 'Skeleton\'s Trap';
+            $aCoincidencias = (object) $aCoincidencias;
+
+            $aResultado[] = $aCoincidencias;
+        }
+
+        return $aResultado;
+    }
+
+    /**
      * Busca coincidencias de forma general con un patrón sobre una cadena previamente recogida
      * con la funcion de setContenidoWeb.
      * @param  string|null &$patron        Donde se va a guardar el patron.
@@ -515,6 +576,7 @@ class ClashRoyaleData
         $clave      = $config['clave'];
         $patron     = $config['patron'];
         $allResults = isset($config['allResults']) ? $config['allResults'] : false;
+        $noTrim     = isset($config['noTrim']) ? $config['noTrim'] : false;
 
         $nombreFuncion = 'getContenidoWeb';
 
@@ -530,7 +592,10 @@ class ClashRoyaleData
             array_shift($coincidencias);
 
             $coincidenciasFinal = $coincidencias[0];
-            $coincidenciasFinal = (!$allResults ? trim($coincidenciasFinal) : array_filter($coincidenciasFinal, 'trim'));
+
+            if (!$noTrim) {
+                $coincidenciasFinal = (!$allResults ? trim($coincidenciasFinal) : array_filter($coincidenciasFinal, 'trim'));
+            }
         }
 
         return $coincidenciasFinal;

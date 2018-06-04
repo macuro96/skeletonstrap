@@ -2,11 +2,13 @@
 namespace frontend\controllers;
 
 use yii\web\Controller;
+use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 use common\models\Usuarios;
 use common\models\Jugadores;
+use common\models\ConfigEquipo;
 use common\models\ConfigTiempoActualizado;
 
 /**
@@ -71,8 +73,19 @@ class EquipoController extends Controller
         $usuarios = Usuarios::find()->all();
         $usuariosValidos = Usuarios::validos();
 
+        $clan = ConfigEquipo::findAPI('clan', [
+            'tag' => [
+                \Yii::$app->params['tagClan']
+            ]
+        ])[0];
+
+        if (!$clan) {
+            throw new BadRequestHttpException('Ha ocurrido un error inesperado. Por favor, inténtelo de nuevo más tarde.');
+        }
+
         return $this->render('index', [
-            'jugadores' => $usuariosValidos
+            'jugadores' => $usuariosValidos,
+            'clan' => $clan
         ]);
     }
 

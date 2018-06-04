@@ -13,6 +13,14 @@
     max-width: 64px;
 }
 
+.div-logo {
+    margin-bottom: 22px;
+}
+
+.info-equipo {
+    text-align: center;
+}
+
 .img-perfil {
     margin-top: 14px;
     margin-bottom: 14px;

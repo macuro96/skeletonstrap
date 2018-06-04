@@ -7,6 +7,37 @@ use common\components\RegisterThisCss;
 
 $this->title = 'Equipo';
 
+$js = <<<EOT
+    $('.contenido-seccion').on('click', '.load .btn-actualizar-miembro', function(e) {
+        e.preventDefault();
+
+        var dataTag = $(this).closest('.jugador').data('jugador');
+        var urlTo   = $(this).attr('href');
+
+        var dataDiv = $(this).closest('.load');
+
+        $(this).attr('disabled', 'disabled');
+
+        $.ajax({
+            url: urlTo,
+            type: 'POST',
+            data: {
+                tag: dataTag
+            },
+            success: function (data) {
+                $(dataDiv).html(data);
+                $(this).removeAttr('disabled');
+            },
+            error: function (error) {
+                $(this).removeAttr('disabled');
+                alert('Ha ocurrido un error inesperado en la carga de datos para ese jugador.');
+            }
+        });
+    });
+EOT;
+
+$this->registerJs($js);
+
 RegisterThisCss::register($this);
 ?>
 <div class="row cabecera-inicio">

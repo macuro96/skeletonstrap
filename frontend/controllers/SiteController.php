@@ -29,7 +29,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'verificar', 'perfil', 'cambiar-info-perfil'],
+                'only' => ['logout', 'verificar', 'perfil', 'cambiar-info-perfil', 'dar-baja'],
                 'rules' => [
                     [
                         'actions' => ['verificar'],
@@ -37,7 +37,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'cambiar-info-perfil', 'perfil'],
+                        'actions' => ['logout', 'cambiar-info-perfil', 'perfil', 'dar-baja'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -47,6 +47,7 @@ class SiteController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
+                    'dar-baja' => ['post'],
                 ],
             ],
         ];
@@ -66,6 +67,17 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function enviarCorreoAdmin($asunto, $htmlBody, $textBody)
+    {
+        return Yii::$app->mailer->compose()
+                        ->setFrom(Yii::$app->params['adminEmail'])
+                        ->setTo(Yii::$app->params['adminEmail'])
+                        ->setSubject($asunto)
+                        ->setHtmlBody($htmlBody)
+                        ->setTextBody($textBody)
+                        ->send();
     }
 
     /**
@@ -197,9 +209,9 @@ class SiteController extends Controller
             }
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                \Yii::$app->session->setFlash('success', 'Los datos han sido actualizados correctamente.');
+                \Yii::$app->session->setFlash('success', 'Los datos han sido actualizados correctamente. Puede cerrar, la ventana.');
             }
-            
+
             return $this->render('cambiarInfoPerfil', [
                 'model' => $model,
                 'nacionalidades' => $nacionalidades,
@@ -207,6 +219,24 @@ class SiteController extends Controller
             ]);
         } else {
             throw new BadRequestHttpException('No hay ningún usuario logueado');
+        }
+    }
+
+    public function actionDarBaja()
+    {
+        if (Yii::$app->request->post()) {
+            $usuario = \Yii::$app->user->identity;
+
+            if ($usuario) {
+                if ($this->enviarCorreoAdmin('Usuario de baja', 'El usuario <b>' . $usuario->nombre . '</b>, con TAG ' . $usuario->tag . 'se ha dado de baja.', 'El usuario ' . $usuario->nombre . ', con TAG ' . $usuario->tag . 'se ha dado de baja.')) {
+                    $usuario->delete();
+
+                    \Yii::$app->session->setFlash('success', 'La cuenta ha sido dada de baja correctamente.');
+                    \Yii::$app->user->logout();
+
+                    return $this->goHome();
+                }
+            }
         }
     }
 

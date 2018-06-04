@@ -180,3 +180,29 @@ RegisterThisCss::register($this);
         </div>
     </div>
 </div>
+<div class="row seccion">
+    <div class="col-lg-12">
+        <div class="titulo-seccion"><h2>Otras opciones</h2></div>
+
+        <div class="contenido-seccion">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        Si quieres darte de baja recuerda que dejarás de poder acceder a la aplicación,
+                        se borrarán los datos aquí usados y se enviará un correo al administrador avisando
+                        de ello.
+                    </p>
+                    <p>
+                        <?= Html::a('Quiero darme de baja', ['dar-baja'], [
+                            'class' => 'btn btn-danger btn-lg',
+                            'data' => [
+                                'confirm' => '¿Estás seguro que quieres darte de baja de la aplicación?',
+                                'method' => 'post'
+                            ]
+                        ]) ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

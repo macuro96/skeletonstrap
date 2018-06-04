@@ -9,6 +9,7 @@ body {
     min-height: 100% !important;
 }
 
+
 .cabecera-inicio {
     text-align: center;
 
@@ -83,6 +84,10 @@ body {
 
 .navbar-brand {
     color: white !important;
+}
+
+.navbar button {
+    color: black !important;
 }
 
 /* COMPARTIR REDES */

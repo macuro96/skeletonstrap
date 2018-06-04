@@ -1,0 +1,30 @@
+.mi-perfil {
+    max-width: 300px;
+}
+
+.titulo-datos {
+    font-size: 28px;
+}
+
+.glyphicon {
+    padding-right: 4px;
+}
+
+.seccion-datos {
+    margin-bottom: 14px;
+}
+
+.glyphicon-pencil {
+    font-size: 26px !important;
+}
+
+.glyphicon-pencil:hover {
+    color: black;
+    cursor: pointer;
+}
+
+@media (max-width: 994px) {
+    .seccion-datos {
+        margin-bottom: 22px !important;
+    }
+}

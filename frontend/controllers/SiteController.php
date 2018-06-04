@@ -29,7 +29,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'verificar'],
+                'only' => ['logout', 'verificar', 'perfil', 'cambiar-info-perfil'],
                 'rules' => [
                     [
                         'actions' => ['verificar'],
@@ -37,7 +37,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'cambiar-info-perfil', 'perfil'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -154,6 +154,59 @@ class SiteController extends Controller
             return $this->render('login', [
                 'model' => $model,
             ]);
+        }
+    }
+
+    public function actionPerfil()
+    {
+        return $this->render('perfil');
+    }
+
+    public function actionCambiarInfoPerfil()
+    {
+        $model = \Yii::$app->user->identity;
+
+        if ($model) {
+            $nacionalidadesDatos = Nacionalidades::find()
+                                                 ->orderBy('pais ASC')
+                                                 ->asArray()
+                                                 ->all();
+
+            $zonasHorariasDatos = ZonasHorarias::find()
+                                               ->orderBy('zona ASC')
+                                               ->asArray()
+                                               ->all();
+
+            $nacionalidades = [];
+            $zonasHorarias  = [];
+
+            foreach ($nacionalidadesDatos as $key => $value) {
+                $idNacionalidad   = $value['id'];
+                $paisNacionalidad = $value['pais'];
+
+                $nacionalidades[$idNacionalidad] = $paisNacionalidad;
+            }
+
+            foreach ($zonasHorariasDatos as $key => $value) {
+                $idZonaHoraria    = $value['id'];
+
+                $zonaZonaHoraria  = $value['zona'];
+                $lugarZonaHoraria = $value['lugar'];
+
+                $zonasHorarias[$idZonaHoraria] = 'GMT ' . ($zonaZonaHoraria >= 0 ? '+' : '') . $zonaZonaHoraria . ' - ' . $lugarZonaHoraria;
+            }
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                \Yii::$app->session->setFlash('success', 'Los datos han sido actualizados correctamente.');
+            }
+            
+            return $this->render('cambiarInfoPerfil', [
+                'model' => $model,
+                'nacionalidades' => $nacionalidades,
+                'zonasHorarias' => $zonasHorarias,
+            ]);
+        } else {
+            throw new BadRequestHttpException('No hay ningún usuario logueado');
         }
     }
 

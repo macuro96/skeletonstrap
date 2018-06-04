@@ -13,7 +13,7 @@ $this->title = 'Mi perfil';
 
 $usuario = \Yii::$app->user->identity;
 
-if ($usuario && ConfigTiempoActualizado::ultimaActualizacionJugador($usuario->jugadores->tag)) {
+if ($usuario && $usuario->jugador_id && ConfigTiempoActualizado::ultimaActualizacionJugador($usuario->jugadores->tag)) {
     Jugadores::findAPI('jugador', [
         'tag' => [
             $usuario->jugadores->tag
@@ -69,7 +69,7 @@ RegisterThisCss::register($this);
                 <div class="col-md-offset-3 col-md-6">
                     <div class="jugador">
                         <?= Recursos::imageCommon('perfil.png', ['class' => 'img-perfil img-resposive']) ?>
-                        <span class="nombre"><?= Html::encode($usuario->jugadores->nombre) ?></span> <span class="rol">(<?= Html::encode($usuario->jugadores->clan_rol) ?>)</span>
+                        <span class="nombre"><?= Html::encode(isset($usuario->jugadores->nombre) ? $usuario->jugadores->nombre : $usuario->nombre) ?></span> <span class="rol">(<?= Html::encode(isset($usuario->jugadores->clan_rol) ? $usuario->jugadores->clan_rol : 'administrador') ?>)</span>
                         <div class="datos">
                             <div class="seccion-datos">
                                 <div class="row">
@@ -102,77 +102,79 @@ RegisterThisCss::register($this);
                                     </div>
                                 </div>
                             </div>
-                            <div class="seccion-datos">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <span class="titulo-datos">Datos de jugador</span>
+                            <?php if ($usuario->jugador_id) : ?>
+                                <div class="seccion-datos">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="titulo-datos">Datos de jugador</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 nombre-dato">
+                                            TAG
+                                        </div>
+                                        <div class="col-md-6 valor-dato">
+                                            <?= Html::encode($usuario->jugadores->tag) ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 nombre-dato">
+                                            Nivel
+                                        </div>
+                                        <div class="col-md-6 valor-dato">
+                                            <?= Html::encode($usuario->jugadores->nivel) ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 nombre-dato">
+                                            <?= Recursos::imageCommon('trophy.png', ['class' => 'img-icon img-resposive']) ?> Copas
+                                        </div>
+                                        <div class="col-md-6 valor-dato">
+                                            <?= Html::encode($usuario->jugadores->copas) ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 nombre-dato">
+                                            <?= Recursos::imageCommon('battle.png', ['class' => 'img-icon img-resposive']) ?> Victorias
+                                        </div>
+                                        <div class="col-md-6 valor-dato">
+                                            <?= Html::encode($usuario->jugadores->victorias) ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 nombre-dato">
+                                            <?= Recursos::imageCommon('ligas/' . $usuario->jugadores->liga->icono . '.png', ['class' => 'img-icon img-resposive']) ?> Arena
+                                        </div>
+                                        <div class="col-md-6 valor-dato">
+                                            <?= Html::encode($usuario->jugadores->liga->nombre) ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 nombre-dato">
+                                            Partidas totales
+                                        </div>
+                                        <div class="col-md-6 valor-dato">
+                                            <?= Html::encode($usuario->jugadores->partidas_totales) ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 nombre-dato">
+                                            Derrotas
+                                        </div>
+                                        <div class="col-md-6 valor-dato">
+                                            <?= Html::encode($usuario->jugadores->derrotas) ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 nombre-dato">
+                                            Cartas descubiertas
+                                        </div>
+                                        <div class="col-md-6 valor-dato">
+                                            <?= Html::encode($usuario->jugadores->cartas_descubiertas) ?>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6 nombre-dato">
-                                        TAG
-                                    </div>
-                                    <div class="col-md-6 valor-dato">
-                                        <?= Html::encode($usuario->jugadores->tag) ?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 nombre-dato">
-                                        Nivel
-                                    </div>
-                                    <div class="col-md-6 valor-dato">
-                                        <?= Html::encode($usuario->jugadores->nivel) ?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 nombre-dato">
-                                        <?= Recursos::imageCommon('trophy.png', ['class' => 'img-icon img-resposive']) ?> Copas
-                                    </div>
-                                    <div class="col-md-6 valor-dato">
-                                        <?= Html::encode($usuario->jugadores->copas) ?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 nombre-dato">
-                                        <?= Recursos::imageCommon('battle.png', ['class' => 'img-icon img-resposive']) ?> Victorias
-                                    </div>
-                                    <div class="col-md-6 valor-dato">
-                                        <?= Html::encode($usuario->jugadores->victorias) ?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 nombre-dato">
-                                        <?= Recursos::imageCommon('ligas/' . $usuario->jugadores->liga->icono . '.png', ['class' => 'img-icon img-resposive']) ?> Arena
-                                    </div>
-                                    <div class="col-md-6 valor-dato">
-                                        <?= Html::encode($usuario->jugadores->liga->nombre) ?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 nombre-dato">
-                                        Partidas totales
-                                    </div>
-                                    <div class="col-md-6 valor-dato">
-                                        <?= Html::encode($usuario->jugadores->partidas_totales) ?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 nombre-dato">
-                                        Derrotas
-                                    </div>
-                                    <div class="col-md-6 valor-dato">
-                                        <?= Html::encode($usuario->jugadores->derrotas) ?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 nombre-dato">
-                                        Cartas descubiertas
-                                    </div>
-                                    <div class="col-md-6 valor-dato">
-                                        <?= Html::encode($usuario->jugadores->cartas_descubiertas) ?>
-                                    </div>
-                                </div>
-                            </div>
+                                <?php endif; ?>
                         </div>
                     </div>
                 </div>

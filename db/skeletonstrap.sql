@@ -568,7 +568,7 @@ CREATE TABLE config_equipo
 (
     id                BIGSERIAL    PRIMARY KEY
   , nombre            VARCHAR(255) NOT NULL
-  , tag               VARCHAR(16)  NOT NULL
+  , tag               VARCHAR(16)  NOT NULL UNIQUE
   , descripcion       TEXT
   , copas             NUMERIC(8)   NOT NULL
   , copas_requeridas  NUMERIC(8)   NOT NULL

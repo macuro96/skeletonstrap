@@ -23,13 +23,38 @@ RegisterThisCss::register($this);
         <div class="row contenido">
             <div class="col-md-12">
                 <div class="acciones centrar">
-                    <?= Html::a('Invitar a un jugador', ['invitar'], ['class' => 'btn btn-success btn-lg']) ?>
+                    <?= Html::a('Invitar a un jugador', ['invitar'], ['class' => 'btn btn-primary btn-lg']) ?>
                 </div>
                 <div id="usuarios-solicitudes">
                     <?php foreach ($usuariosPendientes as $us) : ?>
                         <?= $this->render('_usuario', [
                             'model' => $us
                         ]); ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 modulo solicitudes-entrar">
+        <div class="row titulo-cabecera centrar">
+            <div class="col-md-12">
+                <h3>Usuarios (<numero-usuarios><?= Html::encode(count($usuarios) - 1) ?></numero-usuarios>)</h3>
+            </div>
+        </div>
+        <div class="row contenido">
+            <div class="col-md-12">
+                <div class="acciones centrar">
+                    <?= Html::a('Expulsar', ['accion-usuario', 'accion' => 'expulsar'], ['class' => 'btn btn-warning']) ?>
+                    <?= Html::a('Quitar expulsion', ['accion-usuario', 'accion' => 'quitar-expulsion'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('Eliminar', ['accion-usuario', 'accion' => 'eliminar'], ['class' => 'btn btn-danger']) ?>
+                </div>
+                <div id="usuarios-solicitudes">
+                    <?php foreach ($usuarios as $us) : ?>
+                        <?php if ($us->id != \Yii::$app->user->identity->id) : ?>
+                            <?= $this->render('_usuarioAcciones', [
+                                'model' => $us
+                            ]); ?>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
             </div>

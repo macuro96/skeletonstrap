@@ -46,7 +46,8 @@ class LoginForm extends Model
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
             ['usuario', 'validateVerificado', 'skipOnError' => true],
-            ['usuario', 'validateActivo', 'skipOnError' => true]
+            ['usuario', 'validateActivo', 'skipOnError' => true],
+            ['usuario', 'validateNoExpulsado']
         ];
     }
 
@@ -133,6 +134,15 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             if (!$this->_user->estaVerificado) {
                 $this->addError($attribute, 'El usuario no está verificado, por favor, compruebe el mensaje que le hemos enviado en su correo electronico para confirmar su cuenta');
+            }
+        }
+    }
+
+    public function validateNoExpulsado($attribute, $params, $validator)
+    {
+        if (!$this->hasErrors()) {
+            if ($this->_user->estaExpulsado) {
+                $this->addError($attribute, 'El usuario está expulsado en este momento, contacte con el soporte para más información');
             }
         }
     }

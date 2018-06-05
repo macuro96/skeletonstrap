@@ -10,6 +10,7 @@ use \yii\web\IdentityInterface;
  * This is the model class for table "usuarios".
  *
  * @property int $id
+ * @property string $expulsado
  * @property string $nombre
  * @property string $password
  * @property string $correo
@@ -169,6 +170,18 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return static::find()
                      ->where(['activo' => true])
+                     ->andWhere('verificado is null')
+                     ->andWhere('expulsado is null');
+    }
+
+    /**
+     * Query de usuarios válidos para el logueo.
+     * @return ActiveQuery ActiveQuery
+     */
+    public static function findLoginExpulsadosQuery()
+    {
+        return static::find()
+                     ->where(['activo' => true])
                      ->andWhere('verificado is null');
     }
 
@@ -190,9 +203,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function validos()
     {
-        return static::find()
-                     ->where(['activo' => true])
-                     ->andWhere('verificado is null')
+        return static::findLoginQuery()
                      ->andWhere('jugador_id is not null')
                      ->all();
     }
@@ -273,6 +284,23 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public function validatePassword(string $password)
     {
         return \Yii::$app->security->validatePassword($password, $this->password);
+    }
+
+    public function expulsar()
+    {
+        $this->expulsado = date('Y-m-d H:i:s');
+        $this->save();
+    }
+
+    public function quitarExpulsion()
+    {
+        $this->expulsado = null;
+        $this->save();
+    }
+
+    public function getEstaExpulsado()
+    {
+        return $this->expulsado !== null;
     }
 
     /**

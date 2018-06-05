@@ -2,7 +2,6 @@
 /* @var $model common\models\Usuarios */
 
 use yii\helpers\Html;
-use common\components\Recursos;
 ?>
 <div class="usuario" data-usuario="<?= Html::encode($model->id) ?>">
     <div class="row">
@@ -11,7 +10,7 @@ use common\components\Recursos;
                 <b><?= Html::encode($model->nombre) ?></b>
             </div>
             <div>
-                <?= Html::encode($model->correo) ?>
+                #<?= Html::encode($model->jugadores->tag) ?>
             </div>
         </div>
         <div class="col-md-12 botones">

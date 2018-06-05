@@ -285,6 +285,8 @@ DROP TABLE IF EXISTS usuarios CASCADE;
 CREATE TABLE usuarios
 (
     id               BIGSERIAL    PRIMARY KEY
+  , expulsado        TIMESTAMP(0) -- HASTA FECHA
+  --, deleted_at       TIMESTAMP(0) -- SOFT DELETE    
   , nombre           VARCHAR(255) NOT NULL UNIQUE
   , password         VARCHAR(255) NOT NULL
   , correo           VARCHAR(255) NOT NULL UNIQUE
@@ -327,8 +329,6 @@ DROP TABLE IF EXISTS jugadores CASCADE;
 CREATE TABLE jugadores
 (
     id                      BIGSERIAL    PRIMARY KEY
-  , expulsado               TIMESTAMP(0) -- HASTA FECHA
-  , deleted_at              TIMESTAMP(0) -- SOFT DELETE
   , tag                     VARCHAR(16)  NOT NULL UNIQUE
   , clan_tag                VARCHAR(16)
   , clan_rol                VARCHAR(16)
@@ -568,7 +568,7 @@ CREATE TABLE config_equipo
 (
     id                BIGSERIAL    PRIMARY KEY
   , nombre            VARCHAR(255) NOT NULL
-  , tag               VARCHAR(16)  NOT NULL
+  , tag               VARCHAR(16)  NOT NULL UNIQUE
   , descripcion       TEXT
   , copas             NUMERIC(8)   NOT NULL
   , copas_requeridas  NUMERIC(8)   NOT NULL

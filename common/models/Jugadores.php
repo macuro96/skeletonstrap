@@ -6,8 +6,6 @@ namespace common\models;
  * This is the model class for table "jugadores".
  *
  * @property int $id
- * @property string $expulsado
- * @property string $deleted_at
  * @property string $tag
  * @property string $clan_tag
  * @property string $clan_rol
@@ -51,7 +49,6 @@ class Jugadores extends \common\models\ClashRoyaleCache
     public function rules()
     {
         return [
-            [['expulsado', 'deleted_at'], 'safe'],
             [['tag', 'nombre', 'nivel', 'copas', 'max_copas', 'partidas_totales', 'victorias', 'derrotas', 'empates', 'cartas_descubiertas'], 'required'],
             [['nivel', 'copas', 'max_copas', 'cartas_descubiertas', 'desafio_cartas_ganadas'], 'number'],
             [['partidas_totales', 'victorias', 'derrotas', 'empates', 'victorias_tres_coronas', 'donaciones_totales', 'donaciones_equipo', 'desafio_max_victorias', 'liga_id'], 'default', 'value' => null],
@@ -78,8 +75,6 @@ class Jugadores extends \common\models\ClashRoyaleCache
     {
         return array_combine(self::clavesLabelsStatic(), [
             'ID',
-            'Expulsado',
-            'Borrado en',
             'TAG',
             'Nombre',
             'Nivel',
@@ -108,8 +103,6 @@ class Jugadores extends \common\models\ClashRoyaleCache
     {
         return [
             'id',
-            'expulsado',
-            'deleted_at',
             'tag',
             'nombre',
             'nivel',
@@ -138,8 +131,6 @@ class Jugadores extends \common\models\ClashRoyaleCache
     {
         return array_combine([
             'id',
-            'expulsado',
-            'deleted_at',
             'tag',
             'name',
             'stats.level',

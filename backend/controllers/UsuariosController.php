@@ -13,6 +13,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use backend\models\ElegirUsuarioForm;
 use common\models\ZonasHorarias;
 use common\models\Nacionalidades;
 
@@ -62,7 +63,7 @@ class UsuariosController extends Controller
      */
     public function actionIndex()
     {
-        $usuarios = Usuarios::find()->all();
+        $usuarios = Usuarios::findLoginExpulsadosQuery()->all();
         $usuariosPendientes = Usuarios::pendientes();
 
         return $this->render('index', [
@@ -91,15 +92,37 @@ class UsuariosController extends Controller
         return $this->redirect(['index']);
     }
 
+    private function usuarioPost()
+    {
+        $id = Yii::$app->request->post('usuario');
+        return $this->findModel($id);
+    }
+
     /**
      * Cancela la solicitud de un usuario que ha pedido una invitación al equipo.
      * @return mixed
      */
     public function actionCancelarSolicitud()
     {
-        $id = Yii::$app->request->post('usuario');
-        $this->findModel($id)->delete();
+        $this->usuarioPost()->delete();
+        return $this->redirect(['index']);
+    }
 
+    public function actionEliminar()
+    {
+        $this->usuarioPost()->delete();
+        return $this->redirect(['index']);
+    }
+
+    public function actionExpulsar()
+    {
+        $this->usuarioPost()->expulsar();
+        return $this->redirect(['index']);
+    }
+
+    public function actionQuitarExpulsion()
+    {
+        $this->usuarioPost()->quitarExpulsion();
         return $this->redirect(['index']);
     }
 
@@ -191,6 +214,67 @@ class UsuariosController extends Controller
             'model' => $model,
             'nacionalidades' => $nacionalidades,
             'zonasHorarias' => $zonasHorarias
+        ]);
+    }
+
+    /**
+     * Lista de usuarios que pueden loguearse y que no sea el propio usuario logueado.
+     * @return array Devuelve la lista de usuarios.
+     */
+    private function listaUsuarios()
+    {
+        $usuariosDatos = Usuarios::findLoginExpulsadosQuery()
+                                 ->orderBy('nombre ASC')
+                                 ->where('id != ' . \Yii::$app->user->identity->id)
+                                 ->asArray()
+                                 ->all();
+
+        $usuarios = [];
+
+        foreach ($usuariosDatos as $key => $value) {
+            $idUsuario     = $value['id'];
+            $nombreUsuario = $value['nombre'];
+
+            $usuarios[$idUsuario] = $nombreUsuario;
+        }
+
+        return $usuarios;
+    }
+
+    /**
+     * Elimina a un usuario por su id en POST
+     */
+    public function actionAccionUsuario()
+    {
+        $model = new ElegirUsuarioForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $accion = $model->accion;
+
+            $usuario = Usuarios::findLoginExpulsadosQuery()
+                               ->where(['id' => $model->usuario_id])
+                               ->one();
+
+            $nombreUsuario = $usuario->nombre;
+
+            if ($accion == 'eliminar') {
+                $usuario->delete();
+                $mensaje = 'Se ha eliminado al usuario ' . $nombreUsuario . ' correctamente.';
+            } elseif ($accion == 'expulsar') {
+                $usuario->expulsar();
+                $mensaje = 'Se ha expulsado al usuario ' . $nombreUsuario . ' correctamente.';
+            } elseif ($accion == 'quitar-expulsion') {
+                $usuario->quitarExpulsion();
+                $mensaje = 'Se ha quitado la expulsión al usuario ' . $nombreUsuario . ' correctamente.';
+            }
+
+            \Yii::$app->session->setFlash('success', $mensaje);
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('accion', [
+            'model' => $model,
+            'usuarios' => $this->listaUsuarios()
         ]);
     }
 

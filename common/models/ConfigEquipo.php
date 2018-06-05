@@ -34,12 +34,13 @@ class ConfigEquipo extends \common\models\ClashRoyaleCache
     public function rules()
     {
         return [
-            [['nombre', 'copas', 'copas_requeridas'], 'required'],
+            [['nombre', 'copas', 'copas_requeridas', 'tag'], 'required'],
             [['donaciones_semana'], 'default', 'value' => null],
             [['donaciones_semana', 'numero_miembros'], 'integer'],
             [['descripcion'], 'string'],
             [['copas', 'copas_requeridas', 'numero_miembros'], 'number'],
             [['nombre'], 'string', 'max' => 255],
+            [['tag'], 'unique'],
         ];
     }
 

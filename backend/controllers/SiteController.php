@@ -25,7 +25,7 @@ class SiteController extends Controller
                     [
                         'actions' => ['login'],
                         'allow' => true,
-                        'roles' => ['?']
+                        'roles' => ['?'],
                     ],
                     [
                         'actions' => ['logout', 'index'],
@@ -33,6 +33,13 @@ class SiteController extends Controller
                         'roles' => ['@'],
                     ],
                 ],
+                'denyCallback' => function ($rule, $action) {
+                    if ($action->id == 'login') {
+                        return $this->goHome();
+                    } else {
+                        return $this->redirect(['login']);
+                    }
+                }
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),

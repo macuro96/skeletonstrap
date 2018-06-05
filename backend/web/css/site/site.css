@@ -105,6 +105,10 @@ div.menu {
     .menu {
         padding-bottom: 5px !important;
     }
+
+    .modulo {
+        margin-right: 0px !important;        
+    }
 }
 
 /* Modulos */
@@ -114,11 +118,11 @@ div.menu {
     border-width: 4px;
 
     padding-bottom: 8px;
-}
 
-.modulo {
     background-color: #337ab7;
     color: white;
+
+    margin-right: 12px;
 }
 
 .modulo .contenido {

@@ -13,6 +13,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use backend\models\ElegirUsuarioForm;
 use common\models\ZonasHorarias;
 use common\models\Nacionalidades;
 
@@ -62,7 +63,7 @@ class UsuariosController extends Controller
      */
     public function actionIndex()
     {
-        $usuarios = Usuarios::find()->all();
+        $usuarios = Usuarios::findLoginQuery()->all();
         $usuariosPendientes = Usuarios::pendientes();
 
         return $this->render('index', [
@@ -91,15 +92,25 @@ class UsuariosController extends Controller
         return $this->redirect(['index']);
     }
 
+    private function eliminarUsuarioPost()
+    {
+        $id = Yii::$app->request->post('usuario');
+        $this->findModel($id)->delete();
+    }
+
     /**
      * Cancela la solicitud de un usuario que ha pedido una invitación al equipo.
      * @return mixed
      */
     public function actionCancelarSolicitud()
     {
-        $id = Yii::$app->request->post('usuario');
-        $this->findModel($id)->delete();
+        $this->eliminarUsuarioPost();
+        return $this->redirect(['index']);
+    }
 
+    public function actionEliminarUsuario()
+    {
+        $this->eliminarUsuarioPost();
         return $this->redirect(['index']);
     }
 
@@ -191,6 +202,53 @@ class UsuariosController extends Controller
             'model' => $model,
             'nacionalidades' => $nacionalidades,
             'zonasHorarias' => $zonasHorarias
+        ]);
+    }
+
+    /**
+     * Lista de usuarios que pueden loguearse y que no sea el propio usuario logueado.
+     * @return array Devuelve la lista de usuarios.
+     */
+    private function listaUsuarios()
+    {
+        $usuariosDatos = Usuarios::findLoginQuery()
+                                 ->orderBy('nombre ASC')
+                                 ->where('id != ' . \Yii::$app->user->identity->id)
+                                 ->asArray()
+                                 ->all();
+
+        $usuarios = [];
+
+        foreach ($usuariosDatos as $key => $value) {
+            $idUsuario     = $value['id'];
+            $nombreUsuario = $value['nombre'];
+
+            $usuarios[$idUsuario] = $nombreUsuario;
+        }
+
+        return $usuarios;
+    }
+
+    /**
+     * Elimina a un usuario por su id en POST
+     */
+    public function actionEliminar()
+    {
+        $model = new ElegirUsuarioForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            Usuarios::findLoginQuery()
+                    ->where(['id' => $model->usuario_id])
+                    ->one()
+                    ->delete();
+
+            \Yii::$app->session->setFlash('success', 'Se ha eliminado al usuario correctamente.');
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('eliminar', [
+            'model' => $model,
+            'usuarios' => $this->listaUsuarios()
         ]);
     }
 

@@ -190,9 +190,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function validos()
     {
-        return static::find()
-                     ->where(['activo' => true])
-                     ->andWhere('verificado is null')
+        return static::findLoginQuery()
                      ->andWhere('jugador_id is not null')
                      ->all();
     }

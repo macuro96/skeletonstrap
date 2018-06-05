@@ -35,4 +35,27 @@ RegisterThisCss::register($this);
             </div>
         </div>
     </div>
+    <div class="col-md-3 modulo solicitudes-entrar">
+        <div class="row titulo-cabecera centrar">
+            <div class="col-md-12">
+                <h3>Usuarios (<numero-usuarios><?= Html::encode(count($usuarios) - 1) ?></numero-usuarios>)</h3>
+            </div>
+        </div>
+        <div class="row contenido">
+            <div class="col-md-12">
+                <div class="acciones centrar">
+                    <?= Html::a('Eliminar un usuario', ['eliminar'], ['class' => 'btn btn-danger btn-lg']) ?>
+                </div>
+                <div id="usuarios-solicitudes">
+                    <?php foreach ($usuarios as $us) : ?>
+                        <?php if ($us->id != \Yii::$app->user->identity->id) : ?>
+                            <?= $this->render('_usuarioAcciones', [
+                                'model' => $us
+                            ]); ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -63,7 +63,7 @@ class UsuariosController extends Controller
      */
     public function actionIndex()
     {
-        $usuarios = Usuarios::findLoginQuery()->all();
+        $usuarios = Usuarios::findLoginExpulsadosQuery()->all();
         $usuariosPendientes = Usuarios::pendientes();
 
         return $this->render('index', [
@@ -92,10 +92,10 @@ class UsuariosController extends Controller
         return $this->redirect(['index']);
     }
 
-    private function eliminarUsuarioPost()
+    private function usuarioPost()
     {
         $id = Yii::$app->request->post('usuario');
-        $this->findModel($id)->delete();
+        return $this->findModel($id);
     }
 
     /**
@@ -104,13 +104,25 @@ class UsuariosController extends Controller
      */
     public function actionCancelarSolicitud()
     {
-        $this->eliminarUsuarioPost();
+        $this->usuarioPost()->delete();
         return $this->redirect(['index']);
     }
 
-    public function actionEliminarUsuario()
+    public function actionEliminar()
     {
-        $this->eliminarUsuarioPost();
+        $this->usuarioPost()->delete();
+        return $this->redirect(['index']);
+    }
+
+    public function actionExpulsar()
+    {
+        $this->usuarioPost()->expulsar();
+        return $this->redirect(['index']);
+    }
+
+    public function actionQuitarExpulsion()
+    {
+        $this->usuarioPost()->quitarExpulsion();
         return $this->redirect(['index']);
     }
 
@@ -211,7 +223,7 @@ class UsuariosController extends Controller
      */
     private function listaUsuarios()
     {
-        $usuariosDatos = Usuarios::findLoginQuery()
+        $usuariosDatos = Usuarios::findLoginExpulsadosQuery()
                                  ->orderBy('nombre ASC')
                                  ->where('id != ' . \Yii::$app->user->identity->id)
                                  ->asArray()
@@ -232,21 +244,35 @@ class UsuariosController extends Controller
     /**
      * Elimina a un usuario por su id en POST
      */
-    public function actionEliminar()
+    public function actionAccionUsuario()
     {
         $model = new ElegirUsuarioForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            Usuarios::findLoginQuery()
-                    ->where(['id' => $model->usuario_id])
-                    ->one()
-                    ->delete();
+            $accion = $model->accion;
 
-            \Yii::$app->session->setFlash('success', 'Se ha eliminado al usuario correctamente.');
+            $usuario = Usuarios::findLoginExpulsadosQuery()
+                               ->where(['id' => $model->usuario_id])
+                               ->one();
+
+            $nombreUsuario = $usuario->nombre;
+
+            if ($accion == 'eliminar') {
+                $usuario->delete();
+                $mensaje = 'Se ha eliminado al usuario ' . $nombreUsuario . ' correctamente.';
+            } elseif ($accion == 'expulsar') {
+                $usuario->expulsar();
+                $mensaje = 'Se ha expulsado al usuario ' . $nombreUsuario . ' correctamente.';
+            } elseif ($accion == 'quitar-expulsion') {
+                $usuario->quitarExpulsion();
+                $mensaje = 'Se ha quitado la expulsión al usuario ' . $nombreUsuario . ' correctamente.';
+            }
+
+            \Yii::$app->session->setFlash('success', $mensaje);
             return $this->redirect(['index']);
         }
 
-        return $this->render('eliminar', [
+        return $this->render('accion', [
             'model' => $model,
             'usuarios' => $this->listaUsuarios()
         ]);

@@ -23,7 +23,7 @@ RegisterThisCss::register($this);
         <div class="row contenido">
             <div class="col-md-12">
                 <div class="acciones centrar">
-                    <?= Html::a('Invitar a un jugador', ['invitar'], ['class' => 'btn btn-success btn-lg']) ?>
+                    <?= Html::a('Invitar a un jugador', ['invitar'], ['class' => 'btn btn-primary btn-lg']) ?>
                 </div>
                 <div id="usuarios-solicitudes">
                     <?php foreach ($usuariosPendientes as $us) : ?>
@@ -44,7 +44,9 @@ RegisterThisCss::register($this);
         <div class="row contenido">
             <div class="col-md-12">
                 <div class="acciones centrar">
-                    <?= Html::a('Eliminar un usuario', ['eliminar'], ['class' => 'btn btn-danger btn-lg']) ?>
+                    <?= Html::a('Expulsar', ['accion-usuario', 'accion' => 'expulsar'], ['class' => 'btn btn-warning']) ?>
+                    <?= Html::a('Quitar expulsion', ['accion-usuario', 'accion' => 'quitar-expulsion'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('Eliminar', ['accion-usuario', 'accion' => 'eliminar'], ['class' => 'btn btn-danger']) ?>
                 </div>
                 <div id="usuarios-solicitudes">
                     <?php foreach ($usuarios as $us) : ?>

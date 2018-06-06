@@ -286,7 +286,7 @@ CREATE TABLE usuarios
 (
     id               BIGSERIAL    PRIMARY KEY
   , expulsado        TIMESTAMP(0) -- HASTA FECHA
-  --, deleted_at       TIMESTAMP(0) -- SOFT DELETE    
+  --, deleted_at       TIMESTAMP(0) -- SOFT DELETE
   , nombre           VARCHAR(255) NOT NULL UNIQUE
   , password         VARCHAR(255) NOT NULL
   , correo           VARCHAR(255) NOT NULL UNIQUE
@@ -561,6 +561,37 @@ CREATE TABLE cofres_ciclos
 
 CREATE INDEX idx_cofres_ciclos_orden        ON cofres_ciclos (orden);
 CREATE INDEX idx_cofres_ciclos_cofre_ultimo ON cofres_ciclos (cofre_ultimo);
+
+DROP TABLE IF EXISTS clanes CASCADE;
+
+CREATE TABLE clanes
+(
+    id                BIGSERIAL    PRIMARY KEY
+  , nombre            VARCHAR(255) NOT NULL
+  , tag               VARCHAR(16)  NOT NULL UNIQUE
+  , descripcion       TEXT
+  , copas             NUMERIC(8)   NOT NULL
+  , copas_requeridas  NUMERIC(8)   NOT NULL
+  , donaciones_semana INTEGER
+  , numero_miembros   INTEGER      NOT NULL
+);
+
+DROP TABLE IF EXISTS solicitudes_lucha CASCADE;
+
+CREATE TABLE solicitudes_lucha
+(
+    id               BIGSERIAL    PRIMARY KEY
+  , tag              VARCHAR(16)  NOT NULL UNIQUE
+  , nacionalidad_id  BIGINT       NOT NULL REFERENCES nacionalidades (id)
+                                  ON DELETE NO ACTION
+                                  ON UPDATE CASCADE
+  , correo           VARCHAR(255) NOT NULL UNIQUE
+  , aceptada         BOOLEAN      NOT NULL DEFAULT FALSE
+  , clan_id          BIGINT       NOT NULL REFERENCES clanes (id)
+                                  ON DELETE NO ACTION
+                                  ON UPDATE CASCADE
+
+);
 
 DROP TABLE IF EXISTS config_equipo CASCADE;
 

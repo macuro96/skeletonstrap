@@ -13,6 +13,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use common\models\SolicitudesLucha;
+
 use backend\models\ElegirUsuarioForm;
 use common\models\ZonasHorarias;
 use common\models\Nacionalidades;
@@ -66,9 +68,12 @@ class UsuariosController extends Controller
         $usuarios = Usuarios::findLoginExpulsadosQuery()->all();
         $usuariosPendientes = Usuarios::pendientes();
 
+        $solicitudesLucha = SolicitudesLucha::find()->all();
+
         return $this->render('index', [
             'usuarios' => $usuarios,
-            'usuariosPendientes' => $usuariosPendientes
+            'usuariosPendientes' => $usuariosPendientes,
+            'solicitudesLucha' => $solicitudesLucha
         ]);
     }
 
@@ -92,6 +97,30 @@ class UsuariosController extends Controller
         return $this->redirect(['index']);
     }
 
+    /**
+     * Acepta la solicitud de un usuario que ha pedido invitación al equipo.
+     * @return mixed
+     */
+    public function actionAceptarSolicitudLucha()
+    {
+        $id = Yii::$app->request->post('solicitud');
+        $model = SolicitudesLucha::findOne($id);
+
+        if ($model) {
+            $model->aceptada = true;
+
+            $model->validate();
+
+            if ($model->save() && $this->enviarCorreoSolicitudLucha($model)) {
+                \Yii::$app->session->setFlash('success', 'Se ha enviado el correo de aceptación de lucha a la dirección <b>' . Html::encode($model->correo) . '</b> correctamente');
+            } else {
+                \Yii::$app->session->setFlash('danger', 'No se ha podido enviar el correo de aceptación de lucha a la dirección <b>' . Html::encode($model->correo) . '</b>, ha ocurrido un error inesperado.');
+            }
+        }
+
+        return $this->redirect(['index']);
+    }
+
     private function usuarioPost()
     {
         $id = Yii::$app->request->post('usuario');
@@ -105,6 +134,23 @@ class UsuariosController extends Controller
     public function actionCancelarSolicitud()
     {
         $this->usuarioPost()->delete();
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Borra la solicitud de un clan que ha pedido una lucha contra el equipo.
+     * @return mixed
+     */
+    public function actionBorrarSolicitudLucha()
+    {
+        $id = Yii::$app->request->post('solicitud');
+
+        $solicitud = SolicitudesLucha::findOne($id);
+
+        if ($solicitud) {
+            $solicitud->delete();
+        }
+
         return $this->redirect(['index']);
     }
 
@@ -144,7 +190,22 @@ class UsuariosController extends Controller
     }
 
     /**
-     * Verifica un correo de un usuario
+     * Envia un correo de aceptación de lucha contra el equipo
+     * @param SolicitudesLucha $solicitud Solicitud al que se le va a enviar el correo
+     */
+    private function enviarCorreoSolicitudLucha($solicitud)
+    {
+        return Yii::$app->mailer->compose()
+                        ->setFrom(Yii::$app->params['adminEmail'])
+                        ->setTo($solicitud->correo)
+                        ->setSubject('Correo de aceptación de la solicitud de lucha contra Skeleton\'s Trap')
+                        ->setHtmlBody('Hola, si has recibido este correo significa que hemos aceptado luchar contra tu clan con TAG <b>' . $solicitud->tag . '</b>. Nos pondremos en contacto en la mayor brevedad posible.')
+                        ->setTextBody('Hola, si has recibido este correo significa que hemos aceptado luchar contra tu clan con TAG ' . $solicitud->tag . '. Nos pondremos en contacto en la mayor brevedad posible.')
+                        ->send();
+    }
+
+    /**
+     * Vuelve a enviar un correo de verificación de un usuario
      * @return mixed
      */
     public function actionCorreoVerificar()
@@ -156,6 +217,26 @@ class UsuariosController extends Controller
             \Yii::$app->session->setFlash('success', 'Se ha vuelto a enviar el correo de confirmación a la dirección <b>' . Html::encode($model->correo) . '</b> correctamente');
         } else {
             \Yii::$app->session->setFlash('danger', 'No se ha podido enviar el correo de confirmación a la dirección <b>' . Html::encode($model->correo) . '</b>, ha ocurrido un error inesperado.');
+        }
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Vuelve a enviar el correo de aceptación de lucha contra el equipo de un clan que lo solicitó
+     * @return mixed
+     */
+    public function actionCorreoSolicitudLucha()
+    {
+        $id = Yii::$app->request->post('solicitud');
+        $solicitud = SolicitudesLucha::findOne($id);
+
+        if ($solicitud) {
+            if ($this->enviarCorreoSolicitudLucha($solicitud)) {
+                \Yii::$app->session->setFlash('success', 'Se ha vuelto a enviar el correo de aceptación de lucha a la dirección <b>' . Html::encode($solicitud->correo) . '</b> correctamente');
+            } else {
+                \Yii::$app->session->setFlash('danger', 'No se ha podido enviar el correo de aceptación de lucha a la dirección <b>' . Html::encode($solicitud->correo) . '</b>, ha ocurrido un error inesperado.');
+            }
         }
 
         return $this->redirect(['index']);

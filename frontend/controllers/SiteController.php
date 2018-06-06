@@ -14,6 +14,7 @@ use common\models\Usuarios;
 use common\models\LoginForm;
 use common\models\ZonasHorarias;
 use common\models\Nacionalidades;
+use common\models\SolicitudesLucha;
 use frontend\models\VerificarForm;
 
 /**
@@ -143,6 +144,42 @@ class SiteController extends Controller
             'model' => $model,
             'nacionalidades' => $nacionalidades,
             'zonasHorarias' => $zonasHorarias
+        ]);
+    }
+
+    /**
+     * Envía una invitación de un nuevo usuario a los administradores.
+     * @return mixed
+     */
+    public function actionLuchar()
+    {
+        $model = new SolicitudesLucha([
+            'scenario' => SolicitudesLucha::ESCENARIO_LUCHA
+        ]);
+
+        $nacionalidadesDatos = Nacionalidades::find()
+                                             ->orderBy('pais ASC')
+                                             ->asArray()
+                                             ->all();
+
+        $nacionalidades = [];
+
+        foreach ($nacionalidadesDatos as $key => $value) {
+            $idNacionalidad   = $value['id'];
+            $paisNacionalidad = $value['pais'];
+
+            $nacionalidades[$idNacionalidad] = $paisNacionalidad;
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            \Yii::$app->session->setFlash('success', 'Se ha enviado la petición al administrador correctamente. Correo suministrado: <b>' . Html::encode($model->correo) . '</b>');
+
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('luchar', [
+            'model' => $model,
+            'nacionalidades' => $nacionalidades,
         ]);
     }
 

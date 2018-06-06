@@ -13,6 +13,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use common\models\SolicitudesLucha;
+
 use backend\models\ElegirUsuarioForm;
 use common\models\ZonasHorarias;
 use common\models\Nacionalidades;
@@ -66,9 +68,12 @@ class UsuariosController extends Controller
         $usuarios = Usuarios::findLoginExpulsadosQuery()->all();
         $usuariosPendientes = Usuarios::pendientes();
 
+        $solicitudesLucha = SolicitudesLucha::find()->all();
+
         return $this->render('index', [
             'usuarios' => $usuarios,
-            'usuariosPendientes' => $usuariosPendientes
+            'usuariosPendientes' => $usuariosPendientes,
+            'solicitudesLucha' => $solicitudesLucha
         ]);
     }
 

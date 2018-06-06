@@ -47,13 +47,31 @@ RegisterThisCss::register($this);
                     <?= Html::a('Quitar expulsion', ['accion-usuario', 'accion' => 'quitar-expulsion'], ['class' => 'btn btn-success']) ?>
                     <?= Html::a('Eliminar', ['accion-usuario', 'accion' => 'eliminar'], ['class' => 'btn btn-danger']) ?>
                 </div>
-                <div id="usuarios-solicitudes">
+                <div id="usuarios-acciones">
                     <?php foreach ($usuarios as $us) : ?>
                         <?php if ($us->id != \Yii::$app->user->identity->id) : ?>
                             <?= $this->render('_usuarioAcciones', [
                                 'model' => $us
                             ]); ?>
                         <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 modulo solicitudes-entrar">
+        <div class="row titulo-cabecera centrar">
+            <div class="col-md-12">
+                <h3>Solicitudes para luchar con el equipo (<numero-solicitudes-lucha><?= Html::encode(count($solicitudesLucha)) ?></numero-solicitudes-lucha>)</h3>
+            </div>
+        </div>
+        <div class="row contenido">
+            <div class="col-md-12">
+                <div id="solicitudes-lucha">
+                    <?php foreach ($solicitudesLucha as $solicitud) : ?>
+                        <?= $this->render('_solicitudLucha', [
+                            'model' => $solicitud
+                        ]); ?>
                     <?php endforeach; ?>
                 </div>
             </div>

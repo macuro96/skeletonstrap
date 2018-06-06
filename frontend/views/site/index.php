@@ -3,8 +3,6 @@
 /* @var $this yii\web\View */
 /* @var $detect Detection\MobileDetect */
 
-use yii\web\View;
-
 use common\components\Recursos;
 use common\components\RedesSociales;
 use common\components\RegisterThisJs;
@@ -13,8 +11,7 @@ use common\components\RegisterThisCss;
 $this->title = 'Inicio';
 
 RegisterThisCss::register($this);
-RegisterThisJs::register($this, ['position' => View::POS_END,
-                                 'depends'  => [\yii\web\JqueryAsset::className()]]);
+RegisterThisJs::register($this);
 ?>
 <div class="row cabecera-inicio">
     <div class="col-lg-offset-3 col-lg-6">

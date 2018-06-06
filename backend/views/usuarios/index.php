@@ -9,7 +9,6 @@ use common\components\RegisterThisCss;
 /* @var $usuariosPendientes common\models\Usuarios */
 
 $this->title = 'Usuarios';
-$this->params['breadcrumbs'][] = $this->title;
 
 RegisterThisCss::register($this);
 ?>

@@ -6,26 +6,146 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Eliminar o expulsar un usuario';
-$this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['usuarios/index']];
-$this->params['breadcrumbs'][] = $this->title;
+use common\components\RegisterThisJs;
+use common\components\RegisterThisCss;
 
+$this->title = 'Eliminar o expulsar usuarios';
+
+RegisterThisCss::register($this);
+RegisterThisJs::register($this);
+
+$usuariosAnadidos = $model->usuarios_id;
+
+$primerUsuario = (isset($model->usuarios_id[0]) ? $model->usuarios_id[0] : 1);
+
+if (is_array($usuariosAnadidos) && !empty($usuariosAnadidos)) {
+    array_shift($usuariosAnadidos);
+} else {
+    $usuariosAnadidos = [];
+}
+
+$cont = 0;
+
+$errors['noexpulsado'] = [];
+$errors['expulsado']   = [];
+
+foreach ($model->errors as $key => $value) {
+    $separacion = explode('-', $key);
+
+    if ($separacion[1] == 'noexpulsado') {
+        $errors['noexpulsado'][$separacion[0]] = $value[0];
+    } elseif ($separacion[1] == 'expulsado') {
+        $errors['expulsado'][$separacion[0]] = $value[0];
+    }
+}
+
+$jsonErrors = ((!empty($errors['noexpulsado']) || !empty($errors['expulsado'])) ? json_encode($errors) : '\'\'');
+
+$js = <<<EOT
+    var cont = 1;
+
+    var errors = $jsonErrors;
+
+    $('.anadir-usuario').on('click', function (){
+        if ($('.usuario-row').length < 5) {
+            var nuevoElemento = $('.usuario-row:last').clone(true);
+
+            nuevoElemento.find('.div-anadir').remove();
+            nuevoElemento.find('.div-eliminar').removeClass('hidden');
+
+            nuevoElemento.find('.form-group').removeClass('has-error');
+            nuevoElemento.find('.form-group .help-block').remove();
+
+            var select = nuevoElemento.find('select');
+
+            select.attr('id', 'elegirusuarioform-usuarios_id-' + cont++);
+
+            $('.usuario-row:last').after(nuevoElemento);
+        }
+    });
+
+    $('.eliminar-usuario').on('click', function() {
+        $(this).closest('.usuario-row').remove();
+    });
+
+    if (errors != '') {
+        console.log(errors);
+        for (let clave in errors) {
+            for (let nID in errors[clave]) {
+                var mensaje  = errors[clave][nID];
+                var idSelect = '#elegirusuarioform-usuarios_id-' + nID;
+
+                var divDOM = document.createElement('div');
+                var div = $(divDOM).addClass('help-block');
+
+                div.text(mensaje);
+
+                var formGroup = $(idSelect).closest('.form-group');
+
+                formGroup.addClass('has-error');
+                formGroup.find('.help-block').replaceWith(div);
+            }
+        }
+    }
+EOT;
+
+$this->registerJs($js);
 ?>
 <div class="row seccion usuarios-form">
-    <div class="col-lg-5">
-        <h2>Eliminar o expulsar un usuario</h2>
+    <div class="col-md-5">
+        <h2>Eliminar o expulsar usuarios</h2>
 
         <div>
-            <?php $form = ActiveForm::begin(['id' => 'usuarios-form']); ?>
-                <?= $form->field($model, 'usuario_id')->dropDownList($usuarios) ?>
-                <?= $form->field($model, 'accion')->dropDownList([
-                    'eliminar' => 'Eliminar',
-                    'expulsar' => 'Expulsar',
-                    'quitar-expulsion' => 'Quitar expulsión'
-                ], ['value' => \Yii::$app->request->get('accion')]) ?>
+            <?php $form = ActiveForm::begin(['id' => 'usuarios-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+                <div class="row usuario-row">
+                    <div class="col-md-9 col-xs-9">
+                        <?= $form->field($model, "usuarios_id[]")->dropDownList($usuarios,
+                            [
+                                'value' => $primerUsuario,
+                                'id' => 'elegirusuarioform-usuarios_id-' . $cont
+                            ]) ?>
+                        <?php $cont++ ?>
+                    </div>
+                    <div class="col-md-1 col-xs-1 div-anadir">
+                        <button type="button" class="btn btn-success btn anadir-usuario">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div class="col-md-1 col-xs-1 div-eliminar hidden">
+                        <button type="button" class="btn btn-danger btn eliminar-usuario">
+                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+                <?php foreach ($usuariosAnadidos as $idUsuario) : ?>
+                    <div class="row usuario-row">
+                        <div class="col-md-9 col-xs-9">
+                                <?= $form->field($model, "usuarios_id[]")->dropDownList($usuarios,
+                                [
+                                    'value' => $idUsuario,
+                                    'id' => 'elegirusuarioform-usuarios_id-' . $cont
+                                ]) ?>
+                                <?php $cont++ ?>
+                        </div>
+                        <div class="col-md-1 col-xs-1 div-eliminar">
+                            <button type="button" class="btn btn-danger btn eliminar-usuario">
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <?= $form->field($model, 'accion')->dropDownList([
+                            'eliminar' => 'Eliminar',
+                            'expulsar' => 'Expulsar',
+                            'quitar-expulsion' => 'Quitar expulsión'
+                        ], ['value' => \Yii::$app->request->get('accion')]) ?>
+                    </div>
+                </div>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Hacer acción a usuario', ['class' => 'btn btn-success']) ?>
+                    <?= Html::submitButton('Hacer acción a usuario', ['class' => 'btn btn-success btn-enviar']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

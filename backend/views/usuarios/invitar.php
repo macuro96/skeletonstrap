@@ -7,8 +7,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $this->title = 'Nueva invitación';
-$this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['usuarios/index']];
-$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="row seccion usuarios-form">

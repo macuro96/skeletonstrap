@@ -16,11 +16,18 @@ class RegisterThisJs extends RegisterThis
      * en concreto. Siguiendo una ubicación determinada para el archivo:
      * -> js/nombre-controlador/nombre-accion/nombre-archivo.js
      * @param  View  $view    Vista con la que obtener el controlador y la acción
-     * @param  array $options Array de opciones para el registro del archivo js. Por defecto está vacío.
+     * @param  array $options Array de opciones para el registro del archivo js. Por defecto depende de jQuey y lo posiciona al final.
      * @return bool           Si se ha realizado correctamente o no el registro en la vista.
      */
     public static function register($view, array $options = [])
     {
+        if (empty($options)) {
+            $options = [
+                'position' => View::POS_END,
+                'depends'  => [\yii\web\JqueryAsset::className()]
+            ];
+        }
+
         $ruta = parent::rutaExtension($view, 'js');
 
         return $view->registerJsFile($ruta, $options);

@@ -251,24 +251,25 @@ class UsuariosController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $accion = $model->accion;
 
-            $usuario = Usuarios::findLoginExpulsadosQuery()
-                               ->where(['id' => $model->usuario_id])
-                               ->one();
+            $strUsuarios = implode(', ', array_map(function ($elemento) {
+                return ('\'' . $elemento . '\'');
+            }, $model->usuarios_id));
 
-            $nombreUsuario = $usuario->nombre;
+            $usuarios = Usuarios::findLoginExpulsadosQuery()
+                                ->where('id in (' . $strUsuarios . ')')
+                                ->all();
 
-            if ($accion == 'eliminar') {
-                $usuario->delete();
-                $mensaje = 'Se ha eliminado al usuario ' . $nombreUsuario . ' correctamente.';
-            } elseif ($accion == 'expulsar') {
-                $usuario->expulsar();
-                $mensaje = 'Se ha expulsado al usuario ' . $nombreUsuario . ' correctamente.';
-            } elseif ($accion == 'quitar-expulsion') {
-                $usuario->quitarExpulsion();
-                $mensaje = 'Se ha quitado la expulsión al usuario ' . $nombreUsuario . ' correctamente.';
+            foreach ($usuarios as $usuario) {
+                if ($accion == 'eliminar') {
+                    $usuario->delete();
+                } elseif ($accion == 'expulsar') {
+                    $usuario->expulsar();
+                } elseif ($accion == 'quitar-expulsion') {
+                    $usuario->quitarExpulsion();
+                }
             }
 
-            \Yii::$app->session->setFlash('success', $mensaje);
+            \Yii::$app->session->setFlash('success', 'Se ha realizado la acción a los usuarios seleccionados correctamente.');
             return $this->redirect(['index']);
         }
 

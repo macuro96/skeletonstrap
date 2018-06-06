@@ -15,7 +15,7 @@ class ElegirUsuarioForm extends Model
      * Modelo de usuario temporal
      * @var Usuarios
      */
-    public $usuario_id;
+    public $usuarios_id;
 
     /**
      * Accion de eliminar o expulsar un usuario: 'eliminar' o 'expulsar'
@@ -29,20 +29,43 @@ class ElegirUsuarioForm extends Model
     public function rules()
     {
         return [
-            [['usuario_id', 'accion'], 'required'],
-            [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
-            [['accion'], function ($attribute, $params, $validator) {
+            [['accion'], 'required'],
+            [['usuarios_id'], function ($attribute, $params, $validator) {
                 if (!$this->hasErrors()) {
                     if ($this->accion != 'eliminar' && $this->accion != 'expulsar' && $this->accion != 'quitar-expulsion') {
                         $this->addError($attribute, 'La acción debe ser eliminar, expulsar o quitar expulsión.');
                     }
                     if ($this->accion == 'expulsar' || $this->accion == 'quitar-expulsion') {
-                        $usuario = Usuarios::findOne($this->usuario_id);
+                        $usuarios = [];
 
-                        if ($this->accion == 'expulsar' && $usuario->estaExpulsado) {
-                            $this->addError($attribute, 'El usuario ya ha sido expulsado.');
-                        } elseif ($this->accion == 'quitar-expulsion' && !$usuario->estaExpulsado) {
-                            $this->addError($attribute, 'El usuario no está expulsado.');
+                        foreach ($this->usuarios_id as $usuario_id) {
+                            $usuarioTemp = Usuarios::findOne($usuario_id);
+
+                            if ($usuarioTemp) {
+                                $usuarios[] = $usuarioTemp;
+                            }
+                        }
+
+                        if (count($usuarios) != count($this->usuarios_id)) {
+                            $this->addError('accion', 'Hay algun usuario elegido que no existe.');
+                        } else {
+                            if ($this->accion == 'expulsar') {
+                                $cont = 0;
+
+                                foreach ($usuarios as $usuario) {
+                                    if ($usuario->estaExpulsado) {
+                                        $this->addError($cont++ . '-expulsado', 'El usuario ya ha sido expulsado.');
+                                    }
+                                }
+                            } elseif ($this->accion == 'quitar-expulsion') {
+                                $cont = 0;
+
+                                foreach ($usuarios as $usuario) {
+                                    if (!$usuario->estaExpulsado) {
+                                        $this->addError($cont++ . '-noexpulsado', 'El usuario no está expulsado.');
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -56,7 +79,7 @@ class ElegirUsuarioForm extends Model
     public function attributeLabels()
     {
         return [
-            'usuario_id' => 'Usuario',
+            'usuarios_id' => 'Usuario',
             'accion'     => 'Acción',
         ];
     }

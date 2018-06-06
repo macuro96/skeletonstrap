@@ -153,7 +153,9 @@ class SiteController extends Controller
      */
     public function actionLuchar()
     {
-        $model = new SolicitudesLucha();
+        $model = new SolicitudesLucha([
+            'scenario' => SolicitudesLucha::ESCENARIO_LUCHA
+        ]);
 
         $nacionalidadesDatos = Nacionalidades::find()
                                              ->orderBy('pais ASC')

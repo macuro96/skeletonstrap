@@ -1,9 +1,9 @@
-.usuario {
+.solicitud-lucha, .usuario {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.usuario .botones a {
+.usuario .botones a, .solicitud-lucha .botones a {
     width: 100% !important;
     word-break: break-all;
     overflow: hidden;

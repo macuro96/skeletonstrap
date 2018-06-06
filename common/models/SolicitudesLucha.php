@@ -11,6 +11,12 @@ namespace common\models;
 class SolicitudesLucha extends \yii\db\ActiveRecord
 {
     /**
+     * Escenario de solicitar una lucha contra el equipo.
+     * @var string
+     */
+    const ESCENARIO_LUCHA = 'lucha';
+
+    /**
      * @inheritdoc
      */
     public static function tableName()
@@ -63,7 +69,7 @@ class SolicitudesLucha extends \yii\db\ActiveRecord
                         $this->addError($attribute, 'Ya existe un clan con ese TAG asociado');
                     }
                 }
-            }, 'skipOnEmpty' => true],
+            }, 'skipOnEmpty' => true, 'on' => self::ESCENARIO_LUCHA],
             [['clan_id'], 'required'],
             [['nacionalidad_id'], 'exist', 'skipOnError' => true, 'targetClass' => Nacionalidades::className(), 'targetAttribute' => ['nacionalidad_id' => 'id']],
             [['clan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Clanes::className(), 'targetAttribute' => ['clan_id' => 'id']],

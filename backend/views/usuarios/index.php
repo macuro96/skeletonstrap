@@ -13,7 +13,7 @@ $this->title = 'Usuarios';
 RegisterThisCss::register($this);
 ?>
 <div class="row">
-    <div class="col-md-3 modulo solicitudes-entrar">
+    <div class="col-md-3 modulo modulo-tamano">
         <div class="row titulo-cabecera centrar">
             <div class="col-md-12">
                 <h3>Solicitudes para entrar en el equipo (<numero-solicitudes><?= Html::encode(count($usuariosPendientes)) ?></numero-solicitudes>)</h3>
@@ -34,7 +34,7 @@ RegisterThisCss::register($this);
             </div>
         </div>
     </div>
-    <div class="col-md-3 modulo solicitudes-entrar">
+    <div class="col-md-3 modulo modulo-tamano">
         <div class="row titulo-cabecera centrar">
             <div class="col-md-12">
                 <h3>Usuarios (<numero-usuarios><?= Html::encode(count($usuarios) - 1) ?></numero-usuarios>)</h3>
@@ -59,7 +59,7 @@ RegisterThisCss::register($this);
             </div>
         </div>
     </div>
-    <div class="col-md-3 modulo solicitudes-entrar">
+    <div class="col-md-3 modulo modulo-tamano">
         <div class="row titulo-cabecera centrar">
             <div class="col-md-12">
                 <h3>Solicitudes para luchar con el equipo (<numero-solicitudes-lucha><?= Html::encode(count($solicitudesLucha)) ?></numero-solicitudes-lucha>)</h3>

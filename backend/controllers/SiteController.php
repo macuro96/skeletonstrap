@@ -5,6 +5,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use common\models\Config;
 use backend\models\LoginForm;
 
 /**
@@ -70,6 +71,23 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionAdministrarCuentas()
+    {
+        $config = Config::find()->one();
+
+        $model = ($config ?: new Config());
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            \Yii::$app->session->setFlash('success', 'Configuración cambiada correctamente.');
+
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('administrar-cuentas.php', [
+            'model' => $model
+        ]);
     }
 
     /**

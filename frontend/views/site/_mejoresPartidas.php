@@ -3,6 +3,8 @@
 /* @var $detect Detection\MobileDetect */
 
 use yii\helpers\Html;
+use common\models\Config;
+
 use common\components\RedesSociales;
 use common\components\Twitch;
 
@@ -18,10 +20,10 @@ use common\components\Twitch;
             </div>
             <div class="row">
                 <div class="col-lg-12 centrar">
-                    <h2><?= Html::a('¿Te atréves a jugar <b>contra nosotros</b>?', ['/site/lucha'], ['class' => 'a-none']) ?></h2>
+                    <h2><?= Html::a('¿Te atréves a jugar <b>contra nosotros</b>?', ['/site/luchar'], ['class' => 'a-none']) ?></h2>
                     <div class="redes-sociales">
-                        <?= RedesSociales::twitter('https://skeletons-trap.herokuapp.com/ ¿Te atréves a jugar contra nosotros? Somos Skeleton\'s Trap') ?>
-                        <?= RedesSociales::whatsapp($detect, 'https://skeletons-trap.herokuapp.com/ ¿Te atréves a jugar contra nosotros? Somos Skeleton\'s Trap') ?>
+                        <?= RedesSociales::twitter(Config::find()->one()->mensaje_twitter) ?>
+                        <?= RedesSociales::whatsapp($detect, Config::find()->one()->mensaje_whatsapp) ?>
                     </div>
                 </div>
             </div>

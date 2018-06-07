@@ -27,8 +27,3 @@
     max-height: 92px !important;
     margin: 0 auto;
 }
-
-.solicitudes-entrar .contenido {
-    height: 500px;
-    overflow-y: scroll;
-}

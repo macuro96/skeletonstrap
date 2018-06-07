@@ -391,8 +391,6 @@ CREATE TABLE jugadores
                                          ON UPDATE CASCADE
 );
 
-CREATE INDEX idx_jugadores_expulsado               ON jugadores (expulsado);
-CREATE INDEX idx_jugadores_deleted_at              ON jugadores (deleted_at);
 CREATE INDEX idx_jugadores_nivel                   ON jugadores (nivel);
 CREATE INDEX idx_jugadores_copas                   ON jugadores (copas);
 CREATE INDEX idx_jugadores_max_copas               ON jugadores (max_copas);

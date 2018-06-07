@@ -2,6 +2,8 @@
 
 namespace common\components;
 
+use common\models\Config;
+
 /**
  * Componente común para funciones de twitch.
  */
@@ -14,7 +16,7 @@ class Twitch
     {
         ?>
         <iframe class="twitch-video"
-        src="http://player.twitch.tv/?channel=skeletonstraptv"
+        src="http://player.twitch.tv/?channel=<?= Config::find()->one()->usuario_twitch ?>"
         height="720"
         width="80%"
         frameborder="0"

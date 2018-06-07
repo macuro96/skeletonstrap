@@ -13,6 +13,10 @@ body {
     min-height: 100% !important;
 }
 
+.seccion {
+    margin-right: 14px !important;
+}
+
 .navbar-fija {
     position: fixed;
     left: 0;
@@ -107,7 +111,11 @@ div.menu {
     }
 
     .modulo {
-        margin-right: 0px !important;        
+        margin-right: 0px !important;
+    }
+
+    .seccion {
+        margin-right: 0px !important;
     }
 }
 
@@ -137,4 +145,9 @@ div.menu {
 .modulo .titulo-cabecera {
     margin: 0px !important;
     padding-bottom: 15px !important;
+}
+
+.modulo-tamano .contenido {
+    height: 500px;
+    overflow-y: scroll;
 }

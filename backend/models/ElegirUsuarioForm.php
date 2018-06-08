@@ -29,7 +29,7 @@ class ElegirUsuarioForm extends Model
     public function rules()
     {
         return [
-            [['accion'], 'required'],
+            [['accion', 'usuarios_id'], 'required'],
             [['usuarios_id'], function ($attribute, $params, $validator) {
                 if (!$this->hasErrors()) {
                     if ($this->accion != 'eliminar' && $this->accion != 'expulsar' && $this->accion != 'quitar-expulsion') {

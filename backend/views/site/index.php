@@ -23,61 +23,6 @@ RegisterThisCss::register($this);
     <div class="col-md-3 modulo">
         <div class="row titulo-cabecera centrar">
             <div class="col-md-12">
-                <h3>Navegación</h3>
-            </div>
-        </div>
-        <div class="row contenido">
-            <div class="col-md-12">
-                <div class="acciones centrar">
-                    <?= Html::a('Usuarios', ['usuarios/index'], ['class' => 'btn btn-primary btn-lg']) ?>
-                    <?= Html::a('Calendario', ['site/calendario/index'], ['class' => 'btn btn-warning btn-lg']) ?>
-                    <?= Html::a('Torneos', ['torneos/index'], ['class' => 'btn btn-primary btn-lg']) ?>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 modulo">
-        <div class="row titulo-cabecera centrar">
-            <div class="col-md-12">
-                <h3>Administrar cuentas</h3>
-            </div>
-        </div>
-        <div class="row contenido">
-            <div class="col-md-12">
-                <div class="acciones centrar">
-                    <?= Html::a('Configuración', ['administrar-cuentas'], ['class' => 'btn btn-primary btn-lg']) ?>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-3 modulo">
-        <div class="row titulo-cabecera centrar">
-            <div class="col-md-12">
-                <h3>Configuración</h3>
-            </div>
-        </div>
-        <div class="row contenido">
-            <div class="col-md-12">
-                <div class="acciones centrar">
-                    <?= Html::a('Directo', ['directo'], ['class' => 'btn btn-danger btn-lg btn-extenso']) ?>
-                </div>
-                <div class="acciones centrar">
-                    <?= Html::a('Programar próx partida', ['proxima-partida'], ['class' => 'btn btn-warning btn-lg btn-extenso']) ?>
-                </div>
-                <div class="acciones centrar">
-                    <?= Html::a('Mejores partidas', ['mejores-partidas'], ['class' => 'btn btn-primary btn-lg btn-extenso']) ?>
-                </div>
-                <div class="acciones centrar">
-                    <?= Html::a('Contraseña admin', ['cambiar-contrasena'], ['class' => 'btn btn-primary btn-lg btn-extenso']) ?>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 modulo">
-        <div class="row titulo-cabecera centrar">
-            <div class="col-md-12">
                 <h3>Acciones</h3>
             </div>
         </div>
@@ -86,12 +31,17 @@ RegisterThisCss::register($this);
                 <p class="centrar">
                     Activado: <b><?= $msgAccion ?></b>
                 </p>
+                <?php if ($configuracionAcciones['accion'] == 'd') : ?>
+                    <div class="acciones centrar">
+                        <?= Html::a('Modificar directo', ['web', 'config' => 'directo'], ['class' => 'btn btn-danger btn-lg btn-extenso']) ?>
+                    </div>
+                <?php endif; ?>
                 <?php if ($configuracionAcciones['accion']) : ?>
                     <div class="acciones centrar">
                         <?= Html::a('Desactivar', ['accion', 'activar' => 'n'], ['class' => 'btn btn-primary btn-lg btn-extenso']) ?>
                     </div>
                 <?php endif; ?>
-                <?php if ($configuracionAcciones['accion'] != 'd') : ?>
+                <?php if ($configuracionAcciones['accion'] != 'd' && $directo) : ?>
                     <div class="acciones centrar">
                         <?= Html::a('Activar directo', ['accion', 'activar' => 'd'], ['class' => 'btn btn-danger btn-lg btn-extenso']) ?>
                     </div>
@@ -101,9 +51,36 @@ RegisterThisCss::register($this);
                         <?= Html::a('Activar próx partida', ['accion', 'activar' => 'p'], ['class' => 'btn btn-warning btn-lg btn-extenso']) ?>
                     </div>
                 <?php endif; ?>
-                <div class="acciones centrar">
+                <div class="acciones centrar redes-sociales">
                     <?= RedesSociales::twitter($msgUnete['twitter'], 'Únete') ?>
                     <?= RedesSociales::whatsapp($detect, $msgUnete['whatsapp'], 'Únete') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 modulo">
+        <div class="row titulo-cabecera centrar">
+            <div class="col-md-12">
+                <h3>Configuración web</h3>
+            </div>
+        </div>
+        <div class="row contenido">
+            <div class="col-md-12">
+                <?php if ($configuracionAcciones['accion'] != 'd') : ?>
+                    <div class="acciones centrar">
+                        <?= Html::a('Programar directo', ['web', 'config' => 'directo'], ['class' => 'btn btn-danger btn-lg btn-extenso']) ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($configuracionAcciones['accion'] != 'p') : ?>
+                    <div class="acciones centrar">
+                        <?= Html::a('Programar próx partida', ['web', 'config' => 'proxima-partida'], ['class' => 'btn btn-warning btn-lg btn-extenso']) ?>
+                    </div>
+                <?php endif; ?>
+                <div class="acciones centrar">
+                    <?= Html::a('Contraseña admin', ['web', 'config' => 'cambiar-contrasena'], ['class' => 'btn btn-primary btn-lg btn-extenso']) ?>
+                </div>
+                <div class="acciones centrar">
+                    <?= Html::a('Parámetros', ['administrar-cuentas'], ['class' => 'btn btn-success btn-lg btn-extenso']) ?>
                 </div>
             </div>
         </div>

@@ -10,6 +10,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\Html;
 
+use common\models\Config;
+use common\models\Directo;
 use common\models\Usuarios;
 use common\models\LoginForm;
 use common\models\ZonasHorarias;
@@ -88,10 +90,45 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $config = Config::find()->one();
         $detect = new MobileDetect();
 
+        switch ($config->accion) {
+            case 'd':
+                $directo = Directo::find()->one();
+
+                var_dump($directo->getLogo());
+                die();
+
+                $eventoPartida = $this->renderPartial('_directo', [
+                    'detect' => $detect,
+                    'titulo' => $directo->titulo,
+                    'subtitulo' => $directo->subtitulo,
+                    'msgTwitter' => $directo->mensaje_twitter,
+                    'msgWhatsapp' => $directo->mensaje_whatsapp,
+                    'marcadorPropio' => $directo->marcador_propio,
+                    'marcadorOponente' => $directo->marcador_oponente,
+                    'nombreEquipoOponente' => $directo->clan->nombre,
+                    'imagenLogoOponente' => $directo->logo
+                ]);
+                break;
+
+            case 'p':
+                $eventoPartida = $this->render('_proximaPartida', [
+                    'detect' => $detect,
+                    'msgTwitter' => 'prueba'
+                ]);
+                break;
+
+            default:
+                $eventoPartida = '';
+                break;
+        }
+
         return $this->render('index', [
-            'detect' => $detect
+            'detect' => $detect,
+            'config' => $config,
+            'eventoPartida' => $eventoPartida
         ]);
     }
 

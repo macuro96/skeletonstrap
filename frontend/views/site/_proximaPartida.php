@@ -3,7 +3,6 @@
 /* @var $detect Detection\MobileDetect */
 
 use yii\helpers\Html;
-use common\components\CheckEnd;
 use common\components\Recursos;
 use common\components\RedesSociales;
 ?>
@@ -53,7 +52,7 @@ use common\components\RedesSociales;
             </div>
         </div>
         <div class="redes-sociales centrar">
-            <?= RedesSociales::twitter('jaskdbfjaskdbf') ?>
+            <?= RedesSociales::twitter(Html::encode($msgTwitter)) ?>
             <?= RedesSociales::whatsapp($detect, 'https://skeletons-trap.herokuapp.com/ ¿Te atréves a jugar contra nosotros? Somos Skeleton\'s Trap') ?>
         </div>
     </div>

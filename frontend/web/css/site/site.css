@@ -90,25 +90,6 @@ body {
     color: black !important;
 }
 
-/* COMPARTIR REDES */
-.redes-sociales a {
-    text-decoration: none !important;
-    color: white !important;
-}
-
-.redes-sociales a:hover {
-    color: inherit;
-}
-
-.redes-sociales a:link {
-    color: inherit;
-}
-
-.redes-sociales a:visited {
-    color: inherit;
-}
-/* --------------- */
-
 @media(max-width:767px) {
     .nav li > form > button.logout {
         display:block;

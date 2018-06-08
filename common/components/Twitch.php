@@ -2,6 +2,8 @@
 
 namespace common\components;
 
+use yii\helpers\Html;
+
 use common\models\Config;
 
 /**
@@ -16,9 +18,9 @@ class Twitch
     {
         ?>
         <iframe class="twitch-video"
-        src="http://player.twitch.tv/?channel=<?= Config::find()->one()->usuario_twitch ?>"
+        src="https://player.twitch.tv/?channel=<?= Html::encode(Config::find()->one()->usuario_twitch) ?>"
         height="720"
-        width="80%"
+        width="90%"
         frameborder="0"
         scrolling="no"
         allowfullscreen="true">
@@ -34,7 +36,7 @@ class Twitch
     {
         ?>
         <iframe class="twitch-video"
-            src="http://player.twitch.tv/?collection=<?= $coleccion ?>"
+            src="https://player.twitch.tv/?collection=<?= Html::encode($coleccion) ?>&autoplay=false"
             height="720"
             width="80%"
             frameborder="0"

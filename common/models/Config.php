@@ -29,9 +29,16 @@ class Config extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['accion'], 'string', 'max' => 1],
+            [['coleccion_twitch'], 'string', 'max' => 64],
             [['mensaje_twitter', 'mensaje_unete_twitter', 'mensaje_whatsapp', 'mensaje_unete_whatsapp', 'usuario_twitch'], 'required'],
             [['mensaje_twitter', 'mensaje_unete_twitter'], 'string', 'max' => 120],
             [['mensaje_whatsapp', 'mensaje_unete_whatsapp', 'usuario_twitch'], 'string', 'max' => 255],
+            [['accion'], function ($attribute, $params, $validator) {
+                if ($this->$attribute != 'd' && $this->$attribute != 'p') {
+                    $this->addError($attribute, 'Acción no válida.');
+                }
+            }, 'skipOnError' => true],
         ];
     }
 
@@ -47,6 +54,8 @@ class Config extends \yii\db\ActiveRecord
             'mensaje_whatsapp' => 'Mensaje Whatsapp',
             'mensaje_unete_whatsapp' => 'Mensaje Unete Whatsapp',
             'usuario_twitch' => 'Usuario Twitch',
+            'coleccion_twitch' => 'Código de colección de videos',
+            'accion' => 'Acción',
         ];
     }
 }

@@ -106,4 +106,12 @@ class Clanes extends \common\models\ClashRoyaleCache
     {
         return $this->hasMany(SolicitudesLucha::className(), ['clan_id' => 'id'])->inverseOf('clan');
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDirectos()
+    {
+        return $this->hasMany(Directo::className(), ['clan_id' => 'id'])->inverseOf('clan');
+    }
 }

@@ -30,6 +30,7 @@ RegisterThisJs::register($this);
 </div>
 
 <evento-partida>
+    <?= $eventoPartida ?>
 </evento-partida>
 
 <div class="row seccion">
@@ -105,14 +106,10 @@ RegisterThisJs::register($this);
         </div>
     </div>
 </div>
-<div class="row seccion">
-    <div class="col-lg-12">
-        <div class="titulo-seccion"><h2>Mejores partidas</h2></div>
-        <div style="width: 100%; height: 420px;" class="centrar">
-            <h2>EN DESARROLLO</h2>
-        </div>
-    </div>
-</div>
+<?= $this->render('_mejoresPartidas', [
+    'config' => $config,
+    'detect' => $detect
+]) ?>
 <div class="row seccion">
     <div class="col-lg-12">
         <div class="titulo-seccion"><h2>Novedades</h2></div>

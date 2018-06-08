@@ -1,17 +1,16 @@
 <?php
 
 /* @var $detect       Detection\MobileDetect */
-/* @var $etiqueta     Etiqueta de partida */
-/* @var $nombreEvento Nombre del evento asociado a la partida */
+/* @var $titulo       Etiqueta de partida */
+/* @var $subtitulo    Nombre del evento asociado a la partida */
 
 use yii\helpers\Html;
-use common\components\CheckEnd;
 use common\components\Recursos;
 use common\components\RedesSociales;
 use common\components\Twitch;
 
-$etiqueta     = mb_strtoupper($etiqueta);
-$nombreEvento = $nombreEvento ?? '';
+$titulo     = mb_strtoupper($titulo);
+$subtitulo  = $subtitulo ?? '';
 ?>
 <div class="row proxima-partida directo">
     <div class="col-md-offset-2 col-md-8">
@@ -23,7 +22,7 @@ $nombreEvento = $nombreEvento ?? '';
         <div class="row text-centered div-subtitulo">
             <div class="col-md-12">
                 <!--<a href="#">-->
-                    <h3 class="subtitulo-proxima-partida">- <etiqueta><?= $etiqueta ?></etiqueta><?= $nombreEvento != null ? ": $nombreEvento " : '' ?> -</h3>
+                    <h3 class="subtitulo-proxima-partida">- <?= Html::encode($titulo) ?><?= $subtitulo != null ? ": " . Html::encode($subtitulo) . "" : '' ?> -</h3>
                 <!--</a>-->
             </div>
         </div>
@@ -42,7 +41,7 @@ $nombreEvento = $nombreEvento ?? '';
                 <div class="row nombres-equipos">
                     <div class="col-md-12 equipo">
                         <h3>Skeleton's Trap</h3>
-                        <h3><marcador>0</marcador></h3>
+                        <h3><marcador><?= Html::encode($marcadorPropio) ?></marcador></h3>
                     </div>
                 </div>
             </div>
@@ -56,20 +55,20 @@ $nombreEvento = $nombreEvento ?? '';
             <div class="logo logo-enemigo col-md-5 col-sm-5 col-xs-6 img-centered">
                 <div class="row">
                     <div class="col-md-12">
-                        <?= Recursos::imageCommon('Logo4K1.png') ?>
+                        <?= Recursos::imageCommon(Html::encode($imagenLogoOponente)) ?>
                     </div>
                 </div>
                 <div class="row nombres-equipos">
                     <div class="col-md-12 equipo-enemigo">
-                        <h3>TeamQueso</h3>
-                        <h3><marcador>0</marcador></h3>
+                        <h3><?= Html::encode($nombreEquipoOponente) ?></h3>
+                        <h3><marcador><?= Html::encode($marcadorOponente) ?></marcador></h3>
                     </div>
                 </div>
             </div>
         </div>
         <div class="redes-sociales centrar">
-            <?= RedesSociales::twitter('jaskdbfjaskdbf') ?>
-            <?= RedesSociales::whatsapp($detect, 'https://skeletons-trap.herokuapp.com/ ¿Te atréves a jugar contra nosotros? Somos Skeleton\'s Trap') ?>
+            <?= RedesSociales::twitter(Html::encode($msgTwitter)) ?>
+            <?= RedesSociales::whatsapp($detect, Html::encode($msgWhatsapp)) ?>
         </div>
     </div>
 </div>

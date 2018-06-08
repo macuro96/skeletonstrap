@@ -16,6 +16,16 @@ CREATE TABLE config
   , usuario_twitch          VARCHAR(255) NOT NULL
 );
 
+DROP TABLE IF EXISTS config_acciones CASCADE;
+
+CREATE TABLE config_acciones
+(
+    id                      BIGSERIAL    PRIMARY KEY
+  , accion                  VARCHAR(1)   CHECK (accion = 'd' OR accion = 'p')
+  , mensaje_unete_twitter   VARCHAR(120)
+  , mensaje_unete_whatsapp  VARCHAR(255)
+);
+
 DROP TABLE IF EXISTS mejores_partidas CASCADE;
 
 CREATE TABLE mejores_partidas
@@ -863,5 +873,9 @@ VALUES ('https://skeletons-trap.herokuapp.com/ ¿Te atréves a jugar contra noso
         'https://skeletons-trap.herokuapp.com/ ¿Te atréves a jugar contra nosotros? Somos Skeletons Trap',
         '¡Unete a nosotros! Es muy fácil, entra en el siguiente enlace para ello: https://skeletons-trap.herokuapp.com/site/unete',
         'skeletonstraptv');
+
+INSERT INTO config_acciones (accion, mensaje_unete_twitter, mensaje_unete_whatsapp)
+VALUES (null, '¡Unete a nosotros! Es muy fácil, entra en el siguiente enlace para ello: https://skeletons-trap.herokuapp.com/site/unete',
+        '¡Unete a nosotros! Es muy fácil, entra en el siguiente enlace para ello: https://skeletons-trap.herokuapp.com/site/unete');
 
 -- DATOS PRUEBAS

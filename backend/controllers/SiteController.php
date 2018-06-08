@@ -2,11 +2,15 @@
 namespace backend\controllers;
 
 use Yii;
+use Detection\MobileDetect;
+
 use yii\web\Controller;
+use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\Config;
 use backend\models\LoginForm;
+use backend\models\ConfigAcciones;
 
 /**
  * Site controller
@@ -63,6 +67,11 @@ class SiteController extends Controller
         ];
     }
 
+    public function getConfigAcciones()
+    {
+        return ConfigAcciones::find()->one();
+    }
+
     /**
      * Displays homepage.
      *
@@ -70,7 +79,34 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $config = Config::find()->one();
+
+        $detect = new MobileDetect();
+
+        $msgUnete['whatsapp'] = $config->mensaje_whatsapp;
+        $msgUnete['twitter']  = $config->mensaje_twitter;
+
+        return $this->render('index', [
+            'configuracionAcciones' => [
+                'accion' => $this->configAcciones->accion
+            ],
+            'detect' => $detect,
+            'msgUnete' => $msgUnete
+        ]);
+    }
+
+    public function actionAccion($activar)
+    {
+        $config = $this->configAcciones;
+        $config->accion = ($activar == 'n' ? null : $activar);
+
+        if (!$config->validate()) {
+            throw new BadRequestHttpException('Acción de configuración inválida.');
+        }
+
+        $config->save();
+
+        return $this->redirect(['index']);
     }
 
     public function actionAdministrarCuentas()

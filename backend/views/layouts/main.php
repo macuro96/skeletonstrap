@@ -50,7 +50,7 @@ $bSiteLogin = ($nombreControlador == 'site' && $nombreAccion == 'login');
                         <?= Html::a('
                         <div class="row opcion-row ' . (($nombreControlador == 'site' && ($nombreAccion == 'index' || $nombreAccion == 'administrar-cuentas')) ? 'active' : '') . '">
                             <div class="col-md-12">
-                                <span class="glyphicon glyphicon-chevron-right"></span>Inicio
+                                <span class="glyphicon glyphicon-chevron-right"></span>General
                             </div>
                         </div>
                         ', ['site/index']);

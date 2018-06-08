@@ -26,7 +26,7 @@ $this->title = 'Configuración de cuentas';
                     <div class="col-lg-6">
                         <?= $form->field($model, "mensaje_unete_twitter")->textInput(['maxlength' => true])
                                                                    ->label('Mensaje de únete Twitter*')
-                                                                   ->hint('Se utilizará para el mensaje del tweet para pedir unirse al equipo (tweet de @SkeletonsTrapCR).')
+                                                                   ->hint('Se utilizará para el mensaje del tweet para pedir unirse al equipo (tweet de cuenta logueada en el dispositivo).')
                         ?>
                     </div>
                 </div>

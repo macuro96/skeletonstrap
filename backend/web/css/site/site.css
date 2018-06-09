@@ -17,6 +17,15 @@ body {
     margin-right: 14px !important;
 }
 
+.btn-extenso {
+    width: 100% !important;
+}
+
+.btn {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
 .navbar-fija {
     position: fixed;
     left: 0;
@@ -131,6 +140,7 @@ div.menu {
     color: white;
 
     margin-right: 12px;
+    margin-bottom: 10px;
 }
 
 .modulo .contenido {

@@ -14,6 +14,16 @@ CREATE TABLE config
   , mensaje_whatsapp        VARCHAR(255) NOT NULL
   , mensaje_unete_whatsapp  VARCHAR(255) NOT NULL
   , usuario_twitch          VARCHAR(255) NOT NULL
+  , coleccion_twitch        VARCHAR(64)
+  , accion                  VARCHAR(1)   CHECK (accion = 'd' OR accion = 'p')
+);
+
+DROP TABLE IF EXISTS ficheros_subidos CASCADE;
+
+CREATE TABLE ficheros_subidos
+(
+    id        BIGSERIAL PRIMARY KEY
+  , contenido BYTEA     NOT NULL
 );
 
 DROP TABLE IF EXISTS mejores_partidas CASCADE;
@@ -615,6 +625,24 @@ CREATE TABLE config_tiempo_actualizado
       id          BIGSERIAL    PRIMARY KEY
     , subrutaweb  VARCHAR(255) NOT NULL UNIQUE
     , created_at  TIMESTAMP(0) NOT NULL DEFAULT current_timestamp
+);
+
+DROP TABLE IF EXISTS directo CASCADE;
+
+CREATE TABLE directo
+(
+    id                BIGSERIAL    PRIMARY KEY
+  , titulo            VARCHAR(24)  NOT NULL
+  , subtitulo         VARCHAR(64)
+  , mensaje_twitter   TEXT         NOT NULL
+  , mensaje_whatsapp  VARCHAR(120) NOT NULL
+  , marcador_propio   NUMERIC(1)   NOT NULL DEFAULT 0 CHECK (marcador_propio   >= 0 AND marcador_propio   <= 3)
+  , marcador_oponente NUMERIC(1)   NOT NULL DEFAULT 0 CHECK (marcador_oponente >= 0 AND marcador_oponente <= 3)
+  , oponente_tag      VARCHAR(16)  NOT NULL
+  , clan_id           BIGINT       NOT NULL REFERENCES clanes (id)
+                                   ON DELETE NO ACTION
+                                   ON UPDATE CASCADE
+  , logo              TEXT         NOT NULL
 );
 
 -- TRIGGERS

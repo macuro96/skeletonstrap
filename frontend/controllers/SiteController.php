@@ -10,6 +10,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\Html;
 
+use common\models\Config;
+use common\models\Directo;
 use common\models\Usuarios;
 use common\models\LoginForm;
 use common\models\ZonasHorarias;
@@ -81,6 +83,11 @@ class SiteController extends Controller
                         ->send();
     }
 
+    private function directo()
+    {
+        return Directo::find()->one();
+    }
+
     /**
      * Displays homepage.
      *
@@ -88,11 +95,86 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $config = Config::find()->one();
         $detect = new MobileDetect();
 
+        switch ($config->accion) {
+            case 'd':
+                $directo = $this->directo();
+
+                $eventoPartida = $this->renderPartial('_directo', [
+                    'detect' => $detect,
+                    'titulo' => $directo->titulo,
+                    'subtitulo' => $directo->subtitulo,
+                    'msgTwitter' => $directo->mensaje_twitter,
+                    'msgWhatsapp' => $directo->mensaje_whatsapp,
+                    'marcadorPropio' => $directo->marcador_propio,
+                    'marcadorOponente' => $directo->marcador_oponente,
+                    'nombreEquipoOponente' => $directo->clan->nombre,
+                    'logoOponente' => $directo->getLogoSrc()
+                ]);
+                break;
+
+            case 'p':
+                $eventoPartida = $this->render('_proximaPartida', [
+                    'detect' => $detect,
+                    'msgTwitter' => 'prueba'
+                ]);
+                break;
+
+            default:
+                $eventoPartida = '';
+                break;
+        }
+
         return $this->render('index', [
-            'detect' => $detect
+            'detect' => $detect,
+            'config' => $config,
+            'eventoPartida' => $eventoPartida
         ]);
+    }
+
+    private function configAccion()
+    {
+        return Config::find()->one()->accion;
+    }
+
+    public function actionAccionActual()
+    {
+        if (\Yii::$app->request->isAjax && \Yii::$app->request->isPost) {
+            $datos = ['accion' => $this->configAccion()];
+
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return $datos;
+        }
+    }
+
+    public function actionDatosDirecto()
+    {
+        if (\Yii::$app->request->isAjax && \Yii::$app->request->isPost) {
+            $datos = ['activo' => false];
+
+            if ($this->configAccion() == 'd') {
+                $directo = $this->directo();
+
+                if ($directo) {
+                    $datos = [
+                        'titulo' => $directo->titulo,
+                        'subtitulo' => $directo->subtitulo,
+                        'msgTwitter' => $directo->mensaje_twitter,
+                        'msgWhatsapp' => $directo->mensaje_whatsapp,
+                        'marcadorPropio' => $directo->marcador_propio,
+                        'marcadorOponente' => $directo->marcador_oponente,
+                        'nombreEquipoOponente' => $directo->clan->nombre,
+                        'logoOponente' => $directo->getLogoSrc(),
+                        'activo' => true
+                    ];
+                }
+            }
+
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return $datos;
+        }
     }
 
     /**

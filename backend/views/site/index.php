@@ -46,11 +46,6 @@ RegisterThisCss::register($this);
                         <?= Html::a('Activar directo', ['accion', 'activar' => 'd'], ['class' => 'btn btn-danger btn-lg btn-extenso']) ?>
                     </div>
                 <?php endif; ?>
-                <?php if ($configuracionAcciones['accion'] != 'p') : ?>
-                    <div class="acciones centrar">
-                        <?= Html::a('Activar próx partida', ['accion', 'activar' => 'p'], ['class' => 'btn btn-warning btn-lg btn-extenso']) ?>
-                    </div>
-                <?php endif; ?>
                 <div class="acciones centrar redes-sociales">
                     <?= RedesSociales::twitter($msgUnete['twitter'], 'Únete') ?>
                     <?= RedesSociales::whatsapp($detect, $msgUnete['whatsapp'], 'Únete') ?>

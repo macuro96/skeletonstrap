@@ -44,10 +44,10 @@ class LoginForm extends Model
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
-            ['password', 'validatePassword'],
+            ['password', 'validatePassword', 'skipOnError' => true],
             ['usuario', 'validateVerificado', 'skipOnError' => true],
             ['usuario', 'validateActivo', 'skipOnError' => true],
-            ['usuario', 'validateNoExpulsado']
+            ['usuario', 'validateNoExpulsado', 'skipOnError' => true]
         ];
     }
 
@@ -117,7 +117,7 @@ class LoginForm extends Model
     public function validateActivo($attribute, $params, $validator)
     {
         if (!$this->hasErrors()) {
-            if (!$this->_user->estaActivo) {
+            if (!$this->getUser()->estaActivo) {
                 $this->addError($attribute, 'El usuario esta desactivado temporalmente');
             }
         }
@@ -132,7 +132,7 @@ class LoginForm extends Model
     public function validateVerificado($attribute, $params, $validator)
     {
         if (!$this->hasErrors()) {
-            if (!$this->_user->estaVerificado) {
+            if (!$this->getUser()->estaVerificado) {
                 $this->addError($attribute, 'El usuario no está verificado, por favor, compruebe el mensaje que le hemos enviado en su correo electronico para confirmar su cuenta');
             }
         }
@@ -141,7 +141,7 @@ class LoginForm extends Model
     public function validateNoExpulsado($attribute, $params, $validator)
     {
         if (!$this->hasErrors()) {
-            if ($this->_user->estaExpulsado) {
+            if ($this->getUser()->estaExpulsado) {
                 $this->addError($attribute, 'El usuario está expulsado en este momento, contacte con el soporte para más información');
             }
         }

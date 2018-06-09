@@ -2,10 +2,6 @@
 
 namespace common\models;
 
-use http\Exception\BadMessageException;
-
-use common\components\CheckEnd;
-
 /**
  * This is the model class for table "directo".
  *
@@ -24,6 +20,8 @@ class Directo extends \yii\db\ActiveRecord
 {
     public $file;
 
+    const ESCENARIO_UPDATE = 'update';
+
     /**
      * @inheritdoc
      */
@@ -32,14 +30,23 @@ class Directo extends \yii\db\ActiveRecord
         return 'directo';
     }
 
+    public function scenarios()
+    {
+        $escenarios = parent::scenarios();
+        $escenarios[self::ESCENARIO_UPDATE] = ['file'];
+
+        return $escenarios;
+    }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['titulo', 'mensaje_twitter', 'mensaje_whatsapp', 'oponente_tag', 'file'], 'required'],
-            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png'],
+            [['titulo', 'mensaje_twitter', 'mensaje_whatsapp', 'oponente_tag'], 'required'],
+            [['file'], 'required', 'on' => 'default'],
+            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png'],
             [['logo'], 'string'],
             [['mensaje_twitter'], 'string', 'max' => 280],
             [['marcador_propio', 'marcador_oponente'], 'number', 'min' => 0, 'max' => 3],
@@ -103,45 +110,9 @@ class Directo extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getLogo()
+    public function getLogoSrc()
     {
-        $ruta = CheckEnd::rutaRelativa() . 'images/uploads/logoOponente.png';
-        $fichero = file_get_contents($ruta);
-
-        var_dump($fichero); die();
-
-        if (!$fichero) {
-            if (file_put_contents($ruta, base64_decode($fichero)) === false) {
-                throw new BadMessageException('No se ha podido cargar la imagen satisfactoriamente.');
-            }
-        }
-
-        return $ruta;
-    }
-
-    public function upload()
-    {
-        if ($this->validate()) {
-            $rutaFichero = $this->file->tempName;
-
-            if ($rutaFichero) {
-                $contenido = file_get_contents($rutaFichero);
-
-                if ($contenido) {
-                    $this->logo = base64_encode($contenido);
-                }
-            } else {
-                return false;
-            }
-
-            $rutaNueva = 'images/uploads/logoOponente.png';
-
-            $this->file->saveAs($rutaNueva);
-
-            return true;
-        } else {
-            return false;
-        }
+        return '/images/image.php?t=directo&c=logo';
     }
 
     /**

@@ -6,8 +6,13 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use common\models\Directo;
+
+use common\components\RegisterThisCss;
+
 $this->title = 'Modificar directo actual';
 
+RegisterThisCss::register($this);
 ?>
 <div class="row seccion usuarios-form">
     <div class="col-lg-12">
@@ -57,6 +62,9 @@ $this->title = 'Modificar directo actual';
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
+                        <?php if ($model->scenario == Directo::ESCENARIO_UPDATE) : ?>
+                            <img class="img-file" src="<?= Html::encode($model->getLogoSrc()) ?>">
+                        <?php endif; ?>
                         <?= $form->field($model, "file")->fileInput()
                                                         ->label('Logo equipo oponente*')
                                                         ->hint('Logo en formato png.')

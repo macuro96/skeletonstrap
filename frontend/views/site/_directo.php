@@ -55,7 +55,7 @@ $subtitulo  = $subtitulo ?? '';
             <div class="logo logo-enemigo col-md-5 col-sm-5 col-xs-6 img-centered">
                 <div class="row">
                     <div class="col-md-12">
-                        <?= Recursos::imageCommon(Html::encode($imagenLogoOponente)) ?>
+                        <img src='<?= Html::encode($logoOponente) ?>' class="img-responsive">
                     </div>
                 </div>
                 <div class="row nombres-equipos">

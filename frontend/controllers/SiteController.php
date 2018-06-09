@@ -97,9 +97,6 @@ class SiteController extends Controller
             case 'd':
                 $directo = Directo::find()->one();
 
-                var_dump($directo->getLogo());
-                die();
-
                 $eventoPartida = $this->renderPartial('_directo', [
                     'detect' => $detect,
                     'titulo' => $directo->titulo,
@@ -109,7 +106,7 @@ class SiteController extends Controller
                     'marcadorPropio' => $directo->marcador_propio,
                     'marcadorOponente' => $directo->marcador_oponente,
                     'nombreEquipoOponente' => $directo->clan->nombre,
-                    'imagenLogoOponente' => $directo->logo
+                    'logoOponente' => $directo->getLogoSrc()
                 ]);
                 break;
 

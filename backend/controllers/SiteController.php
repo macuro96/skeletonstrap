@@ -11,6 +11,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\Config;
 use common\models\Directo;
+use common\components\ImageFile;
+
 use backend\models\LoginForm;
 
 /**
@@ -114,6 +116,12 @@ class SiteController extends Controller
             $mensajePorDefecto = '¡¡Estamos en directo ahora mismo, ven a vernos!! Skeletons\' Trap https://skeletons-trap.herokuapp.com/';
 
             $directo = $this->directo;
+            $image   = null;
+
+            if ($directo) {
+                $directo->scenario = Directo::ESCENARIO_UPDATE;
+            }
+
             $model = ($directo ?: new Directo([
                 'marcador_propio'   => 0,
                 'marcador_oponente' => 0,
@@ -125,7 +133,15 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->file = UploadedFile::getInstance($model, 'file');
 
-            if ($model->upload() && $model->save(false)) {
+            $validate = false;
+
+            if ($model->file) {
+                $validate = ImageFile::upload($model->file, $model, 'logo');
+            } else {
+                $validate = $model->validate();
+            }
+
+            if ($validate && $model->save(false)) {
                 \Yii::$app->session->setFlash('success', 'Directo modificado correctamente.');
 
                 return $this->redirect(['index']);
@@ -134,9 +150,9 @@ class SiteController extends Controller
 
         return $this->render($config, [
             'model' => $model,
+            'image' => $image
         ]);
     }
-
 
     public function actionAccion($activar)
     {
@@ -149,9 +165,9 @@ class SiteController extends Controller
 
         if ($activar == 'n') {
             $this->directo->delete();
-        } else {
-            $config->save();
         }
+
+        $config->save();
 
         return $this->redirect(['index']);
     }

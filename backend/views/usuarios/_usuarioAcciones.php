@@ -32,7 +32,7 @@ $configQuitarExpulsion['data']['confirm'] = "¿Estás seguro que quieres quitar 
                 <b><?= Html::encode($model->nombre) ?></b>
             </div>
             <div>
-                #<?= Html::encode($model->jugadores->tag) ?>
+                <?= Html::encode(isset($model->jugadores) ? ('#' . $model->jugadores->tag) : '<sin tag>') ?>
             </div>
         </div>
         <div class="col-md-12 botones">

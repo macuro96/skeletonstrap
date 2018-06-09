@@ -81,8 +81,8 @@ $bSiteLogin = ($nombreControlador == 'site' && $nombreAccion == 'login');
                         <?= Html::a('
                         <div class="row opcion-row salir">
                             <div class="col-md-12">
-                                <span class="glyphicon glyphicon-chevron-right"></span>Salir
-                            </div>
+                                <span class="glyphicon glyphicon-chevron-right"></span>Salir (' . \Yii::$app->user->identity->nombre . ')' . 
+                            '</div>
                         </div>
                         ', ['site/logout'], [
                             'data' => [

@@ -3,6 +3,8 @@
 /* @var $this yii\web\View */
 /* @var $detect Detection\MobileDetect */
 
+use yii\helpers\Url;
+
 use common\components\Recursos;
 use common\components\RedesSociales;
 use common\components\RegisterThisJs;
@@ -12,6 +14,95 @@ $this->title = 'Inicio';
 
 RegisterThisCss::register($this);
 RegisterThisJs::register($this);
+
+$urlActionAccionActual = Url::to(['site/accion-actual']);
+$urlActionDatosDirecto = Url::to(['site/datos-directo']);
+
+$js = <<<EOT
+    var timeDirecto = null;
+    var timeAccion  = null;
+
+    function empezarComprobarAccion() {
+        if (timeAccion == null) {
+            timeAccion = setInterval(ajaxAccion, 5000);
+        }
+    }
+
+    function pararComprobarAccion() {
+        clearInterval(timeAccion);
+    }
+
+    function empezarDirecto() {
+        if (timeDirecto == null) {
+            timeDirecto = setInterval(ajaxDirecto, 5000);
+        }
+    }
+
+    function pararDirecto() {
+        clearInterval(timeDirecto);
+    }
+
+    function ajaxAccion () {
+        $.ajax({
+            url: '$urlActionAccionActual',
+            type: 'POST',
+            success: function (data) {
+                if (data.accion == 'd' || data.accion == 'p') {
+                    if ($('.directo').length == 0) {
+                        location.reload();
+                    } else {
+                        if (data.accion == 'd') {
+                            empezarDirecto();
+                        } else if (data.accion == 'p') {
+
+                        }
+                    }
+                } else {
+                    empezarComprobarAccion();
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function ajaxDirecto() {
+        $.ajax({
+            url: '$urlActionDatosDirecto',
+            type: 'POST',
+            success: function (data) {
+                if (data.activo == true) {
+                    var divDirecto = $('.directo');
+                    divDirecto.find('titulo').html(data.titulo);
+
+                    if (data.subtitulo) {
+                        divDirecto.find('subtitulo').html(': ' + data.subtitulo);
+                    } else {
+                        divDirecto.find('subtitulo').html('');
+                    }
+
+                    divDirecto.find('.resp-sharing-button--twitter').closest('.resp-sharing-button__link').attr('href', 'https://twitter.com/intent/tweet/?text=' + data.msgTwitter);
+                    divDirecto.find('.resp-sharing-button--whatsapp').closest('.resp-sharing-button__link').attr('href', 'whatsapp://send?text=' + data.msgWhatsapp);
+
+                    divDirecto.find('.equipo marcador').html(data.marcadorPropio);
+                    divDirecto.find('.equipo-enemigo marcador').html(data.marcadorOponente);
+
+                    divDirecto.find('.logo-enemigo img').attr('src', data.logoOponente);
+                } else {
+                    location.reload();
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    ajaxAccion();
+EOT;
+
+$this->registerJs($js);
 ?>
 <div class="row cabecera-inicio">
     <div class="col-lg-offset-3 col-lg-6">

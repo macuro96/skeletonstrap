@@ -164,7 +164,11 @@ class SiteController extends Controller
         }
 
         if ($activar == 'n') {
-            $this->directo->delete();
+            $directo = $this->directo;
+
+            if ($directo) {
+                $this->directo->delete();
+            }
         }
 
         $config->save();

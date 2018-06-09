@@ -83,6 +83,11 @@ class SiteController extends Controller
                         ->send();
     }
 
+    private function directo()
+    {
+        return Directo::find()->one();
+    }
+
     /**
      * Displays homepage.
      *
@@ -95,7 +100,7 @@ class SiteController extends Controller
 
         switch ($config->accion) {
             case 'd':
-                $directo = Directo::find()->one();
+                $directo = $this->directo();
 
                 $eventoPartida = $this->renderPartial('_directo', [
                     'detect' => $detect,
@@ -127,6 +132,49 @@ class SiteController extends Controller
             'config' => $config,
             'eventoPartida' => $eventoPartida
         ]);
+    }
+
+    private function configAccion()
+    {
+        return Config::find()->one()->accion;
+    }
+
+    public function actionAccionActual()
+    {
+        if (\Yii::$app->request->isAjax && \Yii::$app->request->isPost) {
+            $datos = ['accion' => $this->configAccion()];
+
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return $datos;
+        }
+    }
+
+    public function actionDatosDirecto()
+    {
+        if (\Yii::$app->request->isAjax && \Yii::$app->request->isPost) {
+            $datos = ['activo' => false];
+
+            if ($this->configAccion() == 'd') {
+                $directo = $this->directo();
+
+                if ($directo) {
+                    $datos = [
+                        'titulo' => $directo->titulo,
+                        'subtitulo' => $directo->subtitulo,
+                        'msgTwitter' => $directo->mensaje_twitter,
+                        'msgWhatsapp' => $directo->mensaje_whatsapp,
+                        'marcadorPropio' => $directo->marcador_propio,
+                        'marcadorOponente' => $directo->marcador_oponente,
+                        'nombreEquipoOponente' => $directo->clan->nombre,
+                        'logoOponente' => $directo->getLogoSrc(),
+                        'activo' => true
+                    ];
+                }
+            }
+
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return $datos;
+        }
     }
 
     /**

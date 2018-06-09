@@ -22,7 +22,7 @@ $subtitulo  = $subtitulo ?? '';
         <div class="row text-centered div-subtitulo">
             <div class="col-md-12">
                 <!--<a href="#">-->
-                    <h3 class="subtitulo-proxima-partida">- <?= Html::encode($titulo) ?><?= $subtitulo != null ? ": " . Html::encode($subtitulo) . "" : '' ?> -</h3>
+                    <h3 class="subtitulo-proxima-partida">- <titulo><?= Html::encode($titulo) ?></titulo><subtitulo><?= $subtitulo != null ? ": " . Html::encode($subtitulo) . "" : '' ?></subtitulo> -</h3>
                 <!--</a>-->
             </div>
         </div>

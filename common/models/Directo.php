@@ -33,7 +33,7 @@ class Directo extends \yii\db\ActiveRecord
     public function scenarios()
     {
         $escenarios = parent::scenarios();
-        $escenarios[self::ESCENARIO_UPDATE] = ['file'];
+        $escenarios[self::ESCENARIO_UPDATE] = array_merge($escenarios['default'], ['file']);
 
         return $escenarios;
     }

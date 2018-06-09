@@ -35,24 +35,57 @@ class UsuariosController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'correo-verificar' => ['POST'],
                     'aceptar-solicitud' => ['POST'],
                     'cancelar-solicitud' => ['POST'],
+                    'aceptar-solicitud-lucha' => ['POST'],
+                    'borrar-solicitud-lucha' => ['POST'],
+                    'correo-verificar' => ['POST'],
+                    'correo-solicitud-lucha' => ['POST'],
+                    'eliminar' => ['POST'],
+                    'expulsar' => ['POST'],
+                    'quitarExpulsion' => ['POST'],
                 ],
             ],
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'invitar', 'aceptar-solicitud', 'cancelar-solicitud'],
+                'only' => [
+                    'index',
+                    'invitar',
+                    'aceptar-solicitud',
+                    'cancelar-solicitud',
+                    'aceptar-solicitud-lucha',
+                    'borrar-solicitud-lucha',
+                    'eliminar',
+                    'expulsar',
+                    'quitarExpulsion',
+                    'correo-verificar',
+                    'correo-solicitud-lucha',
+                    'invitar',
+                    'accion-usuario'
+                ],
                 'rules' => [
-                    [
-                        'actions' => ['invitar', 'aceptar-solicitud', 'cancelar-solicitud'],
-                        'allow' => true,
-                        'roles' => ['administrador']
-                    ],
                     [
                         'actions' => ['index'],
                         'allow' => true,
-                        'roles' => ['@']
+                        'roles' => ['loginBackEnd']
+                    ],
+                    [
+                        'actions' => [
+                            'invitar',
+                            'aceptar-solicitud',
+                            'aceptar-solicitud-lucha',
+                            'cancelar-solicitud',
+                            'borrar-solicitud-lucha',
+                            'correo-verificar',
+                            'correo-solicitud-lucha',
+                        ],
+                        'allow' => true,
+                        'roles' => ['solicitudes']
+                    ],
+                    [
+                        'actions' => ['eliminar', 'expulsar', 'quitarExpulsion', 'accion-usuario'],
+                        'allow' => true,
+                        'roles' => ['usuarios']
                     ],
                 ],
             ],

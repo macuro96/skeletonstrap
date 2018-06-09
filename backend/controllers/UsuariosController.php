@@ -98,7 +98,11 @@ class UsuariosController extends Controller
      */
     public function actionIndex()
     {
-        $usuarios = Usuarios::findLoginExpulsadosQuery()->all();
+        $usuarios = Usuarios::findLoginExpulsadosQuery()
+                            ->where('id != ' . \Yii::$app->user->identity->id)
+                            ->andWhere('id != 1') // Administrador
+                            ->all();
+
         $usuariosPendientes = Usuarios::pendientes();
 
         $solicitudesLucha = SolicitudesLucha::find()->all();
@@ -340,6 +344,7 @@ class UsuariosController extends Controller
         $usuariosDatos = Usuarios::findLoginExpulsadosQuery()
                                  ->orderBy('nombre ASC')
                                  ->where('id != ' . \Yii::$app->user->identity->id)
+                                 ->andWhere('id != 1')
                                  ->asArray()
                                  ->all();
 

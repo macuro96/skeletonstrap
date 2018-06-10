@@ -28,8 +28,8 @@ class Usuarios extends \common\models\Usuarios
     public static function findAdminQuery()
     {
         $query = static::find()
-                     ->join('LEFT JOIN', 'usuarios_roles', 'usuarios.id = usuarios_roles.id')
-                     ->join('LEFT JOIN', 'roles', 'usuarios_roles.id = roles.id')
+                     ->join('LEFT JOIN', 'usuarios_roles', 'usuarios.id = usuarios_roles.usuario_id')
+                     ->join('LEFT JOIN', 'roles', 'usuarios_roles.rol_id = roles.id')
                      ->join('LEFT JOIN', 'roles_permisos', 'roles.id = roles_permisos.rol_id')
                      ->join('LEFT JOIN', 'permisos', 'permisos.id = roles_permisos.permiso_id')
                      ->where(['permisos.nombre' => 'loginBackEnd']);

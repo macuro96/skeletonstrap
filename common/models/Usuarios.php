@@ -38,6 +38,12 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     public $tag;
 
     /**
+     * Segundo campo de password para actualizacion de password
+     * @var string
+     */
+    public $password_repeat;
+
+    /**
      * Escenario de invitar a un nuevo usuario.
      * @var string
      */
@@ -54,6 +60,12 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
      * @var string
      */
     const ESCENARIO_UNETE = 'unete';
+
+    /**
+     * Escenario de que un usuario actualiza su perfil.
+     * @var string
+     */
+    const ESCENARIO_PERFIL = 'perfil';
 
     /**
      * @inheritdoc
@@ -73,7 +85,13 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             [['nombre', 'correo', 'nacionalidad_id', 'zona_horaria_id'], 'required'],
             [['nombre'], 'string', 'min' => 4],
             [['password'], 'required', 'on' => [self::SCENARIO_DEFAULT, self::ESCENARIO_VERIFICAR]],
-            [['password'], 'default', 'value' => \Yii::$app->security->generatePasswordHash(''), 'on' => [self::ESCENARIO_INVITAR, self::ESCENARIO_UNETE]],
+            [['password_repeat'], function ($attribute, $params, $validator) {
+                if ($this->password && $this->$attribute == null) {
+                    $this->addError($attribute, 'El campo de verificación de contraseña no puede estar vacío.');
+                }
+            }, 'on' => self::ESCENARIO_PERFIL, 'skipOnEmpty' => false],
+            [['password_repeat'], 'default', 'value' => $this->password, 'on' => self::ESCENARIO_PERFIL, 'skipOnError' => true],
+            [['password_repeat'], 'compare', 'compareAttribute'=> 'password', 'on' => self::ESCENARIO_PERFIL, 'skipOnError' => true],
             [['nacionalidad_id', 'jugador_id', 'zona_horaria_id'], 'default', 'value' => null],
             [['nacionalidad_id', 'zona_horaria_id'], 'integer'],
             [['activo'], 'boolean'],
@@ -400,6 +418,12 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 
                     $rolMiembro = Roles::find()->where(['nombre' => 'En prueba'])->one();
                     $this->cambiarRol($rolMiembro->id);
+                } else if ($this->scenario == self::ESCENARIO_PERFIL) {
+                    if ($this->password && $this->password != $this->oldAttributes['password']) {
+                        $this->password = \Yii::$app->security->generatePasswordHash($this->password);
+                    } else {
+                        $this->password = $this->oldAttributes['password'];
+                    }
                 }
             }
             return true;

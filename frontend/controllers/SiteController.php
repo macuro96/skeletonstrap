@@ -298,6 +298,9 @@ class SiteController extends Controller
         $model = \Yii::$app->user->identity;
 
         if ($model) {
+            $model->scenario = Usuarios::ESCENARIO_PERFIL;
+            $model->password = '';
+
             $nacionalidadesDatos = Nacionalidades::find()
                                                  ->orderBy('pais ASC')
                                                  ->asArray()
@@ -329,6 +332,7 @@ class SiteController extends Controller
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 \Yii::$app->session->setFlash('success', 'Los datos han sido actualizados correctamente. Puede cerrar, la ventana.');
+                $model->password = '';
             }
 
             return $this->render('cambiarInfoPerfil', [

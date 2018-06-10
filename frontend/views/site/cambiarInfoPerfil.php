@@ -7,7 +7,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $this->title = 'Cambiar información de mi perfil';
-
 ?>
 <div class="row seccion usuarios-form">
     <div class="col-lg-12">
@@ -21,6 +20,10 @@ $this->title = 'Cambiar información de mi perfil';
                 ?>
                 <?= $form->field($model, 'nacionalidad_id')->dropDownList($nacionalidades, ['value' => 48])->label('Nacionalidad*') ?>
                 <?= $form->field($model, 'zona_horaria_id')->dropDownList($zonasHorarias, ['value' => 13])->label('Zona Horaria*') ?>
+                <hr>
+                <?= $form->field($model, 'password')->passwordInput() ?>
+
+                <?= $form->field($model, 'password_repeat')->passwordInput() ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Actualizar', ['class' => 'btn btn-success']) ?>

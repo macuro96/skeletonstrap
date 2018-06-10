@@ -322,11 +322,6 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                 PermisosUsuarios::down();
                 PermisosUsuarios::up();
             }
-
-            if (\Yii::$app->user->identity->id == $this->id) {
-                \Yii::$app->user->logout();
-                return $this->goHome();
-            }
         }
     }
 
@@ -402,6 +397,9 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
                 if ($this->scenario == self::ESCENARIO_VERIFICAR) {
                     $this->verificado = null;
                     $this->password   = \Yii::$app->security->generatePasswordHash($this->password);
+
+                    $rolMiembro = Roles::find()->where(['nombre' => 'En prueba'])->one();
+                    $this->cambiarRol($rolMiembro->id);
                 }
             }
             return true;

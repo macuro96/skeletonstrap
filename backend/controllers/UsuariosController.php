@@ -102,7 +102,7 @@ class UsuariosController extends Controller
         $usuarios = Usuarios::findLoginExpulsadosQuery()
                             ->joinWith('roles')
                             ->orderBy('roles.id')
-                            ->where('usuarios.id != ' . \Yii::$app->user->identity->id)
+                            ->andWhere('usuarios.id != ' . \Yii::$app->user->identity->id)
                             ->andWhere('usuarios.id != 1') // Administrador
                             ->all();
 

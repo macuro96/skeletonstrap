@@ -29,7 +29,7 @@
         </ul>
     </div>
 
-    
+
 <div class="row">
     <div class="col-md-2">
                 <div id="navigation" class="list-group"><a class="list-group-item" href="#navigation-36" data-toggle="collapse" data-parent="#navigation">Descripción general <b class="caret"></b></a><div id="navigation-36" class="submenu panel-collapse collapse"><a class="list-group-item" href="./descripcion.html#funcionalidad-principal-de-la-aplicacion">Funcionalidad principal de la plicación</a>
@@ -48,7 +48,31 @@
 <a class="list-group-item" href="#navigation-44" data-toggle="collapse" data-parent="#navigation">Conclusiones <b class="caret"></b></a><div id="navigation-44" class="submenu panel-collapse collapse"><a class="list-group-item" href="./conclusiones.html">Conclusiones</a></div>
 <a class="list-group-item" href="#navigation-45" data-toggle="collapse" data-parent="#navigation">Anexos <b class="caret"></b></a><div id="navigation-45" class="submenu panel-collapse collapse"><a class="list-group-item" href="./anexos.html">Anexos</a></div></div>    </div>
     <div class="col-md-9 guide-content" role="main">
-        <h1>Decisiones adoptadas <span id="decisiones-adoptadas"></span><a href="#decisiones-adoptadas" class="hashlink">&para;</a></h1><p>Explicar, indicando en cada caso su justificación.</p>
+        <h1>Decisiones adoptadas <span id="decisiones-adoptadas"></span><a href="#decisiones-adoptadas" class="hashlink">&para;</a></h1>
+        <p>
+            Me di cuenta que al estar en desarollo la API a veces no funcionaba correctamente, por lo que decidí hacer una API propia recopilando datos de una web de estadísticas a través de patrones. Todo ello lo unifique en un único componente para que se complementara con el original y solo se utilizara en el caso de que falle el primero.
+        </p>
+        <p>
+            Utilicé demasiada generalización para las clases para su escabilidad en el tiempo que tenía, y en un determinado momento paré de hacerlo.
+        </p>
+        <p>
+            Me tomé mucho tiempo organizando cada cosa que tenía que hacer para empezar a programar de manera adecuada, pero me di cuenta que no me daba tiempo.
+        </p>
+        <p>
+            He cerrado algunas issues que no me daba tiempo terminar, aunque no son estrictamente necesarias para dar funcionalidad a la aplicación. Realmente son más opcionales que funcionales. En los comentarios de las issues en github están asociados el motivo.
+        </p>
+        <p>
+            Opté por darle demasiada importancia al diseño al principio para organizarme mejor a la hora de programar, pero me di cuenta que no me daba tiempo haciendolo así.
+        </p>
+        <p>
+            Para el almacenamiento de archivos (imagenes) he optado por guardarlo en la BD en base64, creandome un componente en la aplicación que lo haga. Para la carga del archivo utilizo un php que lo vuelca a la salida con las cabeceras necesarias.
+        </p>
+        <p>
+            No he utilizado ningún plugin, ya que su utilización hace que pierda el control de la aplicación para propósitos avanzados.
+        </p>
+        <p>
+            Hay requisitos mínimos que no les veo sentido en mi aplicación pero los he tenido que hacer, como por ejemplo: comunicación de ventanas, almacenamiento en cliente (ya se encargaba Yii lo que era necesario) o plugin externo de js.
+        </p>
         <div class="toplink"><a href="#" class="h1" title="go to top"><span class="glyphicon glyphicon-arrow-up"></a></div>
     </div>
 </div>

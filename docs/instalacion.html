@@ -29,7 +29,7 @@
         </ul>
     </div>
 
-    
+
 <div class="row">
     <div class="col-md-2">
                 <div id="navigation" class="list-group"><a class="list-group-item" href="#navigation-108" data-toggle="collapse" data-parent="#navigation">Descripción general <b class="caret"></b></a><div id="navigation-108" class="submenu panel-collapse collapse"><a class="list-group-item" href="./descripcion.html#funcionalidad-principal-de-la-aplicacion">Funcionalidad principal de la plicación</a>
@@ -51,8 +51,36 @@
         <h1>Instrucciones de instalación y despliegue <span id="instrucciones-de-instalacion-y-despliegue"></span><a href="#instrucciones-de-instalacion-y-despliegue" class="hashlink">&para;</a></h1>
 <div class="toc"><ol><li><a href="#en-local">En local</a></li>
 <li><a href="#en-la-nube">En la nube</a></li></ol></div>
-<h2>En local <span id="en-local"></span><a href="#en-local" class="hashlink">&para;</a></h2><p>Explicar.</p>
-<h2>En la nube <span id="en-la-nube"></span><a href="#en-la-nube" class="hashlink">&para;</a></h2><p>Explicar.</p>
+<h2>En local <span id="en-local"></span><a href="#en-local" class="hashlink">&para;</a></h2><h4>Requisitos previos <span id="requisitos-previos"></span><a href="#requisitos-previos" class="hashlink">&para;</a></h4><ul>
+<li>PHP 7.1</li>
+<li>Postgresql 10.3</li>
+<li>Servidor Web</li>
+<li>Composer</li>
+<li>Git (opcional)</li>
+</ul>
+<p><em>Instalación en local</em></p>
+<ol>
+<li>Crear un sitio virtual</li>
+<li>Descargar repositorio git o clonar</li>
+<li>Instalar composer del repositorio</li>
+<li>El parámetro documentroot debe ser la carpeta web del respositorio git, pero hay que diferencias entre backend y front end</li>
+<li>
+    Para diferencias backend y frontend, utilizo 2 sitios virtuales distintos. Para acceder al backend se utiliza un alias.
+</li>
+<li>Hay diferentes variables de entorno para configurar: DATABASE_URL, KEY_CR_API, PASSWORD_SKT_GMAIL, URL_DATA_CR.</li>
+</ol>
+<h2>En la nube <span id="en-la-nube"></span><a href="#en-la-nube" class="hashlink">&para;</a></h2><p><em>Para instalar druidkuma en la nube heroku</em></p>
+<ol>
+<li>Crear nueva app</li>
+<li>Asociar cuenta de github</li>
+<li>Añadir el addon heroku-postgresql</li>
+<li>
+    Enlazar el repositorio git con heroku, comandos: <b>heroku apps heroku git:remote --app nombre aplicacion</b>
+</li>
+<li>
+    Variables de entorno: YII_ENV, DATABASE_URL, KEY_CR_API (key developer de API), PASSWORD_SKT_GMAIL (contraseña gmail), URL_DATA_CR (url de web que utiliza el componente propio para la recopilación de datos).
+</li>
+</ol>
         <div class="toplink"><a href="#" class="h1" title="go to top"><span class="glyphicon glyphicon-arrow-up"></a></div>
     </div>
 </div>

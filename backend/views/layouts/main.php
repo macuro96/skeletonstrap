@@ -81,7 +81,7 @@ $bSiteLogin = ($nombreControlador == 'site' && $nombreAccion == 'login');
                         <?= Html::a('
                         <div class="row opcion-row salir">
                             <div class="col-md-12">
-                                <span class="glyphicon glyphicon-chevron-right"></span>Salir (' . \Yii::$app->user->identity->nombre . ')' . 
+                                <span class="glyphicon glyphicon-chevron-right"></span>Salir (' . \Yii::$app->user->identity->nombre . ')' .
                             '</div>
                         </div>
                         ', ['site/logout'], [
@@ -109,6 +109,15 @@ $bSiteLogin = ($nombreControlador == 'site' && $nombreAccion == 'login');
 </div>
 
 <?php $this->endBody() ?>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120627051-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-120627051-1');
+    </script>
 </body>
 </html>
 <?php $this->endPage() ?>

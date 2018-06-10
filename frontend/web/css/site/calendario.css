@@ -1,0 +1,146 @@
+.calendario {
+    background-color: #964545;
+    color: white;
+
+    padding-right: 15px !important;
+}
+
+.calendario-titulo {
+    text-align: center;
+
+    border-bottom-style: solid;
+    border-bottom-color: #633030;
+    border-bottom-width: 5px;
+}
+
+.calendario-flecha {
+    color: white;
+    font-size: 32px;
+
+    margin-top: 12px;
+
+    cursor: pointer;
+}
+
+.calendario-col-encabezado {
+    text-align: center;
+    font-size: 20px;
+
+    border-right-style: solid;
+    border-right-color: #633030;
+    border-right-width: 3px;
+
+    border-bottom-style: solid;
+    border-bottom-color: #633030;
+    border-bottom-width: 5px;
+}
+
+.calendario-nombre-columna {
+    padding: 10px;
+}
+
+.calendario-evento {
+    border-bottom-style: solid;
+    border-bottom-color: gray;
+    border-bottom-width: 3px;
+
+    background-color: white;
+    color: black;
+
+    padding: 10px;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    text-align: center;
+}
+
+.calendario-evento-realizado {
+    opacity: 0.3;
+}
+
+.calendario-evento > div {
+    border-right-style: solid;
+    border-right-color: gray;
+    border-right-width: 3px;
+}
+
+/*
+.calendario-evento:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+*/
+
+.calendario-color-etiqueta {
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    font-weight: bold;
+}
+
+.color-partido {
+    color: white;
+    background-color: green;
+}
+
+.color-entrenamiento {
+    color: white;
+    background-color: blue;
+}
+
+.color-otros {
+    color: white;
+    background-color: gray;
+}
+
+.color-torneo {
+    color: white;
+    background-color: orange;
+}
+
+.color-liga {
+    color: white;
+    background-color: #e12222;
+}
+
+.color-amistoso {
+    color: white;
+    background-color: green;
+}
+
+.calendario-nombre-columna {
+    background-color: #964545;
+}
+
+.calendario-descripcion {
+    font-weight: bold;
+}
+
+.calendario-vacio {
+    font-weight: bold;
+}
+
+.calendario-contenido {
+    background-color: white;
+
+    overflow-y: scroll;
+    height: 500px;
+}
+
+@media (max-width: 991px) {
+    .calendario-etiqueta {
+        margin-bottom: 14px;
+    }
+
+    .calendario-dia {
+        font-size: 30px;
+    }
+
+    .calendario-descripcion {
+        margin-top: 14px;
+    }
+}

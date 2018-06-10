@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\Config;
 use common\models\Directo;
+use common\models\Calendario;
 use common\components\ImageFile;
 
 use backend\models\LoginForm;
@@ -28,7 +29,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['login', 'index', 'logout', 'accion', 'administrar-cuentas', 'web'],
+                'only' => ['login', 'index', 'logout', 'accion', 'administrar-cuentas', 'web', 'calendario'],
                 'rules' => [
                     [
                         'actions' => ['login'],
@@ -54,6 +55,11 @@ class SiteController extends Controller
                         'actions' => ['accion'],
                         'allow' => true,
                         'roles' => ['accion'],
+                    ],
+                    [
+                        'actions' => ['calendario'],
+                        'allow' => true,
+                        'roles' => ['verBackEndCalendario', 'programarEvento', 'elminarEvento', 'modificarEvento'],
                     ]
                 ],
                 'denyCallback' => function ($rule, $action) {
@@ -118,6 +124,14 @@ class SiteController extends Controller
             'detect' => $detect,
             'msgUnete' => $msgUnete,
             'directo' => $directo
+        ]);
+    }
+
+    public function actionCalendario()
+    {
+        $model = new Calendario();
+        return $this->render('calendario', [
+            'model' => $model
         ]);
     }
 

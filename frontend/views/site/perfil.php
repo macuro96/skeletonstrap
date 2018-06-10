@@ -94,10 +94,7 @@ RegisterThisCss::register($this);
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6 nombre-dato">
-                                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Correo
-                                    </div>
-                                    <div class="col-md-6 valor-dato">
+                                    <div class="col-md-12 valor-dato">
                                         <?= Html::encode($usuario->correo) ?>
                                     </div>
                                 </div>

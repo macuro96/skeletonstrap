@@ -11,6 +11,8 @@ use common\models\Usuarios;
  */
 class ElegirUsuarioForm extends Model
 {
+    const ESCENARIO_ROL = 'rol';
+
     /**
      * Modelo de usuario temporal
      * @var Usuarios
@@ -23,6 +25,16 @@ class ElegirUsuarioForm extends Model
      */
     public $accion;
 
+    public $rol_cambiar;
+
+    public function scenarios()
+    {
+        $escenarios = parent::scenarios();
+        $escenarios[self::ESCENARIO_ROL] = array_merge($escenarios['default'], ['rol_cambiar']);
+
+        return $escenarios;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -30,10 +42,11 @@ class ElegirUsuarioForm extends Model
     {
         return [
             [['accion', 'usuarios_id'], 'required'],
+            [['rol_cambiar'], 'required', 'on' => self::ESCENARIO_ROL],
             [['usuarios_id'], function ($attribute, $params, $validator) {
                 if (!$this->hasErrors()) {
-                    if ($this->accion != 'eliminar' && $this->accion != 'expulsar' && $this->accion != 'quitar-expulsion') {
-                        $this->addError($attribute, 'La acción debe ser eliminar, expulsar o quitar expulsión.');
+                    if ($this->accion != 'eliminar' && $this->accion != 'expulsar' && $this->accion != 'quitar-expulsion' && $this->accion != 'cambiar-rol') {
+                        $this->addError($attribute, 'La acción debe ser eliminar, expulsar, quitar expulsión o cambiar rol.');
                     }
                     if ($this->accion == 'expulsar' || $this->accion == 'quitar-expulsion') {
                         $usuarios = [];
@@ -81,6 +94,7 @@ class ElegirUsuarioForm extends Model
         return [
             'usuarios_id' => 'Usuario',
             'accion'     => 'Acción',
+            'rol_cambiar' => 'Rol'
         ];
     }
 }

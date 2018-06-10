@@ -169,21 +169,15 @@ DROP TABLE IF EXISTS eventos CASCADE;
 
 CREATE TABLE eventos
 (
-    id                 BIGSERIAL    PRIMARY KEY
-  , nombre             VARCHAR(64)  NOT NULL
-  , abreviatura        VARCHAR(8)
-  , descripcion        TEXT         CONSTRAINT ck_descripcion_limite
-                                    CHECK (char_length(descripcion) < 2000)
-  , evento_etiqueta_id BIGINT       NOT NULL
-                                    REFERENCES evento_etiquetas (id)
-                                    ON DELETE NO ACTION
-                                    ON UPDATE CASCADE
-  , fecha_desde        TIMESTAMP(0) NOT NULL
-  , fecha_hasta        TIMESTAMP(0) NOT NULL
+    id                 BIGSERIAL PRIMARY KEY
+  , evento_etiqueta_id BIGINT    NOT NULL
+                                 REFERENCES evento_etiquetas (id)
+                                 ON DELETE NO ACTION
+                                 ON UPDATE CASCADE
+  , descripcion        TEXT      CONSTRAINT ck_descripcion_limite
+                                 CHECK (char_length(descripcion) < 2000)
 );
 
-CREATE INDEX idx_eventos_nombre              ON eventos (nombre);
-CREATE INDEX idx_eventos_fecha_desde         ON eventos (fecha_desde);
 CREATE INDEX idx_eventos_evento_etiqueta_id  ON eventos (evento_etiqueta_id);
 
 DROP TABLE IF EXISTS roles CASCADE;
@@ -325,7 +319,7 @@ CREATE TABLE usuarios_roles
       id         BIGSERIAL   PRIMARY KEY
     , usuario_id BIGINT      NOT NULL
                              REFERENCES usuarios (id)
-                             ON DELETE NO ACTION
+                             ON DELETE CASCADE
                              ON UPDATE CASCADE
     , rol_id     BIGINT      NOT NULL
                              REFERENCES roles (id)
@@ -863,14 +857,23 @@ VALUES ('Arena 1', 0),
        ('Campeones Definitivos', 9);
 
 INSERT INTO usuarios (nombre, password, correo, nacionalidad_id, zona_horaria_id, auth_key, verificado, activo)
-VALUES ('admin', crypt('admin', gen_salt('bf', 13)), 'nombre@dominio.com', 48, 13, 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA', null, true);
+VALUES ('admin', crypt('admin', gen_salt('bf', 13)), 'admin@dominio.com', 48, 13, 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA', null, true);
 
 INSERT INTO permisos (nombre, descripcion)
-VALUES ('verTodo', 'Puede ver'),
-       ('escribirTodo', 'Puede escribir');
+VALUES ('verBackEndCalendario', 'Puede ver el calenario en backend'),
+       ('programarEvento', 'Puede programar un evento nuevo'),
+       ('elminarEvento', 'Puede eliminar un evento existente'),
+       ('modificarEvento', 'Puede modificar un evento existente'),
+       ('parametros', 'Puede modificar los parametros de la configuración web'),
+       ('modificarRoles', 'Puede modificar los roles de los usuarios'),
+       ('directo', 'Puede programar, activar y desactivar un directo'),
+       ('usuarios', 'Puede eliminar, expulsar y quitar la expulsión de los usuarios'),
+       ('solicitudes', 'Puede aceptar e invitar las solicitudes para entrar en el equipo y las de lucha'),
+       ('loginBackEnd', 'Puede loguearse y acceder al backend');
 
 INSERT INTO roles (nombre)
 VALUES ('administrador'),
+       ('Coach'),
        ('Líder'),
        ('Colíder'),
        ('Miembro'),
@@ -878,10 +881,44 @@ VALUES ('administrador'),
 
 INSERT INTO roles_permisos (rol_id, permiso_id)
 VALUES (1, 1),
-       (1, 2);
+       (1, 2),
+       (1, 3),
+       (1, 4),
+       (1, 5),
+       (1, 6),
+       (1, 7),
+       (1, 8),
+       (1, 9),
+       (1, 10),
+       (2, 1),
+       (2, 2),
+       (2, 3),
+       (2, 4),
+       (2, 9),
+       (2, 10),
+       (3, 1),
+       (3, 2),
+       (3, 3),
+       (3, 4),
+       (3, 8),
+       (3, 9),
+       (3, 10),
+       (4, 1),
+       (4, 2),
+       (4, 3),
+       (4, 4),
+       (4, 9),
+       (4, 10);
 
 INSERT INTO usuarios_roles (usuario_id, rol_id)
 VALUES (1, 1);
+
+INSERT INTO evento_etiquetas (nombre, color)
+VALUES ('Otros', 'gray'),
+       ('Entrenamiento', 'blue'),
+       ('Torneo', 'orange'),
+       ('Liga', 'red'),
+       ('Amistoso', 'green');
 
 INSERT INTO config (mensaje_twitter, mensaje_unete_twitter, mensaje_whatsapp, mensaje_unete_whatsapp, usuario_twitch)
 VALUES ('https://skeletons-trap.herokuapp.com/ ¿Te atréves a jugar contra nosotros? Somos Skeletons Trap',

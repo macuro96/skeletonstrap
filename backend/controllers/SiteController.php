@@ -36,10 +36,25 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index', 'accion', 'administrar-cuentas', 'web'],
+                        'actions' => ['logout', 'index'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['loginBackEnd'],
                     ],
+                    [
+                        'actions' => ['administrar-cuentas'],
+                        'allow' => true,
+                        'roles' => ['parametros'],
+                    ],
+                    [
+                        'actions' => ['web'],
+                        'allow' => true,
+                        'roles' => ['directo'],
+                    ],
+                    [
+                        'actions' => ['accion'],
+                        'allow' => true,
+                        'roles' => ['accion'],
+                    ]
                 ],
                 'denyCallback' => function ($rule, $action) {
                     if ($action->id == 'login') {

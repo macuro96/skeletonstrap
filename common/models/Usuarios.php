@@ -68,11 +68,26 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     const ESCENARIO_PERFIL = 'perfil';
 
     /**
+     * Escenario de que un usuario actualiza su perfil.
+     * @var string
+     */
+    const ESCENARIO_ACEPTAR_SOLICITUD = 'aceptar-solicitud';
+
+    /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'usuarios';
+    }
+
+    public function scenarios()
+    {
+        $escenarios = parent::scenarios();
+        $escenarios[self::ESCENARIO_INVITAR] = array_merge($escenarios['default'], []);
+        $escenarios[self::ESCENARIO_ACEPTAR_SOLICITUD] = array_merge($escenarios['default'], []);
+
+        return $escenarios;
     }
 
     /**
@@ -332,7 +347,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
             } else {
                 $nuevoUsuarioRol = new UsuariosRoles([
                     'usuario_id' => $this->id,
-                    'rol_id' => $rol->id
+                    'rol_id' => $rolId
                 ]);
             }
 

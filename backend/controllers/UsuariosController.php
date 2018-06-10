@@ -128,8 +128,10 @@ class UsuariosController extends Controller
     public function actionAceptarSolicitud()
     {
         $id = Yii::$app->request->post('usuario');
+
         $model = $this->findModel($id);
 
+        $model->scenario = Usuarios::ESCENARIO_ACEPTAR_SOLICITUD;
         $model->activo = true;
 
         if ($model->save() && $this->enviarCorreoConfirmacion($model)) {
@@ -324,6 +326,8 @@ class UsuariosController extends Controller
 
             $zonasHorarias[$idZonaHoraria] = 'GMT ' . ($zonaZonaHoraria >= 0 ? '+' : '') . $zonaZonaHoraria . ' - ' . $lugarZonaHoraria;
         }
+
+        //var_dump($model); die();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if ($this->enviarCorreoConfirmacion($model)) {

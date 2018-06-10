@@ -58,7 +58,6 @@ CREATE TABLE evento_etiquetas
 (
     id     BIGSERIAL    PRIMARY KEY
   , nombre VARCHAR(32)  NOT NULL UNIQUE
-  , color  VARCHAR(6)   UNIQUE
 );
 
 DROP TABLE IF EXISTS permisos CASCADE;
@@ -641,6 +640,23 @@ CREATE TABLE directo
   , logo              TEXT         NOT NULL
 );
 
+DROP TABLE IF EXISTS calendario CASCADE;
+
+CREATE TABLE calendario
+(
+    id          BIGSERIAL   PRIMARY KEY
+  , etiqueta    BIGINT      NOT NULL REFERENCES evento_etiquetas (id)
+                            ON DELETE NO ACTION
+                            ON UPDATE CASCADE
+  , fecha       DATE        NOT NULL
+  , hora        TIME        NOT NULL
+  , descripcion TEXT
+  , imagen      BYTEA
+  , visibilidad BIGINT      REFERENCES roles (id)
+                            ON DELETE NO ACTION
+                            ON UPDATE CASCADE
+);
+
 -- TRIGGERS
 
 
@@ -875,9 +891,9 @@ VALUES ('verBackEndCalendario', 'Puede ver el calenario en backend'),
 
 INSERT INTO roles (nombre)
 VALUES ('administrador'),
-       ('Coach'),
        ('Líder'),
        ('Colíder'),
+       ('Coach'),
        ('Miembro'),
        ('En prueba');
 
@@ -896,13 +912,13 @@ VALUES (1, 1),
        (2, 2),
        (2, 3),
        (2, 4),
+       (2, 8),
        (2, 9),
        (2, 10),
        (3, 1),
        (3, 2),
        (3, 3),
        (3, 4),
-       (3, 8),
        (3, 9),
        (3, 10),
        (4, 1),
@@ -915,12 +931,12 @@ VALUES (1, 1),
 INSERT INTO usuarios_roles (usuario_id, rol_id)
 VALUES (1, 1);
 
-INSERT INTO evento_etiquetas (nombre, color)
-VALUES ('Otros', 'gray'),
-       ('Entrenamiento', 'blue'),
-       ('Torneo', 'orange'),
-       ('Liga', 'red'),
-       ('Amistoso', 'green');
+INSERT INTO evento_etiquetas (nombre)
+VALUES ('Otros'),
+       ('Entrenamiento'),
+       ('Torneo'),
+       ('Liga'),
+       ('Amistoso');
 
 INSERT INTO config (mensaje_twitter, mensaje_unete_twitter, mensaje_whatsapp, mensaje_unete_whatsapp, usuario_twitch)
 VALUES ('https://skeletons-trap.herokuapp.com/ ¿Te atréves a jugar contra nosotros? Somos Skeletons Trap',
@@ -930,3 +946,23 @@ VALUES ('https://skeletons-trap.herokuapp.com/ ¿Te atréves a jugar contra noso
         'skeletonstraptv');
 
 -- DATOS PRUEBAS
+/*
+INSERT INTO usuarios (nombre, password, correo, nacionalidad_id, zona_horaria_id, auth_key, verificado, activo)
+VALUES ('coach', crypt('coach', gen_salt('bf', 13)), 'coach@dominio.com', 48, 13, 'WPbxyU4wBMiDlSOQvKlRXE-oEcg__VFA', null, true),
+       ('lider', crypt('lider', gen_salt('bf', 13)), 'lider@dominio.com', 48, 13, 'WPbxyU4wBMiDlSOQvKlRXEasdfEcg__VFA', null, true),
+       ('colider', crypt('colider', gen_salt('bf', 13)), 'colider@dominio.com', 48, 13, 'WPbxyU4wBMiDlSOQvKlRXE-oEascg__VFA', null, true),
+       ('miembro', crypt('miembro', gen_salt('bf', 13)), 'miembro@dominio.com', 48, 13, 'WPbxyU4wBMiDlSOasdQRXE-oEcg__VFA', null, true),
+       ('enprueba', crypt('enprueba', gen_salt('bf', 13)), 'enprueba@dominio.com', 48, 13, 'WPbxyU4wBMiDlSOQvKlRXE-oEcg__VasdFA', null, true);
+
+INSERT INTO usuarios_roles (usuario_id, rol_id)
+VALUES (2, 2),
+       (3, 3),
+       (4, 4),
+       (5, 5),
+       (6, 6);
+*/
+/*
+INSERT INTO calendario (etiqueta, fecha, hora, descripcion, imagen, visibilidad)
+VALUES (1, '2018-06-05', '20:00:00', 'descripcion jabsdfjahkbsdf asdnf', null, 1),
+       (3, '2018-06-10', '20:00:00', 'descripcion jabsdfjahkbsdf asdnf', null, null);
+*/

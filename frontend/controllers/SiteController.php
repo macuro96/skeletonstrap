@@ -4,6 +4,8 @@ namespace frontend\controllers;
 use Yii;
 use Detection\MobileDetect;
 
+use yii\db\Expression;
+
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -14,6 +16,7 @@ use common\models\Config;
 use common\models\Directo;
 use common\models\Usuarios;
 use common\models\LoginForm;
+use common\models\Calendario;
 use common\models\ZonasHorarias;
 use common\models\Nacionalidades;
 use common\models\SolicitudesLucha;
@@ -137,6 +140,51 @@ class SiteController extends Controller
     private function configAccion()
     {
         return Config::find()->one()->accion;
+    }
+
+    public function actionCalendario()
+    {
+        $model = new Calendario();
+        return $this->render('calendario', [
+            'model' => $model
+        ]);
+    }
+
+    public function actionDatosCalendario()
+    {
+        if (\Yii::$app->request->isAjax && \Yii::$app->request->isPost) {
+            $mes = \Yii::$app->request->post('mes');
+
+            if ($mes !== null) {
+                $usuario = \Yii::$app->user->identity; // Para el rol de visibilidad
+                $rolIdUsuario = ($usuario ? $usuario->roles[0]->id : null);
+
+                $mes++;
+
+                $eventos = Calendario::find()
+                                     ->select(new Expression("*, current_timestamp - (fecha || ' ' || hora)::timestamp > interval '1 min' as realizado"))
+                                     ->where('extract(month from fecha) = ' . $mes)
+                                     ->andWhere(['or', ($rolIdUsuario ? ($rolIdUsuario . ' >= visibilidad') : ('false')), 'visibilidad is null'])
+                                     ->orderBy('realizado ASC')
+                                     ->all();
+
+                $datos = [];
+                $contador = 0;
+
+                foreach ($eventos as $evento) {
+                    $datos[$contador]['etiqueta'] = $evento->etiqueta0->nombre;
+                    $datos[$contador]['fecha'] = \Yii::$app->formatter->asDate($evento->fecha);
+                    $datos[$contador]['hora'] = \Yii::$app->formatter->asTime("$evento->fecha $evento->hora+00");
+                    $datos[$contador]['descripcion'] = $evento->descripcion;
+                    $datos[$contador]['realizado'] = $evento->realizado;
+
+                    $contador++;
+                }
+
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                return $datos;
+            }
+        }
     }
 
     public function actionAccionActual()

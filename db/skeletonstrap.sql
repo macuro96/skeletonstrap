@@ -319,7 +319,7 @@ CREATE TABLE usuarios_roles
       id         BIGSERIAL   PRIMARY KEY
     , usuario_id BIGINT      NOT NULL
                              REFERENCES usuarios (id)
-                             ON DELETE NO ACTION
+                             ON DELETE CASCADE
                              ON UPDATE CASCADE
     , rol_id     BIGINT      NOT NULL
                              REFERENCES roles (id)
@@ -859,7 +859,7 @@ VALUES ('Arena 1', 0),
        ('Campeones Definitivos', 9);
 
 INSERT INTO usuarios (nombre, password, correo, nacionalidad_id, zona_horaria_id, auth_key, verificado, activo)
-VALUES ('admin', crypt('admin', gen_salt('bf', 13)), 'nombre@dominio.com', 48, 13, 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA', null, true);
+VALUES ('admin', crypt('admin', gen_salt('bf', 13)), 'admin@dominio.com', 48, 13, 'WPBxyU4wBMiDlSOQiKlRXE-oEcg__VFA', null, true);
 
 INSERT INTO permisos (nombre, descripcion)
 VALUES ('verBackEndCalendario', 'Puede ver el calenario en backend'),

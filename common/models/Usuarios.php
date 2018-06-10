@@ -4,6 +4,8 @@ namespace common\models;
 
 use yii\db\ActiveQuery;
 
+use backend\components\PermisosUsuarios;
+
 use \yii\web\IdentityInterface;
 
 /**
@@ -296,6 +298,36 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         $this->expulsado = null;
         $this->save();
+    }
+
+    public function cambiarRol($rolId)
+    {
+        $rol = Roles::findOne($rolId);
+
+        if ($rol) {
+            $nuevoUsuarioRol = UsuariosRoles::find()
+                                            ->where(['usuario_id' => $this->id])
+                                            ->one();
+
+            if ($nuevoUsuarioRol) {
+                $nuevoUsuarioRol->rol_id = $rol->id;
+            } else {
+                $nuevoUsuarioRol = new UsuariosRoles([
+                    'usuario_id' => $this->id,
+                    'rol_id' => $rol->id
+                ]);
+            }
+
+            if ($nuevoUsuarioRol->save()) {
+                PermisosUsuarios::down();
+                PermisosUsuarios::up();
+            }
+
+            if (\Yii::$app->user->identity->id == $this->id) {
+                \Yii::$app->user->logout();
+                return $this->goHome();
+            }
+        }
     }
 
     public function getEstaExpulsado()

@@ -8,6 +8,7 @@ use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\helpers\Html;
 
+use common\models\Roles;
 use common\models\Usuarios;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -99,13 +100,19 @@ class UsuariosController extends Controller
     public function actionIndex()
     {
         $usuarios = Usuarios::findLoginExpulsadosQuery()
-                            ->where('id != ' . \Yii::$app->user->identity->id)
-                            ->andWhere('id != 1') // Administrador
+                            ->joinWith('roles')
+                            ->orderBy('roles.id')
+                            ->where('usuarios.id != ' . \Yii::$app->user->identity->id)
+                            ->andWhere('usuarios.id != 1') // Administrador
                             ->all();
 
         $usuariosPendientes = Usuarios::pendientes();
 
-        $solicitudesLucha = SolicitudesLucha::find()->all();
+        $solicitudesLucha = SolicitudesLucha::find()
+                                            ->orderBy('aceptada ASC')
+                                            ->all();
+
+        //var_dump($solicitudesLucha); die();
 
         return $this->render('index', [
             'usuarios' => $usuarios,
@@ -342,6 +349,7 @@ class UsuariosController extends Controller
     private function listaUsuarios()
     {
         $usuariosDatos = Usuarios::findLoginExpulsadosQuery()
+                                 ->with('roles')
                                  ->orderBy('nombre ASC')
                                  ->where('id != ' . \Yii::$app->user->identity->id)
                                  ->andWhere('id != 1')
@@ -360,6 +368,24 @@ class UsuariosController extends Controller
         return $usuarios;
     }
 
+    private function listaRoles()
+    {
+        $rolesDatos = Roles::find()
+                           ->orderBy('id')
+                           ->all();
+
+        $roles = [];
+
+        foreach ($rolesDatos as $key => $value) {
+            $idRoles     = $value['id'];
+            $nombreRoles = $value['nombre'];
+
+            $roles[$idRoles] = $nombreRoles;
+        }
+
+        return $roles;
+    }
+
     /**
      * Elimina a un usuario por su id en POST
      */
@@ -367,34 +393,55 @@ class UsuariosController extends Controller
     {
         $model = new ElegirUsuarioForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if (Yii::$app->request->post()) {
+            $accionPost = isset(Yii::$app->request->post('ElegirUsuarioForm')['accion']) ? Yii::$app->request->post('ElegirUsuarioForm')['accion'] : '';
+
+            if ($accionPost == 'cambiar-rol') {
+                $model = new ElegirUsuarioForm([
+                    'scenario' => ElegirUsuarioForm::ESCENARIO_ROL
+                ]);
+            }
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
             $accion = $model->accion;
 
-            $strUsuarios = implode(', ', array_map(function ($elemento) {
-                return ('\'' . $elemento . '\'');
-            }, $model->usuarios_id));
+            if ($model->validate()) {
+                $strUsuarios = implode(', ', array_map(function ($elemento) {
+                    return ('\'' . $elemento . '\'');
+                }, $model->usuarios_id));
 
-            $usuarios = Usuarios::findLoginExpulsadosQuery()
-                                ->where('id in (' . $strUsuarios . ')')
-                                ->all();
+                $usuarios = Usuarios::findLoginExpulsadosQuery()
+                                    ->where('id in (' . $strUsuarios . ')')
+                                    ->all();
 
-            foreach ($usuarios as $usuario) {
-                if ($accion == 'eliminar') {
-                    $usuario->delete();
-                } elseif ($accion == 'expulsar') {
-                    $usuario->expulsar();
-                } elseif ($accion == 'quitar-expulsion') {
-                    $usuario->quitarExpulsion();
+                foreach ($usuarios as $usuario) {
+                    if ($accion == 'eliminar') {
+                        $usuario->delete();
+                    } elseif ($accion == 'expulsar') {
+                        $usuario->expulsar();
+                    } elseif ($accion == 'quitar-expulsion') {
+                        $usuario->quitarExpulsion();
+                    } elseif ($accion == 'cambiar-rol') {
+                        if ($usuario->id != \Yii::$app->user->identity->id) {
+                            $rol = Roles::findOne($model->rol_cambiar);
+
+                            if ($rol) {
+                                $usuario->cambiarRol($rol->id);
+                            }
+                        }
+                    }
                 }
-            }
 
-            \Yii::$app->session->setFlash('success', 'Se ha realizado la acción a los usuarios seleccionados correctamente.');
-            return $this->redirect(['index']);
+                \Yii::$app->session->setFlash('success', 'Se ha realizado la acción a los usuarios seleccionados correctamente.');
+                return $this->redirect(['index']);
+            }
         }
 
         return $this->render('accion', [
             'model' => $model,
-            'usuarios' => $this->listaUsuarios()
+            'usuarios' => $this->listaUsuarios(),
+            'roles' => $this->listaRoles()
         ]);
     }
 

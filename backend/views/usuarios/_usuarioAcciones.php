@@ -32,6 +32,9 @@ $configQuitarExpulsion['data']['confirm'] = "¿Estás seguro que quieres quitar 
                 <b><?= Html::encode($model->nombre) ?></b>
             </div>
             <div>
+                <?= Html::encode('<' . $model->roles[0]->nombre . '>') ?>
+            </div>
+            <div>
                 <?= Html::encode(isset($model->jugadores) ? ('#' . $model->jugadores->tag) : '<sin tag>') ?>
             </div>
         </div>
@@ -40,6 +43,9 @@ $configQuitarExpulsion['data']['confirm'] = "¿Estás seguro que quieres quitar 
                 <?= Html::a('Expulsar', ['expulsar'], $configExpulsar) ?>
             <?php else : ?>
                 <?= Html::a('Quitar expulsión', ['quitar-expulsion'], $configQuitarExpulsion) ?>
+            <?php endif; ?>
+            <?php if (\Yii::$app->authManager->checkAccess(\Yii::$app->user->identity->id, 'modificarRoles')) : ?>
+                <?= Html::a('Rol', ['accion-usuario', 'accion' => 'cambiar-rol', 'usuario' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?php endif; ?>
             <?= Html::a('Eliminar', ['eliminar'], $configEliminar) ?>
         </div>

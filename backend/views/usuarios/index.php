@@ -68,6 +68,9 @@ RegisterThisCss::register($this);
                     <div class="acciones centrar">
                         <?= Html::a('Expulsar', ['accion-usuario', 'accion' => 'expulsar'], ['class' => 'btn btn-warning']) ?>
                         <?= Html::a('Quitar expulsion', ['accion-usuario', 'accion' => 'quitar-expulsion'], ['class' => 'btn btn-success']) ?>
+                        <?php if (\Yii::$app->authManager->checkAccess(\Yii::$app->user->identity->id, 'modificarRoles')) : ?>
+                            <?= Html::a('Roles', ['accion-usuario', 'accion' => 'cambiar-rol'], ['class' => 'btn btn-primary']) ?>
+                        <?php endif; ?>
                         <?= Html::a('Eliminar', ['accion-usuario', 'accion' => 'eliminar'], ['class' => 'btn btn-danger']) ?>
                     </div>
                     <div id="usuarios-acciones">

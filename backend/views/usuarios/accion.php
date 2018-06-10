@@ -14,9 +14,26 @@ $this->title = 'Eliminar o expulsar usuarios';
 RegisterThisCss::register($this);
 RegisterThisJs::register($this);
 
+$accionesPermitidas = [
+    'eliminar' => 'Eliminar',
+    'expulsar' => 'Expulsar',
+    'quitar-expulsion' => 'Quitar expulsión',
+];
+
+$accion = (\Yii::$app->request->get('accion') ? \Yii::$app->request->get('accion') : '');
+
+if (\Yii::$app->authManager->checkAccess(\Yii::$app->user->identity->id, 'modificarRoles')) {
+    $accionesPermitidas['cambiar-rol'] = 'Cambiar rol';
+} else {
+    if ($accion == 'cambiar-rol') {
+        $accion = '';
+    }
+}
+
 $usuariosAnadidos = $model->usuarios_id;
 
-$primerUsuario = (isset($model->usuarios_id[0]) ? $model->usuarios_id[0] : 1);
+$primerUsuarioId = (\Yii::$app->request->get('usuario') ? \Yii::$app->request->get('usuario') : 1);
+$primerUsuario = (isset($model->usuarios_id[0]) ? $model->usuarios_id[0] : $primerUsuarioId);
 
 if (is_array($usuariosAnadidos) && !empty($usuariosAnadidos)) {
     array_shift($usuariosAnadidos);
@@ -41,10 +58,16 @@ foreach ($model->errors as $key => $value) {
 
 $jsonErrors = ((!empty($errors['noexpulsado']) || !empty($errors['expulsado'])) ? json_encode($errors) : '\'\'');
 
+$arrayJsRoles = '[' . implode(', ', array_map(function ($elemento) {
+    return '\'' . $elemento . '\'';
+}, $roles)) . ']';
+
 $js = <<<EOT
     var cont = 1;
 
     var errors = $jsonErrors;
+    var roles  = $arrayJsRoles;
+    var accion = '$accion';
 
     $('.anadir-usuario').on('click', function (){
         if ($('.usuario-row').length < 5) {
@@ -86,6 +109,37 @@ $js = <<<EOT
                 formGroup.find('.help-block').replaceWith(div);
             }
         }
+    }
+
+    function selectRoles(selAccion) {
+        $('select[name="ElegirUsuarioForm[rol_cambiar]"]').remove();
+
+        if (selAccion.val() == 'cambiar-rol') {
+            var selectRolDOM = document.createElement('select');
+            var selectRol = $(selectRolDOM);
+
+            selectRol.attr('id', 'elegirusuarioform-rol_cambiar');
+            selectRol.attr('name', 'ElegirUsuarioForm[rol_cambiar]');
+            selectRol.attr('aria-required', true);
+            selectRol.attr('aria-invalid', false);
+
+            selectRol.addClass('form-control');
+
+            for (let r = 0; r < roles.length; r++) {
+                let option = $('<option value='+(r+1)+'>' + roles[r] + '</option>');
+                $(selectRol).append(option);
+            }
+
+            selAccion.after(selectRol);
+        }
+    }
+
+    $('#elegirusuarioform-accion').on('change', function () {
+        selectRoles($('#elegirusuarioform-accion'));
+    });
+
+    if (accion == 'cambiar-rol') {
+        selectRoles($('#elegirusuarioform-accion'));
     }
 EOT;
 
@@ -136,11 +190,7 @@ $this->registerJs($js);
                 <?php endforeach; ?>
                 <div class="row">
                     <div class="col-md-12">
-                        <?= $form->field($model, 'accion')->dropDownList([
-                            'eliminar' => 'Eliminar',
-                            'expulsar' => 'Expulsar',
-                            'quitar-expulsion' => 'Quitar expulsión'
-                        ], ['value' => \Yii::$app->request->get('accion')]) ?>
+                        <?= $form->field($model, 'accion')->dropDownList($accionesPermitidas, ['value' => \Yii::$app->request->get('accion')]) ?>
                     </div>
                 </div>
 

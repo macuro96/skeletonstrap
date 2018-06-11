@@ -104,17 +104,17 @@ EOT;
 
 $this->registerJs($js);
 ?>
-<div class="row cabecera-inicio">
+<div class="row cabecera-inicio" itemscope itemtype="http://schema.org/SportsTeam">
     <div class="col-lg-offset-3 col-lg-6">
-        <div class="img-centered logo-inicio">
+        <div itemprop="logo" class="img-centered logo-inicio">
             <?= Recursos::imageCommon('logo.png') ?>
         </div>
 
         <p class="titulo-inicio">
-            Trappero, bienvenido a la web del equipo <b>"Skeleton's Trap"</b>
+            Trappero, bienvenido a la web del equipo <b itemprop="name">"Skeleton's Trap"</b>
         </p>
 
-        <p>
+        <p itemprop="description">
             Ésta es una web en la que encontrarás información sobre: integrantes del equipo, estadísticas, torneos. También podrás contactarnos para poder unirte o luchar contra nosotros...
         </p>
     </div>

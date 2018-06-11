@@ -25,7 +25,7 @@ use common\components\CheckEnd;
                         <?= $form->field($model, 'password')->passwordInput() ?>
 
                         <?php if (CheckEnd::isFrontEnd()) : ?>
-                            <?= Html::a('Soy un administrador', '/admin/site/login') ?>
+                            <?= Html::a('Soy un administrador', '/admin/site/login', ['class' => 'btn btn-success']) ?>
                         <?php else : ?>
                             <?= Html::a('Soy un jugador', '/site/login') ?>
                         <?php endif; ?>

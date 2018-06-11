@@ -42,17 +42,17 @@ $this->registerJs($js);
 
 RegisterThisCss::register($this);
 ?>
-<div class="row cabecera-inicio">
+<div itemscope itemtype="http://schema.org/SportsTeam" class="row cabecera-inicio">
     <div class="col-lg-offset-3 col-lg-6">
-        <div class="img-centered logo-inicio">
+        <div itemprop="logo" class="img-centered logo-inicio">
             <?= Recursos::imageCommon('equipo.png') ?>
         </div>
 
         <p class="titulo-inicio">
-            Nuestro equipo en <b>Skeleton's Trap</b>
+            Nuestro equipo en <b itemprop="name">Skeleton's Trap</b>
         </p>
 
-        <p>
+        <p itemprop="description">
             Aquí encontrarás información sobre el equipo y sus miembros: estadísticas del juego, requisitos del equipo, etc.
         </p>
     </div>

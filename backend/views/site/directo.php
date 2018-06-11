@@ -12,7 +12,19 @@ use common\components\RegisterThisCss;
 
 $this->title = 'Modificar directo actual';
 
+$this->registerCssFile('/admin/magnific-popup/magnific-popup.css');
+$this->registerJsFile('/admin/magnific-popup/jquery.magnific-popup.min.js', [
+    'depends'  => [\yii\web\JqueryAsset::className()]
+]);
 RegisterThisCss::register($this);
+
+$js = <<<EOT
+    $('.popup-link').magnificPopup({type:'image'});
+EOT;
+
+if ($model->scenario == Directo::ESCENARIO_UPDATE) {
+    $this->registerJs($js);
+}
 ?>
 <div class="row seccion usuarios-form">
     <div class="col-lg-12">
@@ -63,7 +75,7 @@ RegisterThisCss::register($this);
                 <div class="row">
                     <div class="col-lg-3">
                         <?php if ($model->scenario == Directo::ESCENARIO_UPDATE) : ?>
-                            <img class="img-file" src="<?= Html::encode($model->getLogoSrc()) ?>">
+                            <a class="popup-link" href="<?= Html::encode($model->getLogoSrc()) ?>"><img class="img-file" src="<?= Html::encode($model->getLogoSrc()) ?>"></a>
                         <?php endif; ?>
                         <?= $form->field($model, "file")->fileInput()
                                                         ->label('Logo equipo oponente*')

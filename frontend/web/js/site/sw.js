@@ -1,7 +1,7 @@
 var CACHE_VERSION = '1';                    // PARA CONTROLAR LOS CAMBIOS DE ALGUN FICHERO CACHEADO Y LO DETECTE
 var CACHE_NAME    = 'sktrap-sw';
 var urlsToCache   = [
-    '/css/site.css',
+    '/css/site/site.css',
     '/fonts/RobotoSlab-Bold.ttf',
     '/fonts/RobotoSlab-Light.ttf',
     '/fonts/RobotoSlab-Thin.ttf',

@@ -29,7 +29,7 @@
         </ul>
     </div>
 
-    
+
 <div class="row">
     <div class="col-md-2">
                 <div id="navigation" class="list-group"><a class="list-group-item" href="#navigation-72" data-toggle="collapse" data-parent="#navigation">Descripción general <b class="caret"></b></a><div id="navigation-72" class="submenu panel-collapse collapse"><a class="list-group-item" href="./descripcion.html#funcionalidad-principal-de-la-aplicacion">Funcionalidad principal de la plicación</a>
@@ -48,8 +48,24 @@
 <a class="list-group-item" href="#navigation-80" data-toggle="collapse" data-parent="#navigation">Conclusiones <b class="caret"></b></a><div id="navigation-80" class="submenu panel-collapse collapse"><a class="list-group-item" href="./conclusiones.html">Conclusiones</a></div>
 <a class="list-group-item" href="#navigation-81" data-toggle="collapse" data-parent="#navigation">Anexos <b class="caret"></b></a><div id="navigation-81" class="submenu panel-collapse collapse"><a class="list-group-item" href="./anexos.html">Anexos</a></div></div>    </div>
     <div class="col-md-9 guide-content" role="main">
-        <h1>Dificultades encontradas <span id="dificultades-encontradas"></span><a href="#dificultades-encontradas" class="hashlink">&para;</a></h1><p>Explicar, indicando también las soluciones adoptadas en cada caso.</p>
-<p>Incluir aquí el elemento de innovación que se indicó en la propuesta.</p>
+        <h1>Dificultades encontradas <span id="dificultades-encontradas"></span><a href="#dificultades-encontradas" class="hashlink">&para;</a></h1>
+        <p>
+            Al estar en desarrollo la API que utilizo para crear los datos, he creado un componente
+            propio para recoger los datos por mi cuenta con un script. Me tomó mucho tiempo.
+        </p>
+        <p>Elementos de innovacion: Plantilla avanzada de Yii2, utilización de API de clash royale.</p>
+        <p>
+            En cuanto a la API de clash royale me di cuenta que fallaba algunas veces, y no esta operativa todo el tiempo, a si que hice una segunda API propia recopilando a través de patrones una web de estadísticas para utilizarla en el caso de que falle la primera (de forma automática).
+        </p>
+        <p>
+            También me encontré con un fallo de seguridad en el que se podía acceder al contenido sin tener de forma obligatoria HTTPS, con lo cual los datos que mandaban por el login (por ejemplo) no estaban encriptados. Por tanto creé un componente que se ejecuta al principio de la ejecución para rederigir y detectar (asignando variables de apache) cuando se encuentre en HTTP.
+        </p>
+        <p>
+            En el layout que trae Yii por defecto, al redimensionar (tamaño concreto), hay un pequeño fallo de estilo y se come un trozo del contenido. Por tanto cambie los estilos con media query para detectarlo y corregirlo con margen.
+        </p>
+        <p>
+            Para detectar cuando la aplicación está en un dispositivo móvil o tablet utilicé un programa PHP de la web <a href="http://mobiledetect.net/">http://mobiledetect.net/</a>. Utilizo esto para cuando utilizo protocolos que solo se utilizan en móvil, como puede ser compartir por whatsapp.
+        </p>
         <div class="toplink"><a href="#" class="h1" title="go to top"><span class="glyphicon glyphicon-arrow-up"></a></div>
     </div>
 </div>

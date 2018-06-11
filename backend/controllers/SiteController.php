@@ -54,7 +54,7 @@ class SiteController extends Controller
                     [
                         'actions' => ['accion'],
                         'allow' => true,
-                        'roles' => ['accion'],
+                        'roles' => ['directo'],
                     ],
                     [
                         'actions' => ['calendario'],
@@ -130,6 +130,7 @@ class SiteController extends Controller
     public function actionCalendario()
     {
         $model = new Calendario();
+
         return $this->render('calendario', [
             'model' => $model
         ]);

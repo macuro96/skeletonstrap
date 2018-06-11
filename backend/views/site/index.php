@@ -31,7 +31,7 @@ RegisterThisCss::register($this);
                 <p class="centrar">
                     Activado: <b><?= $msgAccion ?></b>
                 </p>
-                <?php if (\Yii::$app->authManager->checkAccess(\Yii::$app->user->identity->id, 'accion')) : ?>
+                <?php if (\Yii::$app->authManager->checkAccess(\Yii::$app->user->identity->id, 'directo')) : ?>
                     <?php if ($configuracionAcciones['accion'] == 'd') : ?>
                         <div class="acciones centrar">
                             <?= Html::a('Modificar directo', ['web', 'config' => 'directo'], ['class' => 'btn btn-danger btn-lg btn-extenso']) ?>

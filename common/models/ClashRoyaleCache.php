@@ -64,11 +64,11 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
         $api = null;
         $version = null;
 
-        $loadAPI = function () use (&$api, &$version) {
+        $loadAPI = function ($bForzarAlternativa = false) use (&$api, &$version) {
             $api     = \Yii::$app->crapi;
             $version = $api->version();
 
-            if ($api->version() == null) {
+            if ($api->version() == null || $bForzarAlternativa) {
                 $api = new \common\components\ClashRoyaleData();
                 $version = $api->version();
             }
@@ -121,6 +121,11 @@ abstract class ClashRoyaleCache extends \yii\db\ActiveRecord
 
         if (!empty($aValoresConsultaAPI)) {
             $atributosJSON = $api->{$metodo}($aValoresConsultaAPI);
+
+            if ($atributosJSON && isset($atributosJSON->error) && $atributosJSON->error == true) {
+                $loadAPI(true);
+                $atributosJSON = $api->{$metodo}($aValoresConsultaAPI);
+            }
 
             $posibleErrorAPI = isset($atributosJSON->error) ? $atributosJSON->error : false;
 

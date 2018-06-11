@@ -557,7 +557,13 @@ class ClashRoyaleData
     private function filtrarContenidoWeb(string $subRutaWeb)
     {
         $url = $this->_url . $subRutaWeb;
-        $contenido = strip_tags(file_get_contents($url), static::ETIQUETAS_FILTRADO);
+
+        try {
+            $fileContent = file_get_contents($url);
+            $contenido = strip_tags($fileContent, static::ETIQUETAS_FILTRADO);
+        } catch (\Exception $e) {
+            $contenido = null;
+        }
 
         return $contenido;
     }

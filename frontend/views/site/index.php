@@ -146,6 +146,7 @@ $this->registerJs($js);
         </div>
     </div>
 </div>
+<!--
 <div class="row seccion">
     <div class="col-lg-12">
         <div class="titulo-seccion" id="ultimos-encuentros">
@@ -197,6 +198,7 @@ $this->registerJs($js);
         </div>
     </div>
 </div>
+-->
 <?= $this->render('_mejoresPartidas', [
     'config' => $config,
     'detect' => $detect

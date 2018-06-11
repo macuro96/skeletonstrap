@@ -71,14 +71,6 @@ $bSiteLogin = ($nombreControlador == 'site' && $nombreAccion == 'login');
                         </div>
                         ', ['site/calendario']); ?>
                         <?= Html::a('
-                        <div class="row opcion-row ' . (($nombreControlador == 'torneos') ? 'active' : '') . '">
-                            <div class="col-md-12">
-                                <span class="glyphicon glyphicon-chevron-right"></span>Torneos
-                            </div>
-                        </div>
-                        ', ['torneos/index']);
-                        ?>
-                        <?= Html::a('
                         <div class="row opcion-row salir">
                             <div class="col-md-12">
                                 <span class="glyphicon glyphicon-chevron-right"></span>Salir (' . \Yii::$app->user->identity->nombre . ')' .

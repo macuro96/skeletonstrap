@@ -2,838 +2,1314 @@ Array
 (
     [0] => Array
         (
-            [line] => 20
-            [file] => ./assets/AppAsset.php
+            [line] => 12
+            [file] => ./backend/assets/AppAsset.php
             [message] => No docblock for element '$basePath'
         )
 
     [1] => Array
         (
-            [line] => 20
-            [file] => ./assets/AppAsset.php
+            [line] => 12
+            [file] => ./backend/assets/AppAsset.php
             [message] => No short description for element '$basePath'
         )
 
     [2] => Array
         (
-            [line] => 21
-            [file] => ./assets/AppAsset.php
+            [line] => 13
+            [file] => ./backend/assets/AppAsset.php
             [message] => No docblock for element '$baseUrl'
         )
 
     [3] => Array
         (
-            [line] => 21
-            [file] => ./assets/AppAsset.php
+            [line] => 13
+            [file] => ./backend/assets/AppAsset.php
             [message] => No short description for element '$baseUrl'
         )
 
     [4] => Array
         (
-            [line] => 22
-            [file] => ./assets/AppAsset.php
+            [line] => 14
+            [file] => ./backend/assets/AppAsset.php
             [message] => No docblock for element '$css'
         )
 
     [5] => Array
         (
-            [line] => 22
-            [file] => ./assets/AppAsset.php
+            [line] => 14
+            [file] => ./backend/assets/AppAsset.php
             [message] => No short description for element '$css'
         )
 
     [6] => Array
         (
-            [line] => 25
-            [file] => ./assets/AppAsset.php
+            [line] => 17
+            [file] => ./backend/assets/AppAsset.php
             [message] => No docblock for element '$js'
         )
 
     [7] => Array
         (
-            [line] => 25
-            [file] => ./assets/AppAsset.php
+            [line] => 17
+            [file] => ./backend/assets/AppAsset.php
             [message] => No short description for element '$js'
         )
 
     [8] => Array
         (
-            [line] => 27
-            [file] => ./assets/AppAsset.php
+            [line] => 20
+            [file] => ./backend/assets/AppAsset.php
             [message] => No docblock for element '$depends'
         )
 
     [9] => Array
         (
-            [line] => 27
-            [file] => ./assets/AppAsset.php
+            [line] => 20
+            [file] => ./backend/assets/AppAsset.php
             [message] => No short description for element '$depends'
         )
 
     [10] => Array
         (
-            [line] => 8
-            [file] => ./components/HerokuTarget.php
-            [message] => No docblock for element 'app\components\HerokuTarget'
+            [line] => 17
+            [file] => ./backend/components/PermisosUsuarios.php
+            [message] => No docblock for element 'up'
         )
 
     [11] => Array
         (
-            [line] => 50
-            [file] => ./controllers/EnviosController.php
-            [message] => No docblock for element 'actionMover'
+            [line] => 61
+            [file] => ./backend/components/PermisosUsuarios.php
+            [message] => No docblock for element 'down'
         )
 
     [12] => Array
         (
-            [line] => 77
-            [file] => ./controllers/EnviosController.php
-            [message] => No docblock for element 'actionClick'
+            [line] => 94
+            [file] => ./backend/controllers/SiteController.php
+            [message] => No docblock for element 'getConfig'
         )
 
     [13] => Array
         (
-            [line] => 15
-            [file] => ./controllers/SiteController.php
-            [message] => No docblock for element 'app\controllers\SiteController'
+            [line] => 99
+            [file] => ./backend/controllers/SiteController.php
+            [message] => No docblock for element 'getDirecto'
         )
 
     [14] => Array
         (
-            [line] => 83
-            [file] => ./controllers/UsuariosController.php
-            [message] => No docblock for element 'actionMiPerfil'
+            [line] => 130
+            [file] => ./backend/controllers/SiteController.php
+            [message] => No docblock for element 'actionCalendario'
         )
 
     [15] => Array
         (
-            [line] => 90
-            [file] => ./controllers/UsuariosController.php
-            [message] => No docblock for element 'actionValidar'
+            [line] => 139
+            [file] => ./backend/controllers/SiteController.php
+            [message] => No docblock for element 'actionActualizarCalendario'
         )
 
     [16] => Array
         (
-            [line] => 13
-            [file] => ./models/ContactForm.php
-            [message] => No docblock for element '$name'
+            [line] => 144
+            [file] => ./backend/controllers/SiteController.php
+            [message] => No docblock for element 'actionWeb'
         )
 
     [17] => Array
         (
-            [line] => 13
-            [file] => ./models/ContactForm.php
-            [message] => No short description for element '$name'
+            [line] => 192
+            [file] => ./backend/controllers/SiteController.php
+            [message] => No docblock for element 'actionAccion'
         )
 
     [18] => Array
         (
-            [line] => 14
-            [file] => ./models/ContactForm.php
-            [message] => No docblock for element '$email'
+            [line] => 214
+            [file] => ./backend/controllers/SiteController.php
+            [message] => No docblock for element 'actionAdministrarCuentas'
         )
 
     [19] => Array
         (
-            [line] => 14
-            [file] => ./models/ContactForm.php
-            [message] => No short description for element '$email'
+            [line] => 203
+            [file] => ./backend/controllers/UsuariosController.php
+            [message] => No docblock for element 'actionEliminar'
         )
 
     [20] => Array
         (
-            [line] => 15
-            [file] => ./models/ContactForm.php
-            [message] => No docblock for element '$subject'
+            [line] => 209
+            [file] => ./backend/controllers/UsuariosController.php
+            [message] => No docblock for element 'actionExpulsar'
         )
 
     [21] => Array
         (
-            [line] => 15
-            [file] => ./models/ContactForm.php
-            [message] => No short description for element '$subject'
+            [line] => 215
+            [file] => ./backend/controllers/UsuariosController.php
+            [message] => No docblock for element 'actionQuitarExpulsion'
         )
 
     [22] => Array
         (
-            [line] => 16
-            [file] => ./models/ContactForm.php
-            [message] => No docblock for element '$body'
+            [line] => 20
+            [file] => ./backend/models/ElegirUsuarioForm.php
+            [message] => No short description for element '$usuarios_id'
         )
 
     [23] => Array
         (
-            [line] => 16
-            [file] => ./models/ContactForm.php
-            [message] => No short description for element '$body'
+            [line] => 26
+            [file] => ./backend/models/ElegirUsuarioForm.php
+            [message] => No short description for element '$accion'
         )
 
     [24] => Array
         (
-            [line] => 17
-            [file] => ./models/ContactForm.php
-            [message] => No docblock for element '$verifyCode'
+            [line] => 28
+            [file] => ./backend/models/ElegirUsuarioForm.php
+            [message] => No docblock for element '$rol_cambiar'
         )
 
     [25] => Array
         (
-            [line] => 17
-            [file] => ./models/ContactForm.php
-            [message] => No short description for element '$verifyCode'
+            [line] => 28
+            [file] => ./backend/models/ElegirUsuarioForm.php
+            [message] => No short description for element '$rol_cambiar'
         )
 
     [26] => Array
         (
-            [line] => 29
-            [file] => ./models/Envios.php
-            [message] => No short description for element '$foto'
+            [line] => 30
+            [file] => ./backend/models/ElegirUsuarioForm.php
+            [message] => No docblock for element 'scenarios'
         )
 
     [27] => Array
         (
-            [line] => 55
-            [file] => ./models/Envios.php
-            [message] => No docblock for element 'upload'
+            [line] => 50
+            [file] => ./backend/models/Usuarios.php
+            [message] => No docblock for element 'findByNombre'
         )
 
     [28] => Array
         (
-            [line] => 97
-            [file] => ./models/Envios.php
-            [message] => No docblock for element 'getNumMovimientos'
+            [line] => 7
+            [file] => ./common/assets/CommonAsset.php
+            [message] => No docblock for element 'common\assets\CommonAsset'
         )
 
     [29] => Array
         (
-            [line] => 102
-            [file] => ./models/Envios.php
-            [message] => No docblock for element 'getLimitadoMeneos'
+            [line] => 9
+            [file] => ./common/assets/CommonAsset.php
+            [message] => No docblock for element '$sourcePath'
         )
 
     [30] => Array
         (
-            [line] => 138
-            [file] => ./models/Envios.php
-            [message] => No docblock for element 'beforeSave'
+            [line] => 9
+            [file] => ./common/assets/CommonAsset.php
+            [message] => No short description for element '$sourcePath'
         )
 
     [31] => Array
         (
-            [line] => 15
-            [file] => ./models/LoginForm.php
-            [message] => No docblock for element '$username'
+            [line] => 10
+            [file] => ./common/assets/CommonAsset.php
+            [message] => No docblock for element '$css'
         )
 
     [32] => Array
         (
-            [line] => 15
-            [file] => ./models/LoginForm.php
-            [message] => No short description for element '$username'
+            [line] => 10
+            [file] => ./common/assets/CommonAsset.php
+            [message] => No short description for element '$css'
         )
 
     [33] => Array
         (
-            [line] => 16
-            [file] => ./models/LoginForm.php
-            [message] => No docblock for element '$password'
+            [line] => 14
+            [file] => ./common/assets/CommonAsset.php
+            [message] => No docblock for element '$js'
         )
 
     [34] => Array
         (
-            [line] => 16
-            [file] => ./models/LoginForm.php
-            [message] => No short description for element '$password'
+            [line] => 14
+            [file] => ./common/assets/CommonAsset.php
+            [message] => No short description for element '$js'
         )
 
     [35] => Array
         (
             [line] => 17
-            [file] => ./models/LoginForm.php
-            [message] => No docblock for element '$rememberMe'
+            [file] => ./common/assets/CommonAsset.php
+            [message] => No docblock for element '$depends'
         )
 
     [36] => Array
         (
             [line] => 17
-            [file] => ./models/LoginForm.php
-            [message] => No short description for element '$rememberMe'
+            [file] => ./common/assets/CommonAsset.php
+            [message] => No short description for element '$depends'
         )
 
     [37] => Array
         (
-            [line] => 46
-            [file] => ./models/LoginForm.php
-            [message] => No docblock for element 'attributeLabels'
+            [line] => 7
+            [file] => ./common/assets/CommonFormNuevoUsuario.php
+            [message] => No docblock for element 'common\assets\CommonFormNuevoUsuario'
         )
 
     [38] => Array
         (
-            [line] => 5
-            [file] => ./models/User.php
-            [message] => No docblock for element 'app\models\User'
+            [line] => 9
+            [file] => ./common/assets/CommonFormNuevoUsuario.php
+            [message] => No docblock for element '$sourcePath'
         )
 
     [39] => Array
         (
-            [line] => 7
-            [file] => ./models/User.php
-            [message] => No docblock for element '$id'
+            [line] => 9
+            [file] => ./common/assets/CommonFormNuevoUsuario.php
+            [message] => No short description for element '$sourcePath'
         )
 
     [40] => Array
         (
-            [line] => 7
-            [file] => ./models/User.php
-            [message] => No short description for element '$id'
+            [line] => 10
+            [file] => ./common/assets/CommonFormNuevoUsuario.php
+            [message] => No docblock for element '$css'
         )
 
     [41] => Array
         (
-            [line] => 8
-            [file] => ./models/User.php
-            [message] => No docblock for element '$username'
+            [line] => 10
+            [file] => ./common/assets/CommonFormNuevoUsuario.php
+            [message] => No short description for element '$css'
         )
 
     [42] => Array
         (
-            [line] => 8
-            [file] => ./models/User.php
-            [message] => No short description for element '$username'
+            [line] => 13
+            [file] => ./common/assets/CommonFormNuevoUsuario.php
+            [message] => No docblock for element '$js'
         )
 
     [43] => Array
         (
-            [line] => 9
-            [file] => ./models/User.php
-            [message] => No docblock for element '$password'
+            [line] => 13
+            [file] => ./common/assets/CommonFormNuevoUsuario.php
+            [message] => No short description for element '$js'
         )
 
     [44] => Array
         (
-            [line] => 9
-            [file] => ./models/User.php
-            [message] => No short description for element '$password'
+            [line] => 16
+            [file] => ./common/assets/CommonFormNuevoUsuario.php
+            [message] => No docblock for element '$depends'
         )
 
     [45] => Array
         (
-            [line] => 10
-            [file] => ./models/User.php
-            [message] => No docblock for element '$authKey'
+            [line] => 16
+            [file] => ./common/assets/CommonFormNuevoUsuario.php
+            [message] => No short description for element '$depends'
         )
 
     [46] => Array
         (
-            [line] => 10
-            [file] => ./models/User.php
-            [message] => No short description for element '$authKey'
+            [line] => 7
+            [file] => ./common/assets/CommonLogin.php
+            [message] => No docblock for element 'common\assets\CommonLogin'
         )
 
     [47] => Array
         (
-            [line] => 11
-            [file] => ./models/User.php
-            [message] => No docblock for element '$accessToken'
+            [line] => 9
+            [file] => ./common/assets/CommonLogin.php
+            [message] => No docblock for element '$sourcePath'
         )
 
     [48] => Array
         (
-            [line] => 11
-            [file] => ./models/User.php
-            [message] => No short description for element '$accessToken'
+            [line] => 9
+            [file] => ./common/assets/CommonLogin.php
+            [message] => No short description for element '$sourcePath'
         )
 
     [49] => Array
         (
-            [line] => 29
-            [file] => ./models/Usuarios.php
-            [message] => No short description for element '$password_repeat'
+            [line] => 10
+            [file] => ./common/assets/CommonLogin.php
+            [message] => No docblock for element '$css'
         )
 
     [50] => Array
         (
-            [line] => 78
-            [file] => ./models/Usuarios.php
-            [message] => No docblock for element 'attributes'
+            [line] => 10
+            [file] => ./common/assets/CommonLogin.php
+            [message] => No short description for element '$css'
         )
 
     [51] => Array
         (
-            [line] => 107
-            [file] => ./models/Usuarios.php
-            [message] => No docblock for element 'findIdentity'
+            [line] => 13
+            [file] => ./common/assets/CommonLogin.php
+            [message] => No docblock for element '$js'
         )
 
     [52] => Array
         (
-            [line] => 112
-            [file] => ./models/Usuarios.php
-            [message] => No docblock for element 'findIdentityByAccessToken'
+            [line] => 13
+            [file] => ./common/assets/CommonLogin.php
+            [message] => No short description for element '$js'
         )
 
     [53] => Array
         (
-            [line] => 117
-            [file] => ./models/Usuarios.php
-            [message] => No docblock for element 'getId'
+            [line] => 16
+            [file] => ./common/assets/CommonLogin.php
+            [message] => No docblock for element '$depends'
         )
 
     [54] => Array
         (
-            [line] => 122
-            [file] => ./models/Usuarios.php
-            [message] => No docblock for element 'getAuthKey'
+            [line] => 16
+            [file] => ./common/assets/CommonLogin.php
+            [message] => No short description for element '$depends'
         )
 
     [55] => Array
         (
-            [line] => 127
-            [file] => ./models/Usuarios.php
-            [message] => No docblock for element 'validateAuthKey'
+            [line] => 5
+            [file] => ./common/components/ImageFile.php
+            [message] => No docblock for element 'common\components\ImageFile'
         )
 
     [56] => Array
         (
-            [line] => 143
-            [file] => ./models/Usuarios.php
-            [message] => No docblock for element 'beforeSave'
+            [line] => 7
+            [file] => ./common/components/ImageFile.php
+            [message] => No docblock for element 'upload'
         )
 
     [57] => Array
+        (
+            [line] => 6
+            [file] => ./common/fixtures/UserFixture.php
+            [message] => No docblock for element 'common\fixtures\UserFixture'
+        )
+
+    [58] => Array
+        (
+            [line] => 8
+            [file] => ./common/fixtures/UserFixture.php
+            [message] => No docblock for element '$modelClass'
+        )
+
+    [59] => Array
+        (
+            [line] => 8
+            [file] => ./common/fixtures/UserFixture.php
+            [message] => No short description for element '$modelClass'
+        )
+
+    [60] => Array
+        (
+            [line] => 23
+            [file] => ./common/models/Calendario.php
+            [message] => No docblock for element '$realizado'
+        )
+
+    [61] => Array
+        (
+            [line] => 23
+            [file] => ./common/models/Calendario.php
+            [message] => No short description for element '$realizado'
+        )
+
+    [62] => Array
+        (
+            [line] => 89
+            [file] => ./common/models/ConfigTiempoActualizado.php
+            [message] => No docblock for element 'ultimaActualizacionJugador'
+        )
+
+    [63] => Array
+        (
+            [line] => 21
+            [file] => ./common/models/Directo.php
+            [message] => No docblock for element '$file'
+        )
+
+    [64] => Array
+        (
+            [line] => 21
+            [file] => ./common/models/Directo.php
+            [message] => No short description for element '$file'
+        )
+
+    [65] => Array
+        (
+            [line] => 33
+            [file] => ./common/models/Directo.php
+            [message] => No docblock for element 'scenarios'
+        )
+
+    [66] => Array
+        (
+            [line] => 113
+            [file] => ./common/models/Directo.php
+            [message] => No docblock for element 'getLogoSrc'
+        )
+
+    [67] => Array
+        (
+            [line] => 211
+            [file] => ./common/models/Jugadores.php
+            [message] => No docblock for element 'getUsuario'
+        )
+
+    [68] => Array
+        (
+            [line] => 216
+            [file] => ./common/models/Jugadores.php
+            [message] => No docblock for element 'beforeSave'
+        )
+
+    [69] => Array
+        (
+            [line] => 16
+            [file] => ./common/models/LoginForm.php
+            [message] => No short description for element '$usuario'
+        )
+
+    [70] => Array
+        (
+            [line] => 22
+            [file] => ./common/models/LoginForm.php
+            [message] => No short description for element '$password'
+        )
+
+    [71] => Array
+        (
+            [line] => 28
+            [file] => ./common/models/LoginForm.php
+            [message] => No short description for element '$rememberMe'
+        )
+
+    [72] => Array
+        (
+            [line] => 141
+            [file] => ./common/models/LoginForm.php
+            [message] => No docblock for element 'validateNoExpulsado'
+        )
+
+    [73] => Array
+        (
+            [line] => 32
+            [file] => ./common/models/Usuarios.php
+            [message] => No short description for element '$normas'
+        )
+
+    [74] => Array
+        (
+            [line] => 38
+            [file] => ./common/models/Usuarios.php
+            [message] => No short description for element '$tag'
+        )
+
+    [75] => Array
+        (
+            [line] => 44
+            [file] => ./common/models/Usuarios.php
+            [message] => No short description for element '$password_repeat'
+        )
+
+    [76] => Array
+        (
+            [line] => 84
+            [file] => ./common/models/Usuarios.php
+            [message] => No docblock for element 'scenarios'
+        )
+
+    [77] => Array
+        (
+            [line] => 324
+            [file] => ./common/models/Usuarios.php
+            [message] => No docblock for element 'expulsar'
+        )
+
+    [78] => Array
+        (
+            [line] => 330
+            [file] => ./common/models/Usuarios.php
+            [message] => No docblock for element 'quitarExpulsion'
+        )
+
+    [79] => Array
+        (
+            [line] => 336
+            [file] => ./common/models/Usuarios.php
+            [message] => No docblock for element 'cambiarRol'
+        )
+
+    [80] => Array
+        (
+            [line] => 361
+            [file] => ./common/models/Usuarios.php
+            [message] => No docblock for element 'getEstaExpulsado'
+        )
+
+    [81] => Array
+        (
+            [line] => 415
+            [file] => ./common/models/Usuarios.php
+            [message] => No docblock for element 'beforeSave'
+        )
+
+    [82] => Array
+        (
+            [line] => 12
+            [file] => ./frontend/assets/AppAsset.php
+            [message] => No docblock for element '$basePath'
+        )
+
+    [83] => Array
+        (
+            [line] => 12
+            [file] => ./frontend/assets/AppAsset.php
+            [message] => No short description for element '$basePath'
+        )
+
+    [84] => Array
+        (
+            [line] => 13
+            [file] => ./frontend/assets/AppAsset.php
+            [message] => No docblock for element '$baseUrl'
+        )
+
+    [85] => Array
+        (
+            [line] => 13
+            [file] => ./frontend/assets/AppAsset.php
+            [message] => No short description for element '$baseUrl'
+        )
+
+    [86] => Array
+        (
+            [line] => 14
+            [file] => ./frontend/assets/AppAsset.php
+            [message] => No docblock for element '$css'
+        )
+
+    [87] => Array
+        (
+            [line] => 14
+            [file] => ./frontend/assets/AppAsset.php
+            [message] => No short description for element '$css'
+        )
+
+    [88] => Array
+        (
+            [line] => 17
+            [file] => ./frontend/assets/AppAsset.php
+            [message] => No docblock for element '$js'
+        )
+
+    [89] => Array
+        (
+            [line] => 17
+            [file] => ./frontend/assets/AppAsset.php
+            [message] => No short description for element '$js'
+        )
+
+    [90] => Array
+        (
+            [line] => 19
+            [file] => ./frontend/assets/AppAsset.php
+            [message] => No docblock for element '$depends'
+        )
+
+    [91] => Array
+        (
+            [line] => 19
+            [file] => ./frontend/assets/AppAsset.php
+            [message] => No short description for element '$depends'
+        )
+
+    [92] => Array
+        (
+            [line] => 92
+            [file] => ./frontend/controllers/EquipoController.php
+            [message] => No docblock for element 'actionActualizarMiembro'
+        )
+
+    [93] => Array
+        (
+            [line] => 78
+            [file] => ./frontend/controllers/SiteController.php
+            [message] => No docblock for element 'enviarCorreoAdmin'
+        )
+
+    [94] => Array
+        (
+            [line] => 145
+            [file] => ./frontend/controllers/SiteController.php
+            [message] => No docblock for element 'actionCalendario'
+        )
+
+    [95] => Array
+        (
+            [line] => 150
+            [file] => ./frontend/controllers/SiteController.php
+            [message] => No docblock for element 'actionDatosCalendario'
+        )
+
+    [96] => Array
+        (
+            [line] => 187
+            [file] => ./frontend/controllers/SiteController.php
+            [message] => No docblock for element 'actionAccionActual'
+        )
+
+    [97] => Array
+        (
+            [line] => 197
+            [file] => ./frontend/controllers/SiteController.php
+            [message] => No docblock for element 'actionDatosDirecto'
+        )
+
+    [98] => Array
+        (
+            [line] => 336
+            [file] => ./frontend/controllers/SiteController.php
+            [message] => No docblock for element 'actionPerfil'
+        )
+
+    [99] => Array
+        (
+            [line] => 341
+            [file] => ./frontend/controllers/SiteController.php
+            [message] => No docblock for element 'actionCambiarInfoPerfil'
+        )
+
+    [100] => Array
+        (
+            [line] => 393
+            [file] => ./frontend/controllers/SiteController.php
+            [message] => No docblock for element 'actionDarBaja'
+        )
+
+    [101] => Array
+        (
+            [line] => 13
+            [file] => ./frontend/models/ContactForm.php
+            [message] => No docblock for element '$name'
+        )
+
+    [102] => Array
+        (
+            [line] => 13
+            [file] => ./frontend/models/ContactForm.php
+            [message] => No short description for element '$name'
+        )
+
+    [103] => Array
+        (
+            [line] => 14
+            [file] => ./frontend/models/ContactForm.php
+            [message] => No docblock for element '$email'
+        )
+
+    [104] => Array
+        (
+            [line] => 14
+            [file] => ./frontend/models/ContactForm.php
+            [message] => No short description for element '$email'
+        )
+
+    [105] => Array
+        (
+            [line] => 15
+            [file] => ./frontend/models/ContactForm.php
+            [message] => No docblock for element '$subject'
+        )
+
+    [106] => Array
+        (
+            [line] => 15
+            [file] => ./frontend/models/ContactForm.php
+            [message] => No short description for element '$subject'
+        )
+
+    [107] => Array
+        (
+            [line] => 16
+            [file] => ./frontend/models/ContactForm.php
+            [message] => No docblock for element '$body'
+        )
+
+    [108] => Array
+        (
+            [line] => 16
+            [file] => ./frontend/models/ContactForm.php
+            [message] => No short description for element '$body'
+        )
+
+    [109] => Array
+        (
+            [line] => 17
+            [file] => ./frontend/models/ContactForm.php
+            [message] => No docblock for element '$verifyCode'
+        )
+
+    [110] => Array
+        (
+            [line] => 17
+            [file] => ./frontend/models/ContactForm.php
+            [message] => No short description for element '$verifyCode'
+        )
+
+    [111] => Array
+        (
+            [line] => 13
+            [file] => ./frontend/models/PasswordResetRequestForm.php
+            [message] => No docblock for element '$email'
+        )
+
+    [112] => Array
+        (
+            [line] => 13
+            [file] => ./frontend/models/PasswordResetRequestForm.php
+            [message] => No short description for element '$email'
+        )
+
+    [113] => Array
+        (
+            [line] => 13
+            [file] => ./frontend/models/ResetPasswordForm.php
+            [message] => No docblock for element '$password'
+        )
+
+    [114] => Array
+        (
+            [line] => 13
+            [file] => ./frontend/models/ResetPasswordForm.php
+            [message] => No short description for element '$password'
+        )
+
+    [115] => Array
+        (
+            [line] => 12
+            [file] => ./frontend/models/SignupForm.php
+            [message] => No docblock for element '$username'
+        )
+
+    [116] => Array
+        (
+            [line] => 12
+            [file] => ./frontend/models/SignupForm.php
+            [message] => No short description for element '$username'
+        )
+
+    [117] => Array
+        (
+            [line] => 13
+            [file] => ./frontend/models/SignupForm.php
+            [message] => No docblock for element '$email'
+        )
+
+    [118] => Array
+        (
+            [line] => 13
+            [file] => ./frontend/models/SignupForm.php
+            [message] => No short description for element '$email'
+        )
+
+    [119] => Array
+        (
+            [line] => 14
+            [file] => ./frontend/models/SignupForm.php
+            [message] => No docblock for element '$password'
+        )
+
+    [120] => Array
+        (
+            [line] => 14
+            [file] => ./frontend/models/SignupForm.php
+            [message] => No short description for element '$password'
+        )
+
+    [121] => Array
+        (
+            [line] => 15
+            [file] => ./frontend/models/VerificarForm.php
+            [message] => No short description for element '$password'
+        )
+
+    [122] => Array
+        (
+            [line] => 21
+            [file] => ./frontend/models/VerificarForm.php
+            [message] => No short description for element '$password_repeat'
+        )
+
+    [123] => Array
         (
             [line] => 20
             [file] => vendor/yiisoft/yii2/captcha/CaptchaAsset.php
             [message] => No docblock for element '$sourcePath'
         )
 
-    [58] => Array
+    [124] => Array
         (
             [line] => 20
             [file] => vendor/yiisoft/yii2/captcha/CaptchaAsset.php
             [message] => No short description for element '$sourcePath'
         )
 
-    [59] => Array
+    [125] => Array
         (
             [line] => 21
             [file] => vendor/yiisoft/yii2/captcha/CaptchaAsset.php
             [message] => No docblock for element '$js'
         )
 
-    [60] => Array
+    [126] => Array
         (
             [line] => 21
             [file] => vendor/yiisoft/yii2/captcha/CaptchaAsset.php
             [message] => No short description for element '$js'
         )
 
-    [61] => Array
+    [127] => Array
         (
             [line] => 24
             [file] => vendor/yiisoft/yii2/captcha/CaptchaAsset.php
             [message] => No docblock for element '$depends'
         )
 
-    [62] => Array
+    [128] => Array
         (
             [line] => 24
             [file] => vendor/yiisoft/yii2/captcha/CaptchaAsset.php
             [message] => No short description for element '$depends'
         )
 
-    [63] => Array
+    [129] => Array
         (
             [line] => 28
             [file] => vendor/yiisoft/yii2/console/UnknownCommandException.php
             [message] => No short description for element '$application'
         )
 
-    [64] => Array
+    [130] => Array
+        (
+            [line] => 22
+            [file] => vendor/yiisoft/yii2/db/ExpressionBuilderTrait.php
+            [message] => No short description for element '$queryBuilder'
+        )
+
+    [131] => Array
+        (
+            [line] => 21
+            [file] => vendor/yiisoft/yii2/db/conditions/ConjunctionCondition.php
+            [message] => No short description for element '$expressions'
+        )
+
+    [132] => Array
         (
             [line] => 20
             [file] => vendor/yiisoft/yii2/grid/GridViewAsset.php
             [message] => No docblock for element '$sourcePath'
         )
 
-    [65] => Array
+    [133] => Array
         (
             [line] => 20
             [file] => vendor/yiisoft/yii2/grid/GridViewAsset.php
             [message] => No short description for element '$sourcePath'
         )
 
-    [66] => Array
+    [134] => Array
         (
             [line] => 21
             [file] => vendor/yiisoft/yii2/grid/GridViewAsset.php
             [message] => No docblock for element '$js'
         )
 
-    [67] => Array
+    [135] => Array
         (
             [line] => 21
             [file] => vendor/yiisoft/yii2/grid/GridViewAsset.php
             [message] => No short description for element '$js'
         )
 
-    [68] => Array
+    [136] => Array
         (
             [line] => 24
             [file] => vendor/yiisoft/yii2/grid/GridViewAsset.php
             [message] => No docblock for element '$depends'
         )
 
-    [69] => Array
+    [137] => Array
         (
             [line] => 24
             [file] => vendor/yiisoft/yii2/grid/GridViewAsset.php
             [message] => No short description for element '$depends'
         )
 
-    [70] => Array
+    [138] => Array
         (
-            [line] => 29
+            [line] => 30
             [file] => vendor/yiisoft/yii2/helpers/BaseJson.php
             [message] => No short description for element '$jsonErrorMessages'
         )
 
-    [71] => Array
+    [139] => Array
         (
             [line] => 37
             [file] => vendor/yiisoft/yii2/i18n/GettextMessageSource.php
             [message] => No short description for element '$basePath'
         )
 
-    [72] => Array
+    [140] => Array
         (
             [line] => 41
             [file] => vendor/yiisoft/yii2/i18n/GettextMessageSource.php
             [message] => No short description for element '$catalog'
         )
 
-    [73] => Array
+    [141] => Array
         (
             [line] => 45
             [file] => vendor/yiisoft/yii2/i18n/GettextMessageSource.php
             [message] => No short description for element '$useMoFile'
         )
 
-    [74] => Array
+    [142] => Array
         (
             [line] => 49
             [file] => vendor/yiisoft/yii2/i18n/GettextMessageSource.php
             [message] => No short description for element '$useBigEndian'
         )
 
-    [75] => Array
+    [143] => Array
         (
             [line] => 977
             [file] => vendor/yiisoft/yii2/rbac/DbManager.php
             [message] => No docblock for element 'invalidateCache'
         )
 
-    [76] => Array
+    [144] => Array
         (
             [line] => 988
             [file] => vendor/yiisoft/yii2/rbac/DbManager.php
             [message] => No docblock for element 'loadFromCache'
         )
 
-    [77] => Array
+    [145] => Array
         (
             [line] => 67
             [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
             [message] => No short description for element '$items'
         )
 
-    [78] => Array
+    [146] => Array
         (
             [line] => 71
             [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
             [message] => No short description for element '$children'
         )
 
-    [79] => Array
+    [147] => Array
         (
             [line] => 75
             [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
             [message] => No short description for element '$assignments'
         )
 
-    [80] => Array
+    [148] => Array
         (
             [line] => 79
             [file] => vendor/yiisoft/yii2/rbac/PhpManager.php
             [message] => No short description for element '$rules'
         )
 
-    [81] => Array
+    [149] => Array
         (
             [line] => 20
             [file] => vendor/yiisoft/yii2/validators/PunycodeAsset.php
             [message] => No docblock for element '$sourcePath'
         )
 
-    [82] => Array
+    [150] => Array
         (
             [line] => 20
             [file] => vendor/yiisoft/yii2/validators/PunycodeAsset.php
             [message] => No short description for element '$sourcePath'
         )
 
-    [83] => Array
+    [151] => Array
         (
             [line] => 21
             [file] => vendor/yiisoft/yii2/validators/PunycodeAsset.php
             [message] => No docblock for element '$js'
         )
 
-    [84] => Array
+    [152] => Array
         (
             [line] => 21
             [file] => vendor/yiisoft/yii2/validators/PunycodeAsset.php
             [message] => No short description for element '$js'
         )
 
-    [85] => Array
+    [153] => Array
         (
             [line] => 86
             [file] => vendor/yiisoft/yii2/validators/UniqueValidator.php
             [message] => No short description for element '$comboNotUnique'
         )
 
-    [86] => Array
+    [154] => Array
         (
             [line] => 20
             [file] => vendor/yiisoft/yii2/validators/ValidationAsset.php
             [message] => No docblock for element '$sourcePath'
         )
 
-    [87] => Array
+    [155] => Array
         (
             [line] => 20
             [file] => vendor/yiisoft/yii2/validators/ValidationAsset.php
             [message] => No short description for element '$sourcePath'
         )
 
-    [88] => Array
+    [156] => Array
         (
             [line] => 21
             [file] => vendor/yiisoft/yii2/validators/ValidationAsset.php
             [message] => No docblock for element '$js'
         )
 
-    [89] => Array
+    [157] => Array
         (
             [line] => 21
             [file] => vendor/yiisoft/yii2/validators/ValidationAsset.php
             [message] => No short description for element '$js'
         )
 
-    [90] => Array
+    [158] => Array
         (
             [line] => 24
             [file] => vendor/yiisoft/yii2/validators/ValidationAsset.php
             [message] => No docblock for element '$depends'
         )
 
-    [91] => Array
+    [159] => Array
         (
             [line] => 24
             [file] => vendor/yiisoft/yii2/validators/ValidationAsset.php
             [message] => No short description for element '$depends'
         )
 
-    [92] => Array
+    [160] => Array
         (
             [line] => 18
             [file] => vendor/yiisoft/yii2/web/JqueryAsset.php
             [message] => No docblock for element '$sourcePath'
         )
 
-    [93] => Array
+    [161] => Array
         (
             [line] => 18
             [file] => vendor/yiisoft/yii2/web/JqueryAsset.php
             [message] => No short description for element '$sourcePath'
         )
 
-    [94] => Array
+    [162] => Array
         (
             [line] => 19
             [file] => vendor/yiisoft/yii2/web/JqueryAsset.php
             [message] => No docblock for element '$js'
         )
 
-    [95] => Array
+    [163] => Array
         (
             [line] => 19
             [file] => vendor/yiisoft/yii2/web/JqueryAsset.php
             [message] => No short description for element '$js'
         )
 
-    [96] => Array
+    [164] => Array
         (
             [line] => 18
             [file] => vendor/yiisoft/yii2/web/YiiAsset.php
             [message] => No docblock for element '$sourcePath'
         )
 
-    [97] => Array
+    [165] => Array
         (
             [line] => 18
             [file] => vendor/yiisoft/yii2/web/YiiAsset.php
             [message] => No short description for element '$sourcePath'
         )
 
-    [98] => Array
+    [166] => Array
         (
             [line] => 19
             [file] => vendor/yiisoft/yii2/web/YiiAsset.php
             [message] => No docblock for element '$js'
         )
 
-    [99] => Array
+    [167] => Array
         (
             [line] => 19
             [file] => vendor/yiisoft/yii2/web/YiiAsset.php
             [message] => No short description for element '$js'
         )
 
-    [100] => Array
+    [168] => Array
         (
             [line] => 22
             [file] => vendor/yiisoft/yii2/web/YiiAsset.php
             [message] => No docblock for element '$depends'
         )
 
-    [101] => Array
+    [169] => Array
         (
             [line] => 22
             [file] => vendor/yiisoft/yii2/web/YiiAsset.php
             [message] => No short description for element '$depends'
         )
 
-    [102] => Array
+    [170] => Array
         (
             [line] => 20
             [file] => vendor/yiisoft/yii2/widgets/ActiveFormAsset.php
             [message] => No docblock for element '$sourcePath'
         )
 
-    [103] => Array
+    [171] => Array
         (
             [line] => 20
             [file] => vendor/yiisoft/yii2/widgets/ActiveFormAsset.php
             [message] => No short description for element '$sourcePath'
         )
 
-    [104] => Array
+    [172] => Array
         (
             [line] => 21
             [file] => vendor/yiisoft/yii2/widgets/ActiveFormAsset.php
             [message] => No docblock for element '$js'
         )
 
-    [105] => Array
+    [173] => Array
         (
             [line] => 21
             [file] => vendor/yiisoft/yii2/widgets/ActiveFormAsset.php
             [message] => No short description for element '$js'
         )
 
-    [106] => Array
+    [174] => Array
         (
             [line] => 24
             [file] => vendor/yiisoft/yii2/widgets/ActiveFormAsset.php
             [message] => No docblock for element '$depends'
         )
 
-    [107] => Array
+    [175] => Array
         (
             [line] => 24
             [file] => vendor/yiisoft/yii2/widgets/ActiveFormAsset.php
             [message] => No short description for element '$depends'
         )
 
-    [108] => Array
+    [176] => Array
         (
             [line] => 22
             [file] => vendor/yiisoft/yii2/widgets/MaskedInputAsset.php
             [message] => No docblock for element '$sourcePath'
         )
 
-    [109] => Array
+    [177] => Array
         (
             [line] => 22
             [file] => vendor/yiisoft/yii2/widgets/MaskedInputAsset.php
             [message] => No short description for element '$sourcePath'
         )
 
-    [110] => Array
+    [178] => Array
         (
             [line] => 23
             [file] => vendor/yiisoft/yii2/widgets/MaskedInputAsset.php
             [message] => No docblock for element '$js'
         )
 
-    [111] => Array
+    [179] => Array
         (
             [line] => 23
             [file] => vendor/yiisoft/yii2/widgets/MaskedInputAsset.php
             [message] => No short description for element '$js'
         )
 
-    [112] => Array
+    [180] => Array
         (
             [line] => 26
             [file] => vendor/yiisoft/yii2/widgets/MaskedInputAsset.php
             [message] => No docblock for element '$depends'
         )
 
-    [113] => Array
+    [181] => Array
         (
             [line] => 26
             [file] => vendor/yiisoft/yii2/widgets/MaskedInputAsset.php
             [message] => No short description for element '$depends'
         )
 
-    [114] => Array
+    [182] => Array
         (
             [line] => 20
             [file] => vendor/yiisoft/yii2/widgets/PjaxAsset.php
             [message] => No docblock for element '$sourcePath'
         )
 
-    [115] => Array
+    [183] => Array
         (
             [line] => 20
             [file] => vendor/yiisoft/yii2/widgets/PjaxAsset.php
             [message] => No short description for element '$sourcePath'
         )
 
-    [116] => Array
+    [184] => Array
         (
             [line] => 21
             [file] => vendor/yiisoft/yii2/widgets/PjaxAsset.php
             [message] => No docblock for element '$js'
         )
 
-    [117] => Array
+    [185] => Array
         (
             [line] => 21
             [file] => vendor/yiisoft/yii2/widgets/PjaxAsset.php
             [message] => No short description for element '$js'
         )
 
-    [118] => Array
+    [186] => Array
         (
             [line] => 24
             [file] => vendor/yiisoft/yii2/widgets/PjaxAsset.php
             [message] => No docblock for element '$depends'
         )
 
-    [119] => Array
+    [187] => Array
         (
             [line] => 24
             [file] => vendor/yiisoft/yii2/widgets/PjaxAsset.php

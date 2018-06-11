@@ -15,6 +15,7 @@ class AppAsset extends AssetBundle
         'css/site/site.css',
     ];
     public $js = [
+        'js/site/cargar-sw.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

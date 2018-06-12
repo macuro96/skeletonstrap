@@ -8,24 +8,19 @@ use kartik\time\TimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Calendario */
-
-$this->title = 'Calendario';
-
 ?>
 <div class="row seccion usuarios-form">
     <div class="col-lg-12">
-        <h2><?= ucfirst(Html::encode($accion)) ?> un evento</h2>
-
         <?php $form = ActiveForm::begin(['id' => 'calendario-form']); ?>
-            <?= Html::dropDownList('eventos', null, $eventos) ?>
-
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <?= $form->field($model, "etiqueta")->dropDownList($etiquetas)
                                                            ->label('Etiqueta*');
                                                            ?>
                 </div>
-                <div class="col-lg-6">
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
                     <?= $form->field($model, "visibilidad")->dropDownList($rolesVisibilidad)
                                                            ->label('Visibilidad')
                                                            ->hint('El rol de visilibidad que se le va a dar al evento. Si no se especifíca, todos podrán verlo (incluido invitados).');
@@ -47,7 +42,8 @@ $this->title = 'Calendario';
                         'model' => $model,
                         'pluginOptions' => [
                             'autoclose'=>true,
-                            'format' => 'H:i'
+                            'format' => 'H:i',
+                            'showMeridian' => false,
                         ]
                     ])->label('Hora*') ?>
                 </div>
@@ -65,7 +61,6 @@ $this->title = 'Calendario';
 
             <div class="form-group">
                 <?= Html::submitButton('Guardar', ['class' => 'btn btn-success', 'id' => 'btn-accion']) ?>
-                <?= Html::submitButton('Borrar', ['name' => 'accion', 'value' => 'borrar', 'class' => 'btn btn-danger', 'id' => 'btn-borrar']) ?>
             </div>
 
         <?php ActiveForm::end(); ?>

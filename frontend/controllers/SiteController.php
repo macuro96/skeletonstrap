@@ -144,10 +144,7 @@ class SiteController extends Controller
 
     public function actionCalendario()
     {
-        $model = new Calendario();
-        return $this->render('calendario', [
-            'model' => $model
-        ]);
+        return $this->render('calendario');
     }
 
     public function actionDatosCalendario()
@@ -165,7 +162,7 @@ class SiteController extends Controller
                                      ->select(new Expression("*, current_timestamp - (fecha || ' ' || hora)::timestamp > interval '1 min' as realizado"))
                                      ->where('extract(month from fecha) = ' . $mes)
                                      ->andWhere(['or', ($rolIdUsuario ? ($rolIdUsuario . ' >= visibilidad') : ('false')), 'visibilidad is null'])
-                                     ->orderBy('realizado ASC')
+                                     ->orderBy('realizado ASC, fecha DESC, hora ASC')
                                      ->all();
 
                 $datos = [];

@@ -878,7 +878,7 @@ VALUES ('admin', crypt('admin', gen_salt('bf', 13)), 'admin@dominio.com', 48, 13
 INSERT INTO permisos (nombre, descripcion)
 VALUES ('verBackEndCalendario', 'Puede ver el calenario en backend'),
        ('programarEvento', 'Puede programar un evento nuevo'),
-       ('elminarEvento', 'Puede eliminar un evento existente'),
+       ('eliminarEvento', 'Puede eliminar un evento existente'),
        ('modificarEvento', 'Puede modificar un evento existente'),
        ('parametros', 'Puede modificar los parametros de la configuración web'),
        ('modificarRoles', 'Puede modificar los roles de los usuarios'),
@@ -953,9 +953,9 @@ VALUES ('coach', crypt('coach', gen_salt('bf', 13)), 'coach@dominio.com', 48, 13
        ('enprueba', crypt('enprueba', gen_salt('bf', 13)), 'enprueba@dominio.com', 48, 13, 'WPbxyU4wBMiDlSOQvKlRXE-oEcg__VasdFA', null, true);
 
 INSERT INTO usuarios_roles (usuario_id, rol_id)
-VALUES (2, 2),
-       (3, 3),
+VALUES (3, 3),
        (4, 4),
+       (2, 2),
        (5, 5),
        (6, 6);
 */

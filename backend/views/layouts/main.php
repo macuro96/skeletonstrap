@@ -36,7 +36,7 @@ AppAsset::register($this);
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-    <meta name="theme-color" content="#964545">        
+    <meta name="theme-color" content="#964545">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -81,12 +81,12 @@ $bSiteLogin = ($nombreControlador == 'site' && $nombreAccion == 'login');
                         ', ['usuarios/index']);
                         ?>
                         <?= Html::a('
-                        <div class="row opcion-row ' . (($nombreControlador == 'site' && $nombreAccion == 'calendario') ? 'active' : '') . '">
+                        <div class="row opcion-row ' . (($nombreControlador == 'calendario' && ($nombreAccion == 'index' || $nombreAccion == 'create' || $nombreAccion == 'update')) ? 'active' : '') . '">
                             <div class="col-md-12">
                                 <span class="glyphicon glyphicon-chevron-right"></span>Calendario
                             </div>
                         </div>
-                        ', ['site/calendario']); ?>
+                        ', ['calendario/index']); ?>
                         <?= Html::a('
                         <div class="row opcion-row salir">
                             <div class="col-md-12">

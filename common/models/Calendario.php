@@ -40,7 +40,17 @@ class Calendario extends \yii\db\ActiveRecord
             [['etiqueta', 'fecha', 'hora'], 'required'],
             [['etiqueta', 'visibilidad'], 'default', 'value' => null],
             [['etiqueta', 'visibilidad'], 'integer'],
+            [['visibilidad'], function ($attribute, $params, $validator) {
+                if ($this->visibilidad == 0) {
+                    $this->visibilidad = null;
+                }
+            }],
             [['fecha', 'hora'], 'safe'],
+            [['hora'], function ($attribute, $params, $validator) {
+                if (explode(':', $this->hora)[0] >= 24) {
+                    $this->addError($attribute, 'La hora no puede ser mayor de las 24 h que tiene el día.');
+                }
+            }],
             [['descripcion', 'imagen'], 'string'],
             [['etiqueta'], 'exist', 'skipOnError' => true, 'targetClass' => EventoEtiquetas::className(), 'targetAttribute' => ['etiqueta' => 'id']],
             [['visibilidad'], 'exist', 'skipOnError' => true, 'targetClass' => Roles::className(), 'targetAttribute' => ['visibilidad' => 'id']],

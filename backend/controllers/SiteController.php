@@ -9,9 +9,11 @@ use yii\web\UploadedFile;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use common\models\Roles;
 use common\models\Config;
 use common\models\Directo;
 use common\models\Calendario;
+use common\models\EventoEtiquetas;
 use common\components\ImageFile;
 
 use backend\models\LoginForm;
@@ -129,10 +131,117 @@ class SiteController extends Controller
 
     public function actionCalendario()
     {
-        $model = new Calendario();
+        $accion = Yii::$app->request->post('accion') ? Yii::$app->request->post('accion') : 'crear';
+        $evento = Yii::$app->request->post('evento');
+
+        //var_dump($accion); die();
+
+        if ($accion) {
+            if ($accion != 'crear' && $accion != 'actualizar' && $accion != 'borrar') {
+                throw new BadRequestHttpException('Acción no válida.');
+            }
+
+            if ($accion == 'actualizar' && ($evento === null || !is_numeric($evento))) {
+                throw new BadRequestHttpException('No se ha especificado el evento a actualizar.');
+            }
+
+            if ($accion == 'borrar' && ($evento === null || !is_numeric($evento))) {
+                throw new BadRequestHttpException('No se ha especificado el evento a borrar.');
+            }
+        }
+
+        if ($accion == 'crear') {
+            $model = new Calendario([
+                'fecha' => date('d-m-Y'),
+            ]);
+        } elseif ($evento && ($accion == 'actualizar' || $accion == 'borrar')) {
+            $model = Calendario::findOne($evento);
+            $model->fecha = date_format(date_create($model->fecha), 'd-m-Y');
+
+            if (!$model) {
+                throw new BadRequestHttpException('Evento no válido.');
+            }
+        }
+
+        if ($accion == 'borrar') {
+            $model->delete();
+
+            \Yii::$app->session->setFlash('success', 'Evento borrado correctamente.');
+            return $this->redirect(['index']);
+        }
+
+        $eventosDatos = Calendario::find()
+                           ->orderBy('fecha DESC')
+                           ->limit(20)
+                           ->all();
+
+        $eventos = [];
+
+        $eventos[0] = 'Nuevo evento';
+
+        foreach ($eventosDatos as $key => $value) {
+            $idEventos     = $value['id'];
+            $nombreEventos = EventoEtiquetas::findOne($value['etiqueta'])->nombre . ': ' . date_format(date_create($value['fecha']), 'd-m-Y') . ' - ' . $value['hora'];
+
+            $eventos[$idEventos] = $nombreEventos;
+        }
+
+        $rolesDatos = Roles::find()
+                           ->orderBy('id')
+                           ->where(\Yii::$app->user->identity->roles[0]->id . ' <= id')
+                           ->all();
+
+        $roles = [];
+        $roles[0] = null;
+
+        foreach ($rolesDatos as $key => $value) {
+            $idRoles     = $value['id'];
+            $nombreRoles = $value['nombre'];
+
+            $roles[$idRoles] = $nombreRoles;
+        }
+
+        $etiquetasDatos = EventoEtiquetas::find()
+                                         ->orderBy('nombre')
+                                         ->all();
+
+        $etiquetas = [];
+
+        foreach ($etiquetasDatos as $key => $value) {
+            $idEtiquetas     = $value['id'];
+            $nombreEtiquetas = $value['nombre'];
+
+            $etiquetas[$idEtiquetas] = $nombreEtiquetas;
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+            $timeTemp = $model->hora;
+            $timeTempArray = explode(' ', $timeTemp);
+
+            $time      = $timeTempArray[0];
+            $timeArray = explode(':', $time);
+
+            $horas   = $timeArray[0];
+            $minutos = $timeArray[1];
+
+            if ($timeTempArray[1] == 'PM') {
+                $horas = $horas + 12;
+            }
+
+            $model->hora = ($horas . ':' . $minutos);
+
+            if ($model->save()) {
+                \Yii::$app->session->setFlash('success', 'Evento guardado correctamente.');
+                return $this->redirect(['index']);
+            }
+        }
 
         return $this->render('calendario', [
-            'model' => $model
+            'model' => $model,
+            'etiquetas' => $etiquetas,
+            'rolesVisibilidad' => $roles,
+            'accion' => $accion,
+            'eventos' => $eventos
         ]);
     }
 

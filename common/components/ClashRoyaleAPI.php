@@ -148,6 +148,8 @@ class ClashRoyaleAPI extends Component
         $data = curl_exec($ch);
         curl_close($ch);
 
+        //var_dump($data);
+
         if ($this->_debug) {
             var_dump('debug:');
             var_dump($data);

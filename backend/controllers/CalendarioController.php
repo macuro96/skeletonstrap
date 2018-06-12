@@ -164,7 +164,10 @@ class CalendarioController extends Controller
         $datos = $this->listaDatos();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->fecha = date_format(date_create($model->fecha), 'd-m-Y');
+            $dateArray = explode('-', $model->fecha);
+            $fechaNueva = "{$dateArray[2]}-{$dateArray[1]}-{$dateArray[0]}";
+
+            $model->fecha = $fechaNueva;
 
             date_default_timezone_set(\Yii::$app->formatter->timeZone);
             $model->hora = gmdate('H:i', strtotime($model->hora));
@@ -195,10 +198,17 @@ class CalendarioController extends Controller
         }
 
         $datos = $this->listaDatos();
-        $model->fecha = date_format(date_create($model->fecha), 'd-m-Y');
+
+        $dateArray = explode('-', $model->fecha);
+        $fechaNueva = "{$dateArray[2]}-{$dateArray[1]}-{$dateArray[0]}";
+
+        $model->fecha = $fechaNueva;
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->fecha = date_format(date_create($model->fecha), 'd-m-Y');
+            $dateArray = explode('-', $model->fecha);
+            $fechaNueva = "{$dateArray[2]}-{$dateArray[1]}-{$dateArray[0]}";
+
+            $model->fecha = $fechaNueva;
 
             date_default_timezone_set(\Yii::$app->formatter->timeZone);
             $model->hora = gmdate('H:i', strtotime($model->hora));
